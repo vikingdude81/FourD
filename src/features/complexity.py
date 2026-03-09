@@ -18,32 +18,9 @@ def lz_complexity(window: np.ndarray) -> float:
     if n == 0:
         return 0.0
 
-    # LZ76 algorithm
     sequence = "".join(map(str, bits))
-    i = 0
-    c = 1  # complexity counter
-    l = 1  # current phrase length
-    k = 1  # pointer
-    k_max = 1
 
-    while i + l <= n - 1:
-        if sequence[i + l - 1] in sequence[k : k + l - 1] if k + l - 1 <= n else False:
-            l += 1
-        else:
-            # Use the standard approach: scan history for the substring
-            substring = sequence[i : i + l]
-            found = substring[:-1] in sequence[:k]
-            if found:
-                l += 1
-            else:
-                c += 1
-                i += l
-                l = 1
-                k = i
-        if i + l > n:
-            break
-
-    # Simplified LZ complexity (Lempel-Ziv 1976)
+    # Lempel-Ziv 1976 phrase count
     c = _lz76(sequence)
 
     # Normalise against the theoretical maximum for a random binary sequence

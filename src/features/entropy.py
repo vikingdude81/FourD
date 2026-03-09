@@ -4,6 +4,8 @@ Entropy-based features for a bitstream window.
 
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
 
@@ -43,8 +45,6 @@ def permutation_entropy(window: np.ndarray, order: int = 3) -> float:
     if n < order:
         return 0.0
     w = window.astype(float)
-    from itertools import permutations
-    import math
 
     # Count ordinal patterns
     counts: dict = {}

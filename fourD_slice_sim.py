@@ -713,7 +713,7 @@ def plot_navigation(metrics: Dict, env: Environment, title: str = "Being Navigat
     for i, (hx, hy) in enumerate(env.hazards):
         circle = plt.Circle((hx, hy), env.hazard_radius, color="red", alpha=0.2)
         ax.add_patch(circle)
-        ax.scatter(hx, hy, color="red", edgecolors="darkred", s=200, zorder=4,
+        ax.scatter(hx, hy, color="darkred", s=200, zorder=4,
                    marker="x", label="Hazard" if i == 0 else "")
 
     for t in metrics["goal_events"]:
