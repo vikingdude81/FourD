@@ -1,0 +1,37 @@
+FourD/
+├── fourD_slice_sim.py
+├── README.md
+├── requirements.txt
+├── simulation_log.csv
+└── src/
+    ├── __init__.py
+    ├── anomaly/
+    │   ├── __init__.py
+    │   └── scoring.py
+    ├── features/
+    │   ├── __init__.py
+    │   ├── autocorr.py
+    │   ├── basic_stats.py
+    │   ├── changepoint.py
+    │   ├── complexity.py
+    │   ├── entropy.py
+    │   └── windows.py
+    ├── latent/
+    │   ├── __init__.py
+    │   ├── basins.py
+    │   ├── coordinator.py
+    │   └── mapping.py
+    ├── pipelines/
+    │   ├── __init__.py
+    │   ├── extract_features.py
+    │   ├── run_latent_analysis.py
+    │   ├── run_qrng_pipeline.py
+    │   └── score_windows.py
+    ├── recurrence/
+    │   ├── __init__.py
+    │   ├── embedding.py
+    │   ├── recurrence_plot.py
+    │   └── rqa.py
+    └── viz/
+        ├── __init__.py
+        └── dashboard.py

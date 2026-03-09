@@ -1,0 +1,3 @@
+1. Add src package structure, analysis modules, and pipeline runners
+2. Add dashboard and update docs/dependencies
+3. Patch fourD_slice_sim.py to integrate shared latent logic and richer logging

@@ -1,0 +1,16 @@
+chosen_basin
+action_x
+action_y
+coord_0
+coord_1
+coord_2
+coord_3
+weighted_input_0
+weighted_input_1
+weighted_input_2
+weighted_input_3
+basin_similarity_0
+...
+subsystem_norm_planning
+subsystem_norm_emotion
+...
