@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Output data (keep structure but ignore generated files)
+outputs/**/*.csv
+outputs/**/*.json
+outputs/**/*.png
+# Preserve directory structure
+!outputs/.gitkeep
+
+# Simulation outputs (committed intentionally)
+# simulation_log.csv is kept as an example output
