@@ -1,1 +1,1 @@
-Feature extraction utilities for bitstream window analysis.
+"""Feature extraction utilities for bitstream window analysis."""
