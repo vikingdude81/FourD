@@ -1,0 +1,4 @@
+architecture: designed
+code: drafted
+repo writes: only partially started
+branch for implementation: scaffold-pipeline

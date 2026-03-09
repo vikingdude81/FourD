@@ -1,0 +1,47 @@
+FourD/
+├── src/
+│   ├── io/
+│   │   ├── load_streams.py
+│   │   └── metadata.py
+│   ├── features/
+│   │   ├── windows.py
+│   │   ├── basic_stats.py
+│   │   ├── entropy.py
+│   │   ├── complexity.py
+│   │   ├── autocorr.py
+│   │   └── changepoint.py
+│   ├── anomaly/
+│   │   ├── standardize.py
+│   │   ├── scoring.py
+│   │   └── rank_windows.py
+│   ├── latent/
+│   │   ├── coordinator.py
+│   │   ├── subsystems.py
+│   │   ├── basins.py
+│   │   ├── mapping.py
+│   │   └── simulator.py
+│   ├── recurrence/
+│   │   ├── embedding.py
+│   │   ├── recurrence_plot.py
+│   │   ├── rqa.py
+│   │   └── motifs.py
+│   ├── nulls/
+│   │   ├── prng_controls.py
+│   │   ├── shuffled.py
+│   │   ├── phase_randomized.py
+│   │   └── synthetic_bias.py
+│   ├── viz/
+│   │   ├── dashboard.py
+│   │   ├── heatmaps.py
+│   │   ├── phase_portraits.py
+│   │   └── animation.py
+│   └── pipelines/
+│       ├── extract_features.py
+│       ├── score_windows.py
+│       ├── run_latent_analysis.py
+│       └── compare_to_nulls.py
+├── data/
+├── outputs/
+├── notebooks/
+├── tests/
+└── README.md

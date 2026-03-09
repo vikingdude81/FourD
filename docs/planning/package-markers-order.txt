@@ -1,0 +1,6 @@
+src/features/__init__.py
+src/anomaly/__init__.py
+src/latent/__init__.py
+src/recurrence/__init__.py
+src/viz/__init__.py
+src/pipelines/__init__.py
