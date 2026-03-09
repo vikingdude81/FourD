@@ -25,14 +25,25 @@ Modules:
 Run: python fourD_slice_sim.py
 """
 
+from __future__ import annotations
+
 import csv
-import numpy as np
+from collections import Counter
 from dataclasses import dataclass, field
-from typing import List, Optional, Dict, Tuple
+from typing import Dict, List, Optional, Tuple
+
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-from matplotlib.colors import Normalize
+import numpy as np
 from matplotlib.cm import ScalarMappable
+from matplotlib.colors import Normalize
+
+from src.latent.basins import (
+    attractor_pull as shared_attractor_pull,
+    basin_similarities as shared_basin_similarities,
+    basin_switch_event as shared_basin_switch_event,
+    initialize_basin_attractors as shared_initialize_basin_attractors,
+)
+
 
 # ────────────────────────────────────────────────────────────────────
 # Configuration
@@ -42,13 +53,38 @@ from matplotlib.cm import ScalarMappable
 class SimulationConfig:
     """Configuration for the consciousness simulation."""
     n_subsystems: int = 8
-    n_dimensions: int = 4          # Dimensionality of the coordination manifold
+    n_dimensions: int = 4
     n_timesteps: int = 300
     coordination_threshold: float = 0.85
-    noise_level: float = 0.1
-    learning_rate: float = 0.005
-    step_size: float = 0.4         # How far the being moves per timestep
-    env_size: int = 20             # 2D environment side length
+    noise_level: float = 0.08
+    learning_rate: float = 0.01
+    step_size: float = 0.35
+    env_size: int = 20
+
+    # Reproducibility
+    random_seed: Optional[int] = 42
+
+    # Basin dynamics
+    n_basins: int = 5
+    basin_ambiguity_threshold: float = 0.05
+    basin_pull_strength: float = 0.02
+    basin_activation_start: int = 10
+
+    # Feedback / damping
+    subsystem_broadcast_gain: float = 0.03
+    subsystem_max_norm: float = 2.0
+    coordinator_max_norm: float = 5.0
+
+    # Relative subsystem gains
+    perception_gain: float = 0.08
+    language_gain: float = 0.03
+    planning_gain: float = 0.12
+    emotion_gain: float = 0.22
+    memory_gain: float = 0.06
+    motor_gain: float = 0.08
+    attention_gain: float = 0.08
+    executive_gain: float = 0.04
+
 
 # ────────────────────────────────────────────────────────────────────
 # Environment and Being
@@ -67,8 +103,9 @@ class Environment:
     hazards: List[Tuple[float, float]] = field(default_factory=lambda: [
         (3.0, 15.0), (17.0, 5.0), (10.0, 17.0)
     ])
-    goal_radius: float = 1.5   # Distance at which a goal is "reached"
-    hazard_radius: float = 2.0 # Distance at which a hazard is "felt"
+    goal_radius: float = 1.5
+    hazard_radius: float = 2.0
+
 
 @dataclass
 class Being:
@@ -82,12 +119,14 @@ class Being:
     hazards_hit: int = 0
     dominant_subsystem_log: List[str] = field(default_factory=list)
 
+
 def initialize_being(env: Environment) -> Being:
     """Start the being near the center of the environment."""
-    pos = np.array([env.size / 2.0, env.size / 2.0])
+    pos = np.array([env.size / 2.0, env.size / 2.0], dtype=float)
     being = Being(position=pos.copy())
     being.history.append(pos.copy())
     return being
+
 
 # ────────────────────────────────────────────────────────────────────
 # Subsystems
@@ -100,7 +139,8 @@ class Subsystem:
     activity: np.ndarray
     weights: np.ndarray
     preferred_direction: np.ndarray
-    active: bool = True  # Set False for lesion studies
+    active: bool = True
+
 
 def initialize_subsystems(config: SimulationConfig, n_subsystems: int) -> List[Subsystem]:
     """Initialize specialized cognitive subsystems."""
@@ -109,18 +149,34 @@ def initialize_subsystems(config: SimulationConfig, n_subsystems: int) -> List[S
         "Perception", "Language", "Planning", "Emotion",
         "Memory", "Motor Control", "Attention", "Executive Control"
     ]
-    return [
-        Subsystem(
-            name=names[i],
-            activity=np.random.randn(dims) * 0.1,
-            weights=np.random.randn(dims) * 0.05,
-            preferred_direction=np.random.randn(dims) * 0.1,
+    subsystems: List[Subsystem] = []
+    for i in range(min(n_subsystems, len(names))):
+        subsystems.append(
+            Subsystem(
+                name=names[i],
+                activity=np.random.randn(dims) * 0.1,
+                weights=np.random.randn(dims) * 0.05,
+                preferred_direction=np.random.randn(dims) * 0.1,
+            )
         )
-        for i in range(min(n_subsystems, len(names)))
-    ]
+    return subsystems
+
+
+def subsystem_gain(name: str, config: SimulationConfig) -> float:
+    return {
+        "Perception": config.perception_gain,
+        "Language": config.language_gain,
+        "Planning": config.planning_gain,
+        "Emotion": config.emotion_gain,
+        "Memory": config.memory_gain,
+        "Motor Control": config.motor_gain,
+        "Attention": config.attention_gain,
+        "Executive Control": config.executive_gain,
+    }.get(name, 0.05)
+
 
 # ────────────────────────────────────────────────────────────────────
-# Sensing: subsystems respond to the environment
+# Sensing
 # ────────────────────────────────────────────────────────────────────
 
 def sense_environment(
@@ -131,26 +187,17 @@ def sense_environment(
 ) -> None:
     """
     Each subsystem reacts differently to the environment.
-    This drives the coordinator toward navigation-relevant attractors.
-
-    - Perception   : responds to proximity of any stimulus
-    - Planning     : biases activity toward nearest goal direction
-    - Emotion      : activates strongly near hazards (fear/avoidance)
-    - Memory       : encodes displacement from recent average position
-    - Attention    : amplifies the most salient stimulus
-    - Motor Control: receives the committed action signal
-    - Language/Exec: internal dynamics, weakly modulated by environment
     """
     pos = being.position
     n_dim = config.n_dimensions
 
-    goal_vecs = [np.array(g) - pos for g in env.goals]
+    goal_vecs = [np.array(g, dtype=float) - pos for g in env.goals]
     goal_dists = [np.linalg.norm(v) for v in goal_vecs]
     nearest_goal_idx = int(np.argmin(goal_dists))
     nearest_goal_dist = goal_dists[nearest_goal_idx]
     nearest_goal_dir = goal_vecs[nearest_goal_idx] / (nearest_goal_dist + 1e-8)
 
-    hazard_vecs = [np.array(h) - pos for h in env.hazards]
+    hazard_vecs = [np.array(h, dtype=float) - pos for h in env.hazards]
     hazard_dists = [np.linalg.norm(v) for v in hazard_vecs]
     nearest_hazard_idx = int(np.argmin(hazard_dists))
     nearest_hazard_dist = hazard_dists[nearest_hazard_idx]
@@ -160,72 +207,60 @@ def sense_environment(
         if not sub.active:
             continue
 
+        gain = subsystem_gain(sub.name, config)
+
         if sub.name == "Perception":
-            # Responds to overall stimulus density
             strength = 1.0 / (nearest_goal_dist + 1.0) + 0.5 / (nearest_hazard_dist + 1.0)
-            sub.activity += np.random.randn(n_dim) * strength * 0.08
+            sub.activity += np.random.randn(n_dim) * strength * gain
 
         elif sub.name == "Planning":
-            # Encodes goal direction into first 2 coordinator dims
-            signal = np.zeros(n_dim)
-            signal[:2] = nearest_goal_dir * 0.2
+            signal = np.zeros(n_dim, dtype=float)
+            signal[:2] = nearest_goal_dir * gain
             sub.activity += signal
 
         elif sub.name == "Emotion":
-            # Fear: strong push away from hazard, encoded as negative hazard direction
             fear_strength = max(0.0, 1.0 - nearest_hazard_dist / env.hazard_radius)
-            signal = np.zeros(n_dim)
-            signal[:2] = -nearest_hazard_dir * fear_strength * 0.3
-            sub.activity += signal + np.random.randn(n_dim) * fear_strength * 0.05
+            signal = np.zeros(n_dim, dtype=float)
+            signal[:2] = -nearest_hazard_dir * fear_strength * gain
+            sub.activity += signal + np.random.randn(n_dim) * fear_strength * (gain * 0.25)
 
         elif sub.name == "Memory":
-            # Integrates displacement from recent average (path memory)
             if len(being.history) >= 5:
                 recent = np.mean(being.history[-5:], axis=0)
                 displacement = pos - recent
-                signal = np.zeros(n_dim)
-                signal[:2] = displacement * 0.06
+                signal = np.zeros(n_dim, dtype=float)
+                signal[:2] = displacement * gain
                 sub.activity += signal
 
         elif sub.name == "Attention":
-            # Boosts the most salient signal (goal or hazard, whichever closer)
             goal_sal = 1.0 / (nearest_goal_dist + 1.0)
-            hazard_sal = 2.0 / (nearest_hazard_dist + 0.5)  # hazards more salient
+            hazard_sal = 2.0 / (nearest_hazard_dist + 0.5)
             salience = max(goal_sal, hazard_sal)
-            sub.activity += np.random.randn(n_dim) * salience * 0.06
+            sub.activity += np.random.randn(n_dim) * salience * gain
 
         elif sub.name == "Motor Control":
-            # Receives a copy of the current intended action (efference copy)
-            signal = np.zeros(n_dim)
-            signal[:2] = nearest_goal_dir * 0.1
+            signal = np.zeros(n_dim, dtype=float)
+            signal[:2] = nearest_goal_dir * gain
             sub.activity += signal
 
         else:
-            # Language, Executive Control: internal noise + weak env coupling
-            sub.activity += np.random.randn(n_dim) * 0.03
+            sub.activity += np.random.randn(n_dim) * gain
+
 
 # ────────────────────────────────────────────────────────────────────
-# Navigation: the 4D slice concept
+# Navigation
 # ────────────────────────────────────────────────────────────────────
 
 def select_action(coordinator: np.ndarray, config: SimulationConfig) -> np.ndarray:
     """
     Select a navigation action by slicing the 4D coordinator state.
-
-    The '4D slice' concept:
-      The coordinator exists in 4D phase space. Consciousness selects a
-      2D cross-section of this manifold to commit to as the next action.
-      Dimensions 0 and 1 are projected onto the XY movement plane.
-      The remaining dimensions (2, 3) encode internal state not yet acted on.
-
-    This is the 'collapse as commitment' — the being reduces its high-dimensional
-    state to a single directed movement.
     """
     action = coordinator[:2].copy()
     norm = np.linalg.norm(action)
     if norm > 1e-8:
         action = action / norm
     return action * config.step_size
+
 
 def move_being(being: Being, action: np.ndarray, env: Environment) -> Tuple[bool, bool]:
     """
@@ -236,11 +271,11 @@ def move_being(being: Being, action: np.ndarray, env: Environment) -> Tuple[bool
     being.history.append(being.position.copy())
 
     goal_reached = any(
-        np.linalg.norm(being.position - np.array(g)) < env.goal_radius
+        np.linalg.norm(being.position - np.array(g, dtype=float)) < env.goal_radius
         for g in env.goals
     )
     hazard_hit = any(
-        np.linalg.norm(being.position - np.array(h)) < env.hazard_radius
+        np.linalg.norm(being.position - np.array(h, dtype=float)) < env.hazard_radius
         for h in env.hazards
     )
 
@@ -251,22 +286,23 @@ def move_being(being: Being, action: np.ndarray, env: Environment) -> Tuple[bool
 
     return goal_reached, hazard_hit
 
+
 # ────────────────────────────────────────────────────────────────────
-# Core coordination functions
+# Coordination helpers
 # ────────────────────────────────────────────────────────────────────
 
 def compute_system_state(subsystems: List[Subsystem]) -> np.ndarray:
-    """Aggregate active subsystem activities into a single 1D state vector."""
+    """Aggregate active subsystem activities into a single state vector."""
     total = np.zeros(len(subsystems[0].activity), dtype=np.float64)
     for sub in subsystems:
         if sub.active:
             total += sub.activity
     return total
 
+
 def compute_coordination_pressure(subsystems: List[Subsystem]) -> float:
     """
     Coordination pressure: how much active subsystems disagree.
-    Range [0, 1] — higher means more conflict, more need for a coordinator.
     """
     active = [s for s in subsystems if s.active]
     n = len(active)
@@ -293,6 +329,7 @@ def compute_coordination_pressure(subsystems: List[Subsystem]) -> float:
         return 0.0
     return float(np.clip(total_conflict / n_pairs, 0.0, 1.0))
 
+
 def dominant_subsystem(subsystems: List[Subsystem]) -> str:
     """Return the name of the subsystem with the highest activity magnitude."""
     active = [s for s in subsystems if s.active]
@@ -300,88 +337,92 @@ def dominant_subsystem(subsystems: List[Subsystem]) -> str:
         return "none"
     return max(active, key=lambda s: np.linalg.norm(s.activity)).name
 
+
 def initialize_coordinator(config: SimulationConfig) -> np.ndarray:
-    # Start with stronger signal so action selection works from step 1
     return np.random.randn(config.n_dimensions) * 0.5
+
+
+def initialize_basin_attractors(config: SimulationConfig) -> List[np.ndarray]:
+    return shared_initialize_basin_attractors(
+        n_basins=config.n_basins,
+        n_dimensions=config.n_dimensions,
+        noise_scale=0.05,
+    )
+
 
 def coordinator_update(
     coordinator: np.ndarray,
     subsystems: List[Subsystem],
     config: SimulationConfig,
-) -> np.ndarray:
+) -> Tuple[np.ndarray, np.ndarray]:
     """
     Update coordinator toward a weighted average of active subsystem inputs.
-    Acts as a global workspace: integrates, then broadcasts.
+    Returns (updated_coordinator, weighted_input).
     """
     n_dim = len(coordinator)
     lr = config.learning_rate
 
     active = [s for s in subsystems if s.active]
     if not active:
-        return coordinator
+        return coordinator, np.zeros_like(coordinator)
 
-    norms = np.array([np.linalg.norm(s.activity) for s in active])
+    norms = np.array([np.linalg.norm(s.activity) for s in active], dtype=float)
     total_norm = norms.sum() + 1e-8
-    weighted_input = sum(
-        s.activity * (norms[i] / total_norm) for i, s in enumerate(active)
-    )
 
-    coordinator_output = np.dot(coordinator, weighted_input)  # scalar alignment
-    coordination_goal = np.ones(n_dim) / n_dim
+    weighted_input = np.zeros(n_dim, dtype=float)
+    for i, s in enumerate(active):
+        weighted_input += s.activity * (norms[i] / total_norm)
+
+    coordinator_output = float(np.dot(coordinator, weighted_input))
+    coordination_goal = np.ones(n_dim, dtype=float) / n_dim
     goal_signal = coordination_goal * coordinator_output
 
     noise = np.random.randn(n_dim) * config.noise_level
-
-    return (
-        (1 - lr) * coordinator
+    updated = (
+        (1.0 - lr) * coordinator
         + lr * weighted_input
         + lr * goal_signal
         + noise
     )
+    return updated, weighted_input
+
 
 def attractor_update(
     state: np.ndarray,
     basin_attractor: np.ndarray,
     config: SimulationConfig,
 ) -> np.ndarray:
-    """Pull state toward a basin of attraction (commitment)."""
-    delta = config.learning_rate * (basin_attractor - state)
-    noise = np.random.randn(len(state)) * config.noise_level
-    state = state + delta + noise
-    norm = np.linalg.norm(state)
-    if norm > 1e-8:
-        state = state / norm
-    return state
+    return shared_attractor_pull(
+        state=state,
+        basin_attractor=basin_attractor,
+        learning_rate=config.basin_pull_strength,
+        noise_level=config.noise_level * 0.25,
+    )
+
+
+def basin_similarities(state: np.ndarray, basin_attractors: List[np.ndarray]) -> np.ndarray:
+    return shared_basin_similarities(state, basin_attractors)
+
 
 def basin_switch_event(
     state: np.ndarray,
     basin_attractors: List[np.ndarray],
     config: SimulationConfig,
-) -> Tuple[np.ndarray, bool]:
-    """
-    Check for basin-switch (decision) events.
-    When equidistant from competing basins, noise breaks symmetry.
-    """
-    distances = []
-    for att in basin_attractors:
-        ns = np.linalg.norm(state)
-        na = np.linalg.norm(att)
-        if ns < 1e-8 or na < 1e-8:
-            distances.append(0.0)
-            continue
-        cos_sim = np.clip(np.dot(state, att) / (ns * na), -1.0, 1.0)
-        distances.append(-np.arccos(cos_sim))
-    distances = np.array(distances)
+    previous_basin_idx: Optional[int] = None,
+) -> Tuple[np.ndarray, int, bool, np.ndarray]:
+    result = shared_basin_switch_event(
+        state=state,
+        basin_attractors=basin_attractors,
+        ambiguity_threshold=config.basin_ambiguity_threshold,
+        previous_index=previous_basin_idx,
+    )
+    return (
+        basin_attractors[result.chosen_index],
+        result.chosen_index,
+        result.switched,
+        result.similarities,
+    )
 
-    spread = np.max(distances) - np.min(distances)
-    next_idx = int(np.argmin(distances))
-
-    if spread < 0.3:  # near-equidistant → decision point
-        if np.random.rand() > 0.5:
-            next_idx = (next_idx + 1) % len(basin_attractors)
-            return basin_attractors[next_idx], True
-
-    return basin_attractors[next_idx], False
 
 # ────────────────────────────────────────────────────────────────────
 # Main simulation loop
@@ -395,65 +436,73 @@ def run_simulation(
 ) -> Dict:
     """
     Run the full consciousness + navigation simulation.
-
-    Each timestep:
-      1. Subsystems sense the environment
-      2. Coordinator integrates subsystem state
-      3. Coordinator selects an action (4D slice → 2D movement)
-      4. Being moves; goals/hazards are recorded
-      5. Metrics are logged
     """
+    if config.random_seed is not None:
+        np.random.seed(config.random_seed)
+
     coordinator = initialize_coordinator(config)
+    basin_attractors = initialize_basin_attractors(config)
+    previous_basin_idx: Optional[int] = None
 
-    n_basins = 5
-    basin_attractors = []
-    for _ in range(n_basins):
-        v = np.random.randn(config.n_dimensions)
-        v = v / (np.linalg.norm(v) + 1e-8)
-        v += np.random.randn(config.n_dimensions) * 0.05
-        basin_attractors.append(v)
-
-    # Metrics
     coordination_pressures = []
     coordinator_magnitudes = []
-    coordinator_trajectory = []  # full 4D state per step
+    coordinator_trajectory = []
     integration_levels = []
     dominant_subsystems = []
     basin_switches = 0
     goal_events = []
     hazard_events = []
+    chosen_basins = []
+    basin_similarity_log = []
+    action_trajectory = []
+    weighted_inputs = []
+    subsystem_norm_log = []
     step_log = []
 
     for t in range(config.n_timesteps):
+        switched = False
+
         # 1. Sense environment
         sense_environment(being, env, subsystems, config)
 
-        # 2. Compute state metrics
-        subsystem_state = compute_system_state(subsystems)
+        # 2. Metrics before coordinator update
         pressure = compute_coordination_pressure(subsystems)
         dom = dominant_subsystem(subsystems)
+        subsystem_norms = {
+            sub.name: float(np.linalg.norm(sub.activity))
+            for sub in subsystems
+            if sub.active
+        }
 
-        coordination_pressures.append(pressure)
-        coordinator_magnitudes.append(np.linalg.norm(coordinator))
-        coordinator_trajectory.append(coordinator.copy())
-        dominant_subsystems.append(dom)
-
-        active_norms = [np.linalg.norm(s.activity) for s in subsystems if s.active]
+        active_norms = list(subsystem_norms.values())
         total_act = sum(active_norms)
-        integration = min(1.0, total_act / config.n_subsystems)
-        integration_levels.append(integration)
+        integration = min(1.0, total_act / max(1, config.n_subsystems))
 
         # 3. Update coordinator
-        coordinator = coordinator_update(coordinator, subsystems, config)
+        coordinator, weighted_input = coordinator_update(coordinator, subsystems, config)
 
-        # 4. Basin switch (decision)
-        if t > 10:
-            next_basin, switched = basin_switch_event(coordinator, basin_attractors, config)
+        # 4. Basin selection / commitment
+        chosen_basin = -1
+        sims = basin_similarities(coordinator, basin_attractors)
+
+        if t >= config.basin_activation_start:
+            next_basin, chosen_basin, switched, sims = basin_switch_event(
+                coordinator,
+                basin_attractors,
+                config,
+                previous_basin_idx=previous_basin_idx,
+            )
+            coordinator = attractor_update(coordinator, next_basin, config)
             if switched:
                 basin_switches += 1
-                coordinator = attractor_update(coordinator, next_basin, config)
+            previous_basin_idx = chosen_basin
 
-        # 5. Select action and move
+        # 5. Clamp coordinator magnitude
+        c_norm = np.linalg.norm(coordinator)
+        if c_norm > config.coordinator_max_norm:
+            coordinator = coordinator / c_norm * config.coordinator_max_norm
+
+        # 6. Select action and move
         action = select_action(coordinator, config)
         goal_reached, hazard_hit = move_being(being, action, env)
 
@@ -462,22 +511,27 @@ def run_simulation(
         if hazard_hit:
             hazard_events.append(t)
 
-        # 6. Broadcast coordinator back to subsystems
+        # 7. Broadcast coordinator back to subsystems
         for sub in subsystems:
             if sub.active:
-                sub.activity += coordinator * 0.05
-                # Damping: prevent activity explosion
+                sub.activity += coordinator * config.subsystem_broadcast_gain
                 norm = np.linalg.norm(sub.activity)
-                if norm > 2.0:
-                    sub.activity = sub.activity / norm * 2.0
+                if norm > config.subsystem_max_norm:
+                    sub.activity = sub.activity / norm * config.subsystem_max_norm
 
-        # Clamp coordinator magnitude to prevent overflow
-        c_norm = np.linalg.norm(coordinator)
-        if c_norm > 5.0:
-            coordinator = coordinator / c_norm * 5.0
+        # 8. Log metrics
+        coordination_pressures.append(pressure)
+        coordinator_magnitudes.append(float(np.linalg.norm(coordinator)))
+        coordinator_trajectory.append(coordinator.copy())
+        integration_levels.append(float(integration))
+        dominant_subsystems.append(dom)
+        chosen_basins.append(chosen_basin)
+        basin_similarity_log.append(sims.copy())
+        action_trajectory.append(action.copy())
+        weighted_inputs.append(weighted_input.copy())
+        subsystem_norm_log.append(subsystem_norms)
 
-        # 7. Per-step log entry
-        step_log.append({
+        log_row = {
             "t": t,
             "x": float(being.position[0]),
             "y": float(being.position[1]),
@@ -485,10 +539,30 @@ def run_simulation(
             "coordinator_magnitude": float(np.linalg.norm(coordinator)),
             "integration": float(integration),
             "dominant": dom,
-            "basin_switch": switched if t > 10 else False,
-            "goal_reached": goal_reached,
-            "hazard_hit": hazard_hit,
-        })
+            "chosen_basin": int(chosen_basin),
+            "basin_switch": bool(switched),
+            "goal_reached": bool(goal_reached),
+            "hazard_hit": bool(hazard_hit),
+            "action_x": float(action[0]),
+            "action_y": float(action[1]),
+            "coord_0": float(coordinator[0]),
+            "coord_1": float(coordinator[1]),
+            "coord_2": float(coordinator[2]),
+            "coord_3": float(coordinator[3]),
+            "weighted_input_0": float(weighted_input[0]),
+            "weighted_input_1": float(weighted_input[1]),
+            "weighted_input_2": float(weighted_input[2]),
+            "weighted_input_3": float(weighted_input[3]),
+        }
+
+        for i, sim in enumerate(sims):
+            log_row[f"basin_similarity_{i}"] = float(sim)
+
+        for name, value in subsystem_norms.items():
+            safe_name = name.lower().replace(" ", "_")
+            log_row[f"subsystem_norm_{safe_name}"] = float(value)
+
+        step_log.append(log_row)
 
     return {
         "coordination_pressures": coordination_pressures,
@@ -497,11 +571,18 @@ def run_simulation(
         "integration_levels": integration_levels,
         "dominant_subsystems": dominant_subsystems,
         "basin_switches": basin_switches,
+        "chosen_basins": chosen_basins,
+        "basin_similarity_log": np.array(basin_similarity_log),
         "goal_events": goal_events,
         "hazard_events": hazard_events,
+        "action_trajectory": np.array(action_trajectory),
+        "weighted_inputs": np.array(weighted_inputs),
+        "subsystem_norm_log": subsystem_norm_log,
         "step_log": step_log,
         "being": being,
+        "basin_attractors": np.array(basin_attractors),
     }
+
 
 # ────────────────────────────────────────────────────────────────────
 # Consciousness level
@@ -514,7 +595,7 @@ def compute_consciousness_level(metrics: Dict, config: SimulationConfig) -> Tupl
     switches = metrics["basin_switches"]
 
     n = len(pressures)
-    avg_pressure = np.mean(pressures[n // 2:])
+    avg_pressure = np.mean(pressures[n // 2:]) if n > 1 else np.mean(pressures)
     avg_magnitude = np.mean(magnitudes)
     avg_integration = np.mean(integrations)
     switch_factor = min(1.0, switches / 10.0)
@@ -538,8 +619,9 @@ def compute_consciousness_level(metrics: Dict, config: SimulationConfig) -> Tupl
 
     return level, state
 
+
 # ────────────────────────────────────────────────────────────────────
-# Study tool: lesion study
+# Lesion study
 # ────────────────────────────────────────────────────────────────────
 
 def run_lesion_study(
@@ -553,15 +635,13 @@ def run_lesion_study(
     """
     print(f"\n  [Lesion Study] Disabling subsystem: {lesion_name}")
 
-    # Intact run
-    np.random.seed(42)
+    np.random.seed(config.random_seed if config.random_seed is not None else 42)
     subs_intact = initialize_subsystems(config, config.n_subsystems)
     being_intact = initialize_being(env)
     metrics_intact = run_simulation(config, env, being_intact, subs_intact)
     level_intact, state_intact = compute_consciousness_level(metrics_intact, config)
 
-    # Lesioned run
-    np.random.seed(42)
+    np.random.seed(config.random_seed if config.random_seed is not None else 42)
     subs_lesioned = initialize_subsystems(config, config.n_subsystems)
     for s in subs_lesioned:
         if s.name == lesion_name:
@@ -585,8 +665,9 @@ def run_lesion_study(
         "lesion_name": lesion_name,
     }
 
+
 # ────────────────────────────────────────────────────────────────────
-# Study tool: CSV export
+# CSV export
 # ────────────────────────────────────────────────────────────────────
 
 def export_to_csv(metrics: Dict, path: str = "simulation_log.csv") -> None:
@@ -601,83 +682,69 @@ def export_to_csv(metrics: Dict, path: str = "simulation_log.csv") -> None:
         writer.writerows(log)
     print(f"  Exported {len(log)} rows to {path}")
 
+
 # ────────────────────────────────────────────────────────────────────
 # Visualization
 # ────────────────────────────────────────────────────────────────────
 
 def plot_navigation(metrics: Dict, env: Environment, title: str = "Being Navigation"):
-    """
-    Plot the being's path through the 2D environment.
-    Color encodes time (early=dark, late=bright). Goals and hazards are marked.
-    """
     being = metrics["being"]
     history = np.array(being.history)
     T = len(history)
 
     fig, ax = plt.subplots(figsize=(8, 8))
-
-    # Path colored by time
     cmap = plt.cm.plasma
+
     for i in range(T - 1):
         ax.plot(
             history[i:i+2, 0], history[i:i+2, 1],
-            color=cmap(i / T), linewidth=1.2, alpha=0.8
+            color=cmap(i / max(T, 1)), linewidth=1.2, alpha=0.8
         )
 
-    # Start and end
-    ax.scatter(*history[0], color='white', edgecolors='black', s=120, zorder=5, label='Start')
-    ax.scatter(*history[-1], color='black', edgecolors='white', s=120, zorder=5, label='End', marker='*')
+    ax.scatter(*history[0], color="white", edgecolors="black", s=120, zorder=5, label="Start")
+    ax.scatter(*history[-1], color="black", edgecolors="white", s=120, zorder=5, label="End", marker="*")
 
-    # Goals
     for i, (gx, gy) in enumerate(env.goals):
-        circle = plt.Circle((gx, gy), env.goal_radius, color='lime', alpha=0.3)
+        circle = plt.Circle((gx, gy), env.goal_radius, color="lime", alpha=0.3)
         ax.add_patch(circle)
-        ax.scatter(gx, gy, color='lime', edgecolors='darkgreen', s=200, zorder=4,
-                   marker='^', label='Goal' if i == 0 else '')
+        ax.scatter(gx, gy, color="lime", edgecolors="darkgreen", s=200, zorder=4,
+                   marker="^", label="Goal" if i == 0 else "")
 
-    # Hazards
     for i, (hx, hy) in enumerate(env.hazards):
-        circle = plt.Circle((hx, hy), env.hazard_radius, color='red', alpha=0.2)
+        circle = plt.Circle((hx, hy), env.hazard_radius, color="red", alpha=0.2)
         ax.add_patch(circle)
-        ax.scatter(hx, hy, color='red', edgecolors='darkred', s=200, zorder=4,
-                   marker='x', label='Hazard' if i == 0 else '')
+        ax.scatter(hx, hy, color="red", edgecolors="darkred", s=200, zorder=4,
+                   marker="x", label="Hazard" if i == 0 else "")
 
-    # Goal/hazard events
-    goal_ts = metrics["goal_events"]
-    hazard_ts = metrics["hazard_events"]
-    for t in goal_ts:
+    for t in metrics["goal_events"]:
         if t < len(history):
-            ax.scatter(*history[t], color='lime', s=80, zorder=6, marker='o', alpha=0.9)
-    for t in hazard_ts:
+            ax.scatter(*history[t], color="lime", s=80, zorder=6, marker="o", alpha=0.9)
+    for t in metrics["hazard_events"]:
         if t < len(history):
-            ax.scatter(*history[t], color='red', s=80, zorder=6, marker='x', alpha=0.9)
+            ax.scatter(*history[t], color="red", s=80, zorder=6, marker="x", alpha=0.9)
 
     sm = ScalarMappable(cmap=cmap, norm=Normalize(0, T))
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label='Timestep')
+    plt.colorbar(sm, ax=ax, label="Timestep")
 
     ax.set_xlim(0, env.size)
     ax.set_ylim(0, env.size)
-    ax.set_aspect('equal')
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_title(f'{title}\nGoals reached: {being.goals_reached}  |  Hazards hit: {being.hazards_hit}')
-    ax.legend(loc='upper right')
+    ax.set_aspect("equal")
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_title(f"{title}\nGoals reached: {being.goals_reached}  |  Hazards hit: {being.hazards_hit}")
+    ax.legend(loc="upper right")
     ax.grid(alpha=0.2)
-
     plt.tight_layout()
 
+
 def plot_phase_portrait(metrics: Dict):
-    """
-    Phase portrait: coordinator trajectory projected onto 2D dimension pairs.
-    Shows identity orbits and basin-switch events in phase space.
-    """
-    traj = metrics["coordinator_trajectory"]  # shape (T, 4)
+    traj = metrics["coordinator_trajectory"]
     T = len(traj)
     cmap = plt.cm.viridis
 
     pairs = [(0, 1), (0, 2), (1, 2), (2, 3)]
-    labels = ['Dim 0 vs 1', 'Dim 0 vs 2', 'Dim 1 vs 2', 'Dim 2 vs 3']
+    labels = ["Dim 0 vs 1", "Dim 0 vs 2", "Dim 1 vs 2", "Dim 2 vs 3"]
 
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
     axes = axes.flatten()
@@ -686,26 +753,23 @@ def plot_phase_portrait(metrics: Dict):
         for i in range(T - 1):
             ax.plot(
                 traj[i:i+2, d1], traj[i:i+2, d2],
-                color=cmap(i / T), linewidth=1.0, alpha=0.7
+                color=cmap(i / max(T, 1)), linewidth=1.0, alpha=0.7
             )
-        ax.scatter(traj[0, d1], traj[0, d2], color='white', edgecolors='black', s=80, zorder=5)
-        ax.scatter(traj[-1, d1], traj[-1, d2], color='black', edgecolors='white', s=80, zorder=5, marker='*')
-        ax.set_xlabel(f'Dim {d1}')
-        ax.set_ylabel(f'Dim {d2}')
+        ax.scatter(traj[0, d1], traj[0, d2], color="white", edgecolors="black", s=80, zorder=5)
+        ax.scatter(traj[-1, d1], traj[-1, d2], color="black", edgecolors="white", s=80, zorder=5, marker="*")
+        ax.set_xlabel(f"Dim {d1}")
+        ax.set_ylabel(f"Dim {d2}")
         ax.set_title(label)
         ax.grid(alpha=0.3)
 
     sm = ScalarMappable(cmap=cmap, norm=Normalize(0, T))
     sm.set_array([])
-    fig.colorbar(sm, ax=axes, label='Timestep', shrink=0.6)
-    plt.suptitle('4D Phase Portrait (Coordinator Trajectory)', fontsize=13)
+    fig.colorbar(sm, ax=axes, label="Timestep", shrink=0.6)
+    plt.suptitle("4D Phase Portrait (Coordinator Trajectory)", fontsize=13)
     plt.tight_layout()
 
+
 def plot_dominance(metrics: Dict, subsystems: List[Subsystem]):
-    """
-    Subsystem dominance over time: which subsystem is steering at each step.
-    Displayed as a categorical timeline.
-    """
     names = [s.name for s in subsystems]
     dom_log = metrics["dominant_subsystems"]
     T = len(dom_log)
@@ -715,38 +779,34 @@ def plot_dominance(metrics: Dict, subsystems: List[Subsystem]):
     fig, axes = plt.subplots(3, 1, figsize=(14, 9), sharex=True)
     t = np.arange(T)
 
-    # Dominance timeline
-    axes[0].scatter(t, dom_idx, c=dom_idx, cmap='tab10', s=8, alpha=0.7)
+    axes[0].scatter(t, dom_idx, c=dom_idx, cmap="tab10", s=8, alpha=0.7)
     axes[0].set_yticks(range(len(names)))
     axes[0].set_yticklabels(names)
-    axes[0].set_ylabel('Dominant Subsystem')
-    axes[0].set_title('Subsystem Dominance Over Time')
+    axes[0].set_ylabel("Dominant Subsystem")
+    axes[0].set_title("Subsystem Dominance Over Time")
     axes[0].grid(alpha=0.2)
 
-    # Coordination pressure
-    axes[1].plot(t, metrics["coordination_pressures"], color='blue', linewidth=1.5)
-    axes[1].set_ylabel('Coordination Pressure')
-    axes[1].set_title('Coordination Pressure (conflict between subsystems)')
+    axes[1].plot(t, metrics["coordination_pressures"], color="blue", linewidth=1.5)
+    axes[1].set_ylabel("Coordination Pressure")
+    axes[1].set_title("Coordination Pressure (conflict between subsystems)")
     axes[1].grid(alpha=0.3)
 
-    # Integration level
-    axes[2].plot(t, metrics["integration_levels"], color='orange', linewidth=1.5)
-    axes[2].set_ylabel('Integration Level')
-    axes[2].set_xlabel('Timestep')
-    axes[2].set_title('Information Integration (IIT-style)')
+    axes[2].plot(t, metrics["integration_levels"], color="orange", linewidth=1.5)
+    axes[2].set_ylabel("Integration Level")
+    axes[2].set_xlabel("Timestep")
+    axes[2].set_title("Information Integration (IIT-style)")
     axes[2].grid(alpha=0.3)
 
-    # Mark goal and hazard events
     for ax in axes:
         for t_g in metrics["goal_events"]:
-            ax.axvline(t_g, color='lime', alpha=0.4, linewidth=1.5)
+            ax.axvline(t_g, color="lime", alpha=0.4, linewidth=1.5)
         for t_h in metrics["hazard_events"]:
-            ax.axvline(t_h, color='red', alpha=0.3, linewidth=1.0)
+            ax.axvline(t_h, color="red", alpha=0.3, linewidth=1.0)
 
     plt.tight_layout()
 
+
 def plot_lesion_comparison(lesion_results: Dict):
-    """Compare intact vs lesioned run: pressure, magnitude, integration, position."""
     intact = lesion_results["intact"]
     lesioned = lesion_results["lesioned"]
     name = lesion_results["lesion_name"]
@@ -760,23 +820,22 @@ def plot_lesion_comparison(lesion_results: Dict):
         (axes[0, 1], "coordinator_magnitudes", "Magnitude", "Coordinator Magnitude"),
         (axes[1, 0], "integration_levels", "Integration", "Information Integration"),
     ]:
-        ax.plot(t, intact[key], color='steelblue', linewidth=1.5, label='Intact')
-        ax.plot(t, lesioned[key], color='salmon', linewidth=1.5, linestyle='--', label=f'Lesion: {name}')
+        ax.plot(t, intact[key], color="steelblue", linewidth=1.5, label="Intact")
+        ax.plot(t, lesioned[key], color="salmon", linewidth=1.5, linestyle="--", label=f"Lesion: {name}")
         ax.set_ylabel(ylabel)
         ax.set_title(title)
         ax.legend()
         ax.grid(alpha=0.3)
 
-    # Navigation comparison
     ax = axes[1, 1]
     h_intact = np.array(lesion_results["intact"]["being"].history)
     h_lesioned = np.array(lesion_results["lesioned"]["being"].history)
-    ax.plot(h_intact[:, 0], h_intact[:, 1], color='steelblue', linewidth=1.2, label='Intact', alpha=0.8)
-    ax.plot(h_lesioned[:, 0], h_lesioned[:, 1], color='salmon', linewidth=1.2,
-            linestyle='--', label=f'Lesion: {name}', alpha=0.8)
-    ax.set_title('Navigation Path Comparison')
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
+    ax.plot(h_intact[:, 0], h_intact[:, 1], color="steelblue", linewidth=1.2, label="Intact", alpha=0.8)
+    ax.plot(h_lesioned[:, 0], h_lesioned[:, 1], color="salmon", linewidth=1.2,
+            linestyle="--", label=f"Lesion: {name}", alpha=0.8)
+    ax.set_title("Navigation Path Comparison")
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
     ax.legend()
     ax.grid(alpha=0.2)
 
@@ -785,34 +844,29 @@ def plot_lesion_comparison(lesion_results: Dict):
     si = lesion_results["state_intact"]
     sl = lesion_results["state_lesioned"]
     plt.suptitle(
-        f'Lesion Study: {name} removed\n'
-        f'Intact: {il:.3f} ({si})  →  Lesioned: {ll:.3f} ({sl})  |  Δ = {il - ll:+.3f}',
+        f"Lesion Study: {name} removed\n"
+        f"Intact: {il:.3f} ({si})  →  Lesioned: {ll:.3f} ({sl})  |  Δ = {il - ll:+.3f}",
         fontsize=12
     )
     plt.tight_layout()
+
 
 # ────────────────────────────────────────────────────────────────────
 # Main
 # ────────────────────────────────────────────────────────────────────
 
 def main():
-    config = SimulationConfig(
-        n_subsystems=8,
-        n_dimensions=4,
-        n_timesteps=300,
-        coordination_threshold=0.85,
-        noise_level=0.1,
-        learning_rate=0.005,
-        step_size=0.4,
-        env_size=20,
-    )
+    config = SimulationConfig()
+
+    if config.random_seed is not None:
+        np.random.seed(config.random_seed)
 
     env = Environment()
     subsystems = initialize_subsystems(config, config.n_subsystems)
     being = initialize_being(env)
 
     print(f"\n{'=' * 60}")
-    print(f"  CONSCIOUSNESS EMERGENCE + NAVIGATION SIMULATION")
+    print("  CONSCIOUSNESS EMERGENCE + NAVIGATION SIMULATION")
     print(f"{'=' * 60}")
     print(f"\n  Config: {config.n_subsystems} subsystems | {config.n_dimensions}D manifold | {config.n_timesteps} steps")
     print(f"  Environment: {config.env_size}x{config.env_size} | {len(env.goals)} goals | {len(env.hazards)} hazards\n")
@@ -821,7 +875,7 @@ def main():
     level, state = compute_consciousness_level(metrics, config)
 
     print(f"\n{'=' * 60}")
-    print(f"  RESULTS")
+    print("  RESULTS")
     print(f"{'=' * 60}")
     print(f"\n  Consciousness Level:  {level:.3f} ({state})")
     print(f"  Basin-switch events: {metrics['basin_switches']}")
@@ -830,28 +884,23 @@ def main():
     print(f"  Avg pressure:        {np.mean(metrics['coordination_pressures']):.3f}")
     print(f"  Avg integration:     {np.mean(metrics['integration_levels']):.3f}")
 
-    # Dominance summary
-    from collections import Counter
     dom_counts = Counter(metrics["dominant_subsystems"])
-    print(f"\n  Subsystem dominance (top 3):")
+    print("\n  Subsystem dominance (top 3):")
     for name, count in dom_counts.most_common(3):
-        print(f"    {name:<20} {count} steps ({100*count//config.n_timesteps}%)")
+        print(f"    {name:<20} {count} steps ({100 * count // config.n_timesteps}%)")
 
-    # Export CSV
     print(f"\n{'=' * 60}")
-    print(f"  EXPORT")
+    print("  EXPORT")
     print(f"{'=' * 60}")
     export_to_csv(metrics, "simulation_log.csv")
 
-    # Lesion study
     print(f"\n{'=' * 60}")
-    print(f"  LESION STUDY")
+    print("  LESION STUDY")
     print(f"{'=' * 60}")
     lesion_results = run_lesion_study(config, env, lesion_name="Planning")
 
-    # Plots
     print(f"\n{'=' * 60}")
-    print(f"  VISUALIZATIONS  (close each window to see the next)")
+    print("  VISUALIZATIONS  (close each window to see the next)")
     print(f"{'=' * 60}\n")
 
     plot_navigation(metrics, env, title="Being Navigation (4D Slice → 2D Action)")
@@ -862,6 +911,7 @@ def main():
     plt.show()
 
     return metrics, level, state
+
 
 if __name__ == "__main__":
     main()
