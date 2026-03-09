@@ -1,3 +1,5 @@
 """
-Feature extraction from QRNG bitstreams: windowing, statistics, entropy, complexity.
+Feature extraction utilities for bitstream window analysis.
+
+Covers windowing, statistics, entropy, and complexity features.
 """
