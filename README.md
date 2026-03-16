@@ -60,18 +60,27 @@ Subsystems 0–3 form the "core four" that the being's state typically orbits. S
 
 A cyclic alliance chain (Memory↔Motor +0.81, Attention↔Planning +0.81) and opposition structure (Motor↔Emotion −0.81) are emergent properties of the preference geometry, not hardcoded rules.
 
-### Key Metrics (36 columns exported per timestep)
+### Key Metrics (55 columns exported per timestep)
 
 **Coherence metrics:** closure_coherence, integration, differentiation, path_coherence
 
-**Geometric metrics (new):**
+**Geometric metrics:**
 | Metric | What It Measures |
-|--------|-----------------|
+|--------|------------------|
 | `conflict_angle` | Angle between top-2 subsystem forces (rad). 0° = agreement, 180° = maximally torn |
 | `clarity` | Resultant force magnitude. High = the being knows what it wants |
 | `curvature` | Angular change in trajectory per step. High = rapid state shifts |
 | `inner_outer_ratio` | Perception dims / navigation dims. >1 = contemplative, <1 = action-oriented |
 | `force_mag_0`–`force_mag_7` | Per-subsystem tangent force magnitude. Lower = closer to that subsystem's home |
+
+**Clarity field expansions:**
+| Metric | What It Measures |
+|--------|------------------|
+| `clarity_grad_mag` | How fast clarity changes in nearby directions on S³. Steep = near a decision boundary |
+| `clarity_decomp_0`–`clarity_decomp_7` | Per-subsystem contribution to clarity. Positive = building purpose, negative = opposing it |
+| `clarity_persistence` | Running autocorrelation over 20 steps. High = sustained purpose, negative = flickering |
+| `clarity_rate` | d(clarity)/dt — first difference. Predicts purpose forming/dissolving before it happens |
+| `resultant_dir_0`–`resultant_dir_3` | Unit vector of the combined force direction. Where purpose points, not just how strong |
 
 **Perception:** perc_range, perc_focus, perc_mode, n_visible
 
@@ -83,11 +92,22 @@ A cyclic alliance chain (Memory↔Motor +0.81, Attention↔Planning +0.81) and o
 
 The system discovers emergent cognitive phases by clustering timesteps on their full 20-dimensional geometric signature (conflict, clarity, curvature, orientation, all force magnitudes, coherence metrics, perception state). Uses Gaussian Mixture Model with BIC model selection to find the natural number of phases.
 
-Typical result: **4 phases** with ~59 transitions in 500 steps:
-- **Phase 0 (68%):** Balanced — default cruising mode, moderate conflict, vigilant perception
-- **Phase 1 (13%):** Balanced but threat-aware — similar geometry but in threat-lock perception
-- **Phase 2 (11%):** Restless — high curvature, action-oriented, rapid state changes
-- **Phase 3 (7%):** Contemplative — high inner/outer ratio, low speed, inward-focused
+Typical result: **4–7 phases** with 59–71 transitions in 500 steps:
+- **Balanced (dominant):** Default cruising mode, moderate conflict, vigilant perception
+- **Restless / Action-oriented:** High curvature, rapid state changes, shorter perception range
+- **Contemplative:** High inner/outer ratio, low speed, inward-focused
+- **Coherent / Driven:** Rare spikes of very high clarity, low conflict — the being briefly "knows exactly what it wants"
+
+### Clarity Field Analysis
+
+The clarity field — magnitude of the activity-weighted resultant tangent force — is decomposed across six dimensions:
+
+1. **Clarity gradient:** Samples the manifold at 4 tangent neighbors to measure how fast clarity changes in nearby directions. Steep gradients indicate proximity to decision boundaries.
+2. **Clarity decomposition:** Each subsystem's signed contribution to the resultant. Motor-Planning-Aesthetic typically *build* purpose (+0.01–0.015 each); Social-Emotion tend to *oppose* it (−0.001 to −0.003).
+3. **Clarity persistence:** Running autocorrelation over a 20-step window. Typical: 55% of time flickering (autocorr < 0), only 15% sustained (autocorr > 0.3).
+4. **Directional clarity:** Tracks the 4D unit vector of the resultant — where purpose points, not just how strong it is. Hundreds of snap events (>45° rotation) occur per run.
+5. **Clarity potential field:** Streamline visualization of gradient flow on PCA-projected S³. Shows natural "paths of purpose" the being tends to follow, plus clarity sinks and peaks.
+6. **Second-order clarity:** d(clarity)/dt predicts transitions — cross-correlation with macro-state changes typically peaks at lag 0 with r ≈ 0.24.
 
 ## Quick Start
 
@@ -100,7 +120,8 @@ Generates:
 - `simulation_v2_results.png` — 6-panel coherence/dominance/navigation overview
 - `cognitive_landscape.png` — 10-panel force field, trajectories, and cognitive profile
 - `cognitive_phases.png` — 9-panel phase detection with transitions, profiles, and landscape
-- `simulation_log_v2.csv` — 500 rows × 36 columns of per-timestep data
+- `clarity_deep_dive.png` — 12-panel clarity field analysis (gradient, decomposition, persistence, direction, potential, rate)
+- `simulation_log_v2.csv` — 500 rows × 55 columns of per-timestep data
 
 ### V1 Simulation (Independent)
 
@@ -122,7 +143,7 @@ Feature extraction (entropy, autocorrelation, changepoint, complexity), anomaly 
 
 ```
 FourD/
-├── v2_consciousness_sim.py       # V2 simulation (2100+ lines, tangent force architecture)
+├── v2_consciousness_sim.py       # V2 simulation (2700+ lines, tangent force architecture)
 ├── fourD_slice_sim.py            # V1 simulation (750 lines, scalar scores)
 ├── config.py                     # Shared configuration
 ├── requirements.txt              # Dependencies
@@ -164,7 +185,7 @@ The key insight: **neural networks (and brains) represent functions as geometric
 ### Near-Term (Current Architecture Extensions)
 
 **Causal Analysis Layer**
-- Cross-correlation: do clarity drops predict macro transitions? Does conflict peak before mode switches?
+- ~~Cross-correlation: do clarity drops predict macro transitions?~~ ✅ Implemented (clarity rate × macro transition xcorr, r ≈ 0.24 at lag 0)
 - Granger causality between geometric metrics and phase transitions
 - Information-theoretic: transfer entropy between subsystem forces and trajectory curvature
 

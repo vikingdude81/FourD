@@ -905,6 +905,19 @@ class ConsciousnessSimulation:
             'force_mag_5': [],
             'force_mag_6': [],
             'force_mag_7': [],
+            # ── Clarity field expansions ──
+            'clarity_decomp_0': [],     # Per-subsystem contribution to clarity
+            'clarity_decomp_1': [],
+            'clarity_decomp_2': [],
+            'clarity_decomp_3': [],
+            'clarity_decomp_4': [],
+            'clarity_decomp_5': [],
+            'clarity_decomp_6': [],
+            'clarity_decomp_7': [],
+            'resultant_dir': [],        # 4D direction of resultant force (unit vector)
+            'clarity_rate': [],         # d(clarity)/dt — rate of purpose formation
+            'clarity_persistence': [],  # Running autocorrelation of clarity
+            'clarity_grad_mag': [],     # Magnitude of clarity gradient on S³
         }
         
         self.recent_states = []
@@ -1091,7 +1104,72 @@ class ConsciousnessSimulation:
         
         # Clarity: magnitude of activity-weighted resultant force
         resultant = activities @ tangent_forces  # (4,)
-        self.history['clarity'].append(np.linalg.norm(resultant))
+        clarity_val = np.linalg.norm(resultant)
+        self.history['clarity'].append(clarity_val)
+        
+        # ── Clarity expansion 1: Clarity gradient on S³ ──
+        # Sample clarity at 4 nearby tangent directions to estimate gradient magnitude
+        grad_eps = 0.05
+        clarity_at_neighbors = []
+        for d in range(CONFIG['manifold_dim']):
+            # Construct a tangent basis vector in dimension d
+            e_d = np.zeros(CONFIG['manifold_dim'])
+            e_d[d] = 1.0
+            tangent_d = e_d - np.dot(e_d, self.u_t) * self.u_t
+            tn = np.linalg.norm(tangent_d)
+            if tn > 1e-8:
+                tangent_d /= tn
+                # Neighbor point on S³
+                u_neighbor = self.u_t + grad_eps * tangent_d
+                u_neighbor /= np.linalg.norm(u_neighbor)
+                # Clarity at neighbor
+                nb_forces = self.subsystems.compute_tangent_forces(u_neighbor)
+                nb_resultant = activities @ nb_forces  # Use current activities (frozen snapshot)
+                clarity_at_neighbors.append(np.linalg.norm(nb_resultant))
+            else:
+                clarity_at_neighbors.append(clarity_val)
+        clarity_grad_mag = np.linalg.norm(
+            [(c - clarity_val) / grad_eps for c in clarity_at_neighbors]
+        )
+        self.history['clarity_grad_mag'].append(clarity_grad_mag)
+        
+        # ── Clarity expansion 2: Per-subsystem contribution to clarity ──
+        r_norm = np.linalg.norm(resultant)
+        if r_norm > 1e-10:
+            r_hat = resultant / r_norm
+        else:
+            r_hat = np.zeros(CONFIG['manifold_dim'])
+        for si in range(8):
+            contrib = activities[si] * np.dot(tangent_forces[si], r_hat)
+            self.history[f'clarity_decomp_{si}'].append(contrib)
+        
+        # ── Clarity expansion 3: Clarity persistence (exponential moving autocorrelation) ──
+        if len(self.history['clarity']) >= 2:
+            # Running correlation with lag-1: tracks if clarity is steady vs flickering
+            recent_clarity = self.history['clarity'][-min(20, len(self.history['clarity'])):]
+            if len(recent_clarity) >= 3:
+                rc = np.array(recent_clarity)
+                rc_mean = rc.mean()
+                rc_var = rc.var()
+                if rc_var > 1e-12:
+                    autocorr = np.mean((rc[:-1] - rc_mean) * (rc[1:] - rc_mean)) / rc_var
+                else:
+                    autocorr = 1.0
+                self.history['clarity_persistence'].append(np.clip(autocorr, -1, 1))
+            else:
+                self.history['clarity_persistence'].append(0.0)
+        else:
+            self.history['clarity_persistence'].append(0.0)
+        
+        # ── Clarity expansion 4: Directional clarity (resultant unit vector) ──
+        self.history['resultant_dir'].append(r_hat.copy())
+        
+        # ── Clarity expansion 5 & 6: Clarity rate (d/dt) ──
+        if len(self.history['clarity']) >= 2:
+            clarity_rate = clarity_val - self.history['clarity'][-2]
+        else:
+            clarity_rate = 0.0
+        self.history['clarity_rate'].append(clarity_rate)
         
         # Curvature proxy: angle between consecutive tangent vectors
         if len(self.history['u_t']) >= 2:
@@ -1169,11 +1247,14 @@ class ConsciousnessSimulation:
         print(f"    Trajectory curvature:  {np.mean(self.history['curvature']):.4f} rad/step")
         print(f"    Inner/outer ratio:     {np.mean(self.history['inner_outer_ratio']):.3f}")
         
-        # Export to CSV (split u_t into separate dimension columns)
-        export = {k: v for k, v in self.history.items() if k != 'u_t'}
+        # Export to CSV (split u_t and resultant_dir into separate dimension columns)
+        export = {k: v for k, v in self.history.items() if k not in ('u_t', 'resultant_dir')}
         u_arr = np.array(self.history['u_t'])
         for d in range(CONFIG['manifold_dim']):
             export[f'u_dim{d}'] = u_arr[:, d]
+        rd_arr = np.array(self.history['resultant_dir'])
+        for d in range(CONFIG['manifold_dim']):
+            export[f'resultant_dir_{d}'] = rd_arr[:, d]
         df = pd.DataFrame(export)
         csv_filename = 'simulation_log_v2.csv'
         df.to_csv(csv_filename, index=False)
@@ -2078,6 +2159,511 @@ def plot_phase_analysis(history, phase_result, sim):
 
 
 # ============================================================================
+# CLARITY DEEP DIVE — 6 expansions of the clarity field
+# ============================================================================
+
+def plot_clarity_deep_dive(history, sim):
+    """
+    Comprehensive analysis of the clarity field across 6 dimensions:
+    1. Clarity gradient field — where clarity increases/decreases on S³
+    2. Clarity decomposition — which subsystems build vs. destroy purpose
+    3. Clarity persistence — sustained purpose vs. flickering certainty
+    4. Directional clarity — where the resultant points and how it drifts
+    5. Clarity potential field — natural paths of purpose on the manifold
+    6. Second-order clarity — rate of change predicting transitions
+    """
+    import matplotlib.gridspec as gridspec
+    from scipy.ndimage import uniform_filter1d
+    
+    n_steps = len(history['time'])
+    t = np.array(history['time'])
+    clarity = np.array(history['clarity'])
+    clarity_rate = np.array(history['clarity_rate'])
+    clarity_persistence = np.array(history['clarity_persistence'])
+    clarity_grad_mag = np.array(history['clarity_grad_mag'])
+    conflict = np.degrees(np.array(history['conflict_angle']))
+    
+    names = sim.subsystems.SUBSYSTEM_NAMES
+    sub_colors = plt.cm.Set2(np.linspace(0, 1, 8))
+    
+    fig = plt.figure(figsize=(22, 28))
+    gs = gridspec.GridSpec(6, 3, figure=fig, hspace=0.38, wspace=0.32)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 1: Clarity Gradient Field on S³ (PCA projected)
+    # ═══════════════════════════════════════════════════════════════════
+    ax = fig.add_subplot(gs[0, 0:2])
+    
+    u_history = np.array(history['u_t'])
+    u_centered = u_history - u_history.mean(axis=0)
+    cov = u_centered.T @ u_centered / n_steps
+    eigvals, eigvecs = np.linalg.eigh(cov)
+    pc1 = eigvecs[:, -1]
+    pc2 = eigvecs[:, -2]
+    traj_x = u_history @ pc1
+    traj_y = u_history @ pc2
+    
+    # Sample clarity and its gradient on a grid
+    grid_n = 35
+    x_range = np.linspace(traj_x.min() - 0.15, traj_x.max() + 0.15, grid_n)
+    y_range = np.linspace(traj_y.min() - 0.15, traj_y.max() + 0.15, grid_n)
+    gx, gy = np.meshgrid(x_range, y_range)
+    
+    clarity_surface = np.zeros_like(gx)
+    grad_x_field = np.zeros_like(gx)
+    grad_y_field = np.zeros_like(gx)
+    
+    grad_eps = 0.05
+    for i in range(grid_n):
+        for j in range(grid_n):
+            u_sample = gx[i, j] * pc1 + gy[i, j] * pc2
+            norm_s = np.linalg.norm(u_sample)
+            if norm_s < 0.1:
+                continue
+            u_sample = u_sample / norm_s
+            
+            forces = sim.subsystems.compute_tangent_forces(u_sample)
+            influences = sim.subsystems.compute_influences(u_sample)
+            activities = sim.subsystems.apply_competition_and_fatigue(influences)
+            sim.subsystems.fatigue *= 0
+            sim.subsystems.recent_dominant_activities.clear()
+            resultant = activities @ forces
+            c0 = np.linalg.norm(resultant)
+            clarity_surface[i, j] = c0
+            
+            # Gradient in PC1 direction
+            u_dx = u_sample + grad_eps * pc1
+            u_dx = u_dx / np.linalg.norm(u_dx)
+            f_dx = sim.subsystems.compute_tangent_forces(u_dx)
+            c_dx = np.linalg.norm(activities @ f_dx)
+            grad_x_field[i, j] = (c_dx - c0) / grad_eps
+            
+            # Gradient in PC2 direction
+            u_dy = u_sample + grad_eps * pc2
+            u_dy = u_dy / np.linalg.norm(u_dy)
+            f_dy = sim.subsystems.compute_tangent_forces(u_dy)
+            c_dy = np.linalg.norm(activities @ f_dy)
+            grad_y_field[i, j] = (c_dy - c0) / grad_eps
+    
+    sim.subsystems.fatigue = np.zeros(sim.subsystems.n_subsystems)
+    
+    # Background: clarity surface
+    im = ax.contourf(gx, gy, clarity_surface, levels=25, cmap='YlOrRd', alpha=0.7)
+    plt.colorbar(im, ax=ax, label='Clarity magnitude', shrink=0.8)
+    
+    # Gradient arrows (direction clarity increases)
+    skip = 3
+    grad_mag = np.sqrt(grad_x_field**2 + grad_y_field**2)
+    mask = grad_mag > 0.001
+    ax.quiver(gx[::skip, ::skip], gy[::skip, ::skip],
+              grad_x_field[::skip, ::skip], grad_y_field[::skip, ::skip],
+              color='navy', alpha=0.5, scale=3.0, width=0.003)
+    
+    # Trajectory colored by clarity
+    sc = ax.scatter(traj_x, traj_y, c=clarity, cmap='plasma', s=8,
+                    alpha=0.6, zorder=5, edgecolors='none')
+    ax.plot(traj_x, traj_y, 'k-', alpha=0.06, lw=0.3)
+    
+    ax.set_title('1. Clarity Gradient Field on S³\n'
+                 '(arrows = direction that increases purpose; warm = high clarity)',
+                 fontsize=12)
+    ax.set_xlabel('PC1')
+    ax.set_ylabel('PC2')
+    ax.grid(True, alpha=0.2)
+    
+    # ── Panel 1b: Gradient magnitude along trajectory ──
+    ax = fig.add_subplot(gs[0, 2])
+    ax.plot(t, clarity_grad_mag, color='navy', alpha=0.7, lw=1)
+    ax.fill_between(t, 0, clarity_grad_mag, alpha=0.15, color='navy')
+    
+    # Mark steep gradient moments
+    steep = clarity_grad_mag > np.percentile(clarity_grad_mag, 90)
+    if steep.any():
+        ax.scatter(t[steep], clarity_grad_mag[steep], c='red', s=15, zorder=5,
+                   label=f'Steep gradient (top 10%)')
+    
+    ax.set_title('Clarity Gradient Magnitude\n'
+                 '(how fast clarity changes in nearby directions)',
+                 fontsize=11)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('|∇ clarity|')
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 2: Clarity Decomposition — who builds/destroys purpose
+    # ═══════════════════════════════════════════════════════════════════
+    ax = fig.add_subplot(gs[1, :])
+    
+    decomp = np.zeros((n_steps, 8))
+    for si in range(8):
+        decomp[:, si] = np.array(history[f'clarity_decomp_{si}'])
+    
+    # Stacked area: positive contributions above zero, negative below
+    # Sort by mean contribution for readability
+    mean_contrib = decomp.mean(axis=0)
+    sort_order = np.argsort(mean_contrib)[::-1]  # Biggest contributor first
+    
+    # Smooth for readability
+    decomp_smooth = np.zeros_like(decomp)
+    for si in range(8):
+        decomp_smooth[:, si] = uniform_filter1d(decomp[:, si], size=5)
+    
+    # Plot each subsystem's contribution as a line
+    for rank, si in enumerate(sort_order):
+        ax.plot(t, decomp_smooth[:, si], color=sub_colors[si], lw=1.5,
+                alpha=0.8, label=f'{names[si]} ({mean_contrib[si]:+.4f})')
+    
+    ax.axhline(0, color='black', lw=1, ls='-')
+    ax.fill_between(t, 0, np.sum(np.maximum(decomp_smooth, 0), axis=1),
+                    alpha=0.08, color='green', label='_net positive')
+    ax.fill_between(t, 0, -np.sum(np.maximum(-decomp_smooth, 0), axis=1),
+                    alpha=0.08, color='red', label='_net negative')
+    
+    ax.set_title('2. Clarity Decomposition — Who Builds vs. Destroys Purpose\n'
+                 '(positive = contributes to resultant direction, negative = opposes it)',
+                 fontsize=12)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('Contribution to clarity')
+    ax.legend(loc='upper right', fontsize=7, ncol=4)
+    ax.grid(True, alpha=0.3)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 3: Clarity Persistence — sustained purpose vs. flickering
+    # ═══════════════════════════════════════════════════════════════════
+    ax_main = fig.add_subplot(gs[2, 0:2])
+    
+    # Top: clarity with shading by persistence
+    ax_main.fill_between(t, 0, clarity, alpha=0.15, color='teal')
+    # Color the line by persistence value
+    for i in range(len(t) - 1):
+        color = 'darkgreen' if clarity_persistence[i] > 0.3 else (
+                'orange' if clarity_persistence[i] > 0 else 'red')
+        ax_main.plot(t[i:i+2], clarity[i:i+2], color=color, lw=1.5, alpha=0.7)
+    
+    ax_main.set_title('3. Clarity Persistence — Sustained Purpose vs. Flickering\n'
+                      '(green = steady, orange = transitional, red = oscillating)',
+                      fontsize=12)
+    ax_main.set_xlabel('Timestep')
+    ax_main.set_ylabel('Clarity')
+    ax_main.grid(True, alpha=0.3)
+    
+    # Persistence subplot  
+    ax_pers = ax_main.twinx()
+    ax_pers.plot(t, clarity_persistence, color='purple', alpha=0.4, lw=0.8)
+    ax_pers.set_ylabel('Persistence (autocorr)', color='purple', fontsize=9)
+    ax_pers.tick_params(axis='y', labelcolor='purple')
+    ax_pers.set_ylim(-1.2, 1.2)
+    
+    # ── Panel 3b: Episode duration histogram ──
+    ax = fig.add_subplot(gs[2, 2])
+    
+    # Classify each timestep as high/medium/low clarity
+    p33, p67 = np.percentile(clarity, [33, 67])
+    level = np.where(clarity > p67, 2, np.where(clarity > p33, 1, 0))
+    
+    # Compute episode durations for each level
+    level_names = ['Low clarity', 'Medium clarity', 'High clarity']
+    level_colors = ['#e74c3c', '#f39c12', '#27ae60']
+    
+    for lev in range(3):
+        episodes = []
+        in_ep = False
+        ep_len = 0
+        for i in range(n_steps):
+            if level[i] == lev:
+                ep_len += 1
+                in_ep = True
+            elif in_ep:
+                episodes.append(ep_len)
+                ep_len = 0
+                in_ep = False
+        if in_ep:
+            episodes.append(ep_len)
+        if episodes:
+            ax.hist(episodes, bins=range(1, max(episodes) + 3),
+                    color=level_colors[lev], alpha=0.5, label=level_names[lev])
+    
+    ax.set_title('Clarity Episode Durations\n(how long each regime lasts)',
+                 fontsize=11)
+    ax.set_xlabel('Duration (timesteps)')
+    ax.set_ylabel('Count')
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 4: Directional Clarity — where the resultant points
+    # ═══════════════════════════════════════════════════════════════════
+    ax = fig.add_subplot(gs[3, 0:2])
+    
+    rd_history = np.array(history['resultant_dir'])
+    # Project resultant direction to PCA plane
+    rd_x = rd_history @ pc1
+    rd_y = rd_history @ pc2
+    
+    # Compute angular direction of resultant in PCA plane
+    rd_angle = np.degrees(np.arctan2(rd_y, rd_x))
+    
+    # Compute angular velocity (how fast the purpose direction rotates)
+    angle_diff = np.diff(rd_angle)
+    # Handle wraparound
+    angle_diff = np.where(angle_diff > 180, angle_diff - 360, angle_diff)
+    angle_diff = np.where(angle_diff < -180, angle_diff + 360, angle_diff)
+    angle_diff = np.concatenate([[0], angle_diff])
+    
+    # Color by clarity magnitude
+    sc = ax.scatter(t, rd_angle, c=clarity, cmap='plasma', s=8, alpha=0.6)
+    plt.colorbar(sc, ax=ax, label='Clarity magnitude', shrink=0.6)
+    
+    # Overlay smoothed direction
+    rd_angle_smooth = uniform_filter1d(rd_angle, size=15)
+    ax.plot(t, rd_angle_smooth, 'k-', lw=2, alpha=0.5, label='Smoothed direction')
+    
+    ax.set_title('4. Directional Clarity — Where Purpose Points\n'
+                 '(angle of resultant force in PCA plane; color = clarity strength)',
+                 fontsize=12)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('Resultant direction (°)')
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    
+    # ── Panel 4b: Angular velocity of purpose ──
+    ax = fig.add_subplot(gs[3, 2])
+    
+    angle_vel_smooth = uniform_filter1d(np.abs(angle_diff), size=5)
+    ax.plot(t, angle_vel_smooth, color='indigo', alpha=0.7, lw=1)
+    ax.fill_between(t, 0, angle_vel_smooth, alpha=0.15, color='indigo')
+    
+    # Mark snap events (sudden direction change >45°)
+    snaps = np.abs(angle_diff) > 45
+    if snaps.any():
+        ax.scatter(t[snaps], angle_vel_smooth[snaps], c='red', s=20,
+                   zorder=5, label=f'Direction snaps (n={snaps.sum()})')
+    
+    ax.set_title('Purpose Rotation Speed\n'
+                 '(how fast direction of purpose changes)',
+                 fontsize=11)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('|Δ angle| (°/step)')
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 5: Clarity as Potential Field — natural paths of purpose
+    # ═══════════════════════════════════════════════════════════════════
+    ax = fig.add_subplot(gs[4, 0:2])
+    
+    # Use the clarity surface already computed + gradient field
+    # Streamlines show the natural flow of purpose
+    im = ax.contourf(gx, gy, clarity_surface, levels=25, cmap='YlOrRd', alpha=0.5)
+    
+    # Streamlines of the clarity gradient — paths of increasing purpose
+    speed = np.sqrt(grad_x_field**2 + grad_y_field**2)
+    lw = 2 * speed / (speed.max() + 1e-8)
+    
+    try:
+        ax.streamplot(x_range, y_range, grad_x_field, grad_y_field,
+                      color=speed, cmap='cool', linewidth=lw, density=1.5,
+                      arrowstyle='->', arrowsize=1.2)
+    except Exception:
+        # Fallback to quiver if streamplot fails
+        skip = 2
+        ax.quiver(gx[::skip, ::skip], gy[::skip, ::skip],
+                  grad_x_field[::skip, ::skip], grad_y_field[::skip, ::skip],
+                  speed[::skip, ::skip], cmap='cool', alpha=0.6, scale=3.0)
+    
+    # Overlay trajectory
+    ax.plot(traj_x, traj_y, 'k-', alpha=0.3, lw=0.5)
+    ax.scatter(traj_x[0], traj_y[0], marker='o', c='lime', s=100,
+               edgecolors='black', zorder=10, label='Start')
+    ax.scatter(traj_x[-1], traj_y[-1], marker='s', c='red', s=100,
+               edgecolors='black', zorder=10, label='End')
+    
+    # Mark clarity sinks (local minima — decision/equilibrium points)
+    from scipy.ndimage import minimum_filter
+    local_min = (clarity_surface == minimum_filter(clarity_surface, size=5))
+    local_min &= (clarity_surface < np.percentile(clarity_surface[clarity_surface > 0], 20))
+    min_y, min_x = np.where(local_min)
+    if len(min_x) > 0:
+        ax.scatter(gx[0, min_x] if len(gx.shape) > 1 else x_range[min_x],
+                   gy[min_y, 0] if len(gy.shape) > 1 else y_range[min_y],
+                   marker='*', c='cyan', s=150, edgecolors='navy',
+                   zorder=10, label='Clarity sinks')
+    
+    # Mark clarity peaks (local maxima — purpose attractors)
+    from scipy.ndimage import maximum_filter
+    local_max = (clarity_surface == maximum_filter(clarity_surface, size=5))
+    local_max &= (clarity_surface > np.percentile(clarity_surface[clarity_surface > 0], 80))
+    max_y, max_x = np.where(local_max)
+    if len(max_x) > 0:
+        ax.scatter(gx[0, max_x] if len(gx.shape) > 1 else x_range[max_x],
+                   gy[max_y, 0] if len(gy.shape) > 1 else y_range[max_y],
+                   marker='D', c='gold', s=100, edgecolors='darkred',
+                   zorder=10, label='Clarity peaks')
+    
+    plt.colorbar(im, ax=ax, label='Clarity potential', shrink=0.7)
+    ax.set_title('5. Clarity Potential Field — Natural Paths of Purpose\n'
+                 '(streamlines flow toward higher clarity; stars = sinks, diamonds = peaks)',
+                 fontsize=12)
+    ax.set_xlabel('PC1')
+    ax.set_ylabel('PC2')
+    ax.legend(fontsize=7, loc='lower right')
+    ax.grid(True, alpha=0.2)
+    
+    # ── Panel 5b: Trajectory alignment with gradient ──
+    ax = fig.add_subplot(gs[4, 2])
+    
+    # How aligned is the being's movement with the clarity gradient?
+    # At each step: dot(movement_direction, gradient_direction)
+    traj_vel_x = np.diff(traj_x, prepend=traj_x[0])
+    traj_vel_y = np.diff(traj_y, prepend=traj_y[0])
+    
+    # Interpolate gradient at trajectory points
+    from scipy.interpolate import RegularGridInterpolator
+    gi_gx = RegularGridInterpolator((y_range, x_range), grad_x_field,
+                                     bounds_error=False, fill_value=0)
+    gi_gy = RegularGridInterpolator((y_range, x_range), grad_y_field,
+                                     bounds_error=False, fill_value=0)
+    
+    grad_at_traj_x = gi_gx(np.column_stack([traj_y, traj_x]))
+    grad_at_traj_y = gi_gy(np.column_stack([traj_y, traj_x]))
+    
+    # Cosine similarity between movement and gradient
+    dot_prod = traj_vel_x * grad_at_traj_x + traj_vel_y * grad_at_traj_y
+    vel_mag = np.sqrt(traj_vel_x**2 + traj_vel_y**2) + 1e-10
+    grad_mag_traj = np.sqrt(grad_at_traj_x**2 + grad_at_traj_y**2) + 1e-10
+    alignment = dot_prod / (vel_mag * grad_mag_traj)
+    alignment_smooth = uniform_filter1d(alignment, size=10)
+    
+    ax.plot(t, alignment_smooth, color='darkgreen', alpha=0.7, lw=1)
+    ax.fill_between(t, 0, alignment_smooth,
+                    where=alignment_smooth > 0, color='green', alpha=0.2,
+                    label='Seeking clarity')
+    ax.fill_between(t, alignment_smooth, 0,
+                    where=alignment_smooth < 0, color='red', alpha=0.2,
+                    label='Fleeing clarity')
+    ax.axhline(0, color='black', lw=0.8)
+    
+    seek_pct = 100 * (alignment > 0).mean()
+    ax.set_title(f'Following the Gradient?\n'
+                 f'(seeking clarity {seek_pct:.0f}% of time)',
+                 fontsize=11)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('Movement-gradient alignment')
+    ax.set_ylim(-1.1, 1.1)
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    
+    # ═══════════════════════════════════════════════════════════════════
+    # PANEL 6: Second-Order Clarity — rate of change & predictions
+    # ═══════════════════════════════════════════════════════════════════
+    ax = fig.add_subplot(gs[5, 0:2])
+    
+    # Top: clarity with rate of change overlay
+    ax.plot(t, clarity, color='teal', alpha=0.5, lw=1, label='Clarity')
+    
+    ax2 = ax.twinx()
+    rate_smooth = uniform_filter1d(clarity_rate, size=5)
+    ax2.fill_between(t, 0, rate_smooth,
+                     where=rate_smooth > 0, color='green', alpha=0.3,
+                     label='Purpose forming')
+    ax2.fill_between(t, rate_smooth, 0,
+                     where=rate_smooth < 0, color='red', alpha=0.3,
+                     label='Purpose dissolving')
+    ax2.plot(t, rate_smooth, color='black', alpha=0.4, lw=0.8)
+    ax2.set_ylabel('d(clarity)/dt', fontsize=10)
+    
+    # Mark zero-crossings of rate (inflection points)
+    zero_cross = np.where(np.diff(np.sign(rate_smooth)))[0]
+    rising = zero_cross[rate_smooth[zero_cross] < 0]  # crossing from neg to pos
+    falling = zero_cross[rate_smooth[zero_cross] > 0]  # crossing from pos to neg
+    
+    if len(rising) > 0:
+        ax.scatter(t[rising], clarity[rising], marker='^', c='lime',
+                   s=30, zorder=5, label=f'Purpose forming ({len(rising)})')
+    if len(falling) > 0:
+        ax.scatter(t[falling], clarity[falling], marker='v', c='salmon',
+                   s=30, zorder=5, label=f'Purpose dissolving ({len(falling)})')
+    
+    ax.set_title('6. Second-Order Clarity — The Clarity of Clarity\n'
+                 '(rate of change reveals purpose forming/dissolving before it happens)',
+                 fontsize=12)
+    ax.set_xlabel('Timestep')
+    ax.set_ylabel('Clarity')
+    ax.legend(loc='upper left', fontsize=7)
+    ax2.legend(loc='upper right', fontsize=7)
+    ax.grid(True, alpha=0.3)
+    
+    # ── Panel 6b: Predictive analysis — does clarity rate predict transitions? ──
+    ax = fig.add_subplot(gs[5, 2])
+    
+    # Cross-correlation: does clarity_rate lead macro transitions?
+    macro_dom = np.array(history['macro_dominant'])
+    macro_change = np.zeros(n_steps)
+    for i in range(1, n_steps):
+        if macro_dom[i] != macro_dom[i-1]:
+            macro_change[i] = 1.0
+    
+    # Cross-correlation at various lags
+    max_lag = 20
+    lags = range(-max_lag, max_lag + 1)
+    xcorr = []
+    rate_abs = np.abs(clarity_rate)
+    for lag in lags:
+        if lag >= 0:
+            a = rate_abs[:n_steps - lag]
+            b = macro_change[lag:]
+        else:
+            a = rate_abs[-lag:]
+            b = macro_change[:n_steps + lag]
+        if len(a) > 0 and a.std() > 0:
+            xcorr.append(np.corrcoef(a, b)[0, 1])
+        else:
+            xcorr.append(0)
+    
+    ax.bar(list(lags), xcorr, color='steelblue', alpha=0.7, width=0.8)
+    ax.axvline(0, color='red', ls='--', lw=1, alpha=0.5)
+    
+    # Find peak correlation
+    peak_lag = list(lags)[np.argmax(np.abs(xcorr))]
+    peak_val = xcorr[np.argmax(np.abs(xcorr))]
+    ax.annotate(f'Peak: lag={peak_lag}, r={peak_val:.3f}',
+                xy=(peak_lag, peak_val),
+                xytext=(peak_lag + 3, peak_val + 0.02),
+                fontsize=8, arrowprops=dict(arrowstyle='->', color='red'))
+    
+    ax.set_title('Does Clarity Change Predict Transitions?\n'
+                 '(cross-correlation: |d(clarity)/dt| vs macro transitions)',
+                 fontsize=11)
+    ax.set_xlabel('Lag (negative = rate leads)')
+    ax.set_ylabel('Correlation')
+    ax.grid(True, alpha=0.3)
+    
+    fig.suptitle('Clarity Field Deep Dive — 6 Dimensions of Purpose',
+                 fontsize=15, fontweight='bold', y=0.99)
+    
+    # ── Console summary ──
+    print(f"\n  Clarity Deep Dive Results:")
+    print(f"  {'='*55}")
+    print(f"  Clarity gradient: mean |∇| = {clarity_grad_mag.mean():.4f}")
+    steep_pct = 100 * (clarity_grad_mag > np.percentile(clarity_grad_mag, 90)).mean()
+    print(f"    Steep gradient regions: {steep_pct:.0f}% of time")
+    print(f"  Decomposition (mean contribution):")
+    for si in np.argsort(mean_contrib)[::-1]:
+        sign = '+' if mean_contrib[si] > 0 else ''
+        print(f"    {names[si]:20s}  {sign}{mean_contrib[si]:.5f}")
+    print(f"  Persistence: mean autocorr = {clarity_persistence.mean():.3f}")
+    sustained = 100 * (clarity_persistence > 0.3).mean()
+    flickering = 100 * (clarity_persistence < 0).mean()
+    print(f"    Sustained ({'>'}0.3): {sustained:.0f}%  Flickering ({'<'}0): {flickering:.0f}%")
+    print(f"  Direction: {snaps.sum()} snap events (sudden >45° rotation)")
+    print(f"  Gradient alignment: seeking clarity {seek_pct:.0f}% of time")
+    print(f"  Predictive: peak xcorr at lag={peak_lag} (r={peak_val:.3f})")
+    
+    return fig
+
+
+# ============================================================================
 # MAIN EXECUTION
 # ============================================================================
 
@@ -2114,6 +2700,11 @@ def main():
     fig3 = plot_phase_analysis(history, phase_result, sim)
     plt.savefig('cognitive_phases.png', dpi=150, bbox_inches='tight')
     print("  Saved phase analysis to cognitive_phases.png")
+    
+    print("\n  Generating clarity deep dive...")
+    fig4 = plot_clarity_deep_dive(history, sim)
+    plt.savefig('clarity_deep_dive.png', dpi=150, bbox_inches='tight')
+    print("  Saved clarity deep dive to clarity_deep_dive.png")
     
     return history
 
