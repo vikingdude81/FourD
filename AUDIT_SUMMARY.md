@@ -1,166 +1,91 @@
-# Consciousness Simulation Project Audit Summary
+# Consciousness Simulation v1 Audit (Revised)
 
-## Current State (as of March 15, 2026)
+## Current Status (as of March 16, 2026)
 
-### Project Structure
-```
-consciousness-sim/
-├── fourD_slice_sim.py       # Main simulation (300+ lines)
-├── requirements.txt          # Dependencies: numpy, matplotlib, pandas
-└── simulation_log.csv        # Output data from runs
-```
+The project is a functioning research scaffold, not a broken prototype.
 
----
+What is already strong:
+- Dual-layer architecture is implemented and operational.
+- The 4D hidden coordinator runs consistently and produces measurable trajectories.
+- Metrics and CSV logging are usable for analysis.
+- Lesion study infrastructure exists and supports comparative experiments.
+- The primary failure mode is boundary trapping, not full-system collapse.
 
-## Core Architecture Implemented
+## Precision Update: Geometry Claim
 
-### Dual-Geometry Model (Iterative Development Complete)
+The current system is better described as a **4D latent state with hyperspherical intent**, not yet a fully closed **4D hyperspherical manifold engine**.
 
-The simulation implements a **dual-layer consciousness model** based on Penrose's geometry:
+This distinction is central for v2 planning: the next step is not cosmetic tuning, it is structural grounding of geometry.
 
-#### Layer 1: Micro-transition Mesh (600-cell inspired)
-- **Scale**: ~600 nodes (hyper-octahedron structure)
-- **Dynamics**: Fast local transitions between states
-- **Purpose**: Captures moment-to-moment consciousness changes
+## Core Architectural Limitation (Elevated)
 
-#### Layer 2: Macro-closure Basin (120-cell inspired)
-- **Scale**: ~120 basins (dodecahedral-like attractors)
-- **Structure**: Stable modes of conscious experience
-- **Purpose**: Represents enduring states like "being in love," depression, flow
+The most important limitation in v1 is micro/macro coupling.
 
-#### Dual Mapping Mechanism:
-```python
-# Each micro-node belongs to exactly one macro-basin
-basin_id = node // BASINS_PER_NODE  # Simplified mapping
+Current behavior indicates:
+- Micro states do not geometrically induce macro states.
+- Macro states do not meaningfully constrain local transitions.
+- The mapping is organizational, not structural.
 
-# Closure coherence measures fit quality:
-coherence = |local_state - basin_center|²
-```
+This should be treated as a top-tier architecture task, alongside topology correction.
 
----
+## Boundary Handling Guidance
 
-## Key Components
+Boundary clamping is acceptable as a short-term debugging patch.
 
-### 1. Subsystem Architecture (8 subsystems)
-- Motor Control, Planning, Attention, Memory, Emotion, Social, Intuition, Aesthetic
-- Each with independent dynamics and coordination pressures
+For the intended theory of closure and continuity, the target solution should be a closed visible topology (toroidal first, alternatives possible). This aligns the navigation layer with manifold continuity rather than hard edge artifacts.
 
-### 2. Coordinator Manifold
-- **Dimension**: 4D hyperspherical space
-- **Trajectory**: Simulates evolving conscious state
-- **Magnitude**: Measures overall activation intensity
+## Revised Priority Order
 
-### 3. Environment Model
-- Size: 20x20 grid
-- Contains goals (to reach) and hazards (to avoid)
-- Being navigates based on dominant subsystem influence
+### Priority 1: Topology and Geometric Closure
+- Ensure non-blocking visualization for reliable iteration loops.
+- Implement toroidal visible world (or equivalent closed topology).
+- Enforce stable bounded behavior in hidden 4D dynamics without edge artifacts.
 
-### 4. Consciousness Metrics
-| Metric | Description |
-|--------|-------------|
-| Coordination Pressure | Conflict between subsystems |
-| Integration Level | IIT-style measure of unified information |
-| Closure Coherence | How well local dynamics fit global state |
-| Basin-switch Events | Macro-state transitions |
+### Priority 2: Structural Micro↔Macro Coupling
+- Replace symbolic assignment (`node // BASINS_PER_NODE`).
+- Introduce distance/similarity-based micro-to-macro assignment.
+- Add top-down macro constraints on local transition probabilities.
 
----
+### Priority 3: Subsystem Balance (Dominance Control)
+- Add competition mechanisms across subsystems.
+- Normalize subsystem gains to avoid monoculture dynamics.
+- Add fatigue/adaptation to dominant controllers.
+- Specifically reduce persistent Planning monopolization.
 
-## Simulation Results (Sample Run)
+### Priority 4: Coherence and Dynamics Metrics
+- Move from static basin fit to dynamic closure metrics.
+- Track path consistency and transition quality (surprise/error terms).
+- Separate differentiation from integration in reporting.
 
-From 300 timesteps:
-- **Dominant Subsystem**: Planning (95% of time)
-- **Goals Reached**: 1
-- **Hazards Hit**: ~60+ (many collisions at boundaries)
-- **Coordination Pressure**: Ranged 0.12 → 0.93 (increasing tension)
-- **Integration Level**: Stabilized around 1.0 after initial phase
+### Priority 5: Learning and Adaptation
+- Add learning only after geometry, coupling, and subsystem balance are structurally corrected.
+- This preserves interpretability and prevents learning around distorted dynamics.
 
-### Key Observation:
-The being gets trapped in boundary oscillations, indicating the need for better navigation strategies or environmental constraints.
+## Why Learning Is Deferred
 
----
+Learning is important but should not be next.
 
-## Current Issues Identified
+If adaptation is added before topology, coupling, and subsystem balance are corrected, the system is likely to optimize around geometric artifacts. That reduces scientific interpretability and makes later ablations harder to trust.
 
-### 1. Visualization Blocking
-- Matplotlib windows open sequentially and block execution
-- **Solution**: Use non-blocking backend (`plt.show(block=False)`)
+## Hidden Risk to Interpretation
 
-### 2. Boundary Behavior
-- Being gets stuck at environment edges (x=20, y=20)
-- **Root cause**: Subsystem dynamics can push beyond bounds
-- **Fix needed**: Proper boundary clamping or toroidal topology
+Planning dominance is likely shaping much of the observed latent geometry.
 
-### 3. Micro/Macro Coupling Too Simple
-- Current mapping is linear division (`node // BASINS_PER_NODE`)
-- **Improvement needed**: Realistic geometric relationships
+Until subsystem balance improves, many plots should be interpreted as:
+- planning dynamics with perturbations,
+not
+- integrated multi-subsystem consciousness-like dynamics.
 
-### 4. Missing Features
-- No learning/adaptation over time
-- Subsystem interactions are simplified (no detailed coupling)
-- Lesion study runs but doesn't show comparative analysis in plots
+## v1.5 Success Criteria
 
----
+Before calling v2 structurally complete, target:
+- No persistent edge trapping.
+- Planning dominance below ~50% over representative runs.
+- At least 3 subsystems with meaningful sustained contribution.
+- Gradual macro-state shifts replacing abrupt symbolic switches.
+- Closure coherence that rises/falls with actual state organization.
+- Richer latent coverage without total diffusion.
 
-## What Works Well ✓
+## Revised Conclusion
 
-1. **Dual-layer architecture** successfully implemented
-2. **Coordinator manifold** dynamics functioning correctly
-3. **CSV export** provides clean data for analysis
-4. **Lesion study framework** operational
-5. **Visualization functions** created (though display blocking)
-
----
-
-## Recommended Next Steps
-
-### Priority 1: Fix Display Issues
-```python
-# Replace plt.show() with non-blocking version
-import matplotlib.pyplot as plt
-plt.ion()  # Interactive mode
-for i in range(num_plots):
-    plot_function(i)
-    plt.pause(0.1)
-plt.ioff()
-plt.show()
-```
-
-### Priority 2: Improve Boundary Handling
-```python
-def clamp_to_bounds(coord, bounds=20.0):
-    return max(-bounds/2, min(bounds/2, coord))
-```
-
-### Priority 3: Enhance Micro-Macro Mapping
-Replace simple division with geometric distance-based assignment to actual 120-cell/dual-600cell structures.
-
-### Priority 4: Add Learning Mechanism
-Implement Hebbian-style updates or reinforcement learning for subsystem weights.
-
----
-
-## Technical Stack
-
-| Component | Technology |
-|-----------|------------|
-| Simulation Engine | Pure Python + NumPy |
-| Visualization | Matplotlib |
-| Data Export | Pandas CSV |
-| Dependencies | numpy, matplotlib, pandas |
-
-**Total Lines of Code**: ~400 lines in main file
-
----
-
-## Conclusion
-
-The project has successfully implemented a sophisticated dual-geometry consciousness simulation with:
-- Multi-scale dynamics (micro/macro layers)
-- Subsystem architecture
-- 4D state manifold
-- Quantifiable consciousness metrics
-
-The core research framework is sound. The remaining work focuses on:
-1. Making visualizations more usable
-2. Improving environmental interaction realism
-3. Adding adaptive learning mechanisms
+The v1 project successfully demonstrates a dual-scale consciousness simulation scaffold with measurable hidden-state dynamics, but the current implementation is geometry-inspired rather than geometrically grounded. The next stage should enforce closed-manifold behavior, replace symbolic micro/macro mapping with similarity-based coupling, and correct subsystem imbalance before introducing adaptive learning.

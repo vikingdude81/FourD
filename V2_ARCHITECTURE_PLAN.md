@@ -2,17 +2,20 @@
 
 ## Guiding Principles for v2
 
-1. **True geometric duality** - not symbolic mapping
-2. **Closed manifold dynamics** - no edge artifacts
-3. **Soft assignment** - ambiguous, mixed states possible
-4. **Two-stage updates** - micro transitions + macro reconciliation
-5. **Balanced subsystems** - before adding learning
+1. **Geometry first** — the v1 system is geometry-inspired; v2 must be geometrically grounded
+2. **Closed manifold dynamics** — no edge artifacts; toroidal visible world, bounded hidden dynamics
+3. **Structural micro↔macro coupling** — replace symbolic mapping with distance-based assignment and top-down constraint
+4. **Soft assignment** — ambiguous, mixed basin membership
+5. **Two-stage updates** — micro transitions + macro reconciliation
+6. **Subsystem balance before learning** — correct Planning dominance and gain normalization before introducing adaptation
+7. **Learning is deferred** — adaptation added only after topology, coupling, and balance are structurally sound (see Audit)
 
 ---
 
-## 1. Manifold Geometry (Closed 4D)
+## 1. Manifold Geometry (Closed 4D) — Audit Priority 1
 
 ### Current Issue
+- The v1 system is a 4D latent state with hyperspherical intent, not yet a closed manifold engine
 - Free-drifting 4D Euclidean space allows unbounded growth
 - Magnitude can explode or collapse arbitrarily
 
@@ -59,11 +62,12 @@ class ClosedManifold:
 
 ---
 
-## 2. Soft Assignment Mechanism
+## 2. Soft Assignment Mechanism — Audit Priority 2
 
 ### Current Issue
-- Hard assignment via `node // BASINS_PER_NODE` is purely symbolic
-- No geometric relationship between local and global states
+- Hard assignment via `node // BASINS_PER_NODE` is purely symbolic (organizational, not structural)
+- Micro states do not geometrically induce macro states
+- Macro states do not meaningfully constrain local transitions
 
 ### v2 Solution: Geometric Distance-Based Membership
 
@@ -112,7 +116,7 @@ class DualGeometryEngine:
 
 ---
 
-## 3. Two-Stage State Update
+## 3. Two-Stage State Update — Audit Priority 2 (continued)
 
 ### Current Issue
 - Single update step conflates local dynamics with global organization
@@ -144,12 +148,13 @@ class DualGeometryEngine:
 
 ---
 
-## 4. Toroidal Visible World
+## 4. Toroidal Visible World — Audit Priority 1 (continued)
 
 ### Current Issue
 - Hard boundaries at x=20, y=20 cause artificial trapping
 - Edge behavior distorts navigation dynamics
 - Contradicts closure philosophy (incomplete manifold)
+- Clamping is acceptable only as a short-term debugging patch; proper solution is closed topology
 
 ### v2 Solution: Wrap-around torus topology
 
@@ -180,10 +185,11 @@ class ToroidalEnvironment:
 
 ---
 
-## 5. Balanced Subsystem Dynamics
+## 5. Balanced Subsystem Dynamics — Audit Priority 3
 
 ### Current Issue
-- Planning dominates 98% of timesteps
+- Planning dominates ~95–98% of timesteps
+- Until subsystem balance improves, latent plots likely reflect planning dynamics with perturbations, not integrated multi-subsystem consciousness-like dynamics
 - System lacks rich exploration due to single-channel dominance
 
 ### v2 Solution: Competitive inhibition with fatigue
@@ -218,11 +224,12 @@ class BalancedSubsystems:
 
 ---
 
-## 6. Revised Consciousness Metrics
+## 6. Revised Consciousness Metrics — Audit Priority 4
 
 ### Current Issue
 - Closure coherence only measures static fit to basin center
 - Doesn't capture dynamic quality of state evolution
+- Differentiation and integration are not reported separately
 
 ### v2 Solution: Multi-component Dynamic Coherence
 
@@ -325,40 +332,49 @@ def create_linked_visualizations(time_series_data):
 
 ## Implementation Order (v2)
 
-### Phase 1: Manifold Foundation (1-2 hours)
+Phases are sequenced to match the revised audit priority order:
+geometry → coupling → subsystem balance → metrics → (then learning).
+
+### Phase 1: Manifold Foundation (Audit P1)
 1. Implement `ClosedManifold` class with pre-computed micro/macro points
 2. Add normalization and similarity functions
 3. Test spherical coverage of reference points
 
-### Phase 2: Soft Assignment (1 hour)
-4. Implement `compute_micro_membership()` and `compute_macro_membership()`
-5. Add softmax weighting for macro assignment
-6. Verify soft transitions between basins
+### Phase 2: Toroidal Visible World (Audit P1)
+4. Replace boundary clamping with toroidal wrapping
+5. Update collision detection for wrapped distances
+6. Verify no edge trapping occurs
+7. Fix non-blocking visualization so iteration loops are reliable
 
-### Phase 3: Two-Stage Updates (1-2 hours)
-7. Implement `_micro_transition_step()` with subsystem influences
-8. Implement `_macro_reconciliation_step()` with basin pull
-9. Test that micro can explore while macro constrains
+### Phase 3: Soft Assignment (Audit P2)
+8. Implement `compute_micro_membership()` and `compute_macro_membership()`
+9. Add softmax weighting for macro assignment
+10. Verify soft transitions between basins
 
-### Phase 4: Toroidal World (30 min)
-10. Replace boundary clamping with toroidal wrapping
-11. Update collision detection for wrapped distances
-12. Verify no edge trapping occurs
+### Phase 4: Two-Stage Updates (Audit P2)
+11. Implement `_micro_transition_step()` with subsystem influences
+12. Implement `_macro_reconciliation_step()` with basin pull
+13. Test that micro can explore while macro constrains
 
-### Phase 5: Subsystem Balance (1 hour)
-13. Add competitive inhibition between subsystems
-14. Implement fatigue/adaptation mechanism
-15. Tune gains to achieve ~20-30% dominant subsystem (not 98%)
+### Phase 5: Subsystem Balance (Audit P3)
+14. Add competitive inhibition between subsystems
+15. Implement fatigue/adaptation mechanism
+16. Tune gains to reduce Planning dominance below ~50%
 
-### Phase 6: Enhanced Metrics (30 min)
-16. Implement dynamic closure coherence with all components
-17. Add integration and differentiation measures
-18. Verify metrics respond appropriately to state changes
+### Phase 6: Enhanced Metrics (Audit P4)
+17. Implement dynamic closure coherence with all components
+18. Add integration and differentiation measures (reported separately)
+19. Track path consistency and transition surprise
+20. Verify metrics respond appropriately to state changes
 
-### Phase 7: Visualization Updates (1 hour)
-19. Create linked view layout
-20. Test non-blocking display with `plt.pause()`
-21. Verify all key behaviors visible across views
+### Phase 7: Visualization Updates
+21. Create linked view layout
+22. Test non-blocking display with `plt.pause()`
+23. Verify all key behaviors visible across views
+
+### Phase 8: Learning and Adaptation (Audit P5 — deferred)
+24. Add learning only after Phases 1-6 are validated
+25. This preserves interpretability and prevents learning around distorted geometry
 
 ---
 
@@ -374,22 +390,30 @@ def create_linked_visualizations(time_series_data):
 
 ---
 
-## Success Criteria for v2
+## Success Criteria for v2 (aligned with Audit v1.5 targets)
 
-1. **No edge artifacts** - Being navigates freely on torus
-2. **Balanced competition** - At least 3 subsystems each dominate >5% of time
-3. **Soft transitions** - Basin switching shows gradual probability shifts
-4. **Meaningful coherence** - Closure metric varies meaningfully (0.3-0.9 range)
-5. **Rich exploration** - State space coverage improves significantly
+1. **No persistent edge trapping** — being navigates freely on torus
+2. **Planning dominance below ~50%** over representative runs
+3. **At least 3 subsystems with meaningful sustained contribution**
+4. **Gradual macro-state shifts** replacing abrupt symbolic switches
+5. **Closure coherence rises and falls with actual state organization**
+6. **Richer latent-space coverage** without total diffusion
+7. **Soft transitions** — basin switching shows gradual probability shifts
+8. **Meaningful coherence range** — closure metric varies across 0.3–0.9
 
 ---
 
 ## Next Steps After v2 Complete
 
-Once the geometric foundation is solid:
+Learning and adaptation are introduced only after the geometry is structurally sound.
+If adaptation is added before topology, coupling, and subsystem balance are corrected,
+the system will likely optimize around geometric artifacts, reducing scientific
+interpretability and making later ablations harder to trust.
+
+Once Phases 1-7 are validated against the success criteria above:
 
 1. Add Hebbian learning to subsystem weights
-2. Implement reinforcement signal from goal/hazard interactions  
+2. Implement reinforcement signal from goal/hazard interactions
 3. Study how coherence emerges under different parameter regimes
 4. Run lesion studies on macro vs micro layer removal
 5. Compare with baseline "consciousness" metrics from other models
