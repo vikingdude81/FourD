@@ -1,97 +1,116 @@
-# FourD
+# Consciousness Simulation: Emergent Coordination Manifold + Navigation
 
-Higher-dimensional latent-state simulation and QRNG analysis pipeline.
+A theoretical physics/philosophy simulation demonstrating how "consciousness" emerges as an attractor when a system's internal degrees of freedom exceed what modular control can manage.
 
-## What this repo contains
+## Core Concepts
 
-This project now has two connected parts:
+### The 4D Slice Theory
+Consciousness is modeled as the emergence of a coordination manifold in high-dimensional phase space. When subsystem competition increases, a coordinator emerges to integrate competing demands. The "4D slice" concept refers to how this 4D coordinator state is projected into 2D action vectors for navigation.
 
-1. **`fourD_slice_sim.py`**  
-   A 4D latent coordination / navigation simulator where a hidden 4D coordinator
-   is projected into 2D action.
+### Attractor Dynamics
+- **Identity** = stable orbits in phase space
+- **Decisions** = basin switching events when the system becomes equidistant from competing attractors
+- **Consciousness Level** = measured by coordination pressure, integration, and decision frequency
 
-2. **`src/` pipeline**  
-   A modular QRNG analysis stack that:
-   - windows bitstreams,
-   - extracts local features,
-   - computes anomaly scores,
-   - maps feature windows into latent subsystem drives,
-   - reconstructs latent trajectories,
-   - runs recurrence analysis,
-   - and visualizes results in a dashboard.
+### Information Integration (IIT-style)
+The simulation tracks how information is integrated across subsystems, with higher integration levels indicating more unified conscious experience.
 
-## Structure
-
-```text
-src/
-  features/
-  anomaly/
-  latent/
-  recurrence/
-  viz/
-  pipelines/
-```
-
-## Install
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run the simulator
+Required dependencies:
+- numpy >= 1.24
+- matplotlib >= 3.7
+
+## Usage
+
+Run the simulation:
 
 ```bash
-python3 fourD_slice_sim.py
+python fourD_slice_sim.py
 ```
 
 This will:
-- run the 4D latent navigation simulation,
-- export `simulation_log.csv`,
-- run a lesion study,
-- show plots for navigation, phase portrait, dominance, and lesion comparison.
+1. Run a 300-timestep simulation with an agent navigating a 20x20 environment
+2. Perform a lesion study (disabling the Planning subsystem)
+3. Display interactive plots showing navigation, phase portraits, and dominance patterns
+4. Export detailed metrics to `simulation_log.csv`
 
-## Run the QRNG pipeline
+## Project Structure
 
-Place one or more bitstream text files in a directory. Each file should contain `0` and `1` characters.
-
-Example:
-
-```bash
-python3 -m src.pipelines.run_qrng_pipeline data/bitstreams --output outputs/qrng_pipeline
+```
+consciousness-sim/
+├── fourD_slice_sim.py    # Main simulation code (~750 lines)
+├── requirements.txt      # Python dependencies
+├── simulation_log.csv    # Per-timestep output data (generated on run)
+└── README.md            # This file
 ```
 
-Outputs per stream:
-- `window_features.csv`
-- `latent_trajectory.csv`
-- `summary.json`
+## Simulation Components
 
-## Open the dashboard
+### Subsystems (8 specialized cognitive modules)
+1. **Perception** - Responds to environmental stimuli density
+2. **Language** - Internal dynamics with weak environmental coupling
+3. **Planning** - Encodes goal-directed behavior into coordinator state
+4. **Emotion** - Fear/avoidance responses to hazards
+5. **Memory** - Path integration from recent displacement
+6. **Motor Control** - Efference copy of intended actions
+7. **Attention** - Amplifies most salient stimuli
+8. **Executive Control** - Higher-order regulation
 
-```bash
-python3 -m src.viz.dashboard \
-  --features outputs/qrng_pipeline/<stream_id>/window_features.csv \
-  --latent outputs/qrng_pipeline/<stream_id>/latent_trajectory.csv
+### Environment
+- 20x20 grid world
+- 3 goals (rewards) at positions: (4,4), (16,16), (10,3)
+- 3 hazards (threats) at positions: (3,15), (17,5), (10,17)
+
+### Output Metrics
+| Metric | Description |
+|--------|-------------|
+| Coordination Pressure | Conflict between subsystems [0,1] |
+| Coordinator Magnitude | Norm of 4D state vector |
+| Integration Level | Information integration (IIT-style) [0,1] |
+| Basin Switches | Decision events during simulation |
+| Goals Reached | Number of objectives achieved |
+| Hazards Hit | Number of threats encountered |
+
+## Consciousness States
+
+The simulation classifies consciousness into four states based on computed level:
+
+- **pre-conscious** (< 0.3): Minimal coordination, no integrated experience
+- **emerging** (0.3 - 0.6): Coordination developing, subsystems beginning to integrate
+- **conscious** (0.6 - 0.85): Stable coordination with decision-making capacity
+- **self-aware** (> 0.85): High integration with rich basin-switching behavior
+
+## Lesion Studies
+
+The simulation includes built-in lesion study capability:
+
+```python
+# Disable a specific subsystem and compare to intact system
+lesion_results = run_lesion_study(config, env, lesion_name="Planning")
 ```
 
-## Current workflow
+This compares consciousness levels between an intact system and one with the specified subsystem disabled.
 
-1. Window QRNG bitstreams
-2. Extract local complexity / entropy / autocorrelation / change features
-3. Build anomaly scores
-4. Map feature rows into latent subsystem drives
-5. Run latent coordinator / basin dynamics
-6. Analyze recurrence of anomaly behavior
-7. Inspect with dashboard
+## Theoretical Frameworks Referenced
 
-## Notes
+1. **Global Workspace Theory**: Coordinator acts as global workspace integrating subsystem outputs
+2. **Integrated Information Theory (IIT)**: Integration level measures Φ-like information integration
+3. **Attractor Dynamics**: Decisions modeled as basin-switching in phase space
+4. **Predictive Processing**: Subsystems encode predictions about environmental contingencies
 
-- The simulator is a conceptual latent-state model, not evidence of exotic influence.
-- Null-model comparison is still essential for serious analysis.
-- The current subsystem mapping is hand-designed and should eventually be compared against alternative mappings.
+## Contributing
 
-## Next recommended expansions
+Contributions are welcome! Areas for potential improvement:
+- Add more subsystem types
+- Implement different environment configurations
+- Add visualization of internal coordinator state
+- Extend to multi-agent scenarios
 
-- null / surrogate generators
-- dashboard animation
-- direct QRNG-to-simulator integration
-- cross-stream motif clustering
+## License
+
+This project is provided as-is for educational and research purposes.
