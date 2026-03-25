@@ -179,3 +179,7 @@ def compute_feature_vector(bits: np.ndarray) -> dict:
         "zero_one_ratio": compute_zero_one_ratio(bits),
         "alternating_rate": compute_alternating_rate(bits),
     }
+
+
+# Alias for backward compatibility
+compute_basic_stats = compute_feature_vector

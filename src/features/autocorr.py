@@ -281,3 +281,7 @@ def compute_feature_vector(bits: np.ndarray, max_lag: int = 20) -> dict:
         "sum_abs_autocorrelations": acf_test["sum_abs_autocorrelations"],
         "spectral_low_freq_ratio": spectral_density_estimate(bits),
     }
+
+
+# Alias: autocorr_lag(bits, lag=k) → autocorr_lagk(bits, lag=k)
+autocorr_lag = autocorr_lagk
