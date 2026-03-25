@@ -357,3 +357,7 @@ def compute_feature_vector(bits: np.ndarray, block_size: int = 4) -> dict:
         "run_length_variance": run_length_variance(bits),
         "run_length_mean": run_length_mean(bits),
     }
+
+
+# Alias for backward compatibility
+lz_complexity = lempel_ziv_complexity

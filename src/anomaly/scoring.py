@@ -8,6 +8,7 @@ against null distributions (PRNG, shuffled data, etc.).
 from __future__ import annotations
 
 import numpy as np
+import pandas as pd
 from typing import Dict, List, Optional, Tuple
 
 
@@ -340,3 +341,75 @@ from src.features.basic_stats import compute_longest_run
 from src.features.autocorr import autocorr_lag1
 from src.features.entropy import spectral_entropy, permutation_entropy
 from src.features.complexity import lempel_ziv_complexity
+
+def score_windows(
+    df: pd.DataFrame,
+    method: str = "zscore",
+    columns: Optional[List[str]] = None,
+) -> pd.DataFrame:
+    """
+    Compute row-level anomaly scores for a DataFrame of feature windows.
+
+    Parameters
+    ----------
+    df:
+        Feature DataFrame where each row represents one window.
+    method:
+        Scoring method.  ``"zscore"`` returns the mean absolute z-score
+        across selected columns (assumes features are already z-scored).
+        ``"iqr"`` uses the inter-quartile range for a robust alternative.
+        ``"isolation_forest"`` uses sklearn's IsolationForest.
+    columns:
+        Subset of columns to use.  Defaults to all numeric columns.
+
+    Returns
+    -------
+    A copy of *df* with an additional ``anomaly_score`` column (float ≥ 0).
+    """
+    out = df.copy()
+    if columns is None:
+        columns = list(df.select_dtypes(include=[np.number]).columns)
+
+    # Keep only columns that are actually present in df
+    columns = [c for c in columns if c in df.columns]
+
+    if not columns:
+        out["anomaly_score"] = 0.0
+        return out
+
+    X = df[columns].values.astype(float)
+
+    if method == "zscore":
+        # For each row: mean of absolute values (assumes df is already z-scored)
+        scores = np.mean(np.abs(X), axis=1)
+
+    elif method == "iqr":
+        q25 = np.percentile(X, 25, axis=0)
+        q75 = np.percentile(X, 75, axis=0)
+        iqr = np.maximum(q75 - q25, 1e-8)
+        median = np.median(X, axis=0)
+        scores = np.mean(np.abs(X - median) / iqr, axis=1)
+
+    elif method == "mahalanobis":
+        try:
+            from sklearn.covariance import EmpiricalCovariance
+            cov = EmpiricalCovariance().fit(X)
+            scores = cov.mahalanobis(X)
+        except Exception:
+            scores = np.mean(np.abs(X), axis=1)
+
+    elif method == "isolation_forest":
+        try:
+            from sklearn.ensemble import IsolationForest
+            clf = IsolationForest(random_state=0, contamination=0.1)
+            raw = clf.fit_predict(X)
+            score_vals = clf.score_samples(X)
+            scores = -score_vals  # higher = more anomalous
+        except Exception:
+            scores = np.mean(np.abs(X), axis=1)
+
+    else:
+        raise ValueError(f"Unknown scoring method: {method!r}")
+
+    out["anomaly_score"] = np.maximum(scores, 0.0)
+    return out
