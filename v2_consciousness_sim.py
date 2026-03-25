@@ -33,19 +33,22 @@ CONFIG = {
     'hazards': 3,
     'timesteps': 500,        # Increased for better sampling
     
-    # Two-stage update parameters
-    'alpha_pull': 0.03,      # How strongly to follow macro field (light touch)
-    'beta_macro': 4.0,       # Softness parameter for basin assignment (moderate selectivity)
+    # Two-stage update parameters (optimized via 400K-config Goldilocks sweep)
+    'alpha_pull': 0.0,       # No artificial centering — geometry provides coherence
+    'beta_macro': 11.375,    # Strong macro coupling for basin structure
     
-    # Integration metric target range - tuned for 24 basins with beta=4
+    # Integration metric target range - tuned for 24 basins with beta=11.375
     'target_neff': 8.0,      # Target effective number of active basins
     'sigma_integr': 3.0,     # Bell width for integration score
     
-    # Subsystem dynamics - tuned for balanced competition with subsystem-driven steering
-    'fatigue_rate': 0.08,    # Fatigue/adaptation rate (strong enough to force rotation)
+    # Subsystem dynamics (optimized: high fatigue + noise → awakened regime)
+    'fatigue_rate': 0.217,   # Forces release of settled states (phase transition at ~0.177)
     'recovery_rate': 0.025,  # Recovery when inactive
     'floor_value': 0.05,     # Minimum activity floor
-    'exploration_noise': 0.05,
+    'exploration_noise': 0.25, # Energy to explore full S³ manifold
+    
+    # Steering (optimized)
+    'steering_strength': 0.707, # Strong subsystem-driven steering
     
     # Coherence metric weights
     'alpha_fit': 0.5,
@@ -982,8 +985,7 @@ class ConsciousnessSimulation:
         drive += self.manifold.project_to_tangent(sensory_grad, self.u_t)
         
         # Move along tangent direction and retract to S³
-        steering_strength = 0.3
-        new_dir = self.u_t + steering_strength * drive
+        new_dir = self.u_t + CONFIG['steering_strength'] * drive
         self.u_t = self.manifold.normalize_to_sphere(new_dir)
         
         # Adjust magnitude based on overall activity
