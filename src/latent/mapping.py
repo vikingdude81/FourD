@@ -1,38 +1,71 @@
 """
 Latent subsystem mapping.
 
-Maps feature windows produced by the anomaly pipeline into per-subsystem
+Maps feature windows produced by the QRNG analysis pipeline into per-subsystem
 drive vectors that feed the 4D latent coordinator.
+
+Subsystem architecture:
+- perception: Basic statistics (bias, runs, alternation rate)
+- planning: Autocorrelation and predictability features  
+- emotion: Entropy measures (spectral, permutation, sample entropy)
+- memory: Complexity metrics (Lempel-Ziv, block entropy)
+- attention: Change-point detection signals
+- executive: Anomaly scores and composite metrics
 """
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import numpy as np
 import pandas as pd
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Default feature → subsystem weights
+# Default feature → subsystem weights (expanded)
 # ──────────────────────────────────────────────────────────────────────────────
 
-# Each subsystem is associated with a dict of {feature_name: weight}.
-# Weights are hand-designed based on what each feature intuitively drives.
 DEFAULT_SUBSYSTEM_WEIGHTS: Dict[str, Dict[str, float]] = {
     "perception": {
-        "bias": 0.4,
-        "runs_count": 0.3,
-        "longest_run": 0.3,
+        # Basic statistics - raw bit properties
+        "bias": 0.35,
+        "runs_count": 0.25,
+        "longest_run": 0.25,
+        "alternating_rate": 0.15,
     },
     "planning": {
-        "autocorr_lag1": 0.5,
-        "lz_complexity": 0.5,
+        # Autocorrelation - predictability and temporal structure
+        "autocorr_lag1": 0.4,
+        "autocorr_lag3": 0.3,
+        "max_autocorrelation": 0.3,
     },
     "emotion": {
-        "permutation_entropy": 0.4,
-        "spectral_entropy": 0.3,
-        "sample_entropy": 0.3,
+        # Entropy measures - uncertainty and randomness
+        "permutation_entropy": 0.35,
+        "spectral_entropy": 0.30,
+        "sample_entropy": 0.20,
+        "shannon_entropy": 0.15,
+    },
+    "memory": {
+        # Complexity - algorithmic structure and compressibility
+        "lz_complexity": 0.40,
+        "block_entropy_4": 0.30,
+        "run_length_variance": 0.20,
+        "ks_entropy_estimate": 0.10,
+    },
+    "attention": {
+        # Change-point detection - structural breaks and regime shifts
+        "cusum_detected": 0.40,
+        "moving_variance_ratio": 0.30,
+        "sliding_mean_deviation": 0.20,
+        "bayesian_segmentation_score": 0.10,
+    },
+    "executive": {
+        # Composite/anomaly metrics - overall quality assessment
+        "autocorr_lag1": 0.30,  # Also feeds into planning
+        "min_entropy": 0.35,
+        "sum_abs_autocorrelations": 0.20,
+        "entropy_rate_change": 0.15,
     },
 }
 
@@ -42,7 +75,7 @@ DRIVE_DIMS = 4
 
 def feature_row_to_drives(
     features: Dict[str, float],
-    subsystem_weights: Dict[str, Dict[str, float]] | None = None,
+    subsystem_weights: Optional[Dict[str, Dict[str, float]]] = None,
     dims: int = DRIVE_DIMS,
 ) -> Dict[str, np.ndarray]:
     """

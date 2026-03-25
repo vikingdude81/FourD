@@ -31,6 +31,9 @@ htmlcov/
 .idea/
 .vscode/
 
+# Secrets
+.env
+
 # Output data (keep structure but ignore generated files)
 outputs/**/*.csv
 outputs/**/*.json

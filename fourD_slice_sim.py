@@ -12,10 +12,16 @@ differentiated while global closure remains stable enough to bind them into one 
 Run: python fourD_slice_sim.py
 """
 
+from __future__ import annotations
+
+import argparse
 import csv
-import numpy as np
+from collections import Counter
+from pathlib import Path
 from dataclasses import dataclass, field
-from typing import List, Optional, Dict, Tuple
+from typing import Dict, List, Optional, Tuple
+
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.colors import Normalize
@@ -996,27 +1002,93 @@ def plot_lesion_comparison(lesion_results: Dict):
     plt.tight_layout()
 
 # ────────────────────────────────────────────────────────────────────
+# CLI argument parsing
+# ────────────────────────────────────────────────────────────────────
+
+def _build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(
+        prog="python3 fourD_slice_sim.py",
+        description="Consciousness Emergence + Navigation Simulation"
+    )
+    p.add_argument("--n-subsystems", type=int, default=None, help="Number of subsystems")
+    p.add_argument("--n-dims", type=int, default=None, help="Coordinator dimensionality")
+    p.add_argument("--n-timesteps", type=int, default=None, help="Number of simulation steps")
+    p.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
+    p.add_argument("--perception-gain", type=float, default=None, help="Perception subsystem gain")
+    p.add_argument("--language-gain", type=float, default=None, help="Language subsystem gain")
+    p.add_argument("--planning-gain", type=float, default=None, help="Planning subsystem gain")
+    p.add_argument("--emotion-gain", type=float, default=None, help="Emotion subsystem gain")
+    p.add_argument("--memory-gain", type=float, default=None, help="Memory subsystem gain")
+    p.add_argument("--motor-gain", type=float, default=None, help="Motor Control subsystem gain")
+    p.add_argument("--attention-gain", type=float, default=None, help="Attention subsystem gain")
+    p.add_argument("--executive-gain", type=float, default=None, help="Executive Control subsystem gain")
+    p.add_argument("--basin-ambiguity-threshold", type=float, default=None, help="Basin switching ambiguity threshold")
+    p.add_argument("--basin-pull-strength", type=float, default=None, help="Basin attractor pull strength")
+    p.add_argument("--output-dir", type=str, default=None, help="Output directory (default: outputs/)")
+    return p
+
+
+# ────────────────────────────────────────────────────────────────────
 # Main
 # ────────────────────────────────────────────────────────────────────
 
-def main():
-    config = SimulationConfig(
-        n_subsystems=8,
-        n_dimensions=4,
-        n_timesteps=300,
-        coordination_threshold=0.85,
-        noise_level=0.1,
-        learning_rate=0.005,
-        step_size=0.4,
-        env_size=20,
-    )
+def main(argv: list[str] | None = None):
+    import os
+    from datetime import datetime
+    
+    parser = _build_parser()
+    args = parser.parse_args(argv)
+    
+    # Start with default config, then override with CLI arguments
+    config = SimulationConfig()
+    
+    # Override config values with CLI arguments if provided
+    if args.n_subsystems is not None:
+        config.n_subsystems = args.n_subsystems
+    if args.n_dims is not None:
+        config.n_dimensions = args.n_dims
+    if args.n_timesteps is not None:
+        config.n_timesteps = args.n_timesteps
+    if args.seed is not None:
+        config.random_seed = args.seed
+    if args.perception_gain is not None:
+        config.perception_gain = args.perception_gain
+    if args.language_gain is not None:
+        config.language_gain = args.language_gain
+    if args.planning_gain is not None:
+        config.planning_gain = args.planning_gain
+    if args.emotion_gain is not None:
+        config.emotion_gain = args.emotion_gain
+    if args.memory_gain is not None:
+        config.memory_gain = args.memory_gain
+    if args.motor_gain is not None:
+        config.motor_gain = args.motor_gain
+    if args.attention_gain is not None:
+        config.attention_gain = args.attention_gain
+    if args.executive_gain is not None:
+        config.executive_gain = args.executive_gain
+    if args.basin_ambiguity_threshold is not None:
+        config.basin_ambiguity_threshold = args.basin_ambiguity_threshold
+    if args.basin_pull_strength is not None:
+        config.basin_pull_strength = args.basin_pull_strength
+    
+    # Create output directory with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    if args.output_dir is not None:
+        output_dir = Path(args.output_dir)
+    else:
+        output_dir = Path("outputs/simulation_run_{}".format(timestamp))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    if config.random_seed is not None:
+        np.random.seed(config.random_seed)
 
     env = Environment()
     subsystems = initialize_subsystems(config, config.n_subsystems)
     being = initialize_being(env)
 
     print(f"\n{'=' * 70}")
-    print(f"  CONSCIOUSNESS EMERGENCE SIMULATION: DUAL-GEOMETRY MODEL")
+    print(f"  CONSCIOUSNESS EMERGENCE + NAVIGATION SIMULATION")
     print(f"{'=' * 70}")
     print(f"\n  Config: {config.n_subsystems} subsystems | {config.n_dimensions}D manifold | {config.n_timesteps} steps")
     print(f"  Environment: {config.env_size}x{config.env_size} | {len(env.goals)} goals | {len(env.hazards)} hazards\n")
@@ -1035,7 +1107,6 @@ def main():
     print(f"  Avg pressure:        {np.mean(metrics['coordination_pressures']):.3f}")
     print(f"  Avg integration:     {np.mean(metrics['integration_levels']):.3f}")
 
-    from collections import Counter
     dom_counts = Counter(metrics["dominant_subsystems"])
     print(f"\n  Subsystem dominance (top 3):")
     for name, count in dom_counts.most_common(3):
@@ -1044,25 +1115,85 @@ def main():
     print(f"\n{'=' * 70}")
     print(f"  EXPORT")
     print(f"{'=' * 70}")
-    export_to_csv(metrics, "simulation_log.csv")
+
+    # Export CSV to output directory
+    csv_path = output_dir / "simulation_log.csv"
+    export_to_csv(metrics, str(csv_path))
 
     print(f"\n{'=' * 70}")
     print(f"  LESION STUDY")
     print(f"{'=' * 70}")
     lesion_results = run_lesion_study(config, env, lesion_name="Planning")
 
+    # Save all figures to output directory
     print(f"\n{'=' * 70}")
-    print(f"  VISUALIZATIONS (close each window to see the next)")
+    print(f"  SAVING VISUALIZATIONS")
     print(f"{'=' * 70}\n")
 
-    plot_navigation(metrics, env, title="Being Navigation (2D Shadow of 4D State)")
-    plot_phase_portrait(metrics)
-    plot_dominance(metrics, subsystems)
-    plot_micro_macro_layers(metrics)
-    plot_closure_coherence(metrics)
-    plot_lesion_comparison(lesion_results)
+    fig_nav = plt.figure(figsize=(8, 8))
+    plot_navigation(metrics, env, title="Being Navigation (4D Slice → 2D Action)")
+    nav_path = output_dir / "navigation.png"
+    fig_nav.savefig(nav_path, dpi=150, bbox_inches='tight')
+    print(f"  Saved: {nav_path}")
 
-    plt.show()
+    fig_phase = plot_phase_portrait(metrics)
+    phase_path = output_dir / "phase_portrait.png"
+    plt.gcf().savefig(phase_path, dpi=150, bbox_inches='tight')
+    print(f"  Saved: {phase_path}")
+
+    fig_dom = plot_dominance(metrics, subsystems)
+    dom_path = output_dir / "dominance.png"
+    plt.gcf().savefig(dom_path, dpi=150, bbox_inches='tight')
+    print(f"  Saved: {dom_path}")
+
+    fig_lesion = plot_lesion_comparison(lesion_results)
+    lesion_path = output_dir / "lesion_study.png"
+    plt.gcf().savefig(lesion_path, dpi=150, bbox_inches='tight')
+    print(f"  Saved: {lesion_path}")
+
+    # Save summary JSON
+    summary = {
+        "timestamp": timestamp,
+        "config": {
+            "n_subsystems": config.n_subsystems,
+            "n_dimensions": config.n_dimensions,
+            "n_timesteps": config.n_timesteps,
+            "coordination_threshold": config.coordination_threshold,
+            "noise_level": config.noise_level,
+            "random_seed": config.random_seed,
+        },
+        "results": {
+            "consciousness_level": level,
+            "consciousness_state": state,
+            "basin_switches": metrics["basin_switches"],
+            "goals_reached": being.goals_reached,
+            "hazards_hit": being.hazards_hit,
+            "avg_pressure": float(np.mean(metrics['coordination_pressures'])),
+            "avg_integration": float(np.mean(metrics['integration_levels'])),
+        },
+        "subsystem_dominance": {name: count for name, count in dom_counts.most_common()},
+        "lesion_study": {
+            "lesioned_subsystem": "Planning",
+            "intact_level": lesion_results["level_intact"],
+            "lesioned_level": lesion_results["level_lesioned"],
+            "delta": lesion_results["level_intact"] - lesion_results["level_lesioned"],
+        },
+        "output_files": {
+            "simulation_log_csv": str(csv_path),
+            "navigation_plot": str(nav_path),
+            "phase_portrait_plot": str(phase_path),
+            "dominance_plot": str(dom_path),
+            "lesion_study_plot": str(lesion_path),
+        }
+    }
+    
+    summary_path = output_dir / "summary.json"
+    with open(summary_path, 'w') as f:
+        import json
+        json.dump(summary, f, indent=2)
+    print(f"  Saved: {summary_path}")
+
+    plt.close('all')
 
     return metrics, level, state
 
