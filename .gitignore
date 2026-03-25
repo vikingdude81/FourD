@@ -43,3 +43,12 @@ outputs/**/*.png
 
 # Simulation outputs (committed intentionally)
 # simulation_log.csv is kept as an example output
+
+# Large sweep result CSVs (100MB+)
+outputs/**/phase_cartography_results*.csv
+
+# Cline configuration
+.clinerules
+
+# Tool configs (may contain API keys)
+tools/fallback_config.json
