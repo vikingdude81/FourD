@@ -1,0 +1,27 @@
+======================================================================
+BATCH SIMULATION REPORT
+Generated: 2026-03-09T23:00:43.367814
+Total runs: 3
+======================================================================
+
+Status Summary:
+  success: 3
+
+----------------------------------------------------------------------
+Detailed Results:
+----------------------------------------------------------------------
+
+1. high_coherence
+   Status: success
+   Parameters: {'name': 'high_coherence', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'emotion_gain': 0.35, 'planning_gain': 0.15, 'perception_gain': 0.12, 'basin_ambiguity_threshold': 0.04, 'description': 'Optimized for high coherence states'}
+   Time: 6.04s
+
+2. critical
+   Status: success
+   Parameters: {'name': 'critical', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'emotion_gain': 0.25, 'planning_gain': 0.12, 'perception_gain': 0.08, 'language_gain': 0.05, 'basin_ambiguity_threshold': 0.06, 'description': 'Near critical point for maximum complexity'}
+   Time: 3.73s
+
+3. balanced
+   Status: success
+   Parameters: {'name': 'balanced', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'emotion_gain': 0.22, 'planning_gain': 0.12, 'perception_gain': 0.08, 'memory_gain': 0.08, 'basin_pull_strength': 0.025, 'description': 'Balanced complexity and coherence'}
+   Time: 3.58s

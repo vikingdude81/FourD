@@ -1,0 +1,27 @@
+======================================================================
+BATCH SIMULATION REPORT
+Generated: 2026-03-09T22:58:22.632954
+Total runs: 3
+======================================================================
+
+Status Summary:
+  failed: 3
+
+----------------------------------------------------------------------
+Detailed Results:
+----------------------------------------------------------------------
+
+1. high_coherence
+   Status: failed
+   Parameters: {'name': 'high_coherence', 'window_size': 48, 'embedding_dim': 6, 'basin_threshold': 0.55, 'depth': 5, 'width_factor': 1.3, 'description': 'Optimized for high coherence states'}
+   Time: 0.75s
+
+2. critical
+   Status: failed
+   Parameters: {'name': 'critical', 'window_size': 40, 'embedding_dim': 5, 'basin_threshold': 0.52, 'depth': 4, 'width_factor': 1.2, 'description': 'Near critical point for maximum complexity'}
+   Time: 0.73s
+
+3. balanced
+   Status: failed
+   Parameters: {'name': 'balanced', 'window_size': 36, 'embedding_dim': 4, 'basin_threshold': 0.51, 'depth': 4, 'width_factor': 1.25, 'description': 'Balanced complexity and coherence'}
+   Time: 0.77s

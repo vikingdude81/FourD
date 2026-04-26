@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "C:\Users\akbon\OneDrive\Documents\GitHub\FourD\universality_verification.py", line 92, in measure_gamma
+    print("  PART 1: SUSCEPTIBILITY EXPONENT \u03b3")
+  File "C:\Users\akbon\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u03b3' in position 34: character maps to <undefined>
+
+======================================================================

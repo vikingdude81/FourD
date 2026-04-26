@@ -1,0 +1,52 @@
+======================================================================
+BATCH SIMULATION REPORT
+Generated: 2026-03-09T23:12:35.090264
+Total runs: 8
+======================================================================
+
+Status Summary:
+  success: 8
+
+----------------------------------------------------------------------
+Detailed Results:
+----------------------------------------------------------------------
+
+1. lesion_perception
+   Status: success
+   Parameters: {'name': 'lesion_perception', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'perception_gain': 0.01}
+   Time: 3.36s
+
+2. lesion_language
+   Status: success
+   Parameters: {'name': 'lesion_language', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'language_gain': 0.01}
+   Time: 3.42s
+
+3. lesion_planning
+   Status: success
+   Parameters: {'name': 'lesion_planning', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'planning_gain': 0.01}
+   Time: 3.36s
+
+4. lesion_emotion
+   Status: success
+   Parameters: {'name': 'lesion_emotion', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'emotion_gain': 0.01}
+   Time: 3.34s
+
+5. lesion_memory
+   Status: success
+   Parameters: {'name': 'lesion_memory', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'memory_gain': 0.01}
+   Time: 3.34s
+
+6. lesion_motor control
+   Status: success
+   Parameters: {'name': 'lesion_motor control', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'motor_control_gain': 0.01}
+   Time: 3.31s
+
+7. lesion_attention
+   Status: success
+   Parameters: {'name': 'lesion_attention', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'attention_gain': 0.01}
+   Time: 3.34s
+
+8. lesion_executive control
+   Status: success
+   Parameters: {'name': 'lesion_executive control', 'n_subsystems': 8, 'n_dims': 4, 'n_timesteps': 300, 'executive_control_gain': 0.01}
+   Time: 3.33s
