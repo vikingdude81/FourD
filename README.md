@@ -4,10 +4,18 @@ An emerging research platform for higher-dimensional consciousness-like dynamics
 FourD combines a geometric consciousness simulation, GPU-accelerated ensemble experiments,
 phase-transition analysis, and a QRNG / latent-analysis pipeline in a single repo.
 
-> **Repo status (March 2026):** active development.  The GPU ensemble backend and
-> experiment suites are implemented and runnable.  The `src/` QRNG pipeline is functional
-> but analysed independently.  A planned `core/` package extraction and unified output
-> schema are future work — see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+> **Repo status (August 2026):** active development.  The GPU ensemble backend and
+> experiment suites are implemented and runnable.  A second research thread (April–August
+> 2026) grew out of Observer Patch Holography (OPH)-inspired boundary-negotiation work:
+> a modular `UniversalEngine` (swappable manifold/topology/fatigue), basin-gateway and
+> combinatorial-graph readouts, and — newest — a persistent **bearer state** layered on
+> top of the engine to test whether interface geometry is *constitutive* (gates which
+> competencies survive lesion/perturbation) rather than merely descriptive. See
+> [Boundary Negotiation / Interface-Competency Thread](#boundary-negotiation--interface-competency-thread)
+> below. The `src/` QRNG pipeline is partially bridged into this thread (see
+> `rqa_boundary_analysis.py`, `latent_boundary_mapping.py`) but not yet fully unified.
+> A planned `core/` package extraction and unified output schema are future work — see
+> [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ---
 
@@ -43,6 +51,48 @@ preferred region.  Forces curve with the manifold.  No information is lost.
 
 For a detailed breakdown of each subsystem and how they relate, see
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+---
+
+## Boundary Negotiation / Interface-Competency Thread
+
+A second research thread, credited to Observer Patch Holography (OPH, by FloatingPragma —
+https://github.com/FloatingPragma/observer-patch-holography) for its framing, asks a
+different question than the canonical V2 model: not "what does this system's trajectory
+look like" but "does *where information concentrates* (basin boundaries, transition
+gateways) carry structure that's derivable, predictable, or constitutive." It runs on a
+separate, lighter modular engine (`universality_test.py`'s `UniversalEngine`) with
+swappable manifold (S³ / S² / flat R⁴), topology (cyclic / random / full / none), and
+fatigue dynamics, so claims about "does geometry X matter" can be tested against matched
+controls instead of only the canonical model.
+
+| Script | Role |
+|---|---|
+| `oph_bridge_analysis.py` | OPH-inspired metrics bridged onto the V2 engine — starting point for this thread |
+| `universality_test.py` | `UniversalEngine` — the swappable manifold/topology/fatigue core used by everything below |
+| `boundary_negotiation_test.py` | 5-part validation: does clarity concentrate at basin boundaries, and is it universal or engine-specific? |
+| `minimal_boundary_model.py` | Strips the effect down to its minimal substrate — reproduces on S¹/R¹ with just cyclic opponents + fatigue |
+| `topology_dissection.py` | Decomposes "cyclic topology" into angle / pairing-structure / pair-count axes to find what's actually essential |
+| `geometry_comparison.py` | S³ vs flat R⁴ head-to-head — found flat R⁴ has *stronger* boundary negotiation on the edge-clarity metric |
+| `mechanism_extraction.py`, `critical_phenomena_suite.py`, `universality_verification.py` | Establish this is a genuine critical phase transition (3D-Ising-class exponents), not just a qualitative effect |
+| `goldilocks_sweep.py` | Locates the critical parameter region empirically — `outputs/phase_cartography/goldilocks_report.txt` puts it around `fatigue_rate≈0.20–0.27`, `exploration_noise≈0.17–0.20` |
+| `basin_gateway_analysis.py`, `basin_deep_dive.py`, `staged_gateway_control.py` | Basin-transition graph construction, gateway centrality, dwell-time/occupancy structure |
+| `controller_ablation_multiseed.py` | Multi-seed ranking of controller variants with confidence intervals |
+| `rqa_boundary_analysis.py`, `latent_boundary_mapping.py` | Bridge `src/recurrence` and `src/latent` (the QRNG pipeline's analysis modules) into boundary-transition analysis |
+| `positive_geometry_readout.py` | Tests whether spanning-tree graph combinatorics (Foster's theorem), computed with zero access to simulation dynamics, predict the empirical gateway graph — found to work on flat4 (partial r=0.29, p<1e-7) but not on the canonical s3/cyclic geometry |
+| `bearer_state_competency.py` | Adds a persistent **bearer state** to `UniversalEngine` that biases and is biased by dynamics; measures a competency vector (lesion recovery, adaptation speed, memory horizon) with immediate/cumulative-deficit decomposition so "0" can't conflate "no effect" with "instant recovery" |
+| `qrng_developmental_capture.py` | Measures how long a one-shot perturbation's effect persists (`DC(Δ)`) under deterministic / PRNG / OS-CSPRNG injection, with a TOST equivalence test |
+| `perturbation_concentration_sweep.py` | Isolates perturbation *shape* (concentrated vs. distributed) from entropy source — found this, not randomness quality, drives `DC(Δ)` differences |
+
+**Open thread worth flagging:** the canonical `s3 + cyclic` configuration's default
+`fatigue_rate=0.217` sits inside the empirically-identified Goldilocks/critical region
+above, and `geometry_comparison.py`'s own S³ sweep shows a sharp clarity jump right around
+`fatigue_rate≈0.18–0.20`. The August 2026 bearer-state competency runs found `s3/cyclic`
+uniquely showing large, slow perturbation-recovery times (800+ steps) vs. near-zero
+elsewhere — plausibly **critical slowing down** (a system near a real critical point
+relaxes slowly after perturbation) rather than a manifold- or calibration-specific effect.
+Not yet confirmed; the decisive test is a `fatigue_rate` sweep at fixed manifold/topology,
+not yet run. See `outputs/bearer_state_competency/` for the raw numbers this is based on.
 
 ---
 
@@ -95,6 +145,27 @@ python deep_analysis.py
 
 All GPU scripts write outputs under `outputs/`.
 `gpu_ensemble_sim.py` auto-detects available VRAM and adjusts batch size.
+
+### Run the boundary-negotiation / interface-competency thread
+
+```bash
+# Bearer-state competency vector (lesion recovery, adaptation, memory) across manifolds
+python bearer_state_competency.py --device cuda:0 --steps 1800 --N 256 --seeds 10
+
+# Developmental capture under deterministic / PRNG / OS-CSPRNG perturbation sources
+python qrng_developmental_capture.py --device cuda:0 --steps 1800 --N 256 --seeds 16
+
+# Does perturbation concentration (not entropy source) drive developmental capture?
+python perturbation_concentration_sweep.py --device cuda:0 --steps 1800 --N 256 --seeds 16
+
+# Combinatorial gateway readout: does spanning-tree graph structure predict empirical
+# gateway importance? (run basin_gateway_analysis.py first to generate its input)
+python basin_gateway_analysis.py --device cuda:0 --steps 2000 --N 128
+python positive_geometry_readout.py
+```
+
+See [Boundary Negotiation / Interface-Competency Thread](#boundary-negotiation--interface-competency-thread)
+above for what each script tests and how they connect.
 
 ### Run the QRNG analysis pipeline
 
@@ -261,9 +332,17 @@ FourD/
 | Multi-seed robustness analysis | ✅ Implemented |
 | QRNG latent analysis pipeline | ✅ Implemented |
 | Surrogate comparison / statistical tests | ✅ Implemented |
+| `UniversalEngine` (swappable manifold/topology/fatigue) | ✅ Implemented |
+| Boundary negotiation / gateway-graph analysis | ✅ Implemented |
+| Bearer state + competency vector (lesion/adaptation/memory) | ✅ Implemented |
+| Developmental capture (`DC(Δ)`) + perturbation-source comparison | ✅ Implemented |
+| Combinatorial (spanning-tree) gateway readout | ✅ Implemented |
+| Critical-slowing-down explanation for s3/cyclic's competency results | 🔧 Hypothesized, not yet tested |
+| Matched-preference factorial (isolates manifold from calibration) | 🔧 Planned |
+| Causal bearer-memory probe (decode + ablate, not just decay-time) | 🔧 Planned |
 | Unified `core/` package (shared geometry, config, signatures) | 🔧 Planned |
 | Standardised output schema across all scripts | 🔧 Planned |
-| `src/` pipeline wired to simulation outputs (shared RQA) | 🔧 Planned |
+| `src/` pipeline fully wired to boundary-negotiation thread (partially bridged via `rqa_boundary_analysis.py`, `latent_boundary_mapping.py`) | 🔧 Planned |
 | Multi-being toroidal environment | 💡 Future |
 | Manifold learning from neural-recording data | 💡 Future |
 
@@ -272,11 +351,30 @@ FourD/
 ## Roadmap
 
 ### Near-Term
+- **Decisive test:** sweep `fatigue_rate` at fixed manifold/topology (s3/cyclic) through the
+  Goldilocks region identified by `goldilocks_sweep.py` (≈0.18–0.27) and measure whether
+  `bearer_state_competency.py`'s lesion/adaptation recovery times peak there — tests the
+  critical-slowing-down hypothesis directly, and is cheaper than the full matched-preference
+  factorial below since it varies one already-understood parameter instead of building new
+  preference generators.
+- Matched-preference factorial across manifold × topology × preference-regime, using
+  `topology_dissection.py`'s existing angle/structure/pair-count decomposition as the source
+  of controlled preference variants rather than building a new generator from scratch.
 - Extract shared geometry / config into a reusable `core/` package to prevent V2 ↔ GPU drift
 - Standardise output directories and column schemas across all scripts
-- Wire the `src/recurrence` and `src/latent` tools to simulation outputs (currently QRNG-only)
 
 ### Medium-Term
+- Causal bearer-memory probe: decode a task-relevant variable from `b_t` and ablate it,
+  rather than inferring memory purely from decay-time metrics (current `memory_horizon` is
+  dominated by the fixed `bearer_decay` hyperparameter, not emergent memory)
+- Re-run bearer-state competency experiments on `minimal_boundary_model.py`'s S¹/R¹
+  substrates — 10–100x cheaper per run than full S³ at N=256, enabling much larger seed
+  counts and parameter sweeps within the same GPU budget
+- Reconcile `geometry_comparison.py`'s finding (flat R⁴ > S³ on edge-clarity boundary
+  negotiation) with the bearer-competency finding (S³/cyclic > everything on lesion/
+  adaptation recovery) — likely resolved once the criticality test above lands, since these
+  may be measuring steady-state coupling strength vs. perturbation-response time, which
+  needn't agree
 - Multi-seed population studies with personality-type classification
 - Formal Granger / transfer-entropy causal analysis between geometric metrics and phase transitions
 - S⁷ / S¹⁵ manifold experiments
@@ -286,6 +384,7 @@ FourD/
 - Evolutionary dynamics: beings that reach goals survive, offspring inherit preference matrices
 - Manifold learning from actual neural recordings
 - Quantum walks on S³ — formal connection to QRNG pipeline
+- Real hardware QRNG capture wired into `data/qrng_bits.npy` (currently `os.urandom`-only)
 
 ---
 
