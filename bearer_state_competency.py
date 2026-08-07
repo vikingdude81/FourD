@@ -237,14 +237,19 @@ class BearerEngine(UniversalEngine):
 # COMPETENCY MEASUREMENTS
 # ============================================================================
 
-def build_engine(manifold, topology, use_bearer, device, steps, N, seed, rng_seed=None):
+def build_engine(manifold, topology, use_bearer, device, steps, N, seed, rng_seed=None,
+                  fatigue_rate=None):
     torch.manual_seed(seed)
     np.random.seed(seed)
+    engine_kwargs = {}
+    if fatigue_rate is not None:
+        engine_kwargs['fatigue_rate'] = fatigue_rate
     return BearerEngine(
         N=N, device=device, steps=steps,
         manifold=manifold, topology=topology, fatigue_type='gradual',
         use_bearer=use_bearer,
         rng_seed=rng_seed if rng_seed is not None else seed,
+        **engine_kwargs,
     )
 
 
@@ -300,10 +305,10 @@ def memory_horizon(manifold, topology, use_bearer, device, steps, N, seed,
 
 
 def lesion_recovery(manifold, topology, use_bearer, device, steps, N, seed,
-                     lesion_at=None, baseline_window=150, tol=0.10) -> float:
+                     lesion_at=None, baseline_window=150, tol=0.10, fatigue_rate=None) -> float:
     if lesion_at is None:
         lesion_at = steps // 2
-    eng = build_engine(manifold, topology, use_bearer, device, steps, N, seed)
+    eng = build_engine(manifold, topology, use_bearer, device, steps, N, seed, fatigue_rate=fatigue_rate)
     eng.schedule_lesion(lesion_at, sub_idx=0)
     for _ in range(steps):
         eng.step()
@@ -342,10 +347,10 @@ def lesion_recovery(manifold, topology, use_bearer, device, steps, N, seed,
 
 
 def adaptation_speed(manifold, topology, use_bearer, device, steps, N, seed,
-                      shift_at=None, window=40, tol=0.05) -> float:
+                      shift_at=None, window=40, tol=0.05, fatigue_rate=None) -> float:
     if shift_at is None:
         shift_at = steps // 2
-    eng = build_engine(manifold, topology, use_bearer, device, steps, N, seed)
+    eng = build_engine(manifold, topology, use_bearer, device, steps, N, seed, fatigue_rate=fatigue_rate)
     eng.schedule_rotation(shift_at)
     for _ in range(steps):
         eng.step()
