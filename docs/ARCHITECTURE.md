@@ -284,21 +284,35 @@ that had never been cross-referenced against the bearer-state results before
 now:
 
 - `outputs/mechanism/bifurcation_results.json` (from `mechanism_extraction.py`
-  Part 2, a *deterministic eigenvalue analysis* of the reduced 2-subsystem
-  skeleton — a completely different method from the empirical lesion sweep
-  above) classifies the transition as **"Saddle-node / Transcritical"** at
-  `fr_c_s3 ≈ 0.1816`. Saddle-node bifurcations are exactly the kind that
-  produce a discontinuous jump onto a new branch rather than a smooth,
-  symmetric divergence — consistent with the step-to-ceiling shape just
-  measured, and its `fr_c_s3` lines up with our empirical ~0.18–0.20 jump to
-  within the sweep's resolution, from a method that never ran the full engine.
-- `outputs/mechanism/layered_ablation_results.json` (Part 3) found the
-  transition requires **competition + fatigue together** (`"Layer 3: Comp +
-  Fatigue"` is the first layer with `has_transition: true`; competition alone
-  or fatigue alone show none). Since both s3 and flat4 share that mechanism
-  and only differ in manifold, this directly explains why the transition
-  *location* is manifold-independent — it's a property of the competition/
-  fatigue dynamics, not the geometry it's embedded in.
+  Part 2, a *deterministic eigenvalue analysis* of a reduced 2-subsystem
+  circle (S¹) skeleton) classifies the transition type as **"Saddle-node /
+  Transcritical"** — a discontinuous jump onto a new branch, qualitatively
+  matching the step-to-ceiling shape just measured, not a smooth divergence.
+  **Correction to an earlier draft of this document:** the `fr_c_s3≈0.1816`
+  field in that JSON is *not* something this eigenvalue analysis computed —
+  it's `FR_C`, a shared hardcoded reference constant (defined in
+  `mechanism_extraction.py`, `critical_phenomena_suite.py`, and
+  `universality_verification.py` alike, sourced from `deep_analysis.py`
+  Part 4's full-engine critical-exponent measurement) that this script only
+  plots as a comparison line. The reduced skeleton's *own* eigenvalue-crossing
+  point is `bifurcation_fr≈0.0224` — nearly an order of magnitude off from
+  the full engine's measured ~0.18–0.20. That's not surprising given how much
+  the skeleton strips out (no manifold embedding, no exploration noise, no
+  bearer state, no macro-basin assignment layer at all), but it means the
+  agreement between methods is in **bifurcation type**, not in the specific
+  critical `fatigue_rate` value — the quantitative match claimed in an
+  earlier version of this section was wrong and has been corrected here.
+- `outputs/mechanism/layered_ablation_results.json` (Part 3, also a reduced/
+  ablated proxy model — its own `fr_c` values, ~0.02–0.05, are similarly not
+  directly comparable to the full engine's ~0.18–0.20) found the transition
+  requires **competition + fatigue together** (`"Layer 3: Comp + Fatigue"` is
+  the first layer with `has_transition: true`; competition alone or fatigue
+  alone show none). That qualitative dependency — not any specific `fr_c`
+  number from this analysis — is what supports manifold-independence: since
+  both s3 and flat4 share the competition+fatigue mechanism and only differ
+  in manifold, and `criticality_sweep.py` empirically confirmed both
+  transition at the same *actual* location on the full engine, the
+  transition looks like a property of the dynamics, not the geometry.
 - **Open tension, not yet resolved:** that same bifurcation analysis reports
   `has_hysteresis: false` on its minimal skeleton, which sits awkwardly next
   to the full engine's apparent permanent lock-in on s3 across the entire

@@ -90,11 +90,15 @@ found flat4 shares s3's transition location (~0.18–0.20) almost exactly, rulin
 calibration specifically" as the driver of the transition's existence. But the shape isn't
 a critical-slowing-down peak either — it's an abrupt jump to a ceiling that s3 then stays
 pinned at for every `fatigue_rate` tested up to 0.40, while flat4 spikes only exactly at
-the transition and snaps back to near-instant recovery past it. That matches
-`outputs/mechanism/bifurcation_results.json` (a completely independent deterministic
-eigenvalue analysis from `mechanism_extraction.py`), which classifies this transition as a
-**saddle-node/transcritical bifurcation at `fr_c≈0.1816`** — a discontinuous jump onto a
-new branch, not a smooth divergence-and-recovery. Open tension: that same analysis reports
+the transition and snaps back to near-instant recovery past it. The *type* of transition
+matches `outputs/mechanism/bifurcation_results.json` (a deterministic eigenvalue analysis
+of a reduced circle skeleton from `mechanism_extraction.py`), which classifies it as
+**saddle-node/transcritical** — a discontinuous jump onto a new branch, not a smooth
+divergence-and-recovery. (The specific `fr_c≈0.1816` in that file is a hardcoded reference
+constant from `deep_analysis.py`, not something this analysis computed; the skeleton's own
+eigenvalue-crossing point is ≈0.0224 — an order of magnitude off, unsurprising given how
+much the skeleton strips out. Only the qualitative bifurcation type transfers, not the
+number — see ARCHITECTURE.md for the full correction.) Open tension: that same analysis reports
 `has_hysteresis: false` on its minimal skeleton, in apparent conflict with the full
 engine's permanent lock-in on s3 — not yet resolved. See
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#resolution-august-2026-neither-h1-nor-h2-as-stated--a-saddle-node-bifurcation)
