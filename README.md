@@ -84,15 +84,21 @@ controls instead of only the canonical model.
 | `qrng_developmental_capture.py` | Measures how long a one-shot perturbation's effect persists (`DC(Δ)`) under deterministic / PRNG / OS-CSPRNG injection, with a TOST equivalence test |
 | `perturbation_concentration_sweep.py` | Isolates perturbation *shape* (concentrated vs. distributed) from entropy source — found this, not randomness quality, drives `DC(Δ)` differences |
 
-**Open thread worth flagging:** the canonical `s3 + cyclic` configuration's default
-`fatigue_rate=0.217` sits inside the empirically-identified Goldilocks/critical region
-above, and `geometry_comparison.py`'s own S³ sweep shows a sharp clarity jump right around
-`fatigue_rate≈0.18–0.20`. The August 2026 bearer-state competency runs found `s3/cyclic`
-uniquely showing large, slow perturbation-recovery times (800+ steps) vs. near-zero
-elsewhere — plausibly **critical slowing down** (a system near a real critical point
-relaxes slowly after perturbation) rather than a manifold- or calibration-specific effect.
-Not yet confirmed; the decisive test is a `fatigue_rate` sweep at fixed manifold/topology,
-not yet run. See `outputs/bearer_state_competency/` for the raw numbers this is based on.
+**Resolved (partially) — it's a bifurcation, not critical slowing down:**
+`criticality_sweep.py` (August 2026) swept `fatigue_rate` at fixed manifold/topology and
+found flat4 shares s3's transition location (~0.18–0.20) almost exactly, ruling out "S³ or
+calibration specifically" as the driver of the transition's existence. But the shape isn't
+a critical-slowing-down peak either — it's an abrupt jump to a ceiling that s3 then stays
+pinned at for every `fatigue_rate` tested up to 0.40, while flat4 spikes only exactly at
+the transition and snaps back to near-instant recovery past it. That matches
+`outputs/mechanism/bifurcation_results.json` (a completely independent deterministic
+eigenvalue analysis from `mechanism_extraction.py`), which classifies this transition as a
+**saddle-node/transcritical bifurcation at `fr_c≈0.1816`** — a discontinuous jump onto a
+new branch, not a smooth divergence-and-recovery. Open tension: that same analysis reports
+`has_hysteresis: false` on its minimal skeleton, in apparent conflict with the full
+engine's permanent lock-in on s3 — not yet resolved. See
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#resolution-august-2026-neither-h1-nor-h2-as-stated--a-saddle-node-bifurcation)
+for the full evidence trail and `outputs/criticality_sweep/` for the raw numbers.
 
 ---
 
@@ -337,8 +343,9 @@ FourD/
 | Bearer state + competency vector (lesion/adaptation/memory) | ✅ Implemented |
 | Developmental capture (`DC(Δ)`) + perturbation-source comparison | ✅ Implemented |
 | Combinatorial (spanning-tree) gateway readout | ✅ Implemented |
-| Critical-slowing-down explanation for s3/cyclic's competency results | 🔧 Hypothesized, not yet tested |
-| Matched-preference factorial (isolates manifold from calibration) | 🔧 Planned |
+| Criticality sweep (fatigue_rate vs. s3/cyclic's competency results) | ✅ Implemented — result: saddle-node bifurcation, not critical slowing down |
+| Post-bifurcation regime-stability explanation (why s3 stays locked, flat4 doesn't) | 🔧 Open — see ARCHITECTURE.md |
+| Matched-preference factorial (isolates manifold from calibration) | 🔧 Planned, lower priority now that transition location is shown manifold-independent |
 | Causal bearer-memory probe (decode + ablate, not just decay-time) | 🔧 Planned |
 | Unified `core/` package (shared geometry, config, signatures) | 🔧 Planned |
 | Standardised output schema across all scripts | 🔧 Planned |
@@ -351,15 +358,20 @@ FourD/
 ## Roadmap
 
 ### Near-Term
-- **Decisive test:** sweep `fatigue_rate` at fixed manifold/topology (s3/cyclic) through the
-  Goldilocks region identified by `goldilocks_sweep.py` (≈0.18–0.27) and measure whether
-  `bearer_state_competency.py`'s lesion/adaptation recovery times peak there — tests the
-  critical-slowing-down hypothesis directly, and is cheaper than the full matched-preference
-  factorial below since it varies one already-understood parameter instead of building new
-  preference generators.
-- Matched-preference factorial across manifold × topology × preference-regime, using
-  `topology_dissection.py`'s existing angle/structure/pair-count decomposition as the source
-  of controlled preference variants rather than building a new generator from scratch.
+- **Reconcile the hysteresis conflict:** `mechanism_extraction.py`'s minimal-skeleton
+  bifurcation analysis reports `has_hysteresis: false`, but the full-engine lesion sweep
+  shows s3 permanently locked into a bad regime for every `fatigue_rate` past the
+  transition. Extend the hysteresis test to the full `BearerEngine` directly (sweep
+  `fatigue_rate` up and back down across a lesion event, check path-dependence) rather than
+  relying on the 2-subsystem proxy.
+- Extend `mechanism_extraction.py`'s bifurcation analysis (currently s3-only) to a
+  flat4-equivalent reduced skeleton, to see whether its saddle-node point and post-
+  bifurcation branch structure explain why flat4 snaps back and s3 doesn't.
+- Matched-preference factorial across manifold × topology × preference-regime is now lower
+  priority — `criticality_sweep.py` already showed the transition's location isn't
+  manifold-specific — but may still matter for explaining the post-bifurcation asymmetry.
+  If pursued, use `topology_dissection.py`'s existing angle/structure/pair-count
+  decomposition as the source of controlled preference variants.
 - Extract shared geometry / config into a reusable `core/` package to prevent V2 ↔ GPU drift
 - Standardise output directories and column schemas across all scripts
 
@@ -371,10 +383,11 @@ FourD/
   substrates — 10–100x cheaper per run than full S³ at N=256, enabling much larger seed
   counts and parameter sweeps within the same GPU budget
 - Reconcile `geometry_comparison.py`'s finding (flat R⁴ > S³ on edge-clarity boundary
-  negotiation) with the bearer-competency finding (S³/cyclic > everything on lesion/
-  adaptation recovery) — likely resolved once the criticality test above lands, since these
-  may be measuring steady-state coupling strength vs. perturbation-response time, which
-  needn't agree
+  negotiation) with the bearer-competency finding (S³/cyclic locks into a bad regime past
+  the bifurcation, flat4 doesn't) — the criticality sweep confirmed these are different
+  axes (steady-state coupling strength vs. post-bifurcation regime stability), so they're
+  not in tension, but a direct account of *why* flat4's branch is escapable and s3's isn't
+  is still missing
 - Multi-seed population studies with personality-type classification
 - Formal Granger / transfer-entropy causal analysis between geometric metrics and phase transitions
 - S⁷ / S¹⁵ manifold experiments

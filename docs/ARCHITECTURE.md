@@ -257,6 +257,77 @@ and point back to H1 — at which point the matched-preference factorial
 (controlling for calibration while varying manifold) becomes the right
 next experiment instead.
 
+### Resolution (August 2026): neither H1 nor H2 as stated — a saddle-node bifurcation
+
+`criticality_sweep.py` ran the sweep (`fatigue_rate` in [0.05, 0.40], s3/cyclic
+and flat4/cyclic, N=256, 10 seeds, `outputs/criticality_sweep/`). The full
+curve, not just its argmax, rejects both hypotheses as originally framed:
+
+- **Not H1 as stated:** flat4 — uncalibrated, non-S³ — shows a transition at
+  essentially the *same location* as s3 (~0.18–0.20). The transition's
+  existence and location are not S³- or calibration-specific.
+- **Not H2 as stated:** true critical slowing down predicts a *peak* —
+  relaxation time rising then falling around the critical point. Instead:
+  s3's `lesion_t_recovery` jumps from unmeasurable (below ~0.18) straight to
+  a ceiling (~899/900, "never recovers in the window") and **stays pinned at
+  that ceiling all the way out to fatigue_rate=0.40** — no decay on the far
+  side. flat4 does something different again: a single-point spike exactly
+  at fr=0.18 (523.6 / ceiling), then instantly back to near-zero recovery
+  time for every fr≥0.20.
+
+That shape — abrupt jump, then a persistent, non-decaying plateau — is the
+signature of crossing into a new stable regime (bifurcation), not of a
+continuous transition's relaxation time smoothly diverging and receding.
+
+This matches existing, independently-computed evidence in `outputs/mechanism/`
+that had never been cross-referenced against the bearer-state results before
+now:
+
+- `outputs/mechanism/bifurcation_results.json` (from `mechanism_extraction.py`
+  Part 2, a *deterministic eigenvalue analysis* of the reduced 2-subsystem
+  skeleton — a completely different method from the empirical lesion sweep
+  above) classifies the transition as **"Saddle-node / Transcritical"** at
+  `fr_c_s3 ≈ 0.1816`. Saddle-node bifurcations are exactly the kind that
+  produce a discontinuous jump onto a new branch rather than a smooth,
+  symmetric divergence — consistent with the step-to-ceiling shape just
+  measured, and its `fr_c_s3` lines up with our empirical ~0.18–0.20 jump to
+  within the sweep's resolution, from a method that never ran the full engine.
+- `outputs/mechanism/layered_ablation_results.json` (Part 3) found the
+  transition requires **competition + fatigue together** (`"Layer 3: Comp +
+  Fatigue"` is the first layer with `has_transition: true`; competition alone
+  or fatigue alone show none). Since both s3 and flat4 share that mechanism
+  and only differ in manifold, this directly explains why the transition
+  *location* is manifold-independent — it's a property of the competition/
+  fatigue dynamics, not the geometry it's embedded in.
+- **Open tension, not yet resolved:** that same bifurcation analysis reports
+  `has_hysteresis: false` on its minimal skeleton, which sits awkwardly next
+  to the full engine's apparent permanent lock-in on s3 across the entire
+  fr≥0.217 range. Plausible explanations — not yet tested: (a) lesioning
+  removes an entire subsystem, a qualitatively more severe intervention than
+  the parameter-only hysteresis sweep the minimal skeleton was tested with,
+  or (b) the full 8-subsystem engine (plus fatigue's `excess`/`recovery_rate`
+  terms and the bearer-state feedback loop) has richer multistability than a
+  2-subsystem deterministic skeleton can express.
+
+**Refined conclusion:** the transition's *existence and location* are a
+general property of competition+fatigue dynamics, not S³ or calibration —
+largely settling H1 as originally stated. But *what happens after* crossing
+it is geometry-dependent: s3 falls into a regime it doesn't leave (for any
+fatigue_rate tested up to 0.40), flat4 only shows it exactly at the boundary
+and otherwise recovers instantly. That's a narrower, more specific, and
+better-evidenced claim than either original hypothesis — and it reframes the
+right next question from "is s3 special" to "why does s3's post-bifurcation
+branch stay locked while flat4's doesn't."
+
+**Next step:** extend `mechanism_extraction.py`'s bifurcation/hysteresis
+analysis (currently s3-only) to a flat4-equivalent reduced skeleton, and/or
+run a direct hysteresis test on the full `BearerEngine` (sweep `fatigue_rate`
+up past the transition and back down across a lesion event, check whether
+recovery is path-dependent) — the minimal-skeleton hysteresis test is a proxy
+for exactly the behavior the lesion sweep measured directly, and the two
+disagree, which is the concrete thing to chase down next rather than a new
+speculative hypothesis.
+
 ---
 
 ## Known Duplication / Technical Debt
