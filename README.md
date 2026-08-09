@@ -83,26 +83,31 @@ controls instead of only the canonical model.
 | `bearer_state_competency.py` | Adds a persistent **bearer state** to `UniversalEngine` that biases and is biased by dynamics; measures a competency vector (lesion recovery, adaptation speed, memory horizon) with immediate/cumulative-deficit decomposition so "0" can't conflate "no effect" with "instant recovery" |
 | `qrng_developmental_capture.py` | Measures how long a one-shot perturbation's effect persists (`DC(Δ)`) under deterministic / PRNG / OS-CSPRNG injection, with a TOST equivalence test |
 | `perturbation_concentration_sweep.py` | Isolates perturbation *shape* (concentrated vs. distributed) from entropy source — found this, not randomness quality, drives `DC(Δ)` differences |
+| `criticality_sweep.py` | Sweeps `fatigue_rate` at fixed manifold/topology — found a saddle-node-type bifurcation at a manifold-independent location (~0.18–0.20), not critical slowing down |
+| `compact_vs_noncompact_bifurcation.py` | Matched compact (S¹) vs. non-compact (R¹) reduced skeletons — found compactness explains neither bifurcation type nor hysteresis (both absent from both skeletons) |
+| `hysteresis_test.py` | Direct full-engine test: confirms real (transient) path-dependence at fixed `fatigue_rate` depending on approach direction, and that lesion deficits at s3/cyclic's default `fatigue_rate` are still unresolved after 3000 steps in 70% of runs |
+| `emergent_geometry_readout.py` | Tests whether effective-resistance graph distance (zero access to coordinates) reconstructs true manifold distance/dimensionality — s3's graph recovers ≈4–5 effective dimensions (true dim 4) with weak distance correlation; flat4 doesn't compress but correlates more strongly |
 
-**Resolved (partially) — it's a bifurcation, not critical slowing down:**
-`criticality_sweep.py` (August 2026) swept `fatigue_rate` at fixed manifold/topology and
-found flat4 shares s3's transition location (~0.18–0.20) almost exactly, ruling out "S³ or
-calibration specifically" as the driver of the transition's existence. But the shape isn't
-a critical-slowing-down peak either — it's an abrupt jump to a ceiling that s3 then stays
-pinned at for every `fatigue_rate` tested up to 0.40, while flat4 spikes only exactly at
-the transition and snaps back to near-instant recovery past it. The *type* of transition
-matches `outputs/mechanism/bifurcation_results.json` (a deterministic eigenvalue analysis
-of a reduced circle skeleton from `mechanism_extraction.py`), which classifies it as
-**saddle-node/transcritical** — a discontinuous jump onto a new branch, not a smooth
-divergence-and-recovery. (The specific `fr_c≈0.1816` in that file is a hardcoded reference
-constant from `deep_analysis.py`, not something this analysis computed; the skeleton's own
-eigenvalue-crossing point is ≈0.0224 — an order of magnitude off, unsurprising given how
-much the skeleton strips out. Only the qualitative bifurcation type transfers, not the
-number — see ARCHITECTURE.md for the full correction.) Open tension: that same analysis reports
-`has_hysteresis: false` on its minimal skeleton, in apparent conflict with the full
-engine's permanent lock-in on s3 — not yet resolved. See
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#resolution-august-2026-neither-h1-nor-h2-as-stated--a-saddle-node-bifurcation)
-for the full evidence trail and `outputs/criticality_sweep/` for the raw numbers.
+**Resolved — it's a bifurcation with real (transient) hysteresis, not critical slowing
+down:** `criticality_sweep.py` found flat4 shares s3's transition location (~0.18–0.20)
+almost exactly, ruling out "S³ or calibration specifically" as the driver of the
+transition's existence — and the *type*, per `outputs/mechanism/bifurcation_results.json`
+(a reduced circle-skeleton eigenvalue analysis), is saddle-node/transcritical: an abrupt
+jump onto a new branch, not a smooth divergence-and-recovery. (Its specific `fr_c≈0.1816`
+is a hardcoded reference constant from `deep_analysis.py`, not computed by that analysis —
+see ARCHITECTURE.md for the correction; only the bifurcation *type* transfers, not the
+number.) `compact_vs_noncompact_bifurcation.py` ruled out manifold compactness as the
+explanation for s3's lock-in vs. flat4's snap-back — neither a compact (S¹) nor non-compact
+(R¹) reduced skeleton shows hysteresis. `hysteresis_test.py` then tested the full engine
+directly and found real hysteresis the reduced skeleton can't show (likely from the bearer-
+state feedback loop, absent in the skeleton): at the *same* `fatigue_rate=0.30`, system
+state differs sharply by how it got there (`clarity_at_lesion`: ramp_up=0.11, direct=0.24,
+ramp_down=0.30; p=1.9e-29) — but this hysteresis is *transient*, decaying within a few
+hundred steps at constant `fatigue_rate`. Separately, the lesion-induced deficit itself
+(distinct from this pre-lesion path-dependence) looks close to permanent: 70% of runs still
+hadn't recovered 3000 steps post-lesion at s3/cyclic's default `fatigue_rate=0.217`. See
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#follow-up-august-2026-three-more-targeted-tests)
+for the full evidence trail.
 
 ---
 
@@ -172,6 +177,18 @@ python perturbation_concentration_sweep.py --device cuda:0 --steps 1800 --N 256 
 # gateway importance? (run basin_gateway_analysis.py first to generate its input)
 python basin_gateway_analysis.py --device cuda:0 --steps 2000 --N 128
 python positive_geometry_readout.py
+
+# Does graph combinatorics alone (no coordinates) recover true manifold distance/dimension?
+python emergent_geometry_readout.py
+
+# Does recovery time peak at the known critical fatigue_rate (~0.18-0.27)?
+python criticality_sweep.py --device cuda:0 --steps 1800 --N 256 --seeds 10
+
+# Compact (S1) vs. non-compact (R1) reduced-skeleton bifurcation/hysteresis comparison
+python compact_vs_noncompact_bifurcation.py --n_sub 3
+
+# Full-engine hysteresis: permanence of lesion deficit + path-dependence at fixed fatigue_rate
+python hysteresis_test.py --device cuda:0 --N 256 --seeds 10
 ```
 
 See [Boundary Negotiation / Interface-Competency Thread](#boundary-negotiation--interface-competency-thread)
@@ -348,7 +365,10 @@ FourD/
 | Developmental capture (`DC(Δ)`) + perturbation-source comparison | ✅ Implemented |
 | Combinatorial (spanning-tree) gateway readout | ✅ Implemented |
 | Criticality sweep (fatigue_rate vs. s3/cyclic's competency results) | ✅ Implemented — result: saddle-node bifurcation, not critical slowing down |
-| Post-bifurcation regime-stability explanation (why s3 stays locked, flat4 doesn't) | 🔧 Open — see ARCHITECTURE.md |
+| Compact vs. non-compact reduced-skeleton comparison | ✅ Implemented — result: compactness explains neither bifurcation type nor hysteresis |
+| Full-engine hysteresis test (permanence + path-dependence) | ✅ Implemented — result: real transient hysteresis found; lesion deficit looks near-permanent |
+| Emergent geometry from graph combinatorics (effective resistance vs. true distance) | ✅ Implemented — mixed: s3 recovers true dimensionality (~5 vs 4) weakly; flat4 doesn't compress but correlates more strongly |
+| Post-bifurcation regime-stability explanation (why s3 stays locked, flat4 doesn't) | 🔧 Still open — hysteresis is real but transient; doesn't fully explain s3's near-permanent lock-in on its own |
 | Matched-preference factorial (isolates manifold from calibration) | 🔧 Planned, lower priority now that transition location is shown manifold-independent |
 | Causal bearer-memory probe (decode + ablate, not just decay-time) | 🔧 Planned |
 | Unified `core/` package (shared geometry, config, signatures) | 🔧 Planned |
@@ -362,15 +382,14 @@ FourD/
 ## Roadmap
 
 ### Near-Term
-- **Reconcile the hysteresis conflict:** `mechanism_extraction.py`'s minimal-skeleton
-  bifurcation analysis reports `has_hysteresis: false`, but the full-engine lesion sweep
-  shows s3 permanently locked into a bad regime for every `fatigue_rate` past the
-  transition. Extend the hysteresis test to the full `BearerEngine` directly (sweep
-  `fatigue_rate` up and back down across a lesion event, check path-dependence) rather than
-  relying on the 2-subsystem proxy.
-- Extend `mechanism_extraction.py`'s bifurcation analysis (currently s3-only) to a
-  flat4-equivalent reduced skeleton, to see whether its saddle-node point and post-
-  bifurcation branch structure explain why flat4 snaps back and s3 doesn't.
+- **Explain the near-permanent lesion deficit directly:** `hysteresis_test.py` showed the
+  pre-lesion path-dependence is transient (decays within ~300 steps at constant
+  `fatigue_rate`), but the *lesion-induced* deficit itself doesn't decay within 3000 steps
+  in 70% of runs. Those are now shown to be two different phenomena — the transient
+  hysteresis doesn't explain the near-permanent lock-in. Worth checking directly whether the
+  lesioned subsystem's contribution is architecturally required for the post-bifurcation
+  fixed point (i.e. recovery to baseline clarity may be structurally impossible once
+  subsystem 0 is zeroed at this `fatigue_rate`, not merely slow).
 - Matched-preference factorial across manifold × topology × preference-regime is now lower
   priority — `criticality_sweep.py` already showed the transition's location isn't
   manifold-specific — but may still matter for explaining the post-bifurcation asymmetry.

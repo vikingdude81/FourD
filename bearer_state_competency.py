@@ -304,6 +304,43 @@ def memory_horizon(manifold, topology, use_bearer, device, steps, N, seed,
     return float(horizon_windows * window)
 
 
+def deficit_metrics(clarity: np.ndarray, event_at: int, steps: int,
+                     baseline_window: int = 150, tol: float = 0.10,
+                     immediate_window: int = 20, cap: int = 600,
+                     no_effect_frac: float = 0.03) -> dict:
+    """Shared immediate/cumulative/recovery-time decomposition, used by both
+    lesion_recovery() and hysteresis_test.py so the two stay consistent."""
+    pre = clarity[max(0, event_at - baseline_window):event_at]
+    if len(pre) == 0:
+        return dict(d_immediate=float('nan'), c_lesion=float('nan'), t_recovery=float('nan'))
+    target = pre.mean()
+    post = clarity[event_at:]
+
+    # Immediate deficit: how much clarity dropped right after the event.
+    iw = min(immediate_window, len(post))
+    d_immediate = float(target - post[:iw].mean())
+
+    # Cumulative deficit ("regret"): sums the *shortfall* only, so overshoot
+    # above baseline doesn't cancel out a real dip.
+    c = min(len(post), cap)
+    c_lesion = float(np.sum(np.clip(target - post[:c], 0, None)))
+
+    # Recovery time is only meaningful if something was actually disrupted --
+    # otherwise "0 steps to recover" is indistinguishable from "no effect".
+    no_effect_threshold = no_effect_frac * (abs(target) + 1e-8)
+    if d_immediate < no_effect_threshold:
+        t_recovery = float('nan')
+    else:
+        within = np.abs(post - target) <= tol * (abs(target) + 1e-8)
+        t_recovery = float(steps - event_at)
+        for i, ok in enumerate(within):
+            if ok and np.all(within[i:i + 20]):
+                t_recovery = float(i)
+                break
+
+    return dict(d_immediate=d_immediate, c_lesion=c_lesion, t_recovery=t_recovery)
+
+
 def lesion_recovery(manifold, topology, use_bearer, device, steps, N, seed,
                      lesion_at=None, baseline_window=150, tol=0.10, fatigue_rate=None) -> float:
     if lesion_at is None:
@@ -314,36 +351,7 @@ def lesion_recovery(manifold, topology, use_bearer, device, steps, N, seed,
         eng.step()
 
     clarity = eng.hist_clarity[:, :steps].cpu().numpy().mean(axis=0)
-    pre = clarity[max(0, lesion_at - baseline_window):lesion_at]
-    if len(pre) == 0:
-        return dict(d_immediate=float('nan'), c_lesion=float('nan'), t_recovery=float('nan'))
-    target = pre.mean()
-    post = clarity[lesion_at:]
-
-    # Immediate deficit: how much clarity dropped right after lesioning.
-    immediate_window = min(20, len(post))
-    d_immediate = float(target - post[:immediate_window].mean())
-
-    # Cumulative deficit ("post-lesion regret"): sums the *shortfall* only,
-    # so overshoot above baseline doesn't cancel out a real dip.
-    cap = min(len(post), 600)
-    c_lesion = float(np.sum(np.clip(target - post[:cap], 0, None)))
-
-    # Recovery time is only a meaningful quantity if something was actually
-    # disrupted -- otherwise "0 steps to recover" is indistinguishable from
-    # "the lesion had no effect", and those are opposite findings.
-    no_effect_threshold = 0.03 * (abs(target) + 1e-8)
-    if d_immediate < no_effect_threshold:
-        t_recovery = float('nan')
-    else:
-        within = np.abs(post - target) <= tol * (abs(target) + 1e-8)
-        t_recovery = float(steps - lesion_at)
-        for i, ok in enumerate(within):
-            if ok and np.all(within[i:i + 20]):
-                t_recovery = float(i)
-                break
-
-    return dict(d_immediate=d_immediate, c_lesion=c_lesion, t_recovery=t_recovery)
+    return deficit_metrics(clarity, lesion_at, steps, baseline_window, tol)
 
 
 def adaptation_speed(manifold, topology, use_bearer, device, steps, N, seed,

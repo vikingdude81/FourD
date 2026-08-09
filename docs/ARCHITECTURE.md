@@ -333,14 +333,82 @@ better-evidenced claim than either original hypothesis — and it reframes the
 right next question from "is s3 special" to "why does s3's post-bifurcation
 branch stay locked while flat4's doesn't."
 
-**Next step:** extend `mechanism_extraction.py`'s bifurcation/hysteresis
-analysis (currently s3-only) to a flat4-equivalent reduced skeleton, and/or
-run a direct hysteresis test on the full `BearerEngine` (sweep `fatigue_rate`
-up past the transition and back down across a lesion event, check whether
-recovery is path-dependent) — the minimal-skeleton hysteresis test is a proxy
-for exactly the behavior the lesion sweep measured directly, and the two
-disagree, which is the concrete thing to chase down next rather than a new
-speculative hypothesis.
+### Follow-up (August 2026): three more targeted tests
+
+**1. `compact_vs_noncompact_bifurcation.py`** built a matched non-compact (R¹,
+bounded line, clamped rather than wrapped) reduced skeleton alongside the
+existing compact (S¹, circle) one, both run through the same eigenvalue-
+crossing and forward/backward hysteresis analysis. Result: **both** show the
+same bifurcation type (saddle-node/transcritical) and **neither** shows
+hysteresis (`gap≈0` for both). This is a clean negative result for
+"compactness explains the s3-vs-flat4 asymmetry" — compactness alone, at this
+level of reduction, changes neither the transition type nor the presence of
+hysteresis. Whatever produces s3's lock-in isn't manifold compactness itself.
+
+**2. `hysteresis_test.py`** tested the full `BearerEngine` directly instead of
+a proxy, in two parts:
+
+- *Permanence:* extended the lesion-recovery observation window from
+  criticality_sweep.py's 900–1500 steps to 6000, at s3/cyclic's default
+  `fatigue_rate=0.217`. **70% of runs still hadn't recovered after 3000 steps
+  post-lesion** (`outputs/hysteresis_test/permanence_per_seed.csv`) — the
+  deficit isn't merely slow, it looks close to permanent at this
+  `fatigue_rate`.
+- *Path-dependence:* three histories (`direct` — built straight at
+  `fatigue_rate=0.30`; `ramp_up` — started at 0.05, ramped up through the
+  transition; `ramp_down` — started at 0.45, ramped down through it) were
+  compared at the *same* `fatigue_rate=0.30`, lesioned immediately on
+  reaching it (no settling gap — see below for why that matters). Result: a
+  clean, well-separated, highly significant difference in system state at
+  the same parameter value purely as a function of history
+  (`clarity_at_lesion`: ramp_up=0.109±0.004, direct=0.241±0.008,
+  ramp_down=0.296±0.009; ANOVA F=1795, p=1.9e-29,
+  `outputs/hysteresis_test/path_dependence_summary.csv`). **This is genuine
+  hysteresis in the full engine** — something the reduced skeleton, lacking a
+  bearer state entirely, cannot show.
+
+  A first version of this test used a 300-step settling gap between reaching
+  the target `fatigue_rate` and lesioning, and found *zero* path-dependence
+  — diagnosing this (`fatigue.mean` and `u_t` printed immediately after the
+  ramp vs. after 300 more steps) showed why: `fatigue` saturates at its
+  clamp ceiling (`clamp(0,3)`) within a few hundred steps regardless of path,
+  erasing the history-dependent state before the settling window even ends.
+  The hysteresis is real but **transient** — it exists right after the ramp
+  and decays away if the system is left to run at constant `fatigue_rate`
+  for a few hundred more steps before being perturbed.
+
+**Resolved:** the "open tension" above is resolved, not by the reduced
+skeleton being wrong, but by it simply not having the mechanism that
+produces hysteresis in the full engine — most likely the bearer-state
+feedback loop (`b_t` biasing influences, which then update `b_t` again),
+which the 2–3 subsystem deterministic skeleton has no analog of. The full
+picture is now: (a) the bifurcation's existence/location is manifold-
+independent (geometry_comparison.py, criticality_sweep.py); (b) its *type*
+(saddle-node) is consistent between the reduced skeleton and the qualitative
+shape of the full-engine result, though the exact critical `fatigue_rate`
+is not (see the correction above — don't expect quantitative agreement,
+only qualitative); (c) the full engine shows real but transient hysteresis
+that the reduced skeleton — lacking bearer state — cannot; (d) separately,
+the *lesion-induced* deficit (as opposed to the pre-lesion path-dependence)
+looks close to permanent at s3/cyclic's default `fatigue_rate`, confirmed
+now out to 3000 steps post-lesion. (a)–(d) are four distinct claims, each
+resting on a different script — worth keeping separate rather than
+collapsing back into "s3 is special."
+
+**3. `emergent_geometry_readout.py`** asked an unrelated but generatively
+similar question: does the basin-transition graph's combinatorics alone
+(effective resistance, computed with zero access to manifold coordinates)
+recover the *true* geometric distance between basins? Mixed, informative
+result: on s3, the graph's effective dimensionality (90% of variance,
+via classical MDS on the resistance matrix) is 5 — close to the true
+manifold dimension of 4 — but distance-reconstruction correlation is weak
+(r≈0.13–0.18, still significant). On flat4, effective dimensionality is 16
+(no compression at all — the graph doesn't "know" it's 4-D) but distance
+correlation is markedly stronger (r≈0.34–0.43). Mirrors
+`positive_geometry_readout.py`'s earlier finding that flat4's transition
+graph carries more topology-only-recoverable structure than s3's — the two
+manifolds seem to encode "meaning" in their transition graphs differently,
+not just to different degrees. See `outputs/emergent_geometry/`.
 
 ---
 
