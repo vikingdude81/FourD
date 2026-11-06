@@ -21,12 +21,10 @@ import torch.nn.functional as F
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import json
 import time
 import os
 import argparse
 from itertools import product
-from pathlib import Path
 from sklearn.cluster import KMeans
 
 
@@ -361,7 +359,7 @@ class BatchConsciousnessEngine:
         # --- Path coherence (rolling window of last 10 direction changes) ---
         if t > 0:
             diff = u - self.u_prev  # (N, 4) latest direction change
-            idx = min(t - 1, 9)
+            min(t - 1, 9)
             # Shift window and insert
             if self.dir_history_len < 10:
                 self.dir_history[:, self.dir_history_len] = diff
@@ -456,7 +454,7 @@ class BatchConsciousnessEngine:
         diff        = self.hist_differentiation[:, :T]
         inner_outer = self.hist_inner_outer[:, :T]
         path_coh    = self.hist_path_coherence[:, :T]
-        clar_rate   = self.hist_clarity_rate[:, :T]
+        self.hist_clarity_rate[:, :T]
         dom_sub     = self.hist_dominant_sub[:, :T]
         perc_mode   = self.hist_perc_mode[:, :T]
         macro_basin = self.hist_macro_basin[:, :T]
@@ -766,9 +764,8 @@ class PhaseCartographer:
             }
 
         # For each pair of parameters, fix others at default and make heatmap
-        n_pairs = len(params) * (len(params) - 1) // 2
-        fig_rows = len(features_to_plot)
-        fig_cols = n_pairs
+        len(params) * (len(params) - 1) // 2
+        len(features_to_plot)
 
         pair_list = [(i, j) for i in range(len(params)) for j in range(i + 1, len(params))]
 
@@ -868,7 +865,7 @@ class PhaseCartographer:
             line += "  ".join(f"{row[p]:12.4f}" for p in params)
             report.append(line)
 
-        report.append(f"\n\nDefault config: " +
+        report.append("\n\nDefault config: " +
                       ", ".join(f"{k}={v}" for k, v in default_config.items()))
 
         report_text = "\n".join(report)
@@ -897,7 +894,7 @@ def run_multi_gpu(param_ranges=None, steps=1000, output_dir='outputs/phase_carto
         raise RuntimeError("No CUDA devices available")
 
     print(f"\n{'='*60}")
-    print(f"  MULTI-GPU PHASE CARTOGRAPHY")
+    print("  MULTI-GPU PHASE CARTOGRAPHY")
     print(f"{'='*60}")
     for i in range(n_gpus):
         props = torch.cuda.get_device_properties(i)
@@ -987,7 +984,7 @@ def run_validation(device='cuda:0', steps=500):
     for comparison with the CPU v2 simulation.
     """
     print(f"\n{'='*60}")
-    print(f"  VALIDATION RUN (single being, default config)")
+    print("  VALIDATION RUN (single being, default config)")
     print(f"{'='*60}")
 
     configs = {
@@ -1011,7 +1008,7 @@ def run_validation(device='cuda:0', steps=500):
     integ = engine.hist_integration[0, :T].cpu().numpy()
     diff = engine.hist_differentiation[0, :T].cpu().numpy()
 
-    print(f"\n  Metrics (compare to CPU v2 output):")
+    print("\n  Metrics (compare to CPU v2 output):")
     print(f"    Mean clarity:         {clarity.mean():.4f}")
     print(f"    Max clarity:          {clarity.max():.4f}")
     print(f"    Mean conflict angle:  {np.degrees(conflict.mean()):.1f}°")
@@ -1022,7 +1019,7 @@ def run_validation(device='cuda:0', steps=500):
 
     # Dominant subsystem distribution
     dom = engine.hist_dominant_sub[0, :T].cpu().numpy()
-    print(f"\n  Subsystem dominance:")
+    print("\n  Subsystem dominance:")
     for s in range(8):
         count = (dom == s).sum()
         print(f"    {SUBSYSTEM_NAMES[s]:20s}: {count:4d} ({100*count/T:.1f}%)")
@@ -1030,7 +1027,7 @@ def run_validation(device='cuda:0', steps=500):
     # Perception modes
     modes = engine.hist_perc_mode[0, :T].cpu().numpy()
     mode_names = ['exploration', 'threat-lock', 'vigilant', 'internal']
-    print(f"\n  Perception modes:")
+    print("\n  Perception modes:")
     for m in range(4):
         count = (modes == m).sum()
         print(f"    {mode_names[m]:15s}: {count:4d} ({100*count/T:.1f}%)")
@@ -1123,7 +1120,7 @@ Examples:
     for v in param_ranges.values():
         n_total *= len(v)
     print(f"\n{'='*60}")
-    print(f"  CONSCIOUSNESS PHASE CARTOGRAPHY")
+    print("  CONSCIOUSNESS PHASE CARTOGRAPHY")
     print(f"{'='*60}")
     print(f"  Preset: {args.preset}")
     print(f"  Grid: {' × '.join(str(len(v)) for v in param_ranges.values())} = {n_total:,} configs")
@@ -1142,7 +1139,7 @@ Examples:
     carto_viz.visualize_phase_diagram(df, output_dir=args.output)
 
     print(f"\n{'='*60}")
-    print(f"  PHASE CARTOGRAPHY COMPLETE")
+    print("  PHASE CARTOGRAPHY COMPLETE")
     print(f"{'='*60}")
 
 

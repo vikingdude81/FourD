@@ -9,7 +9,6 @@ Usage:
     python run_batch_simulations.py [--qrng-data PATH] [--parallel N]
 """
 
-import os
 import sys
 import json
 import time
@@ -440,7 +439,7 @@ class BatchSimulationRunner:
             json.dump(summary, f, indent=2)
         
         print(f"\n{'='*60}")
-        print(f"BATCH COMPLETE")
+        print("BATCH COMPLETE")
         print(f"Total runs: {len(all_results)}")
         print(f"Elapsed time: {elapsed_time:.2f}s ({elapsed_time/60:.2f}m)")
         print(f"Summary saved to: {summary_file}")
@@ -632,9 +631,9 @@ Examples:
     
     # Generate and save report
     if isinstance(results, dict):
-        summary = results
+        pass
     else:
-        summary = {
+        {
             "timestamp": datetime.now().isoformat(),
             "total_runs": len(runner.results),
             "results": runner.results

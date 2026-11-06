@@ -51,7 +51,6 @@ from __future__ import annotations
 import json
 import os
 import time
-from datetime import datetime
 from itertools import combinations
 
 import matplotlib
@@ -59,7 +58,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import torch.nn.functional as F
 
 from gpu_ensemble_sim import (
     BatchConsciousnessEngine,
@@ -117,7 +115,7 @@ def overlap_consistency_analysis(device='cuda:0', steps=2000, outdir='outputs/op
     N = 512
     prefs = torch.tensor(PREFERENCE_MATRIX_NORMED, dtype=torch.float32, device=device)
     n_sub = 8
-    pair_indices = list(combinations(range(n_sub), 2))  # 28 pairs
+    list(combinations(range(n_sub), 2))  # 28 pairs
 
     # ------------------------------------------------------------------
     # A) Single run at optimal CONFIG → overlap matrix & time-series
@@ -135,7 +133,7 @@ def overlap_consistency_analysis(device='cuda:0', steps=2000, outdir='outputs/op
         influences = 0.5 + 0.3 * torch.einsum('nd,sd->ns', u, prefs)
         effective = influences * torch.exp(-eng2.fatigue)
         effective = torch.clamp(effective, min=0.05)
-        activities = effective / (effective.sum(dim=1, keepdim=True) + 1e-8)
+        effective / (effective.sum(dim=1, keepdim=True) + 1e-8)
         radial = torch.einsum('sd,nd->ns', prefs, u)
         forces = prefs.unsqueeze(0) - radial.unsqueeze(2) * u.unsqueeze(1)  # (N,8,4)
         # Normalize forces per subsystem
@@ -412,7 +410,7 @@ def entropy_decomposition_analysis(device='cuda:0', steps=2000, outdir='outputs/
     n_sub = 8
     prefs = torch.tensor(PREFERENCE_MATRIX_NORMED, dtype=torch.float32, device=device)
 
-    print(f"\n[A] Collecting full trajectory for entropy decomposition...")
+    print("\n[A] Collecting full trajectory for entropy decomposition...")
     eng = make_engine(N, device=device, steps=T_collect + 100)
     for _ in range(100):
         eng.step()
@@ -586,7 +584,7 @@ def consensus_protocol_analysis(device='cuda:0', steps=2000, outdir='outputs/oph
         dtype=torch.float32, device=device
     )  # (24, 4)
 
-    print(f"\n[A] Running consensus convergence measurement...")
+    print("\n[A] Running consensus convergence measurement...")
     eng = make_engine(N, device=device, steps=T_collect + 100)
     for _ in range(100):
         eng.step()
@@ -611,7 +609,7 @@ def consensus_protocol_analysis(device='cuda:0', steps=2000, outdir='outputs/oph
 
         # Agreement = fraction of subsystem pairs that voted the same basin
         # Vectorized: use upper-triangle indices
-        n_pairs = n_sub * (n_sub - 1) / 2
+        n_sub * (n_sub - 1) / 2
         triu_i2 = torch.triu_indices(n_sub, n_sub, offset=1, device=device)
         n_agree = (votes[:, triu_i2[0]] == votes[:, triu_i2[1]]).float().mean().item()
         agreement_hist[t] = n_agree
@@ -764,7 +762,6 @@ def loop_frustration_analysis(device='cuda:0', steps=2000, outdir='outputs/oph_b
 
     N = 256
     T_collect = 2000
-    n_sub = 8
     prefs = torch.tensor(PREFERENCE_MATRIX_NORMED, dtype=torch.float32, device=device)
 
     # Opponent pairs
@@ -830,7 +827,7 @@ def loop_frustration_analysis(device='cuda:0', steps=2000, outdir='outputs/oph_b
 
     # Top 15 most common cycles
     top_cycles = sorted(cycle_counts.items(), key=lambda x: -x[1])[:15]
-    print(f"\n  Top 15 dominance cycles:")
+    print("\n  Top 15 dominance cycles:")
     cycle_labels = []
     cycle_freqs = []
     cycle_irred = []
@@ -955,8 +952,8 @@ def grand_summary(results, outdir='outputs/oph_bridge'):
 
     print("Part 1 — OVERLAP CONSISTENCY (Axiom A2)")
     print(f"  Overlap consistency at optimal config: {r1.get('oc_optimal', 'N/A')}")
-    print(f"  Interpretation: Subsystems maintain partial agreement on force")
-    print(f"  directions, exactly as OPH predicts for observer patches.")
+    print("  Interpretation: Subsystems maintain partial agreement on force")
+    print("  directions, exactly as OPH predicts for observer patches.")
     print()
 
     print("Part 2 — MARKOV-COLLAR RECOVERABILITY")
@@ -966,32 +963,32 @@ def grand_summary(results, outdir='outputs/oph_bridge'):
         worst = min(r2['r2_per_subsystem'].items(), key=lambda x: x[1])
         print(f"  Best recoverable:  {best[0]} (R²={best[1]:.4f})")
         print(f"  Worst recoverable: {worst[0]} (R²={worst[1]:.4f})")
-    print(f"  Interpretation: Boundary fatigue data partially recovers interior")
-    print(f"  activity — supporting the Markov-collar structure.")
+    print("  Interpretation: Boundary fatigue data partially recovers interior")
+    print("  activity — supporting the Markov-collar structure.")
     print()
 
     print("Part 3 — GENERALIZED ENTROPY DECOMPOSITION")
     print(f"  S_bulk  = {r3.get('s_bulk_optimal', 'N/A'):.4f}" if isinstance(r3.get('s_bulk_optimal'), float) else "  S_bulk  = N/A")
     print(f"  S_edge  = {r3.get('s_edge_optimal', 'N/A'):.4f}" if isinstance(r3.get('s_edge_optimal'), float) else "  S_edge  = N/A")
     print(f"  S_total = {r3.get('s_total_optimal', 'N/A'):.4f}" if isinstance(r3.get('s_total_optimal'), float) else "  S_total = N/A")
-    print(f"  Interpretation: Entropy decomposes into bulk (within-basin) and")
-    print(f"  edge (at transitions), matching OPH's S = S_bulk + Tr(ρ L_C).")
+    print("  Interpretation: Entropy decomposes into bulk (within-basin) and")
+    print("  edge (at transitions), matching OPH's S = S_bulk + Tr(ρ L_C).")
     print()
 
     print("Part 4 — CONSENSUS PROTOCOL DYNAMICS")
     print(f"  Mean agreement ratio: {r4.get('mean_agreement', 'N/A')}")
     print(f"  Agreement↔Clarity correlation: {r4.get('agreement_clarity_corr', 'N/A')}")
     print(f"  Convergence events: {r4.get('convergence_events', 'N/A')}")
-    print(f"  Interpretation: Subsystem agreement (OPH consensus) directly")
-    print(f"  tracks clarity — consciousness emerges from observer consensus.")
+    print("  Interpretation: Subsystem agreement (OPH consensus) directly")
+    print("  tracks clarity — consciousness emerges from observer consensus.")
     print()
 
     print("Part 5 — LOOP FRUSTRATION TOPOLOGY")
     print(f"  Total cycles: {r5.get('total_cycles', 'N/A'):,}" if isinstance(r5.get('total_cycles'), int) else f"  Total cycles: {r5.get('total_cycles', 'N/A')}")
     print(f"  Irreducible fraction: {r5.get('irreducible_fraction', 'N/A')}")
     print(f"  Unique cycle types: {r5.get('unique_types', 'N/A')}")
-    print(f"  Interpretation: Opponent-traversing cycles are topologically")
-    print(f"  protected — analogous to OPH defects that carry physical meaning.")
+    print("  Interpretation: Opponent-traversing cycles are topologically")
+    print("  protected — analogous to OPH defects that carry physical meaning.")
     print()
 
     print("═"*72)

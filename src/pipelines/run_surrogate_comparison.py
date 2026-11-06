@@ -18,15 +18,14 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 import numpy as np
-import pandas as pd
 
 # Import feature extraction modules
 from src.features.windows import sliding_windows
 from src.features import extract_all_features
-from src.anomaly.scoring import AnomalyScorer, NullDistribution
+from src.anomaly.scoring import AnomalyScorer
 
 
 def generate_prng_bits(
@@ -251,7 +250,7 @@ def run_surrogate_comparison(
             try:
                 score = scorer.compute_composite_anomaly_score(features, control_type="prng")
                 scores.append(score)
-            except Exception as e:
+            except Exception:
                 pass
         return np.mean(scores) if scores else 0.0
     

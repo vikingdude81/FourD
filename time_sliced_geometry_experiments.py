@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 import os
 import time
-from typing import Callable, Dict, List
+from typing import Dict, List
 
 import matplotlib
 matplotlib.use('Agg')

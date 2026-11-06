@@ -50,7 +50,6 @@ from scipy import stats
 from universality_test import (
     UniversalEngine,
     boundary_metrics,
-    GROUP_COLORS,
 )
 from gpu_ensemble_sim import PREFERENCE_MATRIX_NORMED
 
@@ -558,14 +557,14 @@ def print_dissection_summary(results):
     angle_names = [n for n, r in results.items() if r['group'] == 'anti_angle']
     angle_strong = sum(1 for n in angle_names if verdicts[n] in ('STRONG', 'MODERATE'))
     print(f'    Opposition angle:  {angle_strong}/{len(angle_names)} variants show boundary negotiation')
-    baseline_r = results.get('FourD baseline (135°)', {}).get('edge_clarity_r', 0)
+    results.get('FourD baseline (135°)', {}).get('edge_clarity_r', 0)
     aligned_r = results.get('Aligned (≈0°)', {}).get('edge_clarity_r', 0)
     if aligned_r > 0.3:
-        print(f'    → Anti-parallelism NOT necessary (even aligned pairs show it)')
+        print('    → Anti-parallelism NOT necessary (even aligned pairs show it)')
     elif aligned_r < 0.15:
-        print(f'    → Anti-parallelism IS essential (aligned pairs fail)')
+        print('    → Anti-parallelism IS essential (aligned pairs fail)')
     else:
-        print(f'    → Anti-parallelism helps but is not strictly required')
+        print('    → Anti-parallelism helps but is not strictly required')
 
     # Structure
     struct_names = [n for n, r in results.items() if r['group'] == 'structure']
@@ -610,7 +609,7 @@ def main():
     t_start = time.time()
 
     results = run_dissection(args.device, args.steps, args.N, args.outdir)
-    verdicts = print_dissection_summary(results)
+    print_dissection_summary(results)
     dissection_comparison_plot(results, args.outdir)
     opposition_angle_analysis(results, args.outdir)
     pair_count_analysis(results, args.outdir)

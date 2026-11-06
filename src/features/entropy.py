@@ -9,8 +9,9 @@ Computes various entropy measures to quantify randomness and unpredictability:
 
 from __future__ import annotations
 
+import math
 import numpy as np
-from scipy.fft import fft, rfft
+from scipy.fft import rfft
 
 
 def spectral_entropy(bits: np.ndarray, normalize: bool = True) -> float:
@@ -36,7 +37,7 @@ def spectral_entropy(bits: np.ndarray, normalize: bool = True) -> float:
     signal = 2 * bits.astype(float) - 1
     
     # Compute FFT
-    n = len(signal)
+    len(signal)
     fft_result = rfft(signal)
     
     # Compute power spectrum
@@ -112,7 +113,7 @@ def permutation_entropy(bits: np.ndarray, embedding_dim: int = 3, delay: int = 1
     entropy = -np.sum(probs * np.log2(probs))
     
     # Normalize by maximum possible entropy (log2 of m! permutations)
-    max_entropy = np.log2(np.math.factorial(embedding_dim)) if embedding_dim > 1 else 1.0
+    max_entropy = np.log2(math.factorial(embedding_dim)) if embedding_dim > 1 else 1.0
     
     return float(entropy / max_entropy) if max_entropy > 0 else 1.0
 
@@ -289,7 +290,7 @@ def conditional_entropy(bits: np.ndarray, lag: int = 1) -> float:
     
     # Marginal probabilities
     p_prev = joint_counts.sum(axis=1) / joint_counts.sum()
-    p_curr = joint_counts.sum(axis=0) / joint_counts.sum()
+    joint_counts.sum(axis=0) / joint_counts.sum()
     
     # Joint probability
     p_joint = joint_counts / joint_counts.sum()

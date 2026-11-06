@@ -44,7 +44,6 @@ from __future__ import annotations
 import json
 import os
 import time
-from pathlib import Path
 
 import matplotlib
 matplotlib.use('Agg')
@@ -52,7 +51,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
-import torch.nn.functional as F
 from scipy import stats
 
 from gpu_ensemble_sim import (
@@ -132,7 +130,7 @@ def test_A_edge_agreement_coupling(device='cuda:0', steps=2000, outdir='outputs/
 
         # Edge fraction: fraction of timesteps where basin changes
         transitions = (b_win[:, 1:] != b_win[:, :-1])  # (N, window-1)
-        trans_rate = transitions.float().mean() if isinstance(transitions, torch.Tensor) else transitions.mean()
+        transitions.float().mean() if isinstance(transitions, torch.Tensor) else transitions.mean()
 
         # Compute entropy at transition vs non-transition steps
         # For each being, split clarity into edge/bulk
@@ -143,7 +141,7 @@ def test_A_edge_agreement_coupling(device='cuda:0', steps=2000, outdir='outputs/
         if len(c_edge) > 1 and len(c_bulk) > 1:
             # Use variance as proxy for entropy (actual Shannon requires binning)
             s_edge = np.var(c_edge)
-            s_bulk = np.var(c_bulk)
+            np.var(c_bulk)
             s_total = np.var(c_win)
             # Edge fraction = how much of total variance lives at transitions
             ef = (s_edge * len(c_edge)) / (s_total * len(c_win.flatten()) + 1e-15)
@@ -188,7 +186,7 @@ def test_A_edge_agreement_coupling(device='cuda:0', steps=2000, outdir='outputs/
     peak_ec = cc_ec[np.argmax(np.abs(cc_ec))]
     peak_ac = cc_ac[np.argmax(np.abs(cc_ac))]
 
-    print(f'\n  Cross-correlations (peak absolute):')
+    print('\n  Cross-correlations (peak absolute):')
     print(f'    Edge fraction ↔ Agreement:  r = {peak_ea:+.4f}  (lag={lags_ea[np.argmax(np.abs(cc_ea))]})')
     print(f'    Edge fraction ↔ Clarity:    r = {peak_ec:+.4f}  (lag={lags_ec[np.argmax(np.abs(cc_ec))]})')
     print(f'    Agreement ↔ Clarity:        r = {peak_ac:+.4f}  (lag={lags_ac[np.argmax(np.abs(cc_ac))]})')
@@ -198,7 +196,7 @@ def test_A_edge_agreement_coupling(device='cuda:0', steps=2000, outdir='outputs/
     r_ec_0, p_ec = stats.pearsonr(edge_fracs, window_clarity)
     r_ac_0, p_ac = stats.pearsonr(agreement_ratios, window_clarity)
 
-    print(f'\n  Lag-0 Pearson correlations:')
+    print('\n  Lag-0 Pearson correlations:')
     print(f'    Edge ↔ Agreement:  r = {r_ea_0:+.4f}  (p = {p_ea:.2e})')
     print(f'    Edge ↔ Clarity:    r = {r_ec_0:+.4f}  (p = {p_ec:.2e})')
     print(f'    Agreement ↔ Clarity: r = {r_ac_0:+.4f}  (p = {p_ac:.2e})')
@@ -247,7 +245,7 @@ def test_A_edge_agreement_coupling(device='cuda:0', steps=2000, outdir='outputs/
     plt.colorbar(sc, ax=ax, label='Agreement ratio')
     ax.set_xlabel('Edge entropy fraction')
     ax.set_ylabel('Mean clarity')
-    ax.set_title(f'Edge vs Clarity (colored by Agreement)')
+    ax.set_title('Edge vs Clarity (colored by Agreement)')
 
     plt.tight_layout()
     plt.savefig(f'{outdir}/test_A_edge_agreement_coupling.png', dpi=150)
@@ -318,7 +316,7 @@ def test_B_transition_conditioned_clarity(device='cuda:0', steps=2000, outdir='o
     dwell_force_mean = f_at_dwelling.mean(axis=0)
     force_diff = trans_force_mean - dwell_force_mean
 
-    print(f'\n  Per-subsystem force magnitude difference (transition - dwelling):')
+    print('\n  Per-subsystem force magnitude difference (transition - dwelling):')
     for i, name in enumerate(SUBSYSTEM_NAMES):
         print(f'    {name:15s}  Δ = {force_diff[i]:+.6f}')
 
@@ -437,7 +435,7 @@ def test_C_subsystem_boundary_contribution(device='cuda:0', steps=2000, outdir='
     transitions = basins[:, 1:] != basins[:, :-1]  # (N, T-1)
 
     # Expand transitions mask for 8 subsystems
-    trans_exp = np.expand_dims(transitions, -1)  # (N, T-1, 1)
+    np.expand_dims(transitions, -1)  # (N, T-1, 1)
     cd = clarity_decomp[:, 1:]  # (N, T-1, 8)
 
     # Per-subsystem mean contribution at transitions vs dwelling
@@ -558,7 +556,7 @@ def test_D_phase_cartography_validation(outdir='outputs/boundary_tests'):
     r_all, p_all = stats.pearsonr(tr, cl)
     rho_all, p_rho = stats.spearmanr(tr, cl)
 
-    print(f'\n  basin_transition_rate ↔ mean_clarity:')
+    print('\n  basin_transition_rate ↔ mean_clarity:')
     print(f'    Pearson  r = {r_all:+.4f}  (p = {p_all:.2e})')
     print(f'    Spearman ρ = {rho_all:+.4f}  (p = {p_rho:.2e})')
 
@@ -577,7 +575,7 @@ def test_D_phase_cartography_validation(outdir='outputs/boundary_tests'):
             r_vals.append(r_slice)
             n_vals.append(mask.sum())
 
-    print(f'\n  Per-fatigue_rate slice correlations:')
+    print('\n  Per-fatigue_rate slice correlations:')
     for f, r, n in zip(fr_vals, r_vals, n_vals):
         marker = ' ← near critical' if abs(f - 0.182) < 0.02 else ''
         print(f'    fr = {f:.3f}  r = {r:+.4f}  (n = {n}){marker}')
@@ -588,7 +586,7 @@ def test_D_phase_cartography_validation(outdir='outputs/boundary_tests'):
     r_int, _ = stats.pearsonr(tr, df['mean_integration'].values)
     r_lyap, _ = stats.pearsonr(tr, df['lyapunov_proxy'].values)
 
-    print(f'\n  basin_transition_rate correlations with other signatures:')
+    print('\n  basin_transition_rate correlations with other signatures:')
     print(f'    ↔ dominance_entropy:    r = {r_dom:+.4f}')
     print(f'    ↔ clarity_volatility:   r = {r_vol:+.4f}')
     print(f'    ↔ mean_integration:     r = {r_int:+.4f}')
@@ -602,7 +600,7 @@ def test_D_phase_cartography_validation(outdir='outputs/boundary_tests'):
     q_lt_hc = ((tr <= tr_med) & (cl > cl_med)).sum()
     q_lt_lc = ((tr <= tr_med) & (cl <= cl_med)).sum()
 
-    print(f'\n  Quadrant analysis (median split):')
+    print('\n  Quadrant analysis (median split):')
     print(f'    High transition + High clarity: {q_ht_hc:>6,}  ({100*q_ht_hc/len(df):.1f}%)')
     print(f'    High transition + Low clarity:  {q_ht_lc:>6,}  ({100*q_ht_lc/len(df):.1f}%)')
     print(f'    Low transition  + High clarity: {q_lt_hc:>6,}  ({100*q_lt_hc/len(df):.1f}%)')
@@ -694,13 +692,13 @@ def test_E_null_model(device='cuda:0', steps=2000, outdir='outputs/boundary_test
     real_trans_rate = transitions.mean()
 
     real_edge_var = np.var(c_edge_real) if len(c_edge_real) > 1 else 0
-    real_bulk_var = np.var(c_bulk_real) if len(c_bulk_real) > 1 else 0
+    np.var(c_bulk_real) if len(c_bulk_real) > 1 else 0
     real_ef = (real_edge_var * len(c_edge_real)) / (np.var(clarity[:, 1:]) * clarity[:, 1:].size + 1e-15)
 
     # Real clarity gap
     real_gap = c_edge_real.mean() - c_bulk_real.mean() if len(c_edge_real) > 0 else 0
 
-    print(f'  Real data:')
+    print('  Real data:')
     print(f'    Transition rate     = {real_trans_rate:.4f}')
     print(f'    Edge entropy frac   = {real_ef:.4f}')
     print(f'    Clarity gap (T-D)   = {real_gap:+.6f}')
@@ -756,11 +754,11 @@ def test_E_null_model(device='cuda:0', steps=2000, outdir='outputs/boundary_test
     z_gap_1 = (real_gap - null_gap_1.mean()) / (null_gap_1.std() + 1e-15)
     z_gap_2 = (real_gap - null_gap_2.mean()) / (null_gap_2.std() + 1e-15)
 
-    print(f'\n  Null Model 1 (shuffle per-being):')
+    print('\n  Null Model 1 (shuffle per-being):')
     print(f'    Edge frac: null mean = {null_ef_1.mean():.4f} ± {null_ef_1.std():.4f}  z = {z_ef_1:+.2f}')
     print(f'    Clarity gap: null mean = {null_gap_1.mean():+.6f} ± {null_gap_1.std():.6f}  z = {z_gap_1:+.2f}')
 
-    print(f'\n  Null Model 2 (random basins):')
+    print('\n  Null Model 2 (random basins):')
     print(f'    Edge frac: null mean = {null_ef_2.mean():.4f} ± {null_ef_2.std():.4f}  z = {z_ef_2:+.2f}')
     print(f'    Clarity gap: null mean = {null_gap_2.mean():+.6f} ± {null_gap_2.std():.6f}  z = {z_gap_2:+.2f}')
 
@@ -842,7 +840,7 @@ def grand_summary(results, outdir='outputs/boundary_tests'):
 
     if 'A' in results:
         A = results['A']
-        print(f'  TEST A — Edge-Agreement Coupling:')
+        print('  TEST A — Edge-Agreement Coupling:')
         print(f'    Edge ↔ Clarity (lag-0):    r = {A["lag0_r_edge_clarity"]:+.4f}  (p = {A["lag0_p_edge_clarity"]:.2e})')
         print(f'    Agreement ↔ Clarity (lag-0): r = {A["lag0_r_agreement_clarity"]:+.4f}  (p = {A["lag0_p_agreement_clarity"]:.2e})')
         print(f'    Peak cross-correlation:      r = {A["peak_xcorr_edge_agreement"]:+.4f}')
@@ -851,7 +849,7 @@ def grand_summary(results, outdir='outputs/boundary_tests'):
 
     if 'B' in results:
         B = results['B']
-        print(f'\n  TEST B — Transition-Conditioned Clarity:')
+        print('\n  TEST B — Transition-Conditioned Clarity:')
         print(f"    Clarity gap (T−D):  {B['clarity_gap']:+.6f}")
         print(f"    Cohen's d:          {B['cohens_d']:+.4f}")
         print(f"    Welch t:            {B['t_stat']:.2f}  (p = {B['p_val']:.2e})")
@@ -865,11 +863,10 @@ def grand_summary(results, outdir='outputs/boundary_tests'):
 
     if 'C' in results:
         C = results['C']
-        print(f'\n  TEST C — Subsystem Boundary Contribution:')
+        print('\n  TEST C — Subsystem Boundary Contribution:')
         print(f'    Most boundary-informative:  {C["ranking"][0]}')
         print(f'    Least boundary-informative: {C["ranking"][-1]}')
         # Check if opponents are anti-correlated in ranking
-        opp_pairs_ranked = [(0, 4), (1, 5), (2, 6), (3, 7)]
         print(f'    Ranking: {" > ".join(n[:4] for n in C["ranking"])}')
 
     if 'D' in results and not results['D'].get('skipped'):
@@ -886,7 +883,7 @@ def grand_summary(results, outdir='outputs/boundary_tests'):
 
     if 'E' in results:
         E = results['E']
-        print(f'\n  TEST E — Null Model:')
+        print('\n  TEST E — Null Model:')
         print(f'    Edge fraction:  real = {E["real_edge_fraction"]:.4f}')
         print(f'      vs Null 1 (shuffle): z = {E["null1_z_edge"]:+.2f}')
         print(f'      vs Null 2 (random):  z = {E["null2_z_edge"]:+.2f}')

@@ -442,7 +442,6 @@ def make_plots(ts_rows: list[dict], inbound_rows: list[dict], summary: dict):
 
     fig, axes = plt.subplots(1, 4, figsize=(18, 5))
     modes = ['no_guard', 'guard']
-    colors = ['#4C72B0', '#DD8452']
 
     for ax, (k_pre, k_post, title) in zip(axes, metrics):
         x = np.arange(2)

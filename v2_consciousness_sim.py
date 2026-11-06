@@ -467,7 +467,7 @@ class BalancedSubsystems:
         self.fatigue += CONFIG['fatigue_rate'] * activities * dt
         
         # Track recent dominant activity for adaptive fatigue
-        dominant_idx = np.argmax(activities)
+        np.argmax(activities)
         self.recent_dominant_activities.append(np.max(activities))
         if len(self.recent_dominant_activities) > 5:
             self.recent_dominant_activities.pop(0)
@@ -1208,18 +1208,18 @@ class ConsciousnessSimulation:
         # Compute summary statistics
         dominant_counts = pd.Series(self.history['dominant_subsystem']).value_counts()
         
-        avg_commitment = np.mean([w**2 for w in self.history['macro_weights_sum_sq']])
+        np.mean([w**2 for w in self.history['macro_weights_sum_sq']])
         
         print("\n" + "=" * 60)
         print("  RESULTS")
         print("=" * 60)
         
-        print(f"\n  Subsystem balance (top 5):")
+        print("\n  Subsystem balance (top 5):")
         for name, count in dominant_counts.head(5).items():
             pct = 100.0 * count / CONFIG['timesteps']
             print(f"    {name:20s}: {count:4d} steps ({pct:.1f}%)")
         
-        print(f"\n  Coherence metrics (averages):")
+        print("\n  Coherence metrics (averages):")
         print(f"    Closure coherence:     {np.mean(self.history['closure_coherence']):.3f}")
         print(f"    Integration:           {np.mean(self.history['integration']):.3f}")
         print(f"    Differentiation:       {np.mean(self.history['differentiation']):.3f}")
@@ -1233,7 +1233,7 @@ class ConsciousnessSimulation:
         
         print(f"\n  Macro-state transitions: {transitions} ({100*transitions/CONFIG['timesteps']:.1f}% of timesteps)")
         
-        print(f"\n  Environment:")
+        print("\n  Environment:")
         print(f"    Goals reached:         {self.environment.goals_reached}")
         print(f"    Hazards hit:           {self.environment.hazards_hit}")
         avg_goal = np.mean(self.history['goal_prox'])
@@ -1243,7 +1243,7 @@ class ConsciousnessSimulation:
         
         # Geometric metrics summary
         conflict_deg = np.degrees(self.history['conflict_angle'])
-        print(f"\n  Geometric metrics (averages):")
+        print("\n  Geometric metrics (averages):")
         print(f"    Conflict angle:        {np.mean(conflict_deg):.1f}°  (range {np.min(conflict_deg):.0f}°–{np.max(conflict_deg):.0f}°)")
         print(f"    Clarity of purpose:    {np.mean(self.history['clarity']):.4f}")
         print(f"    Trajectory curvature:  {np.mean(self.history['curvature']):.4f} rad/step")
@@ -1316,7 +1316,7 @@ def plot_results(history):
     micro_states = history['micro_id']
     # Create time vs micro-id heatmap
     micro_array = np.array(micro_states).reshape(-1, 1)
-    im = ax.imshow(micro_array.T, aspect='auto', cmap='hot', 
+    ax.imshow(micro_array.T, aspect='auto', cmap='hot', 
                    extent=[0, len(t), 0, CONFIG['n_micro']], origin='lower')
     ax.set_title('Micro State Activity (600-cell layer)')
     ax.set_xlabel('Timestep')
@@ -1352,8 +1352,6 @@ def map_cognitive_landscape(sim, history):
     grid is sampled in this plane, lifted back to S³, and the force field
     is computed at each sample point.
     """
-    from matplotlib.colors import Normalize
-    from matplotlib.cm import ScalarMappable
     import matplotlib.gridspec as gridspec
     
     u_history = np.array(history['u_t'])
@@ -1472,7 +1470,7 @@ def map_cognitive_landscape(sim, history):
               color='k', alpha=0.4, scale=1.5, width=0.003)
     
     # Trajectory colored by time
-    sc = ax.scatter(traj_x, traj_y, c=t, cmap='plasma', s=8, alpha=0.7, zorder=5)
+    ax.scatter(traj_x, traj_y, c=t, cmap='plasma', s=8, alpha=0.7, zorder=5)
     ax.plot(traj_x, traj_y, 'k-', alpha=0.15, lw=0.5)
     
     # Mark start and end
@@ -1555,7 +1553,7 @@ def map_cognitive_landscape(sim, history):
     mode_colors_map = {'exploration': '#2196F3', 'vigilant': '#FF9800',
                        'threat-lock': '#F44336', 'internal': '#9C27B0'}
     modes = history['perc_mode']
-    mode_nums = [mode_map.get(m, 0) for m in modes]
+    [mode_map.get(m, 0) for m in modes]
     
     for mname, mnum in mode_map.items():
         mask = np.array([m == mname for m in modes])
@@ -2134,7 +2132,7 @@ def plot_phase_analysis(history, phase_result, sim):
                  fontsize=14, fontweight='bold', y=0.98)
     
     # ── Print phase summary to console ──
-    print(f"\n  Phase Detection Results:")
+    print("\n  Phase Detection Results:")
     print(f"  {'='*55}")
     print(f"  {n_phases} cognitive phases discovered (BIC model selection)")
     print(f"  {len(trans)} phase transitions in {n_steps} timesteps")
@@ -2150,7 +2148,7 @@ def plot_phase_analysis(history, phase_result, sim):
     
     # Print transition info
     if len(trans) > 0:
-        print(f"\n  Phase transition sequence:")
+        print("\n  Phase transition sequence:")
         seq = [str(labels[0])]
         for tr in trans:
             seq.append(f"→{tr['to']}(t={tr['time']})")
@@ -2183,7 +2181,7 @@ def plot_clarity_deep_dive(history, sim):
     clarity_rate = np.array(history['clarity_rate'])
     clarity_persistence = np.array(history['clarity_persistence'])
     clarity_grad_mag = np.array(history['clarity_grad_mag'])
-    conflict = np.degrees(np.array(history['conflict_angle']))
+    np.degrees(np.array(history['conflict_angle']))
     
     names = sim.subsystems.SUBSYSTEM_NAMES
     sub_colors = plt.cm.Set2(np.linspace(0, 1, 8))
@@ -2255,8 +2253,7 @@ def plot_clarity_deep_dive(history, sim):
     
     # Gradient arrows (direction clarity increases)
     skip = 3
-    grad_mag = np.sqrt(grad_x_field**2 + grad_y_field**2)
-    mask = grad_mag > 0.001
+    np.sqrt(grad_x_field**2 + grad_y_field**2)
     ax.quiver(gx[::skip, ::skip], gy[::skip, ::skip],
               grad_x_field[::skip, ::skip], grad_y_field[::skip, ::skip],
               color='navy', alpha=0.5, scale=3.0, width=0.003)
@@ -2282,7 +2279,7 @@ def plot_clarity_deep_dive(history, sim):
     steep = clarity_grad_mag > np.percentile(clarity_grad_mag, 90)
     if steep.any():
         ax.scatter(t[steep], clarity_grad_mag[steep], c='red', s=15, zorder=5,
-                   label=f'Steep gradient (top 10%)')
+                   label='Steep gradient (top 10%)')
     
     ax.set_title('Clarity Gradient Magnitude\n'
                  '(how fast clarity changes in nearby directions)',
@@ -2645,12 +2642,12 @@ def plot_clarity_deep_dive(history, sim):
                  fontsize=15, fontweight='bold', y=0.99)
     
     # ── Console summary ──
-    print(f"\n  Clarity Deep Dive Results:")
+    print("\n  Clarity Deep Dive Results:")
     print(f"  {'='*55}")
     print(f"  Clarity gradient: mean |∇| = {clarity_grad_mag.mean():.4f}")
     steep_pct = 100 * (clarity_grad_mag > np.percentile(clarity_grad_mag, 90)).mean()
     print(f"    Steep gradient regions: {steep_pct:.0f}% of time")
-    print(f"  Decomposition (mean contribution):")
+    print("  Decomposition (mean contribution):")
     for si in np.argsort(mean_contrib)[::-1]:
         sign = '+' if mean_contrib[si] > 0 else ''
         print(f"    {names[si]:20s}  {sign}{mean_contrib[si]:.5f}")
@@ -2681,7 +2678,7 @@ def main():
     
     # Generate visualization
     print("\n  Generating visualization...")
-    fig = plot_results(history)
+    plot_results(history)
     
     try:
         plt.show(block=True)
@@ -2692,19 +2689,19 @@ def main():
     
     # Generate cognitive landscape map
     print("\n  Mapping cognitive landscape...")
-    fig2 = map_cognitive_landscape(sim, history)
+    map_cognitive_landscape(sim, history)
     plt.savefig('cognitive_landscape.png', dpi=150, bbox_inches='tight')
     print("  Saved cognitive landscape to cognitive_landscape.png")
     
     # Phase detection
     print("\n  Detecting cognitive phases...")
     phase_result = detect_cognitive_phases(history)
-    fig3 = plot_phase_analysis(history, phase_result, sim)
+    plot_phase_analysis(history, phase_result, sim)
     plt.savefig('cognitive_phases.png', dpi=150, bbox_inches='tight')
     print("  Saved phase analysis to cognitive_phases.png")
     
     print("\n  Generating clarity deep dive...")
-    fig4 = plot_clarity_deep_dive(history, sim)
+    plot_clarity_deep_dive(history, sim)
     plt.savefig('clarity_deep_dive.png', dpi=150, bbox_inches='tight')
     print("  Saved clarity deep dive to clarity_deep_dive.png")
     

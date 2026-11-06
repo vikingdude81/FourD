@@ -9,6 +9,7 @@ Computes measures of algorithmic complexity and structural patterns:
 
 from __future__ import annotations
 
+import math
 import numpy as np
 
 
@@ -218,7 +219,7 @@ def _permutation_entropy_simple(bits: np.ndarray, embedding_dim: int) -> float:
     entropy = -np.sum(probs * np.log2(probs))
     
     # Normalize
-    max_entropy = np.log2(np.math.factorial(embedding_dim)) if embedding_dim > 1 else 1.0
+    max_entropy = np.log2(math.factorial(embedding_dim)) if embedding_dim > 1 else 1.0
     
     return float(entropy / max_entropy) if max_entropy > 0 else 1.0
 

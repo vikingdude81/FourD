@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 
 class NullDistribution:
@@ -294,8 +294,8 @@ def compute_sample_entropy_fast(bits: np.ndarray, m: int = 2,
     B_matches = count_matches_fast(bipolar, m)
     A_matches = count_matches_fast(bipolar, m + 1)
     
-    B = np.mean(B_matches > 0) if n_m > 1 else 0.0
-    A = np.mean(A_matches > 0) if n_m > 2 else 0.0
+    B = np.mean(B_matches > 0) if len(B_matches) > 1 else 0.0
+    A = np.mean(A_matches > 0) if len(A_matches) > 2 else 0.0
     
     if B <= 0 or A <= 0:
         return float('inf')
@@ -330,9 +330,9 @@ def compute_feature_vector(bits: np.ndarray,
         "autocorr_lag1": autocorr_lag1(bits),
         "spectral_entropy": spectral_entropy(bits),
         "permutation_entropy": permutation_entropy(bits),
-        "sample_entropy_fast": sample_entropy_fast(bits, m=m),
+        "sample_entropy_fast": compute_sample_entropy_fast(bits, m=m),
         "lz_complexity": lempel_ziv_complexity(bits),
-        "min_entropy": min_entropy(bits, block_size=block_size),
+        "min_entropy": compute_min_entropy(bits, block_size=block_size),
     }
 
 
@@ -402,7 +402,7 @@ def score_windows(
         try:
             from sklearn.ensemble import IsolationForest
             clf = IsolationForest(random_state=0, contamination=0.1)
-            raw = clf.fit_predict(X)
+            clf.fit_predict(X)
             score_vals = clf.score_samples(X)
             scores = -score_vals  # higher = more anomalous
         except Exception:

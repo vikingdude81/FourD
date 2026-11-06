@@ -10,21 +10,16 @@ Then: run a single long simulation at the true optimum and compare
 to the default config side-by-side.
 """
 
-import torch
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 from matplotlib.colors import TwoSlopeNorm
-from pathlib import Path
-import time
 import os
 
 from gpu_ensemble_sim import (
     BatchConsciousnessEngine, PhaseCartographer,
-    SIGNATURE_NAMES, SUBSYSTEM_NAMES
+    SIGNATURE_NAMES
 )
-from itertools import product
 
 
 OUTPUT_DIR = 'outputs/goldilocks'
@@ -59,7 +54,7 @@ def run_goldilocks_sweep(device='cuda:0', steps=1000):
         n_total *= len(v)
 
     print(f"\n{'='*70}")
-    print(f"  GOLDILOCKS ZONE HIGH-RESOLUTION SWEEP")
+    print("  GOLDILOCKS ZONE HIGH-RESOLUTION SWEEP")
     print(f"{'='*70}")
     for k, v in param_ranges.items():
         print(f"  {k:25s}: {len(v):3d} points  [{v[0]:.3f} .. {v[-1]:.3f}]")
@@ -83,7 +78,7 @@ def analyze_goldilocks(df):
     """Deep analysis of the high-resolution Goldilocks data."""
 
     print(f"\n{'='*70}")
-    print(f"  GOLDILOCKS ANALYSIS")
+    print("  GOLDILOCKS ANALYSIS")
     print(f"{'='*70}")
 
     # --- Compute flourishing score (same formula as PhaseCartographer) ---
@@ -128,7 +123,7 @@ def analyze_goldilocks(df):
     print(f"  Sharpest transition: fatigue_rate {fr_vals[peak_idx]:.4f} → {fr_vals[peak_idx+1]:.4f}")
     print(f"    Flourishing jumps: {fl_vals[peak_idx]:.4f} → {fl_vals[peak_idx+1]:.4f} "
           f"(Δ = {grads[peak_idx]:.4f})")
-    print(f"\n  Fatigue rate sweep (condensed):")
+    print("\n  Fatigue rate sweep (condensed):")
     for row in fr_data[::5]:  # every 5th point
         print(f"    fr={row['fatigue_rate']:.3f}: fl={row['flourishing']:.4f}  "
               f"clar={row['clarity']:.4f}  dim={row['dim']:.2f}  trans={row['transitions']:.4f}")
@@ -155,7 +150,7 @@ def analyze_goldilocks(df):
     print(f"    Flourishing jumps: {fl_en[peak_en]:.4f} → {fl_en[peak_en+1]:.4f}")
 
     # --- 3. True optimum ---
-    print(f"\n  3. TRUE OPTIMUM")
+    print("\n  3. TRUE OPTIMUM")
     print("  " + "-"*50)
     top20 = df.nlargest(20, 'flourishing')
     params = ['steering_strength', 'alpha_pull', 'fatigue_rate',
@@ -168,14 +163,14 @@ def analyze_goldilocks(df):
         print(f"    {p:25s}: {vals.mean():.4f} ± {vals.std():.4f}  "
               f"[{vals.min():.3f} .. {vals.max():.3f}]")
 
-    print(f"\n  Top 5 individual configs:")
+    print("\n  Top 5 individual configs:")
     for i, (_, r) in enumerate(top20.head(5).iterrows(), 1):
         print(f"    #{i}  fl={r.flourishing:.4f}  ss={r.steering_strength:.3f} "
               f"ap={r.alpha_pull:.3f} fr={r.fatigue_rate:.3f} "
               f"en={r.exploration_noise:.3f} bm={r.beta_macro:.1f}")
 
     # --- 4. Default comparison ---
-    print(f"\n  4. DEFAULT vs OPTIMAL COMPARISON")
+    print("\n  4. DEFAULT vs OPTIMAL COMPARISON")
     print("  " + "-"*50)
     # Find closest to default
     default_cfg = dict(steering_strength=0.3, alpha_pull=0.03,
@@ -222,8 +217,6 @@ def make_publication_plots(df):
         normed['lyapunov_proxy'] = lyap_score
         df['flourishing'] = sum(normed[f] for f in feats + ['lyapunov_proxy']) / (len(feats) + 1)
 
-    params = ['fatigue_rate', 'exploration_noise', 'steering_strength',
-              'alpha_pull', 'beta_macro']
     other_defaults = dict(steering_strength=0.45, alpha_pull=0.03, beta_macro=4.0)
 
     # =====================================================================
@@ -612,7 +605,7 @@ def run_optimal_vs_default(optimal_config, device='cuda:0', steps=2000):
 
     # --- Print comparison summary ---
     print(f"\n{'='*70}")
-    print(f"  SIGNATURE COMPARISON")
+    print("  SIGNATURE COMPARISON")
     print(f"{'='*70}")
     sigs_def = eng_default.extract_signatures()
     sigs_opt = eng_optimal.extract_signatures()
@@ -676,7 +669,7 @@ def main():
     print(f"\n  Optimal config saved to {config_path}")
 
     print(f"\n{'='*70}")
-    print(f"  ALL PHASES COMPLETE")
+    print("  ALL PHASES COMPLETE")
     print(f"  Results in: {OUTPUT_DIR}/")
     print(f"{'='*70}")
 

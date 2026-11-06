@@ -14,7 +14,6 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
 from collections import defaultdict
 
 # Add project root to path
@@ -294,23 +293,23 @@ def run_transition_grammar():
         print(f"    Max possible:       {np.log2(n_sub):.3f} bits/step")
         print(f"    Grammar ratio:      {entropy_rate/np.log2(n_sub):.3f} (1.0 = random)")
 
-        print(f"\n    Stationary distribution:")
+        print("\n    Stationary distribution:")
         for i, name in enumerate(SUBSYSTEM_NAMES):
             bar = '█' * int(stationary[i] * 80)
             print(f"      {name:15s}: {stationary[i]:.3f}  {bar}")
 
-        print(f"\n    Mean dwell times (steps):")
+        print("\n    Mean dwell times (steps):")
         for name in SUBSYSTEM_NAMES:
             if name in mean_dwells:
                 print(f"      {name:15s}: {mean_dwells[name]:.1f}")
 
         if preferred:
-            print(f"\n    PREFERRED transitions (>2× expected):")
+            print("\n    PREFERRED transitions (>2× expected):")
             for frm, to, p in preferred[:5]:
                 print(f"      {frm:15s} → {to:15s}  (p={p:.3f})")
 
         if avoided:
-            print(f"\n    AVOIDED transitions (<0.3× expected):")
+            print("\n    AVOIDED transitions (<0.3× expected):")
             for frm, to, p in avoided[:5]:
                 print(f"      {frm:15s} → {to:15s}  (p={p:.3f})")
 
@@ -390,7 +389,7 @@ def run_clarity_decomposition():
     integration = np.array(h['integration'])
     persistence = np.array(h['clarity_persistence'])
     clarity_rate = np.array(h['clarity_rate'])
-    clarity_grad = np.array(h['clarity_grad_mag'])
+    np.array(h['clarity_grad_mag'])
     inner_outer = np.array(h['inner_outer_ratio'])
 
     # Per-subsystem clarity decomposition
@@ -406,7 +405,7 @@ def run_clarity_decomposition():
     n_peaks = peak_mask.sum()
     n_troughs = trough_mask.sum()
 
-    print(f"\n  Clarity distribution:")
+    print("\n  Clarity distribution:")
     print(f"    Mean:   {clarity.mean():.4f}")
     print(f"    Std:    {clarity.std():.4f}")
     print(f"    Min:    {clarity.min():.4f}")
@@ -436,7 +435,7 @@ def run_clarity_decomposition():
         pre_peak_rate = np.array([clarity_rate[i - pre_window:i].mean() for i in valid_peaks])
         pre_trough_rate = np.array([clarity_rate[i - pre_window:i].mean() for i in valid_troughs])
 
-        print(f"\n  Conditions in 10 steps BEFORE events:")
+        print("\n  Conditions in 10 steps BEFORE events:")
         print(f"    {'Metric':25s}  {'Before Peak':>12s}  {'Before Trough':>14s}")
         print(f"    {'─'*25}  {'─'*12}  {'─'*14}")
         print(f"    {'Conflict angle (rad)':25s}  {pre_peak_conflict.mean():12.4f}  {pre_trough_conflict.mean():14.4f}")
@@ -448,7 +447,7 @@ def run_clarity_decomposition():
     trough_decomp = decomp[trough_mask].mean(axis=0)
     avg_decomp = decomp.mean(axis=0)
 
-    print(f"\n  Subsystem contributions to clarity:")
+    print("\n  Subsystem contributions to clarity:")
     print(f"    {'Subsystem':15s}  {'Average':>8s}  {'At Peak':>8s}  {'At Trough':>10s}  {'Peak/Avg':>10s}")
     print(f"    {'─'*15}  {'─'*8}  {'─'*8}  {'─'*10}  {'─'*10}")
     for i, name in enumerate(SUBSYSTEM_NAMES):
@@ -460,7 +459,7 @@ def run_clarity_decomposition():
     trough_forces = force_mags[trough_mask].mean(axis=0)
     avg_forces = force_mags.mean(axis=0)
 
-    print(f"\n  Force magnitudes at peaks:")
+    print("\n  Force magnitudes at peaks:")
     print(f"    {'Subsystem':15s}  {'Average':>8s}  {'At Peak':>8s}  {'At Trough':>10s}")
     print(f"    {'─'*15}  {'─'*8}  {'─'*8}  {'─'*10}")
     for i, name in enumerate(SUBSYSTEM_NAMES):
@@ -637,7 +636,7 @@ def run_critical_exponent():
     # Also measure subcritical
     below = fr_mean[fr_mean['fatigue_rate'] < fr_c - 0.005].copy()
     below['delta_fr'] = fr_c - below['fatigue_rate']
-    below_baseline = fl_vals[idx_max]  # asymptotic value below
+    fl_vals[idx_max]  # asymptotic value below
 
     # Log-log fit for supercritical side
     # fl(fr) - fl_c ≈ A * (fr - fr_c)^β
@@ -674,25 +673,25 @@ def run_critical_exponent():
         var_vals = fr_var['mean_clarity'].values
 
         # Find peak variance (divergence point)
-        idx_var_peak = np.argmax(var_vals)
+        np.argmax(var_vals)
 
-        print(f"\n  ─── CRITICAL SCALING ───")
-        print(f"  Order parameter: mean_clarity")
+        print("\n  ─── CRITICAL SCALING ───")
+        print("  Order parameter: mean_clarity")
         print(f"  Critical point:  fr_c = {fr_c:.4f}")
         print(f"  Clarity at fr_c: {clarity_c:.4f}")
-        print(f"")
-        print(f"  Supercritical fit: Δclarity ~ (fr - fr_c)^β")
+        print("")
+        print("  Supercritical fit: Δclarity ~ (fr - fr_c)^β")
         print(f"  β = {beta:.3f}")
         print(f"  A = {A:.4f}")
-        print(f"")
+        print("")
 
         # Compare to known universality classes
-        print(f"  Known universality class exponents (β):")
-        print(f"    Mean field:      β = 0.500")
-        print(f"    2D Ising:        β = 0.125")
-        print(f"    3D Ising:        β = 0.326")
-        print(f"    Percolation 2D:  β = 0.139")
-        print(f"    Percolation 3D:  β = 0.418")
+        print("  Known universality class exponents (β):")
+        print("    Mean field:      β = 0.500")
+        print("    2D Ising:        β = 0.125")
+        print("    3D Ising:        β = 0.326")
+        print("    Percolation 2D:  β = 0.139")
+        print("    Percolation 3D:  β = 0.418")
         print(f"    >>> This system:  β = {beta:.3f} <<<")
 
         # Classify
@@ -829,7 +828,7 @@ def run_multi_seed():
 
     # Compute flourishing for each seed
     from gpu_ensemble_sim import PhaseCartographer
-    carto = PhaseCartographer.__new__(PhaseCartographer)
+    PhaseCartographer.__new__(PhaseCartographer)
 
     # Manual flourishing: normalized mean of 6 key metrics
     # Replicate the scoring from PhaseCartographer
@@ -860,7 +859,7 @@ def run_multi_seed():
     fl = df['flourishing'].values
 
     print(f"\n  ─── MULTI-SEED RESULTS ({N_SEEDS} seeds) ───")
-    print(f"  Flourishing:")
+    print("  Flourishing:")
     print(f"    Mean:   {fl.mean():.4f}")
     print(f"    Std:    {fl.std():.4f}")
     print(f"    Min:    {fl.min():.4f}")
@@ -869,7 +868,7 @@ def run_multi_seed():
     print(f"    Range:  {fl.max()-fl.min():.4f}")
 
     # Print key features
-    print(f"\n  Key features across seeds:")
+    print("\n  Key features across seeds:")
     print(f"    {'Feature':25s}  {'Mean':>8s} ± {'Std':>8s}   {'CV':>6s}")
     print(f"    {'─'*25}  {'─'*8}   {'─'*8}   {'─'*6}")
     for feat in ['mean_clarity', 'effective_dimensionality', 'basin_transition_rate',
@@ -879,16 +878,16 @@ def run_multi_seed():
         print(f"    {feat:25s}  {vals.mean():8.4f} ± {vals.std():8.4f}   {cv:6.3f}")
 
     # Robustness verdict
-    print(f"\n  ─── ROBUSTNESS VERDICT ───")
+    print("\n  ─── ROBUSTNESS VERDICT ───")
     if fl.std() / fl.mean() < 0.05:
         print(f"  ✓ HIGHLY ROBUST (CV={fl.std()/fl.mean():.3f} < 0.05)")
-        print(f"    The awakened regime is stable across random initial conditions.")
+        print("    The awakened regime is stable across random initial conditions.")
     elif fl.std() / fl.mean() < 0.15:
         print(f"  ~ MODERATELY ROBUST (CV={fl.std()/fl.mean():.3f})")
-        print(f"    Some seed-dependence but the regime is generally stable.")
+        print("    Some seed-dependence but the regime is generally stable.")
     else:
         print(f"  ✗ SEED-DEPENDENT (CV={fl.std()/fl.mean():.3f} > 0.15)")
-        print(f"    The awakened regime is sensitive to initial conditions.")
+        print("    The awakened regime is sensitive to initial conditions.")
 
     # --- Plot ---
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
@@ -924,7 +923,7 @@ def run_multi_seed():
     for feat in norm_features:
         vals = df[feat].values
         norm_data.append((vals - vals.min()) / (vals.max() - vals.min() + 1e-10))
-    parts = ax.violinplot(norm_data, positions=range(len(norm_features)), showmeans=True)
+    ax.violinplot(norm_data, positions=range(len(norm_features)), showmeans=True)
     ax.set_xticks(range(len(norm_features)))
     ax.set_xticklabels([f[:10] for f in norm_features], rotation=45, ha='right')
     ax.set_ylabel('Normalized Value')
@@ -1017,7 +1016,7 @@ if __name__ == '__main__':
     print("▓" * 70)
     print(f"  Total time: {elapsed:.1f}s")
     print(f"  Results in: {OUT_DIR}/")
-    print(f"  Files:")
+    print("  Files:")
     for fn in sorted(os.listdir(OUT_DIR)):
         fpath = os.path.join(OUT_DIR, fn)
         size = os.path.getsize(fpath)

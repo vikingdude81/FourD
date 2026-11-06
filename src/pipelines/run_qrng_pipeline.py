@@ -17,8 +17,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
-from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -26,9 +24,9 @@ import numpy as np
 import pandas as pd
 
 # Import feature extraction modules
-from src.features.windows import sliding_windows, window_metadata
+from src.features.windows import sliding_windows
 from src.features import extract_all_features
-from src.latent.mapping import feature_row_to_drives, DEFAULT_SUBSYSTEM_WEIGHTS
+from src.latent.mapping import feature_row_to_drives
 from src.latent.coordinator import run_coordinator
 
 
@@ -300,6 +298,7 @@ def compute_summary_statistics(results: Dict) -> Dict:
     """
     trajectory = results["trajectory"]
     features_list = results["features"]
+    features_df = pd.DataFrame(features_list)
     
     # Basin analysis
     basin_counts = trajectory["chosen_basin"].value_counts().to_dict()

@@ -15,23 +15,21 @@ Requires: GPU (RTX 5090 recommended), gpu_ensemble_sim.py in path
 """
 
 import numpy as np
-import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from scipy.stats import linregress
-from scipy.optimize import minimize_scalar, minimize
+from scipy.optimize import minimize
 import torch
 import torch.nn.functional as F
 import time
 import os
 import json
-import copy
 
 from gpu_ensemble_sim import (
     BatchConsciousnessEngine, generate_fibonacci_s3, derive_macro_basins,
-    PREFERENCE_MATRIX_NORMED, SUBSYSTEM_NAMES, SIGNATURE_NAMES,
+    PREFERENCE_MATRIX_NORMED,
 )
 
 OUT_DIR = os.path.join('outputs', 'critical_phenomena')
@@ -141,7 +139,7 @@ def run_null_controls():
     # ── Sweep parameters ────────────────────────────────────────────────
     fr_vals = np.linspace(0.05, 0.35, 40)
     N_SEEDS = 100
-    N_total = len(fr_vals) * N_SEEDS
+    len(fr_vals) * N_SEEDS
 
     results = {}
 
@@ -217,7 +215,7 @@ def run_null_controls():
         elif r2 < 0.5:
             verdict = "DESTROYED ✓"
         else:
-            verdict = f"SHIFTED"
+            verdict = "SHIFTED"
         b_str = f"{b:.3f}" if b is not None else "  N/A"
         print(f"  ║  {name:<28s} {b_str:>8s} {r2:>8.3f} {verdict:>12s}  ║")
     print("  ╚══════════════════════════════════════════════════════════════╝")
@@ -407,7 +405,7 @@ def make_preference_matrix(n_sub, seed=0):
     if n_sub == 8:
         return PREFERENCE_MATRIX_NORMED.copy()
 
-    rng = np.random.default_rng(seed)
+    np.random.default_rng(seed)
     prefs = np.zeros((n_sub, 4), dtype=np.float32)
     for i in range(n_sub):
         # Distribute subsystems around a 4D great circle
@@ -868,7 +866,7 @@ def run_data_collapse(fss_data=None):
         # from different L agree?
         all_x_cat = np.concatenate(all_x)
         all_y_cat = np.concatenate(all_y)
-        L_labels = np.concatenate([np.full(len(fr_vals), L) for L in L_values])
+        np.concatenate([np.full(len(fr_vals), L) for L in L_values])
 
         # Sort by x
         sort_idx = np.argsort(all_x_cat)
@@ -910,16 +908,16 @@ def run_data_collapse(fss_data=None):
     nu_opt = 1.0 / one_over_nu_opt if abs(one_over_nu_opt) > 0.01 else np.inf
     beta_opt = beta_over_nu_opt * nu_opt
 
-    print(f"\n  ╔══════════════════════════════════════════════╗")
-    print(f"  ║        DATA COLLAPSE RESULTS                  ║")
-    print(f"  ╠══════════════════════════════════════════════╣")
+    print("\n  ╔══════════════════════════════════════════════╗")
+    print("  ║        DATA COLLAPSE RESULTS                  ║")
+    print("  ╠══════════════════════════════════════════════╣")
     print(f"  ║  β/ν  = {beta_over_nu_opt:.4f}                         ║")
     print(f"  ║  1/ν  = {one_over_nu_opt:.4f}                         ║")
     print(f"  ║  → ν  = {nu_opt:.4f}                                 ║")
     print(f"  ║  → β  = {beta_opt:.4f}                               ║")
     print(f"  ║  Collapse quality: {collapse_quality:.1f}             ║")
     print(f"  ║  fr_c = {FR_C:.4f} (fixed)                    ║")
-    print(f"  ╚══════════════════════════════════════════════╝")
+    print("  ╚══════════════════════════════════════════════╝")
 
     # Compare
     print(f"\n  3D Ising:     β/ν = {0.3265/0.6301:.4f}, 1/ν = {1/0.6301:.4f}")
@@ -933,7 +931,7 @@ def run_data_collapse(fss_data=None):
     )
     if result_free.fun < result.fun:
         fr_c_free = result_free.x[2]
-        print(f"\n  With free fr_c optimization:")
+        print("\n  With free fr_c optimization:")
         print(f"    β/ν = {result_free.x[0]:.4f}, 1/ν = {result_free.x[1]:.4f}, fr_c = {fr_c_free:.4f}")
         print(f"    Collapse quality: {1.0/(result_free.fun+1e-10):.1f}")
 
@@ -1249,7 +1247,7 @@ def print_grand_summary(null_results, fss_data, betas_per_L, collapse_results, c
     print(f"  │  Ablations that PRESERVE transition: {n_survived}/5")
     verdict1 = "PASS" if n_destroyed >= 3 else ("PARTIAL" if n_destroyed >= 1 else "FAIL")
     print(f"  │  Verdict: {verdict1}")
-    print(f"  └──────────────────────────────────────────────────────────────────┘")
+    print("  └──────────────────────────────────────────────────────────────────┘")
 
     # Part 2: FSS
     print("\n  ┌─ PART 2: SUBSYSTEM-COUNT FINITE-SIZE SCALING ──────────────────────┐")
@@ -1264,7 +1262,7 @@ def print_grand_summary(null_results, fss_data, betas_per_L, collapse_results, c
     else:
         verdict2 = "FAIL"
     print(f"  │  Verdict: {verdict2}")
-    print(f"  └──────────────────────────────────────────────────────────────────┘")
+    print("  └──────────────────────────────────────────────────────────────────┘")
 
     # Part 3: Data collapse
     print("\n  ┌─ PART 3: DATA COLLAPSE ─────────────────────────────────────────────┐")
@@ -1275,12 +1273,12 @@ def print_grand_summary(null_results, fss_data, betas_per_L, collapse_results, c
         print(f"  │  → ν = {collapse_results['nu']:.4f}")
         print(f"  │  Collapse quality: {collapse_results['collapse_quality']:.1f}")
         ising_bn = 0.3265 / 0.6301
-        delta_bn = abs(collapse_results['beta_over_nu'] - ising_bn) / ising_bn
+        abs(collapse_results['beta_over_nu'] - ising_bn) / ising_bn
         verdict3 = "PASS" if collapse_results['collapse_quality'] > 5 else ("PARTIAL" if collapse_results['collapse_quality'] > 2 else "FAIL")
     else:
         verdict3 = "FAIL"
     print(f"  │  Verdict: {verdict3}")
-    print(f"  └──────────────────────────────────────────────────────────────────┘")
+    print("  └──────────────────────────────────────────────────────────────────┘")
 
     # Part 4: Coarse-graining
     print("\n  ┌─ PART 4: COARSE-GRAINING ───────────────────────────────────────────┐")
@@ -1296,7 +1294,7 @@ def print_grand_summary(null_results, fss_data, betas_per_L, collapse_results, c
     else:
         verdict4 = "FAIL"
     print(f"  │  Verdict: {verdict4}")
-    print(f"  └──────────────────────────────────────────────────────────────────┘")
+    print("  └──────────────────────────────────────────────────────────────────┘")
 
     # Overall
     verdicts = [verdict1, verdict2, verdict3, verdict4]

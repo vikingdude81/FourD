@@ -39,9 +39,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from src.recurrence.embedding import time_delay_embedding, estimate_delay
 from src.recurrence.recurrence_plot import recurrence_matrix
-from src.recurrence.rqa import compute_rqa, determinism, laminarity, recurrence_rate
+from src.recurrence.rqa import compute_rqa
 
-from universality_test import UniversalEngine, boundary_metrics
+from universality_test import UniversalEngine
 
 OUT_DIR = os.path.join('outputs', 'rqa_boundary')
 

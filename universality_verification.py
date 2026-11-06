@@ -15,7 +15,6 @@ Requires: GPU (uses BatchConsciousnessEngine from gpu_ensemble_sim.py)
 """
 
 import numpy as np
-import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -30,7 +29,6 @@ import json
 
 from gpu_ensemble_sim import (
     BatchConsciousnessEngine, generate_fibonacci_s3, derive_macro_basins,
-    SIGNATURE_NAMES,
 )
 
 OUT_DIR = os.path.join('outputs', 'universality')
@@ -176,7 +174,7 @@ def measure_gamma():
 
     # ── universality comparison ─────────────────────────────────────────
     if gamma:
-        print(f"\n  ─── γ COMPARISON ───")
+        print("\n  ─── γ COMPARISON ───")
         print(f"  {'Class':20s}  {'γ_known':>7s}  {'Δγ':>7s}")
         print(f"  {'─'*20}  {'─'*7}  {'─'*7}")
         best_match, best_delta = '', 999
@@ -224,7 +222,7 @@ def measure_gamma():
     plt.tight_layout()
     fig.savefig(os.path.join(OUT_DIR, 'susceptibility_gamma.png'), dpi=150)
     plt.close(fig)
-    print(f"\n  Saved susceptibility_gamma.png")
+    print("\n  Saved susceptibility_gamma.png")
 
     results['m'] = m.tolist()
     results['chi'] = chi.tolist()
@@ -409,7 +407,7 @@ def finite_size_scaling():
     plt.tight_layout()
     fig.savefig(os.path.join(OUT_DIR, 'finite_size_scaling.png'), dpi=150)
     plt.close(fig)
-    print(f"\n  Saved finite_size_scaling.png")
+    print("\n  Saved finite_size_scaling.png")
 
     return results
 
@@ -464,8 +462,8 @@ def critical_brain():
 
     # pull per-step histories to CPU
     clarity    = engine.hist_clarity.cpu().numpy()         # (N, T)
-    macro_b    = engine.hist_macro_basin.cpu().numpy()     # (N, T)
-    dom_sub    = engine.hist_dominant_sub.cpu().numpy()    # (N, T)
+    engine.hist_macro_basin.cpu().numpy()     # (N, T)
+    engine.hist_dominant_sub.cpu().numpy()    # (N, T)
     del engine; torch.cuda.empty_cache()
     print(f"  Done in {time.time()-t0:.1f}s")
 
@@ -679,7 +677,7 @@ def critical_brain():
     # (d) Dynamic range vs fr
     ax = fig.add_subplot(gs[1, 0])
     ax.plot(fr_fano, dyn_range_vals, 'go-', ms=4)
-    ax.axvline(FR_C, c='r', ls='--', alpha=.5, label=f'fr_c')
+    ax.axvline(FR_C, c='r', ls='--', alpha=.5, label='fr_c')
     ax.set(xlabel='Fatigue rate', ylabel='Dynamic range (dB)',
            title='(d) Dynamic Range (Kinouchi & Copelli)')
     ax.legend(fontsize=7); ax.grid(True, alpha=.3)
@@ -687,7 +685,7 @@ def critical_brain():
     # (e) Autocorrelation time vs fr
     ax = fig.add_subplot(gs[1, 1])
     ax.plot(fr_fano, autocorr_vals, 'ms-', ms=4)
-    ax.axvline(FR_C, c='r', ls='--', alpha=.5, label=f'fr_c')
+    ax.axvline(FR_C, c='r', ls='--', alpha=.5, label='fr_c')
     ax.set(xlabel='Fatigue rate', ylabel='Autocorrelation time (steps)',
            title='(e) Critical Slowing Down')
     ax.legend(fontsize=7); ax.grid(True, alpha=.3)
@@ -719,7 +717,7 @@ def critical_brain():
 
     fig.savefig(os.path.join(OUT_DIR, 'critical_brain.png'), dpi=150)
     plt.close(fig)
-    print(f"\n  Saved critical_brain.png")
+    print("\n  Saved critical_brain.png")
 
     return {
         'avalanches': aval_results,
@@ -767,32 +765,32 @@ def print_summary(gamma_results, fss_results, brain_results):
     # Check FSS exponents if available
     nu_fss = fss_results.get('nu_fss')
 
-    print(f"\n  ═══════════════════════════════════════════════════")
-    print(f"  MEASURED EXPONENTS")
-    print(f"  ═══════════════════════════════════════════════════")
+    print("\n  ═══════════════════════════════════════════════════")
+    print("  MEASURED EXPONENTS")
+    print("  ═══════════════════════════════════════════════════")
     print(f"    β = {beta:.4f}   (order parameter, from deep_analysis)")
     print(f"    γ = {gamma:.4f}   (susceptibility, Part 1)")
     if nu_fss:
         print(f"    ν = {nu_fss:.4f}   (FSS, Part 2)")
     print(f"    α = {alpha:.4f}   (Rushbrooke: 2 − 2β − γ)")
 
-    print(f"\n  ── DERIVED QUANTITIES ──")
-    print(f"    Assuming 3D Ising η = 0.036:")
+    print("\n  ── DERIVED QUANTITIES ──")
+    print("    Assuming 3D Ising η = 0.036:")
     print(f"      ν = γ/(2−η) = {nu_3dI:.4f}   (3D Ising: 0.630)")
     print(f"      d_eff = (2−α)/ν = {d_eff_3dI:.2f}   (3D Ising: 3.0)")
-    print(f"    Assuming d = 3:")
+    print("    Assuming d = 3:")
     print(f"      ν = (2−α)/3 = {nu_d3:.4f}   (3D Ising: 0.630)")
     print(f"      η = 2 − γ/ν = {eta_d3:.4f}   (3D Ising: 0.036)")
 
-    print(f"\n  ── CONSISTENCY CHECKS ──")
+    print("\n  ── CONSISTENCY CHECKS ──")
     print(f"    Rushbrooke: α + 2β + γ = {alpha + 2*beta + gamma:.4f}  (exact: 2)")
     hsc = d_eff_3dI * nu_3dI
     print(f"    Hyperscaling: d·ν = {hsc:.4f}  vs  2−α = {2-alpha:.4f}")
 
     # ── comparison table ────────────────────────────────────────────────
-    print(f"\n  ═══════════════════════════════════════════════════")
-    print(f"  UNIVERSALITY CLASS COMPARISON")
-    print(f"  ═══════════════════════════════════════════════════")
+    print("\n  ═══════════════════════════════════════════════════")
+    print("  UNIVERSALITY CLASS COMPARISON")
+    print("  ═══════════════════════════════════════════════════")
     print(f"  {'Class':20s}  {'β':>6s}  {'γ':>6s}  {'α':>6s}  "
           f"{'Δβ':>6s}  {'Δγ':>6s}  {'Δα':>6s}  {'RMS':>6s}")
     print(f"  {'─'*20}  {'─'*6}  {'─'*6}  {'─'*6}  "
@@ -814,9 +812,9 @@ def print_summary(gamma_results, fss_results, brain_results):
           f"{alpha:6.3f}")
 
     # ── critical brain summary ──────────────────────────────────────────
-    print(f"\n  ═══════════════════════════════════════════════════")
-    print(f"  CRITICAL BRAIN HYPOTHESIS")
-    print(f"  ═══════════════════════════════════════════════════")
+    print("\n  ═══════════════════════════════════════════════════")
+    print("  CRITICAL BRAIN HYPOTHESIS")
+    print("  ═══════════════════════════════════════════════════")
     fp = brain_results.get('fano_peak_fr', 0)
     dp = brain_results.get('dynamic_range_peak_fr', 0)
     ap = brain_results.get('autocorr_peak_fr', 0)
@@ -834,28 +832,28 @@ def print_summary(gamma_results, fss_results, brain_results):
     ])
 
     # ── verdict ─────────────────────────────────────────────────────────
-    print(f"\n  ═══════════════════════════════════════════════════")
-    print(f"  VERDICT")
-    print(f"  ═══════════════════════════════════════════════════")
+    print("\n  ═══════════════════════════════════════════════════")
+    print("  VERDICT")
+    print("  ═══════════════════════════════════════════════════")
     if best_rms < 0.08 and best_name == '3D Ising':
         print(f"  ★ STRONG EVIDENCE for {best_name} universality class")
         print(f"    RMS deviation across (β, γ, α): {best_rms:.4f}")
         if crit_brain_signs >= 2:
             print(f"    {crit_brain_signs}/3 critical brain signatures confirmed")
-            print(f"    → Genuine continuous phase transition with neural criticality"
-                  f" hallmarks")
+            print("    → Genuine continuous phase transition with neural criticality"
+                  " hallmarks")
     elif best_rms < 0.15:
         print(f"  ◆ MODERATE EVIDENCE for {best_name} universality class")
         print(f"    RMS deviation: {best_rms:.4f}")
     else:
         print(f"  ◇ INCONCLUSIVE — closest class is {best_name} "
               f"(RMS = {best_rms:.4f})")
-        print(f"    May represent a novel universality class or crossover behavior")
+        print("    May represent a novel universality class or crossover behavior")
 
     print(f"\n    d_eff = {d_eff_3dI:.2f}  (using η = 0.036)")
     if 2.8 < d_eff_3dI < 3.2:
-        print(f"    → Effective dimensionality consistent with d = 3")
-        print(f"    → S³ manifold curvature constrains one degree of freedom")
+        print("    → Effective dimensionality consistent with d = 3")
+        print("    → S³ manifold curvature constrains one degree of freedom")
     else:
         print(f"    → Effective dimensionality {d_eff_3dI:.2f} ≠ 3; "
               f"possible crossover or novel class")
@@ -876,7 +874,7 @@ def print_summary(gamma_results, fss_results, brain_results):
     # save to JSON
     with open(os.path.join(OUT_DIR, 'exponent_summary.json'), 'w') as f:
         json.dump(summary, f, indent=2)
-    print(f"\n  Saved exponent_summary.json")
+    print("\n  Saved exponent_summary.json")
 
     return summary
 

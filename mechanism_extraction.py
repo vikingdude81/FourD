@@ -35,8 +35,7 @@ import os
 import json
 
 from gpu_ensemble_sim import (
-    BatchConsciousnessEngine, generate_fibonacci_s3, derive_macro_basins,
-    PREFERENCE_MATRIX_NORMED, SIGNATURE_NAMES,
+    BatchConsciousnessEngine,
 )
 
 OUT_DIR = os.path.join('outputs', 'mechanism')
@@ -257,11 +256,10 @@ def run_minimal_model():
     if min_sufficient:
         print(f"\n  → Minimum sufficient system: N_sub = {min_sufficient}")
     else:
-        print(f"\n  → No clear transition found on S¹ (need S³ geometry?)")
+        print("\n  → No clear transition found on S¹ (need S³ geometry?)")
 
     # ── Plot ─────────────────────────────────────────────────────────────
     fig, axes = plt.subplots(2, 2, figsize=(16, 13))
-    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
 
     for idx, ns in enumerate(n_sub_values):
         r = results[ns]
@@ -328,7 +326,6 @@ def run_bifurcation_analysis(n_sub_target=3):
         """One deterministic step. state = [theta, f_0, f_1, ..., f_{n-1}]."""
         theta = state[0]
         fat = state[1:].copy()
-        n = n_sub_target
 
         alignment = np.cos(theta - phi)
         effective = (0.5 + comp * alignment) * np.exp(-fat)
@@ -799,7 +796,7 @@ def run_layered_ablation():
     for i, (label, r) in enumerate(all_results.items()):
         ax_combined.plot(fr_vals, r['clarity'], '-', color=colors_layer[i],
                          linewidth=2, label=label)
-    ax_combined.axvline(FR_C, color='gray', ls='--', alpha=0.5, label=f'fr_c(S³)')
+    ax_combined.axvline(FR_C, color='gray', ls='--', alpha=0.5, label='fr_c(S³)')
     ax_combined.set_xlabel('fatigue_rate')
     ax_combined.set_ylabel('clarity')
     ax_combined.set_title('All Layers Overlaid', fontsize=10)
@@ -849,7 +846,6 @@ def run_adaptive_phase_diagram():
 
     STEPS = 1000
     N_SEEDS = 20
-    WARMUP = 200
 
     # ── Sweep A: fatigue_rate × exploration_noise ───────────────────────
     print("\n  [Sweep A] fatigue_rate × exploration_noise ...")

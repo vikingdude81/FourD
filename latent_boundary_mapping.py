@@ -31,18 +31,12 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import torch
 from scipy import stats
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from src.latent.basins import (
-    basin_similarities,
-    basin_switch_event,
-    initialize_basin_attractors,
-)
-from src.latent.coordinator import coordinator_step, run_coordinator
+from src.latent.coordinator import run_coordinator
 from src.latent.mapping import DRIVE_DIMS
 
 from universality_test import UniversalEngine
@@ -167,7 +161,7 @@ def part_a_drive_extraction(device='cuda:0', steps=2000, N=64):
 
     # Compare drive magnitudes at transitions vs dwelling
     results = {}
-    print(f'\n    Drive magnitude at transitions vs dwelling:')
+    print('\n    Drive magnitude at transitions vs dwelling:')
     for name in SIM_TO_LATENT:
         mags = np.array(drive_mags[name])
         if len(tr_idx) > 0 and len(tr_idx) < len(mags) - 1:
@@ -462,7 +456,7 @@ def part_d_anomaly_detection(device='cuda:0', steps=2000, N=64):
 
     # Check if anomaly module is available
     try:
-        from src.anomaly.scoring import AnomalyScorer
+        from src.anomaly.scoring import AnomalyScorer  # noqa: F401 (availability check)
     except ImportError:
         print('    [SKIP] src.anomaly.scoring not importable')
         return {}

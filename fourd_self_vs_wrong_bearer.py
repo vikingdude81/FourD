@@ -94,7 +94,7 @@ def main():
         body_B = 5000 + s          # a different body
         # record own-bearer streams
         engA = build_engine(args.manifold, args.topology, True, dev, args.steps, args.N, body_A, rng_seed=body_A)
-        streamA = record_bearer_stream(engA, args.steps)
+        record_bearer_stream(engA, args.steps)
         engB = build_engine(args.manifold, args.topology, True, dev, args.steps, args.N, body_B, rng_seed=body_B)
         streamB = record_bearer_stream(engB, args.steps)
         engAp = build_engine(args.manifold, args.topology, True, dev, args.steps, args.N, body_A, rng_seed=body_A + 777)

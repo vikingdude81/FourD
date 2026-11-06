@@ -31,7 +31,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from collections import Counter
-from scipy import stats
 
 from universality_test import UniversalEngine, boundary_metrics
 
@@ -90,7 +89,7 @@ def part_a_phase_transition(device='cuda:0', steps=1500, N=128):
             'transition_rate': transition_rates,
             'boundary_r': boundary_rs,
         }
-        print(f' done')
+        print(' done')
 
     # Plot
     fig, axes = plt.subplots(1, 3, figsize=(18, 5))
@@ -223,7 +222,7 @@ def part_b_basin_grammar(device='cuda:0', steps=2000, N=128):
               f'unique={results[manifold]["unique_basins"]:.1f}')
 
     # Statistical comparison
-    print(f'\n    Comparison:')
+    print('\n    Comparison:')
     for metric in ['unigram_entropy', 'bigram_entropy', 'trigram_entropy', 'unique_basins']:
         s3_val = results['s3'][metric]
         r4_val = results['flat4'][metric]
@@ -305,7 +304,7 @@ def part_c_multi_seed(device='cuda:0', steps=1500, N=64, n_seeds=10):
                 'cv': float(np.std(vals) / (np.abs(np.mean(vals)) + 1e-15)),
                 'values': vals,
             }
-        print(f' done')
+        print(' done')
 
     # Print comparison
     print(f'\n    {"Metric":<20s}  {"S³ μ±σ":>15s}  {"S³ CV":>8s}  '

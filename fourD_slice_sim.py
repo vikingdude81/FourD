@@ -19,11 +19,10 @@ import csv
 from collections import Counter
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
@@ -505,7 +504,7 @@ class DualGeometryLayer:
                     for b in self.basins]
         
         nearest_basin_id, distance = min(distances, key=lambda x: x[1])
-        is_within = distance < self.basins[nearest_basin_id].radius
+        distance < self.basins[nearest_basin_id].radius
         
         return nearest_basin_id, float(distance)
     
@@ -581,7 +580,7 @@ def run_simulation(
         sense_environment(being, env, subsystems, config)
 
         # 2. Compute state metrics
-        subsystem_state = compute_system_state(subsystems)
+        compute_system_state(subsystems)
         pressure = compute_coordination_pressure(subsystems)
         dom = dominant_subsystem(subsystems)
 
@@ -606,7 +605,7 @@ def run_simulation(
         
         if allowed_transitions and np.random.rand() < 0.3:
             # Micro transition driven by dominant subsystem pressure
-            next_micro_node = np.random.choice(allowed_transitions)
+            np.random.choice(allowed_transitions)
             micro_transition_count += 1
         
         coordinator = coordinator_update(coordinator, subsystems, config)
@@ -836,7 +835,7 @@ def plot_micro_macro_layers(metrics: Dict):
     View 2: Micro transition activity (600-cell layer)
     View 3: Macro closure occupancy (120-cell layer)
     """
-    geometry = metrics["geometry_layer"]
+    metrics["geometry_layer"]
     log = metrics["step_log"]
     
     T = len(log)
@@ -1033,7 +1032,6 @@ def _build_parser() -> argparse.ArgumentParser:
 # ────────────────────────────────────────────────────────────────────
 
 def main(argv: list[str] | None = None):
-    import os
     from datetime import datetime
     
     parser = _build_parser()
@@ -1088,7 +1086,7 @@ def main(argv: list[str] | None = None):
     being = initialize_being(env)
 
     print(f"\n{'=' * 70}")
-    print(f"  CONSCIOUSNESS EMERGENCE + NAVIGATION SIMULATION")
+    print("  CONSCIOUSNESS EMERGENCE + NAVIGATION SIMULATION")
     print(f"{'=' * 70}")
     print(f"\n  Config: {config.n_subsystems} subsystems | {config.n_dimensions}D manifold | {config.n_timesteps} steps")
     print(f"  Environment: {config.env_size}x{config.env_size} | {len(env.goals)} goals | {len(env.hazards)} hazards\n")
@@ -1097,7 +1095,7 @@ def main(argv: list[str] | None = None):
     level, state = compute_consciousness_level(metrics, config)
 
     print(f"\n{'=' * 70}")
-    print(f"  RESULTS")
+    print("  RESULTS")
     print(f"{'=' * 70}")
     print(f"\n  Consciousness Level:  {level:.3f} ({state})")
     print(f"  Basin-switch events: {metrics['basin_switches']}")
@@ -1108,12 +1106,12 @@ def main(argv: list[str] | None = None):
     print(f"  Avg integration:     {np.mean(metrics['integration_levels']):.3f}")
 
     dom_counts = Counter(metrics["dominant_subsystems"])
-    print(f"\n  Subsystem dominance (top 3):")
+    print("\n  Subsystem dominance (top 3):")
     for name, count in dom_counts.most_common(3):
         print(f"    {name:<20} {count} steps ({100*count//config.n_timesteps}%)")
 
     print(f"\n{'=' * 70}")
-    print(f"  EXPORT")
+    print("  EXPORT")
     print(f"{'=' * 70}")
 
     # Export CSV to output directory
@@ -1121,13 +1119,13 @@ def main(argv: list[str] | None = None):
     export_to_csv(metrics, str(csv_path))
 
     print(f"\n{'=' * 70}")
-    print(f"  LESION STUDY")
+    print("  LESION STUDY")
     print(f"{'=' * 70}")
     lesion_results = run_lesion_study(config, env, lesion_name="Planning")
 
     # Save all figures to output directory
     print(f"\n{'=' * 70}")
-    print(f"  SAVING VISUALIZATIONS")
+    print("  SAVING VISUALIZATIONS")
     print(f"{'=' * 70}\n")
 
     fig_nav = plt.figure(figsize=(8, 8))
@@ -1136,17 +1134,17 @@ def main(argv: list[str] | None = None):
     fig_nav.savefig(nav_path, dpi=150, bbox_inches='tight')
     print(f"  Saved: {nav_path}")
 
-    fig_phase = plot_phase_portrait(metrics)
+    plot_phase_portrait(metrics)
     phase_path = output_dir / "phase_portrait.png"
     plt.gcf().savefig(phase_path, dpi=150, bbox_inches='tight')
     print(f"  Saved: {phase_path}")
 
-    fig_dom = plot_dominance(metrics, subsystems)
+    plot_dominance(metrics, subsystems)
     dom_path = output_dir / "dominance.png"
     plt.gcf().savefig(dom_path, dpi=150, bbox_inches='tight')
     print(f"  Saved: {dom_path}")
 
-    fig_lesion = plot_lesion_comparison(lesion_results)
+    plot_lesion_comparison(lesion_results)
     lesion_path = output_dir / "lesion_study.png"
     plt.gcf().savefig(lesion_path, dpi=150, bbox_inches='tight')
     print(f"  Saved: {lesion_path}")

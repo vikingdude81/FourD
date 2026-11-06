@@ -33,7 +33,7 @@ import os
 import numpy as np
 import torch
 
-from bearer_state_competency import BearerEngine, build_engine, resolve_device, basin_occupancy
+from bearer_state_competency import build_engine, resolve_device, basin_occupancy
 
 OUT_DIR = os.path.join('outputs', 'foreclosure')
 

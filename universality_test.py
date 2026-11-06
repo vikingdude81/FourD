@@ -616,27 +616,27 @@ def print_summary(results):
     topo_present = sum(1 for n in topo_names if verdicts[n] == 'BOUNDARY PRESENT')
     print(f'    Topology:  {topo_present}/{len(topo_names)} variants show boundary negotiation')
     if topo_present == len(topo_names):
-        print(f'    → Topology is NOT necessary (any opponent structure works)')
+        print('    → Topology is NOT necessary (any opponent structure works)')
     elif topo_present == 0:
-        print(f'    → Topology IS critical (all alternatives lose the pattern)')
+        print('    → Topology IS critical (all alternatives lose the pattern)')
     else:
-        print(f'    → Topology matters partially (some structures preserve it)')
+        print('    → Topology matters partially (some structures preserve it)')
 
     fat_names = [n for n, r in results.items() if r['group'] == 'fatigue']
     fat_present = sum(1 for n in fat_names if verdicts[n] in ('BOUNDARY PRESENT', 'PARTIAL'))
     print(f'    Fatigue:   {fat_present}/{len(fat_names)} variants show boundary negotiation')
     if 'No fatigue' in verdicts and verdicts['No fatigue'] in ('ABSENT', 'NO TRANSITIONS'):
-        print(f'    → Fatigue IS necessary (without it, boundary negotiation collapses)')
+        print('    → Fatigue IS necessary (without it, boundary negotiation collapses)')
 
     mf_names = [n for n, r in results.items() if r['group'] == 'manifold']
     mf_present = sum(1 for n in mf_names if verdicts[n] == 'BOUNDARY PRESENT')
     print(f'    Manifold:  {mf_present}/{len(mf_names)} variants show boundary negotiation')
     if mf_present == len(mf_names):
-        print(f'    → Manifold geometry is NOT necessary (structure survives on different spaces)')
+        print('    → Manifold geometry is NOT necessary (structure survives on different spaces)')
     elif mf_present == 0:
-        print(f'    → Manifold geometry IS critical (S³ specifically required)')
+        print('    → Manifold geometry IS critical (S³ specifically required)')
     else:
-        print(f'    → Manifold matters partially')
+        print('    → Manifold matters partially')
 
     return verdicts
 
@@ -671,7 +671,7 @@ def main():
     t_start = time.time()
 
     results = run_all_variants(args.device, args.steps, args.N, args.outdir)
-    verdicts = print_summary(results)
+    print_summary(results)
     comparison_plots(results, args.outdir)
 
     # Save JSON

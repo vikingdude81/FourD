@@ -42,8 +42,7 @@ import argparse
 import json
 import os
 import time
-from dataclasses import dataclass, field
-from typing import Callable, Optional
+from typing import Optional
 
 import matplotlib
 matplotlib.use('Agg')
@@ -53,7 +52,7 @@ import pandas as pd
 import torch
 import torch.nn.functional as F
 
-from universality_test import UniversalEngine, make_macro_centers
+from universality_test import UniversalEngine
 
 OUT_DIR = os.path.join('outputs', 'bearer_state_competency')
 

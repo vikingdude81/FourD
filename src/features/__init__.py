@@ -11,6 +11,8 @@ This package provides comprehensive feature extraction capabilities:
 
 from __future__ import annotations
 
+import numpy as np
+
 # Re-export key functions from submodules
 from .basic_stats import (
     compute_bias,
@@ -90,8 +92,6 @@ def extract_all_features(bits: np.ndarray,
     dict
         Dictionary containing all computed features.
     """
-    import numpy as np
-    
     return {
         # Basic stats
         **basic_compute_feature_vector(bits),

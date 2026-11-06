@@ -6,7 +6,7 @@ Provides predefined simulation configurations and utilities for loading/saving s
 """
 
 from dataclasses import dataclass, field, asdict
-from typing import List, Tuple, Optional
+from typing import List, Tuple
 
 
 @dataclass

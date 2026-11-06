@@ -17,7 +17,6 @@ from fourD_slice_sim import (
     initialize_being,
     initialize_subsystems,
     compute_coordination_pressure,
-    compute_system_state,
     dominant_subsystem,
     select_action,
     move_being,

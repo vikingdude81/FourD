@@ -3,7 +3,6 @@ Basic smoke tests for the FourD pipeline.
 """
 
 import numpy as np
-import pytest
 
 from src.features.windows import sliding_windows
 from src.features.basic_stats import compute_basic_stats
