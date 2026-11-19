@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hostability Lab — the symmetry kill-switch</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --fg:#e6edf3; --dim:#8b949e; --alive:#3fb950; --dead:#f85149; --acc:#58a6ff; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--fg); font:14px/1.5 system-ui, sans-serif; margin:0; padding:18px; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .sub { color:var(--dim); margin-bottom:12px; }
+  .wrap { display:grid; grid-template-columns:320px 1fr 300px; gap:14px; max-width:1280px; }
+  .panel { background:var(--panel); border:1px solid #30363d; border-radius:8px; padding:12px; }
+  button { background:#21262d; color:var(--fg); border:1px solid #30363d; border-radius:6px; padding:6px 10px; margin:2px; cursor:pointer; font-size:13px; }
+  button.on { background:#1f6feb; border-color:#1f6feb; }
+  input[type=range] { width:100%; }
+  .lbl { color:var(--dim); font-size:12px; margin-top:10px; }
+  .val { color:var(--acc); }
+  .badge { font-weight:700; padding:6px 10px; border-radius:6px; display:inline-block; margin:6px 4px 0 0; }
+  .alive { background:#12321a; color:var(--alive); border:1px solid var(--alive); }
+  .dead { background:#3a1214; color:var(--dead); border:1px solid var(--dead); }
+  .stats div { margin:3px 0; }
+  .k { color:var(--dim); display:inline-block; width:130px; }
+  canvas { background:#0a0e14; border-radius:6px; width:100%; }
+  .sem { background:#1c2128; border-left:3px solid var(--acc); padding:10px; margin:12px 0; font-size:13px; }
+  .sem b { color:var(--acc); }
+  #status { color:var(--dim); font-size:12px; height:16px; }
+  .curve { margin-top:8px; }
+  .foot { color:var(--dim); font-size:11px; margin-top:14px; }
+</style>
+</head>
+<body>
+<h1>Hostability Lab <span style="color:var(--dim)">— FourD × Tegmark</span></h1>
+<div class="sub">Does a mathematical structure host history-bearing dynamics? Drag the symmetry dials. JS engine port, validated against the torch reference (dodeca−1: +35.9 vs +39.5).</div>
+
+<div class="sem">
+<b>Semantics — what "dies" and "resurrects" here:</b> the structure never dies. The 600-cell is a static
+object — it just <i>is</i>. What dies is the <i>dynamics hosted on it</i>: the agent collective's
+boundary-negotiation behaviour. And nothing "resurrects" the dead system from outside — the restore dial
+(ε, gap) <b>changes the structure itself</b>: 600-cell+ε is a <i>different structure</i> that happens to
+host mind-adjacent dynamics. The hostability property belongs to the (structure × engine) pair, not to
+either alone.
+</div>
+
+<div class="wrap">
+  <div class="panel">
+    <b>Substrate</b><br>
+    <div id="subs"></div>
+    <div class="lbl">Symmetry-breaking field ε (adds bias ε·u to every vertex)</div>
+    <input type="range" id="eps" min="0" max="1" step="0.005" value="0">
+    <div><span class="val" id="epsVal">0.000</span></div>
+    <div class="lbl">Gap dial — remove m single vertices (exact negations stay: orphan antipodes)</div>
+    <input type="range" id="gap" min="0" max="30" step="1" value="0">
+    <div><span class="val" id="gapVal">0</span></div>
+    <div class="lbl">Seed</div>
+    <div><button id="reseed">reseed &amp; rerun</button></div>
+    <div id="status"></div>
+    <div class="curve"><canvas id="curve" height="140"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <canvas id="view" width="560" height="420"></canvas>
+    <canvas id="fatbars" width="560" height="70"></canvas>
+    <div class="lbl">Top: agents (colour = macro-basin) projected S³→plane, brightness = 4th coordinate.
+    Crosses: preference vertices. Bottom: mean fatigue per subsystem —
+    <b style="color:var(--dead)">flat zero = attention deadlock, the system is unfueled</b>.</div>
+  </div>
+
+  <div class="panel stats">
+    <b>Readout</b>
+    <div id="readout"></div>
+    <div id="verdict"></div>
+    <hr style="border-color:#30363d">
+    <div class="k">python ref z</div><div id="ref" style="color:var(--dim)"></div>
+    <hr style="border-color:#30363d">
+    <div class="k">antipodal closure</div><div id="cAnti"></div>
+    <div class="k">M2 isotropy dev</div><div id="cDev"></div>
+    <div class="k">force-free 2-design?</div><div id="cFF"></div>
+    <div class="lbl">null_z &gt; 3 ⇒ hosts boundary negotiation (C1).
+    maxF = 0 ⇒ attention deadlock (D1b mechanism).</div>
+  </div>
+</div>
+
+<div class="foot">FourD program · tegmark_bridge · engine: S³, N=128, 1000 steps, gradual fatigue (0.217), recovery 0.025 — faithful port of universality_test.py.
+Reference curves from torch runs (single seed). See RESULTS.md for the full record and retractions.</div>
+
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script>
+const D = window.DEMO_DATA, prm = D.params;
+prm.N = 128;
+const NAMES = { cell600:'600-cell (120)', cell24:'24-cell (24)', dodeca20:'dodecahedron-20',
+                tetra:'tetrahedron', anti12:'antipodal pairs-12', cyclic8:'FourD cyclic-8 (baseline)' };
+let cur = 'cell600', seed = 777, lastResult = null;
+
+const subsDiv = document.getElementById('subs');
+for (const k of Object.keys(NAMES)) {
+  const b = document.createElement('button');
+  b.textContent = NAMES[k]; b.dataset.k = k;
+  b.onclick = () => { cur = k; mark(); rerun(); };
+  subsDiv.appendChild(b);
+}
+function mark() { subsDiv.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.k === cur)); }
+mark();
+
+function substrate() {
+  let P = D.substrates[cur].map(p => p.slice());
+  const eps = +document.getElementById('eps').value;
+  const gap = +document.getElementById('gap').value;
+  // fixed bias direction u (same for all substrates, from the export rng convention)
+  if (eps > 0) {
+    const u = D.bias_u;
+    P = P.map(p => { const q = [p[0]+eps*u[0], p[1]+eps*u[1], p[2]+eps*u[2], p[3]+eps*u[3]];
+      const n = Math.hypot(...q); return q.map(x => x/n); });
+  }
+  if (gap > 0) P = P.slice(gap);   // deterministic: remove first m rows (export perm order)
+  return P;
+}
+
+function rerun() {
+  const P = substrate();
+  document.getElementById('epsVal').textContent = (+document.getElementById('eps').value).toFixed(3);
+  document.getElementById('gapVal').textContent = document.getElementById('gap').value;
+  document.getElementById('status').textContent = 'running 1000 steps…';
+  setTimeout(() => {
+    const e = new Engine(P, D.macro_centers, prm, seed);
+    e.run(1000);
+    const m = boundaryZ(e, 50, seed + 1);
+    const mf = e.meanFatiguePerSub();
+    const maxF = Math.max(...mf);
+    const cert = certificates(P);
+    lastResult = { eng: e, mf, P };
+    render(m, maxF, cert, mf);
+    document.getElementById('status').textContent = '';
+  }, 30);
+}
+
+function render(m, maxF, cert, mf) {
+  const alive = m.null_z > 3;
+  document.getElementById('readout').innerHTML =
+    `<div><span class="k">null_z</span><b style="color:${alive?'var(--alive)':'var(--dead)'}">${m.null_z.toFixed(1)}</b></div>` +
+    `<div><span class="k">transition rate</span>${m.transition_rate.toFixed(3)}</div>` +
+    `<div><span class="k">max fatigue</span>${maxF.toFixed(2)}</div>`;
+  document.getElementById('verdict').innerHTML =
+    `<span class="badge ${alive?'alive':'dead'}">${alive?'HOSTS boundary negotiation':'DEAD (unfuelled / force-free)'}</span>`;
+  document.getElementById('ref').textContent = refZ();
+  document.getElementById('cAnti').textContent = cert.antiFrac.toFixed(3) + (cert.antiFrac > 0.99 ? '  (closed)' : '');
+  document.getElementById('cDev').textContent = cert.dev2.toExponential(2);
+  document.getElementById('cFF').textContent =
+    (cert.antiFrac > 0.99 && cert.dev2 < 1e-9) ? 'YES — provably force-free' : 'no';
+  drawView();
+  drawFat(mf);
+  drawCurve();
+}
+
+function refZ() {
+  const eps = +document.getElementById('eps').value, gap = +document.getElementById('gap').value;
+  if (cur === 'cell600' && gap === 0) {
+    const rows = D.ref_eps; let best = rows[0];
+    for (const r of rows) if (Math.abs(r.eps - eps) < Math.abs(best.eps - eps)) best = r;
+    return `torch: ${best.z} (eps=${best.eps})`;
+  }
+  if (cur === 'cell600' && eps === 0) {
+    const rows = D.ref_gap; let best = rows[0];
+    for (const r of rows) if (Math.abs(r.removed - gap) < Math.abs(best.removed - gap)) best = r;
+    return `torch: ${best.z} (gap=${best.removed})`;
+  }
+  const s = D.ref_static[cur];
+  return (s !== undefined && eps === 0 && gap === 0) ? `torch: ${s}` : '—';
+}
+
+function drawView() {
+  const cv = document.getElementById('view'), ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  const cx = cv.width/2, cy = cv.height/2 - 20, R = Math.min(cx, cy) - 20;
+  ctx.strokeStyle = '#1f2733'; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.stroke();
+  // prefs as crosses
+  for (const p of lastResult.P) {
+    const x = cx + p[0]*R, y = cy - p[1]*R, a = 0.25 + 0.35*Math.abs(p[2]);
+    ctx.strokeStyle = `rgba(200,220,255,${a})`;
+    ctx.beginPath(); ctx.moveTo(x-4, y); ctx.lineTo(x+4, y); ctx.moveTo(x, y-4); ctx.lineTo(x, y+4); ctx.stroke();
+  }
+  // agents
+  const e = lastResult.eng;
+  for (let i = 0; i < e.N; i++) {
+    const u = [e.u[i*4], e.u[i*4+1], e.u[i*4+2], e.u[i*4+3]];
+    const b = e.basins[i][e.basins[i].length-1];
+    const x = cx + u[0]*R, y = cy - u[1]*R;
+    ctx.fillStyle = `hsl(${b*15},70%,${40 + u[2]*20}%)`;
+    ctx.beginPath(); ctx.arc(x, y, 3.2, 0, 7); ctx.fill();
+  }
+}
+
+function drawFat(mf) {
+  const cv = document.getElementById('fatbars'), ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  const w = cv.width / mf.length;
+  for (let j = 0; j < mf.length; j++) {
+    const h = Math.min(60, mf[j] / 3 * 60);
+    ctx.fillStyle = mf[j] > 0.01 ? '#f85149' : '#21262d';
+    ctx.fillRect(j*w, 64 - h, Math.max(1, w-1), h);
+  }
+  ctx.fillStyle = '#8b949e'; ctx.font = '10px system-ui';
+  ctx.fillText('0', 2, 12); ctx.fillText('fatigue 3', cv.width-56, 12);
+}
+
+function drawCurve() {
+  const cv = document.getElementById('curve'), ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  const rows = D.ref_eps, W = cv.width, H = cv.height, pad = 22;
+  const maxz = Math.max(...rows.map(r => r.z), 20);
+  ctx.strokeStyle = '#30363d';
+  ctx.beginPath(); ctx.moveTo(pad, H-pad); ctx.lineTo(W-6, H-pad); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pad, 6); ctx.lineTo(pad, H-pad); ctx.stroke();
+  ctx.strokeStyle = '#58a6ff'; ctx.beginPath();
+  rows.forEach((r, i) => {
+    const x = pad + (r.eps / 1) * (W - pad - 10);
+    const y = (H - pad) - (r.z / maxz) * (H - pad - 10);
+    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  });
+  ctx.stroke();
+  const eps = +document.getElementById('eps').value;
+  const x = pad + eps * (W - pad - 10);
+  ctx.strokeStyle = '#f0883e'; ctx.beginPath(); ctx.moveTo(x, 6); ctx.lineTo(x, H-pad); ctx.stroke();
+  ctx.fillStyle = '#8b949e'; ctx.font = '10px system-ui';
+  ctx.fillText('z', 6, 14); ctx.fillText('eps 0→1', W-56, H-6);
+  ctx.fillText('torch reference', pad+4, 16);
+}
+
+document.getElementById('eps').oninput = rerun;
+document.getElementById('gap').oninput = rerun;
+document.getElementById('reseed').onclick = () => { seed = (Math.random()*1e9)|0; rerun(); };
+rerun();
+</script>
+</body>
+</html>

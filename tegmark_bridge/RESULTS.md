@@ -296,3 +296,33 @@ cd FourD
   the polytopes is unused here (S1 covers the edge/spectral side).
 - Gap-geometry dependence (F3) is single-instance (dodeca); T4 must map it.
 - C1 threshold (z>3) is conventional, not derived.
+
+## 5.6 T6 — certificate on real market structure (LPF bridge, first shot)
+
+Substrate: 504 daily log-return direction vectors, R^4 basket
+(SPY/SMH/IWM/MU), local parquet cache, engine s3/N=128/1000 steps, 3 seeds.
+
+Certificates (structure only):
+- market_full: antiFrac=0.133, dev2=0.695, top-PC conc=0.652
+- market_60: antiFrac=0.033 — passes the closure certificate easily
+- market_60_closed (P+-P control): antiFrac=1.0
+
+Engine states (state = HOSTS if z>3 and tr<0.9; BOILS if tr>=0.9):
+- market_60:         z=+109.1 ±154, tr=1.000 -> BOILS (basin jitter)
+- market_60_closed:  z=-0.9  ±0.5,  tr=0.351 -> DEAD  (closure kills market data too — certificate causal)
+- market_resid_60 (SPY-beta stripped): z=+2.5, tr=1.000 -> BOILS
+- market_white_60 (M2^-1/2 whitened):  z=-0.3, tr=1.000 -> BOILS
+- protos_k8/16/24 (k-means regime prototypes): z=+2.3/-3.5/-12.1, tr 0.38-0.54 -> DEAD/negative
+- random_60_ctrl:    z=+6.0 ±1.0, tr=0.749 -> HOSTS
+
+Reading: (1) the certificate is **causal on empirical data** — antipodally
+closing the exact same market sample flips it from active to dead.
+(2) But raw market direction sets fail hostability for a *different*
+reason than polytopes: cone concentration (conc~0.65) => near-degenerate
+macro-sim distances => basin identity jitters every step (tr=1.0), and
+whitening/residualizing/prototyping did not restore Goldilocks dynamics.
+T6 v1 verdict: **null for the naive bridge**; closure is necessary, not
+sufficient. Geometry that survives so far is well-spread open sets
+(cyclic8, random, dodeca-1). Next T6b candidate: GEX/strike-day
+option-landscape substrates (atlas_index) instead of return directions —
+those are LPF's actual preference geometry.
