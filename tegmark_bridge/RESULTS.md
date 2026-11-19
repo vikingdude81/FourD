@@ -326,3 +326,30 @@ sufficient. Geometry that survives so far is well-spread open sets
 (cyclic8, random, dodeca-1). Next T6b candidate: GEX/strike-day
 option-landscape substrates (atlas_index) instead of return directions —
 those are LPF's actual preference geometry.
+
+## 5.7 N7 — cyclic orbits vs the certificate (Karkada et al. bridge)
+
+Prompt: X-thread on arXiv:2602.15029 (Karkada/Korchinski/Nava/Wyart/Bahri):
+translation symmetry in language co-occurrence statistics provably forces
+Fourier geometry (month circles, rippled timelines, lat/long maps) even in
+word2vec. Same representation-theory family as VFD/S1 (eigenmodes of a
+symmetry-commuting operator) but constructive sign: symmetry of data
+statistics *builds* geometry in learned representations.
+
+Probe (outputs/ngon_certificate.json): regular Z_n orbits as FourD
+preference substrates, n = 7,8,11,12,13,24 x jitter {0, .1, .25},
+3 seeds x 1000 steps:
+- NO cyclic orbit hosts (no z>3 anywhere).
+- coplanar n-gons (jit=0): dead or anti (rank-2 degeneracy axis).
+- full-rank jittered: still dead; n>=12 flips strongly ANTI (z to -14):
+  post-transition clarity *below* chance.
+
+Conclusion: the order parameter is not parity/antipodal closure alone but
+**uniform closed coverage**: every direction answered at equal distance
+(local force balance). Antipodal closure is the n=2 special case; the
+month circle is the continuous-rotation case. Both cancel the net force;
+negotiation needs a *gap*, not an orbit. Beautiful duality with the paper:
+symmetry of statistics -> eigenmodes in the representation (gradient flow
+seeks the symmetric solution); symmetry of the substrate -> no fuel for
+agents (symmetric fixed point is absorbing). Same Schur coin, opposite sign.
+Registered 2602.15029 + follow-up 2610.00647 in vfd_bridge/lit (PDFs on disk).
