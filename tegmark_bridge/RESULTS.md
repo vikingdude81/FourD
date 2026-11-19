@@ -353,3 +353,32 @@ symmetry of statistics -> eigenmodes in the representation (gradient flow
 seeks the symmetric solution); symmetry of the substrate -> no fuel for
 agents (symmetric fixed point is absorbing). Same Schur coin, opposite sign.
 Registered 2602.15029 + follow-up 2610.00647 in vfd_bridge/lit (PDFs on disk).
+
+## 5.8 CERT2 — two geometry scalars, one 19-substrate corpus
+
+Pure-geometry predictors vs freshly recomputed engine fate (3 seeds, 1000
+steps, s3; outputs/cert2_corpus.json, cert2_scatter.png):
+
+  Brel = ||net tangential force|| / gross force under uniform attention (fuel)
+  conc = M2 top-eigenvalue share (cone congestion); drel = dmin/dmed (spacing)
+
+Findings:
+- **Brel = 0 exactly on every antipodally-closed or zero-sum-balanced set**
+  (600cell, 24cell, dodeca20, anti12, ngon7/12, market60_closed) and 8/9
+  of them are DEAD/ANTI. The one escape: **tetra (n=4) HOSTS at Brel=0** —
+  with only 4 prefs, attention noise breaks the balance immediately. The
+  theorem's force-cancellation kills dynamics only when balance is
+  *many-body-pinned* (antipodal pairs / large designs), not when it is a
+  fragile n=4 zero-sum. Certificate needs the pairing condition too.
+- **Jitter axis is real and opposite**: market60 (conc .65, drel .025) and
+  eps600_0.1 boil at tr≈0.95-1.0 — fuel is abundant there (Brel .08-.14);
+  they die from basin degeneracy, not force cancellation.
+- All HOSTS sit in the middle band: Brel in [.05,.22] with resolution
+  intact (dodeca19, sub600_8) or near-random spacing (random60).
+- ANTI remains a third, unsolved mode (protos24 z=-12, ngon12j z=-13.5):
+  fuel present, resolution present, and transitions still anti-correlate
+  with clarity. Open problem for CERT3.
+
+Honest verdict: Brel(=0)+pairing is a proof-grade DEATH certificate;
+conc+tr is an empirical BOIL certificate; neither yet a sufficiency
+certificate for hosting. Two failure modes, two axes, one scatter.
