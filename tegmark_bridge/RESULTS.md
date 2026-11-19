@@ -1,0 +1,205 @@
+# Broken symmetry as a hostability condition for boundary-negotiation dynamics
+### Tegmark bridge — full experiment record (S2, T1, T2), 2026-11-19
+
+Status: working paper record for the `tegmark_bridge/` lane of the FourD program.
+All numbers below are reproduced by the scripts in this directory; raw JSON in
+`outputs/`. Figure: `outputs/t12_phase_maps.png`.
+
+---
+
+## 1. Framing
+
+Tegmark's Mathematical Universe Hypothesis (arXiv:0704.0646): every
+(mathematically consistent, restricted-to-decidable) structure physically
+exists; observers are "self-aware substructures" (SAS) within some of them.
+The standing objections our lane attacks: the measure problem (how are
+structures weighted — Schmidhuber quant-ph/0011122 says by description length;
+Müller 2412.02826 by algorithmic probability over observer-moments) and
+unfalsifiability (Natal 2411.12562).
+
+Our claim, now backed by three experiments: **structure existence-qua-hospitable
+is a computable, falsifiable property.** A dynamical signature we call the
+*boundary-negotiation signal* (agent collectives forming persistent basin
+boundaries: transition events at which the population's basin assignment flips,
+with post-transition preference-attachment clarity significantly above a
+label-shuffled null — the canonical FourD readout `boundary_metrics`) is
+**annihilated by exact central symmetry** and lives only in a window of broken
+symmetry.
+
+Literature file: `lit/REPORT.md` (parent-audited 2026-11-19; 11 indexed papers,
+8 PDFs, 9 full-text extracts).
+
+## 2. Protocol (identical across S2/T1/T2)
+
+- Engine: FourD `UniversalEngine` (repo root `universality_test.py`), N=128
+  agents on S³ manifold, steps=1000, gradual fatigue. The engine's "topology"
+  enters only through the **preference substrate** P: a set of unit direction
+  vectors (subsystems). Baseline FourD substrate: cyclic-8 simplex.
+- Substrate substitutions are exact vertex sets of polytopes (unit
+  circumradius) built in `vfd_bridge/graphs.py`, plus controls.
+- Readout: `boundary_metrics(eng, n_shuffles=50)` →
+  `null_z` (z-score of post-transition clarity vs shuffled null),
+  `cohens_d`, `edge_clarity_r`, `transition_rate` (TR).
+- Seeds: 3 per variant (torch+numpy), GPU (`cuda:0`, verified in output JSON).
+
+## 3. S2 — the founding result (vfd_bridge, 2026-11-19 earlier today)
+
+Substrates: full 24-cell (24 vertices), full 600-cell (120 vertices), count-
+matched random sets, `antipodal12` (12 random dirs + their exact negations),
+and `poly600_s8` (8-vertex subsample).
+
+- Full polytopes: signal dead (null_z +0.2/−0.2, d≈0).
+- Random 24/120: alive (z≈+16). → not subsystem count.
+- **antipodal12: dead (z=+0.4).** → the mechanism is central symmetry
+  (P = −P ⇒ exact pairwise force cancellation), not H4-specific structure.
+- poly600_s8: alive (z≈+15).
+
+## 4. T1 — hostability dial (`t1_sas_census.py`)
+
+Random subsample of k of the 120 600-cell vertices, k = 4…120, 3 seeds.
+The natural order parameter is the **antipodal-closure fraction** of the
+subsample (fraction of rows whose exact negation is also present): it grows
+monotonically with k and hits 1.0 only at k=120.
+
+| k | antipodal_frac | null_z |
+|---|---|---|
+| 8–100 | 0.17–0.83 | +7.5 … +44.8 (alive; k=6 marginal, one seed negative) |
+| 110 | 0.92 | +2.9 (dying) |
+| 118 | 0.98 | +0.2 |
+| 120 | 1.00 | +0.1 (dead) |
+
+The collapse tracks antipodal closure, not size: healthy at 0.83, dying at
+0.92–0.98, dead at 1.00.
+
+**RETRACTION (self-audit same day):** T1 and S2 also reported a
+"seed-sensitivity/history-bearing" criterion C2 (TR std across seeds > 0.01).
+**C2 is confounded and withdrawn:** the subsample/random substrate was
+re-drawn per seed, so TR variance across "seeds" measured *structure*
+variance, not dynamical history-sensitivity. T2 (fixed structure per variant)
+shows TR_std ≈ 0.001–0.002 for *every* structure, alive or dead — TR at this
+scale is not a history measure. The null_z evidence above is unaffected (each
+z is measured on a fixed structure). Any history claim must come from a proper
+T3 design (fixed substrate, varied agent initializations; agreement statistics
+of basin *identity*, not event rates).
+
+## 5. T2 — mechanism pinning (`t2_mechanism.py`)
+
+### Exp A — ε-restore on the dead 600-cell
+
+prefs = V + ε·u (u fixed random direction), renormalized. ε=0 is the dead
+substrate.
+
+| ε | null_z | TR |
+|---|---|---|
+| 0 | +0.0 | 0.365 |
+| 0.003 | −0.0 | 0.406 |
+| 0.01 | +0.3 | 0.511 |
+| 0.03 | +2.5 | 0.696 |
+| **0.1** | **+17.7** | 0.999 |
+| 0.3 | −0.0 | 1.000 |
+| 1.0 | +0.6 | 1.000 |
+
+Findings: (i) the signal **restores** from exact-cancellation death — the
+mechanism is causal, not correlational; (ii) restoring the symmetry-breaking
+is *necessary but not sufficient*: tiny ε stays dead (net induced polarity
+below the dynamical noise floor), and large ε **boils** the system (TR→1.0:
+one basin dominates, every agent pinned, no boundaries left to negotiate).
+The bearer regime is a **Goldilocks window of net preference polarity** —
+neither cancellation nor saturation. The full 600-cell at ε≈0.1 with z=+17.7
+shows a maximal-symmetry structure is fully *recoverable* to hospitality with
+a 10% symmetry-breaking field.
+
+### Exp B — family zoo (3-D polytopes in an R⁴ hyperplane + 4-D hypercube)
+
+| structure | antipodal? | null_z |
+|---|---|---|
+| octahedron | closed | +1.6 |
+| cube-8 | closed | +1.3 |
+| icosahedron | closed | −0.7 |
+| dodecahedron-20 | closed | −1.7 |
+| hypercube-16 {±1}⁴ | closed | +0.3 |
+| **dodeca20 − 1 vertex** | one orphan antipode | **+36.8** |
+| octa − 1 | orphan | +5.4 |
+| cube8 − 1, icosa − 1, hypercube − 1 | orphan | +0.2, +0.8, +0.5 |
+| tetrahedron | not closed (zero net sum) | +2.8 |
+
+Findings: (i) **every centrally-closed polytope across families is dead** —
+cross-dimensional confirmation of S2's antipodal12 pin; (ii) breaking closure
+by a *single* orphaned antipode can fully restore the signal (dodeca−1 →
+z=+36.8), but only when the orphan opens a *directional gap* against the rest
+of the set — cube−1/icosa−1 stay dead (one orphan among few, or near-uniform
+coverage → induced polarity/gap geometry below threshold). (iii) tetrahedron:
+not centrally symmetric but zero net polarity; marginally dead (z=2.8).
+Net polarity alone is not the full order parameter — **gap geometry** (where
+the missing directions are relative to present ones) participates.
+
+## 6. Consolidated findings (what we now assert)
+
+- **F1 (robust, cross-family):** exact central symmetry of the preference
+  substrate annihilates the boundary-negotiation signal. Sufficient condition
+  for death; verified on 600-cell, 24-cell, random antipodal pairs, octa,
+  cube, icosa, dodeca, hypercube.
+- **F2 (robust):** death is reversible and causal — symmetry-breaking field
+  restores; the alive region is a window of net polarity (Goldilocks between
+  cancellation and single-basin saturation), with the dead symmetric state a
+  knife-edge at one end.
+- **F3 (new, one-instance):** single-vertex gap opening (dodeca−1) suffices
+  for full restoration in dense direction sets; whether it fires depends on
+  gap geometry, not count.
+- **R1 (withdrawn):** the S2/T1 "seed-deafness = no history" criterion C2 —
+  confounded by per-seed structure re-draw; see §4.
+
+## 7. What this does to the Tegmark program
+
+Tegmark: all structures exist, weight unknown (measure problem). Our result
+carves the ensemble: **inhospitable ⊃ centrally-symmetric loci**, and this is
+checkable by direct computation on any candidate structure — Natal's
+unfalsifiability objection loses force against *this* part of MUH. It also
+discriminates between measure proposals: uniform weighting is wrong (there are
+provably dead structures); description-length (Schmidhuber) and
+algorithmic-probability (Müller) measures don't currently know about the
+symmetry axis at all. "Hospitable iff broken symmetry (with gap geometry)" is
+a candidate **support condition** any measure must respect. Dual endpoint from
+the VFD lane (vfd_bridge S1): designed-null structure lives AT maximal
+symmetry; bearer/boundary structure lives at BROKEN symmetry — two ends of the
+Scaling Law of Symmetry, now both measured.
+
+## 8. Next experiments (queued, in order)
+
+- **T3 — proper history test:** fixed substrate, vary only agent init/seeds;
+  measure agreement of basin *identity* across runs (mutual information,
+  path-space overlap of transition sequences). This is where history-bearing
+  state is actually tested; the null is T2's finding that event *rates* are
+  seed-deaf everywhere.
+- **T4 — polarity–gap phase diagram:** interpolate continuously between
+  cancellation (antipodal pairs) and saturation (all-aligned) along two axes
+  (net polarity, isotropy/gap structure); locate the alive region boundary;
+  expect a first-order-like edge at boiling (TR→1) and a soft edge at
+  cancellation.
+- **T5 — measure probe:** description-length (LZ on quantized vertex sets) vs
+  hostability across a structure zoo — direct empirical comparison of our
+  support condition against Schmidhuber-style measures.
+- **T6 — bearer readout upgrade:** if T3 shows basin-identity persistence on
+  windowed substrates, port the same test to the market-graph lane (LPF basin
+  structure is empirically non-antipodal — candidate hospitable structure).
+
+## 9. Reproduction
+
+```
+cd FourD
+.venv/Scripts/python.exe vfd_bridge/verify_vfd_spectrum.py     # VFD table check
+.venv/Scripts/python.exe vfd_bridge/s2_substrate_control.py    # S2
+.venv/Scripts/python.exe tegmark_bridge/t1_sas_census.py       # T1 (see R1 caveat)
+.venv/Scripts/python.exe tegmark_bridge/t2_mechanism.py        # T2
+```
+
+## 10. Limitations
+
+- One engine family; 'substrate' = preference geometry, not Laplacian-coupled
+  node dynamics (that variant remains open and is the honest upgrade path
+  toward VFD-style physics claims).
+- 3 seeds per variant; boundary_metrics null uses label shuffling (50).
+- Polytope vertices enter the engine as directions only — edge structure of
+  the polytopes is unused here (S1 covers the edge/spectral side).
+- Gap-geometry dependence (F3) is single-instance (dodeca); T4 must map it.
+- C1 threshold (z>3) is conventional, not derived.
