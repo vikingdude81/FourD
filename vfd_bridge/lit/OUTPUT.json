@@ -1,0 +1,86 @@
+{
+  "report_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/vfd_bridge/lit/REPORT.md",
+  "funnel": "14 queries -> 753 papers recovered -> 15 selected -> 14 downloaded (14 PDFs, 21.5 MB) / 14 extracted (14 TXT, 0.97 MB) / Total: 22.46 MB",
+  "top_papers": [
+    {
+      "id": "2609.10386",
+      "title": "Making the Graph Laplacian Physical: Multiscale Coarse-Graining in Electrical Oscillator Networks",
+      "why": "Direct physical realization of coupled oscillator model; Laplacian spectrum as measurable design principle"
+    },
+    {
+      "id": "2605.17951",
+      "title": "Graph-Theoretic Detection of Hilbert Space Fragmentation",
+      "why": "Graph-theoretic diagnostics for ergodicity breaking; matches user's critical phase transitions"
+    },
+    {
+      "id": "2607.14168",
+      "title": "Tight Wavelet Frames on Graphs via Isometric Group Embedding",
+      "why": "Concrete mechanism for highly symmetric networks; tight frame construction"
+    },
+    {
+      "id": "2606.19404",
+      "title": "Thermodynamic Signatures of Reasoning: Free-Energy and Spectral-Form-Factor Diagnostics",
+      "why": "Spectral entropy as diagnostic; RMT statistics for complexity measurement"
+    },
+    {
+      "id": "2611.21670",
+      "title": "Resistance-regular graphs need not be regular",
+      "why": "Connects spectral properties to graph regularity; spectral geometry of structured graphs"
+    },
+    {
+      "id": "2609.22909",
+      "title": "Spectral Characterization and Network Systems Dynamics of Zero-Divisor Topologies",
+      "why": "Highly symmetric discrete architectures; integral Laplacian spectrum with modal timescales"
+    },
+    {
+      "id": "2607.03388",
+      "title": "The Equality Cases For the Laplacian Conjecture of Brouwer",
+      "why": "Spectral constraints on threshold graphs (highly symmetric class)"
+    },
+    {
+      "id": "2605.24640",
+      "title": "Laplacian Spectrum of the Weakly Zero-Divisor Graph of a Finite Commutative Ring",
+      "why": "Closed-form Laplacian spectrum for structured graphs; Laplacian integrality"
+    },
+    {
+      "id": "2608.16129",
+      "title": "Equality Cases for the Face-Degree Majorization Theorem on Simplicial Complexes",
+      "why": "Extends spectral majorization to simplicial complexes (higher-dimensional polytopes)"
+    },
+    {
+      "id": "2611.06981",
+      "title": "The Spectral Theory of Cographs: A Survey, Organized by Graph Matrix",
+      "why": "Comprehensive spectral theory background; twin-reduction theory for Laplacian spectrum"
+    },
+    {
+      "id": "2611.04995",
+      "title": "Exact Selective Inference for Spectral Clustering via Piecewise-Constant Graph Perturbation",
+      "why": "Connects Laplacian spectrum to dimensionality reduction via spectral clustering"
+    },
+    {
+      "id": "2606.20943",
+      "title": "Quantum Dust from the Curse of Dimensionality",
+      "why": "Spectral dimension measurement; eigenvalue-density criterion separates artifact from genuine dimension"
+    },
+    {
+      "id": "2602.03698",
+      "title": "Data-Driven Graph Filters via Adaptive Spectral Shaping",
+      "why": "Spectral filtering via Chebyshev polynomials; interpretable multi-scale responses"
+    },
+    {
+      "id": "2607.00063",
+      "title": "Spectral Geometry and Bosonic-Bloch Probes: Explorations in Quantum Learning",
+      "why": "Spectral geometry as measurable quantum-state structure; spectral dimension measurement"
+    }
+  ],
+  "observations": [
+    "Spectral geometry is physically realizable: 2609.10386 demonstrates that Laplacian eigenvectors become measurable voltage patterns and eigenvalues quantify resistive damping.",
+    "Highly symmetric structures have integral spectra: Multiple papers (2609.22909, 2605.24640) show zero-divisor graphs have entirely integral Laplacian spectra, supporting VFD's discrete spectrum families.",
+    "Mode selection via spectral gaps: The literature uses spectral gaps to identify collective variables (2609.10386, 2602.03698), aligning with VFD's H(lambda) = 7 - lambda/2 cancellation principle.",
+    "Spectral entropy as diagnostic: Multiple papers (2606.19404, 2607.00063) use spectral entropy and RMT statistics for model diagnostics, supporting the complexity scaling pillar.",
+    "Tight frames via group embeddings: 2607.14168 constructs tight wavelet frames on highly symmetric graphs via isometric group embeddings with O(JN log N) transforms.",
+    "Axis collision warning: The literature conflates three 'level' schemes (grain of description, structural correspondence strength, capacity hierarchy). User's seven-level hierarchy needs explicit separation.",
+    "Spectral dimension measurement: 2606.20943 and 2607.00063 show spectral dimension measurable from eigenvalue density near zero (power-law tail = genuine dimension; single scale above gap = two).",
+    "Fragmentation detection: 2605.17951 demonstrates graph-theoretic diagnostics for Hilbert space fragmentation, capturing hierarchy of dynamical time scales."
+  ]
+}

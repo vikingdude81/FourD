@@ -1,0 +1,77 @@
+[
+  [
+    "2605.17951",
+    "Graph-Theoretic Detection of Hilbert Space Fragmentation",
+    "Connects graph structure to Hilbert space - relevant for mode analysis"
+  ],
+  [
+    "2605.24640",
+    "Laplacian Spectrum of the Weakly Zero-Divisor Graph of a Finite Commutative Ring",
+    "Analyzes Laplacian spectrum of structured graphs - spectral theory"
+  ],
+  [
+    "2606.20943",
+    "Quantum Dust from the Curse of Dimensionality",
+    "Connects spectral properties to dimensionality and mode structure"
+  ],
+  [
+    "2607.03388",
+    "The Equality Cases For the Laplacian Conjecture of Brouwer",
+    "Deals with Laplacian spectrum constraints on graphs - spectral geometry of graphs"
+  ],
+  [
+    "2607.14168",
+    "Tight Wavelet Frames on Graphs via Isometric Group Embedding",
+    "Connects graph spectra to tight frames and group symmetries - highly symmetric networks"
+  ],
+  [
+    "2608.16129",
+    "Equality Cases for the Face-Degree Majorization Theorem on Simplicial Complexes",
+    "Extends spectral majorization to simplicial complexes - highly symmetric structures"
+  ],
+  [
+    "2609.10386",
+    "Making the Graph Laplacian Physical: Multiscale Coarse-Graining in Electrical Oscillator Networks",
+    "Directly connects graph Laplacian to physical oscillator networks with measurable modes - matches user's coupled-oscillator model"
+  ],
+  [
+    "2609.14110",
+    "Torsion detection in clique complexes is conditionally QMA_1-hard",
+    "Connects Laplacian spectra to topological features (torsion) - relates to highly symmetric structures"
+  ],
+  [
+    "2609.22909",
+    "Spectral Characterization and Network Systems Dynamics of Zero-Divisor Topologies",
+    "Uses Laplacian spectrum for consensus dynamics, reliability, transport - matches mode selection theme"
+  ],
+  [
+    "2609.26895",
+    "The Laplacian S_{n,n} conjecture is true",
+    "Deals with Laplacian spectrum structure and eigenvalue constraints on graphs"
+  ],
+  [
+    "2610.24431",
+    "Low-Bit Distributed Constrained Optimization with Application to Optimal Scheduling and Allocation",
+    "Uses graph Laplacian spectrum for network optimization - applies to scale-free networks"
+  ],
+  [
+    "2611.04995",
+    "Exact Selective Inference for Spectral Clustering via Piecewise-Constant Graph Perturbation",
+    "Connects Laplacian spectrum to dimensionality reduction via spectral clustering"
+  ],
+  [
+    "2611.06981",
+    "The Spectral Theory of Cographs: A Survey, Organized by Graph Matrix",
+    "Comprehensive survey of spectral graph theory including Laplacian - provides theoretical background"
+  ],
+  [
+    "2611.21670",
+    "Resistance-regular graphs need not be regular",
+    "Connects spectral properties (Laplacian pseudoinverse) to graph regularity - spectral geometry"
+  ],
+  [
+    "2611.26963",
+    "Spectral Entropy of Graph Signal Processing",
+    "Directly addresses spectral entropy of graphs - matches user's spectral entropy pillar"
+  ]
+]
