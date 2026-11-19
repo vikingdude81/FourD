@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "title": "Mathematical Universe Hypothesis Literature Base",
+    "description": "Literature sweep on Tegmark Level IV, ontic structural realism, measure problem, Godel incompleteness constraints, Schmidhuber algorithmic measure, SAS/digital physics",
+    "version": "1.0",
+    "generated": "2024-11-19",
+    "workspace": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit"
+  },
+  "papers": [
+    {
+      "id": "physics/0510188",
+      "title": "On Math, Matter and Mind",
+      "authors": "Piet Hut, Mark Alford, Max Tegmark",
+      "category": "physics.pop-ph",
+      "published": "2006",
+      "summary": "Fundamentalist/secular/mystic views on Penrose's math-matter-mind triangle; Tegmark advocates fundamentalist view that math embodies reality; Hut mystic view; Alford secular view. Discusses computable structures and measure problem resolution via restricting to computable/decidable mathematical structures.",
+      "pdf_path": null,
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-2ab061400f.md",
+      "tags": [
+        "MUH",
+        "Hut-Alford-Tegmark",
+        "measure problem",
+        "computability",
+        "Level IV"
+      ],
+      "source_url": "https://arxiv.org/abs/physics/0510188"
+    },
+    {
+      "id": "gr-qc/9604009",
+      "title": "Parallel Universes",
+      "authors": "Max Tegmark",
+      "category": "gr-qc",
+      "published": "1996",
+      "summary": "Introduces four levels of multiverse; Level IV (Mathematical Universe Hypothesis) posits all mathematical structures exist physically. Discusses measure problem for parallel universes.",
+      "pdf_path": null,
+      "text_path": null,
+      "tags": [
+        "MUH",
+        "multiverse",
+        "Level IV",
+        "measure problem",
+        "Tegmark"
+      ],
+      "source_url": "https://arxiv.org/abs/gr-qc/9604009"
+    },
+    {
+      "id": "0704.0646",
+      "title": "The Mathematical Universe",
+      "authors": "Max Tegmark",
+      "category": "gr-qc",
+      "published": "2007",
+      "summary": "MUH: external physical reality is an abstract mathematical structure. ERH implies MUH with broad math definition. Hypothesizes only computable and decidable structures exist (Godel sense), alleviating cosmological measure problem. Discusses consciousness, parallel universes, simulations, symmetries, irreducible representations, units, free parameters, randomness, initial conditions.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\0704.0646.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-e827d01723.md",
+      "tags": [
+        "MUH",
+        "Level IV",
+        "computable structures",
+        "Godel incompleteness",
+        "measure problem",
+        "OSR",
+        "Tegmark"
+      ],
+      "source_url": "https://arxiv.org/abs/0704.0646"
+    },
+    {
+      "id": "quant-ph/0011122",
+      "title": "Algorithmic Theories of Everything",
+      "authors": "J\u00fcrgen Schmidhuber",
+      "category": "quant-ph",
+      "published": "2000",
+      "summary": "Probability distribution P from which universe history is sampled represents TOE. Assumes P formally describable, imposing strong inductive bias. Shows P(x) small for universe lacking short description. Studies TOEs spanned by two Ps: one from most compact constructive descriptions (Solomonoff algorithmic probability, Kolmogorov complexity), other from fastest way of computing everything (Levin universal search). Derives P-specific consequences for evolving observers, inductive reasoning, quantum physics, philosophy, expected duration of universe.",
+      "pdf_path": null,
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-aad8c4c6cb.md",
+      "tags": [
+        "Schmidhuber",
+        "algorithmic probability",
+        "Kolmogorov complexity",
+        "measure",
+        "TOE",
+        "algorithmic measure"
+      ],
+      "source_url": "https://arxiv.org/abs/quant-ph/0011122"
+    },
+    {
+      "id": "0907.0216",
+      "title": "The Non-unique Universe",
+      "authors": "Claus Kiefer",
+      "category": "gr-qc",
+      "published": "2009",
+      "summary": "Analyzes multiverse existence in mathematical physics via mathematical logic concepts. Tegmark's 2008 paper incorporated Godel incompleteness and Church-Turing uncomputability, proposing only computable/finite computable structures physically exist. Assesses Godel incompleteness implications for TOEs and whether parameter-free TOE negates multiverse. Discusses elementary equivalence, L\u00f6wenheim-Skolem theorem implications for multiverse cardinality.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\0907.0216.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-ef668a2a5e.md",
+      "tags": [
+        "MUH",
+        "Godel incompleteness",
+        "multiverse",
+        "measure problem",
+        "computable structures",
+        "Tegmark"
+      ],
+      "source_url": "https://arxiv.org/abs/0907.0216"
+    },
+    {
+      "id": "2305.07331",
+      "title": "G\u00f6del's undecidability theorems and the search for a theory of everything",
+      "authors": "Claus Kiefer",
+      "category": "gr-qc",
+      "published": "2024",
+      "summary": "Investigates whether Godel undecidability theorems play crucial role in search for unified physics theory. Concludes that unless spacetime fundamentally discrete, can never decide whether given theory is final. Relevant for canonical quantum gravity and string theory. Discusses Godel's role in TOE search, continuum vs discrete spacetime, Tegmark's computable structures assumption, spectral-gap problem undecidability.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\2305.07331.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-2bd867c846.md",
+      "tags": [
+        "Godel",
+        "undecidability",
+        "TOE",
+        "MUH",
+        "computability",
+        "discrete spacetime",
+        "Kiefer"
+      ],
+      "source_url": "https://arxiv.org/abs/2305.07331"
+    },
+    {
+      "id": "2407.14238",
+      "title": "Univalence and Ontic Structuralism",
+      "authors": "Bryan W. Dutta",
+      "category": "math.CT",
+      "published": "2024",
+      "summary": "Persistent challenge of formulating ontic structuralism in rigorous manner. Argues Univalent Foundations (UF) with axiom that all isomorphic structures identical offer rigorous logical framework implementing ontic structuralism, more attractive than other structuralist frameworks. References Tegmark 2008 on Pythagorean form of OSR and self-aware substructures.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\2407.14238.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-1c5b9859ab.md",
+      "tags": [
+        "ontic structural realism",
+        "OSR",
+        "Univalent Foundations",
+        "MUH",
+        "Tegmark",
+        "structuralism"
+      ],
+      "source_url": "https://arxiv.org/abs/2407.14238"
+    },
+    {
+      "id": "2411.12562",
+      "title": "Refuting the Metaphysics of Wolfram and Tegmark",
+      "authors": "Joseph Natal",
+      "category": "physics.hist-ph",
+      "published": "2024",
+      "summary": "Challenges Wolfram's hypergraph dynamics and Tegmark's MUH metaphysics. Tegmark asserts objective Truth but relation to observer untenable; MUH proof via gematria criticized. Argues Wolfram and Tegmark conflate potential of mathematical truths with instantiation in reality. Discusses ruliad, observer theory, and persistent self-models in computational self-awareness framework.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\2411.12562.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-55e16568cb.md",
+      "tags": [
+        "MUH",
+        "Tegmark",
+        "Wolfram",
+        "ruliad",
+        "observer theory",
+        "self-aware agents",
+        "computational self-awareness"
+      ],
+      "source_url": "https://arxiv.org/abs/2411.12562"
+    },
+    {
+      "id": "2407.18219",
+      "title": "Recursive Introspection: Teaching Language Model Agents How to Self-Improve",
+      "authors": "Zhiheng Xia, et al.",
+      "category": "cs.AI",
+      "published": "2024",
+      "summary": "RISE algorithm endows LLMs with self-improvement capability via iterative self-training. Bootstraps on-policy rollouts from learner with better responses from best-of-N on multiple revision candidates. Fine-tunes using reward-weighted regression objective. Demonstrates monotonically increasing task performance over turns, generalizing to OOD prompts. Relevant to persistent self-models and recursive self-improvement in agents.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\2407.18219.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-a3a4210b14.md",
+      "tags": [
+        "recursive self-improvement",
+        "SARSI",
+        "self-aware agents",
+        "persistent self-models",
+        "introspection",
+        "agents"
+      ],
+      "source_url": "https://arxiv.org/abs/2407.18219"
+    },
+    {
+      "id": "2607.12254",
+      "title": "Self-Aware Recursively Self-Improving Agents for Personal Singularity",
+      "authors": "Chengshuai Yang",
+      "category": "cs.CV",
+      "published": "2026",
+      "summary": "Proposes SARSI agents: governed agents maintaining persistent, machine-readable self-model of identity, goals, capabilities, limitations, uncertainty, relationships, autobiographical history, and developmental change. Functional self-awareness does not imply phenomenal consciousness. Architecture includes scope router, evidence-gated improvement loop, Personal Singularity OS. Formalizes functional self-awareness and bounded recursive self-improvement.",
+      "pdf_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\pdfs\\2607.12254.pdf",
+      "text_path": "C:/Users/akbon/OneDrive/Documents/GitHub/FourD/tegmark_bridge/lit\\txt\\arxiv.org-91ac7d50a7.md",
+      "tags": [
+        "SARSI",
+        "self-aware agents",
+        "recursive self-improvement",
+        "persistent self-models",
+        "computational self-awareness",
+        "functional awareness"
+      ],
+      "source_url": "https://arxiv.org/abs/2607.12254"
+    },
+    {
+      "id": "2412.02826",
+      "title": "Algorithmic idealism: what should you believe to experience next?",
+      "authors": [
+        "Markus P. M\u00fcller"
+      ],
+      "category": "quant-ph",
+      "published": "2024-12-04",
+      "summary": "Formal framework making 'theories of everything' empirically decidable via first-person expectation updates; formalizes/extends Tegmark's MUH and Schmidhuber's ATOE with an explicit measure (algorithmic probability) over observer-moments.",
+      "tags": [
+        "measure-problem",
+        "MUH",
+        "algorithmic-probability",
+        "SAS"
+      ],
+      "pdf_path": "pdfs/2412.02826.pdf",
+      "text_path": "txt/arxiv.org-1c5b9859ab.md",
+      "source_url": "https://arxiv.org/abs/2412.02826",
+      "audit": "added by parent 2026-11-19: txt already on disk, PDF downloaded by parent, ID verified via export API"
+    }
+  ]
+}
