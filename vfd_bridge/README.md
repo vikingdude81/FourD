@@ -47,13 +47,33 @@ curve.
 
 ## Planned experiments
 
-- **S2 — symmetric-substrate control for UniversalEngine.** Add 600-cell /
-  24-cell as substrates in the topology-swap suite. Note: current
-  `generate_preferences(topology=...)` couples n_sub=8 subsystems; a
-  120-node graph needs a new substrate-coupling mode (graph Laplacian
-  coupling A into the engine, subsystems read node states). Prediction:
-  maximally symmetric substrate flattens basin boundaries → bearer/gateway
-  effects weaken; if they SURVIVE, the effect is dynamical, not geometric.
+- **S2 — symmetric-substrate control (RUN 2026-11-19, `s2_substrate_control.py`).**
+  Replaced UniversalEngine's preference-direction set with polytope vertex
+  sets (unit vectors in R⁴). Results (3 seeds × 1000 steps × N=128):
+
+  - `poly24_24` / `poly600_120` (full 24-cell / 600-cell vertex substrates):
+    **boundary-negotiation signal completely dead** — null_z +0.2/−0.2,
+    Cohen's d ≈ 0, ecr ≈ 0. Not weakened: annihilated.
+  - `rand24` / `rand120` (random directions, same subsystem counts): signal
+    SURVIVES (null_z ≈ +16). So it is not subsystem count.
+  - `antipodal12` control (12 random dirs + their antipodes, no polytope
+    structure): signal dead (z=+0.4, d≈0) — **the mechanism is central
+    symmetry (P = −P), which makes the preference force field cancel
+    exactly**, not H4-specific symmetry.
+  - `poly600_s8` (8 vertices subsampled from the 600-cell, symmetry broken):
+    signal survives (z ≈ +15, high variance).
+  - Bonus observation: transition_rate for antipodal-closed substrates is
+    identical across all seeds (0.365 ± 0.001) — dynamics loses
+    seed-sensitivity, consistent with history-bearing structure requiring
+    broken symmetry.
+
+  **Verdict:** falsifies pre-registered P2 as written — the bearer/gateway
+  signal is NOT substrate-invariant; it requires a symmetry-broken
+  preference geometry. Read with S1 as two sides of the Scaling Law of
+  Symmetry: *designed-null structure (VFD) lives at maximal symmetry;
+  boundary-negotiation/bearer structure (FourD) lives at broken symmetry.*
+  Caveat: 'substrate' here = preference geometry only; a true
+  Laplacian-coupled node dynamics substrate is still open.
 - **S3 — ordered filter gating (history-bearing).** Apply spectral families'
   cancellation in different *time orders* as dynamical gates on the engine;
   test whether construction order changes subsequent regime dynamics. VFD's

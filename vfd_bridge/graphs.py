@@ -18,7 +18,8 @@ def _unit_vertex_graph(vertices, edge_len, tol=1e-6, name=""):
     P = np.asarray(vertices, dtype=float)
     d = np.linalg.norm(P[:, None, :] - P[None, :, :], axis=-1)
     A = (np.abs(d - edge_len) < tol).astype(int)
-    return A, {"name": name, "n": len(P), "degree": int(A.sum(1)[0])}
+    return A, {"name": name, "n": len(P), "degree": int(A.sum(1)[0]),
+               "vertices": P}
 
 
 def six00_cell():
