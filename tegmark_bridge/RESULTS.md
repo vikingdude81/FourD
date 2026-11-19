@@ -133,6 +133,54 @@ not centrally symmetric but zero net polarity; marginally dead (z=2.8).
 Net polarity alone is not the full order parameter — **gap geometry** (where
 the missing directions are relative to present ones) participates.
 
+## 5.5 D1/D1b — mechanism autopsy (`d1_autopsy.py`, `d1b_fatigue.py`)
+
+Why are centrally-closed substrates dead? Three measurements, one
+confirmed mechanism, one killed hypothesis.
+
+**(a) Attention deadlock (confirmed — the general mechanism).** After 1000
+steps, accumulated per-subsystem fatigue: 600-cell and antipodal12 =
+**exactly 0.00** (all agents, all subsystems); alive substrates (600cell_s8,
+cyclic8) = up to 2.97. Reading the update rule:
+`F += rate·a + 0.03·excess(a) − recovery·(1−a)`, so F stays pinned at 0
+while attention `a_j` never crosses a concentration threshold
+(≈ recovery/(rate+recovery)). In an antipodally closed set with affine
+influence (0.5+0.3 cos), every attractor pull has a matched repeller of
+equal magnitude, so expected attention is exactly uniform — **no subsystem
+can win attention long enough to accumulate fatigue**. Fatigue is the fuel
+of commitment rotation; without it, agents relax toward fixed axes and
+transitions become pure noise crossings: TR seed-locked at 0.365,
+post-transition clarity at chance (z≈0). Dead does not mean motionless —
+it means unfueled.
+
+**(b) Zero-force certificate (confirmed — sharper for true designs).** The
+second-moment matrix M2 = Σ p pᵀ is isotropic **exactly** for the 24-cell
+(dev2 = 0.0) and 600-cell (dev2 = 3×10⁻¹⁸): both are exact spherical
+2-designs. Under uniform attention (from (a)), the net tangential preference
+force is (M2u − u(uᵀM2u))/n, which **vanishes identically for every agent
+configuration** when M2 ∝ I. So the full 24-/600-cell substrates are
+provably force-free, not just empirically quiet. antipodal12 has dev2 =
+0.46 (anisotropic) yet still dies → deadlock (a) is the general mechanism;
+the zero-force theorem is the special knife-edge case. (dev4 values in
+`d1_autopsy.json` carry Monte-Carlo error from the rotation-average
+estimator and are indicative only — do not cite.)
+
+**(c) Mirror-bounce hypothesis (KILLED).** Pre-registered expectation: dead
+systems' transitions are basin↔antipodal-basin bounces. Measured bounce
+fraction on s3: 0.000–0.003 everywhere, alive and dead. Withdrawn. (Odd
+side-observation: on flat4 dodeca-family bounce ≈ 0.67 with z=+21 —
+transitions there ARE mostly mirror-pair crossings yet the system is alive;
+flagged for T4, not explained.)
+
+**(d) Cross-engine map (flat4 vs s3, same substrates).** 600-cell dead in
+BOTH engines (z +0.9 / +0.2) — engine-robust, as the theorems predict.
+dodeca20: dead on s3 (z −1.6) but ALIVE on flat4 (+21.2) → that death is
+engine/embedding-conditioned, not structural. dodeca20−1: alive in both
+(+39.5 / +23.4) — the single-gap restoration is the most robust positive
+result in the program.
+
+
+
 ## 6. Consolidated findings (what we now assert)
 
 - **F1 (robust, cross-family):** exact central symmetry of the preference
@@ -146,8 +194,51 @@ the missing directions are relative to present ones) participates.
 - **F3 (new, one-instance):** single-vertex gap opening (dodeca−1) suffices
   for full restoration in dense direction sets; whether it fires depends on
   gap geometry, not count.
+- **F4 (mechanism, confirmed):** attention deadlock — antipodally closed
+  substrates hold attention exactly uniform, so fatigue (commitment fuel)
+  accumulates at exactly zero; without fatigue there is no commitment
+  rotation, only noise crossings. Dead = unfueled, not motionless.
+- **F5 (certificate):** 24-cell and 600-cell are exact spherical 2-designs
+  (M2 isotropic to machine precision) ⇒ provably vanishing tangential
+  preference force under uniform attention. Computable death certificate for
+  any candidate structure: check central symmetry, then M2 isotropy.
+- **F6 (engine map):** 600-cell death is engine-robust (s3 + flat4);
+  dodeca20 death is engine-conditioned (alive on flat4); single-gap
+  restoration (dodeca−1) is robust in both. Order-parameter status differs
+  per structure — the certificate (F5) is the part that transfers.
 - **R1 (withdrawn):** the S2/T1 "seed-deafness = no history" criterion C2 —
   confounded by per-seed structure re-draw; see §4.
+- **R2 (withdrawn):** mirror-bounce hypothesis for dead-system transitions —
+  measured bounce fraction ≈ 0 on s3 for all structures; see §5.5(c).
+
+## 6.5 Provability ladder (what is claimable at each grade)
+
+**Theorem grade (clean math, third-party checkable):**
+- T-A: 24-cell/600-cell are exact spherical 2-designs; M2 = (n/4)I
+  (verified to 3×10⁻¹⁸). Under uniform attention the net tangential
+  preference force is identically zero for every configuration.
+- T-B: in an antipodally closed substrate with affine influence
+  0.5+0.3(u·p), the attention-weight multiset pairs exactly
+  (w, mirrored), bounding attainable single-subsystem concentration by a
+  factor ~4× the uniform share; with recovery-biased fatigue this pins
+  F ≡ 0 whenever 4/n_sub·Z < threshold — observed exactly.
+- Corollary (death certificate): any structure that is (i) centrally closed
+  and (ii) n_sub above the concentration bound is force-free and
+  fatigue-dead for this engine family. Computable on any candidate set in
+  O(n·d²).
+
+**Empirical grade (reproducible at fixed seeds, commands in §9):**
+- T1 collapse dial, T2 restore window, family zoo, D1 autopsy tables.
+
+**Prediction grade (falsifiable by outsiders):**
+- Any attention+fatigue collective with symmetric substrate pairing should
+  show the fatigue deadlock; the T4 phase boundary should show a boiling
+  edge at TR→1; LPF-style market substrates (non-antipodal by inspection)
+  should pass the certificate.
+
+**NOT claimable yet:** history-bearing status (R1 pending T3), universality
+beyond two manifold engines, anything market-empirical until the
+certificate is actually run on LPF substrates (T6).
 
 ## 7. What this does to the Tegmark program
 
@@ -191,6 +282,8 @@ cd FourD
 .venv/Scripts/python.exe vfd_bridge/s2_substrate_control.py    # S2
 .venv/Scripts/python.exe tegmark_bridge/t1_sas_census.py       # T1 (see R1 caveat)
 .venv/Scripts/python.exe tegmark_bridge/t2_mechanism.py        # T2
+.venv/Scripts/python.exe tegmark_bridge/d1_autopsy.py          # D1 (isotropy + forensics)
+.venv/Scripts/python.exe tegmark_bridge/d1b_fatigue.py         # D1b (fatigue deadlock)
 ```
 
 ## 10. Limitations
