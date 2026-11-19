@@ -428,3 +428,19 @@ available). Trace: outputs/t7_evolve.json.
   CERT2 scalars should be computed with multiplicity weights.
 Caveats: one evolution run, pop 12; fitness single-seed (but champion
 validated held-out). Plateau suggests diminishing returns at this budget.
+
+## 5.11 E2 — the immortal entity is a structure property (18/18)
+
+dodeca19, 4000 steps, 12 seeds x N=128 + 3 seeds x N=64 + 3 x N=256:
+- Winner basin identical in 18/18 runs: basin 15, mean share 0.807-0.810
+  of all agents, entropy 0.75-0.81, tr~0.263, z 45..125 (all HOST-grade).
+- Strict 'zero leader changes' 10/18; the other 8 had exactly ONE flip
+  (max_life 3999/4000) — a one-step initialization transient. Effective
+  permanence: 18/18.
+- Seed-deaf AND density-deaf (N 64->256 changes share by <0.005).
+- Mechanism mapped: basin 15's center cos=0.978 to preference vertex 2,
+  and cos=-0.706 to the DELETED vertex. The gap does not crown its own
+  shadow — it kills the ANTIPODAL RIVAL of its neighbor, and that
+  neighbor's basin inherits the world. Gap-as-rival-removal -> attractor
+  monoculture. (Russell-zone reading: delete a repeller node, the attractor
+  facing it takes the flow.)
