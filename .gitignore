@@ -54,3 +54,5 @@ outputs/**/phase_cartography_results*.csv
 tools/fallback_config.json
 vfd_bridge/lit/pdfs/
 vfd_bridge/lit/txt/
+tegmark_bridge/lit/pdfs/
+tegmark_bridge/lit/txt/
