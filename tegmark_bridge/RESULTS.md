@@ -404,3 +404,27 @@ lifespans); strong-gap=one immortal entity (order without negotiation).
 'dies and resurrects' is now directly observable as occupancy events.
 
 T7 (selection for hostability, evolving substrates) queued in background.
+
+## 5.10 T7 — selection for hostability: what geometry does selection want?
+
+Evolution over preference multisets (pop 12, 16 gens, fitness = engine z
+with boil penalty, single fitness seed; closure mutation deliberately
+available). Trace: outputs/t7_evolve.json.
+
+- Fitness climbed 23.8 -> 45.5 and plateaued at gen 8.
+- **Selection never kept symmetry**: antiFrac transiently 0.118 at gen 2,
+  pruned to 0.0 by gen 5. Closure mutations are available and REJECTED.
+  CERT2's axis is causally right: hostability-selection avoids closure.
+- **Fuel was selected upward**: Brel 0.31 -> 0.40, the highest in any
+  known substrate (dodeca19 is 0.052). Points pruned 16 -> 14.
+- **Novel motif discovered by selection: duplicated preferences.**
+  Final champion (n=14) has one exact duplicate pair (drel=0). Held-out
+  validation (3 fresh seeds): z=+56.2 sd 2.2, tr=0.534 -> genuinely
+  HOSTS, stronger than dodeca19 at equal horizon. Removing the duplicate:
+  z stays +55.1 but tr jumps 0.534 -> 0.840 (boiling edge). The duplicate
+  is a *stabilizer*: repeated preference = weighted attractor.
+- Consequence: the substrate is a MULTISET, not a set. Hostability
+  depends on multiplicities (weights), not just point positions.
+  CERT2 scalars should be computed with multiplicity weights.
+Caveats: one evolution run, pop 12; fitness single-seed (but champion
+validated held-out). Plateau suggests diminishing returns at this budget.
