@@ -52,3 +52,5 @@ outputs/**/phase_cartography_results*.csv
 
 # Tool configs (may contain API keys)
 tools/fallback_config.json
+vfd_bridge/lit/pdfs/
+vfd_bridge/lit/txt/
