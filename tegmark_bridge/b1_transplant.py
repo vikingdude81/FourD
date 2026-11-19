@@ -59,7 +59,7 @@ def run(mode, seed):
 
     def set_prefs(P):
         Pt = torch.tensor(P, dtype=torch.float32, device=eng.device)
-        Pt = Pt / Pt.norm(dim=1, keepdims=True)
+        Pt = Pt / Pt.norm(dim=1, keepdim=True)
         eng.prefs = Pt; eng.n_sub = Pt.shape[0]
 
     def wipe_bearer():

@@ -469,3 +469,36 @@ raw60: z=+122 tr=1.0 (boil) life_mean 1.37, births 5020 = flicker-only
   the full E1 taxonomy IN MARKET DATA.
 - Brel fell under weighting (.06->.03) while z rose: fuel fraction is
   not monotone in hosting; resolution/weights interact. CERT3 note.
+
+## 5.13 B1 — transplant test: the entity lives in the structure (decisive)
+
+dodeca19 immortal entity, structure swapped to 19 random pts at t=1500,
+restored at t=2500; B = bearer carried (u_t + fatigue preserved, fatigue
+now mislabeling foreign prefs), C = bearer wiped (u_t + fatigue reset).
+3 seeds each. Outputs/b1_transplant.json.
+
+- AWAY phase: entity fully lost in BOTH (share15 = 0.000, a new leader
+  arises from the random structure). Bearer continuity bought nothing.
+- BACK phase: basin 15 re-crowns COMPLETELY in both — share 0.810
+  (vs home 0.806-0.808), lead15_frac = 1.000 for the entire post-warmup
+  window (<=100 steps to full recrown, zero later flips).
+- B and C are numerically identical on every metric: the bearer's
+  preserved history (including fatigue misattached to wrong preferences)
+  has ZERO measurable effect on entity identity.
+- Verdict: entity = fixed point of (structure x engine). The bearer does
+  NOT carry entity identity across structure change. The bearer wall's
+  slogan tested in the negative direction: change the structure and the
+  entity changes, no matter what the bearer retains. History enters
+  identity via SEDIMENTED STRUCTURE (T7 weights = crystallized history),
+  not via agent state.
+- Market reading: regime identity should live in the sedimented landscape
+  (weighted attractors / king-node geometry), not in transient participant
+  state. Regime survives participant turnover; regime dies when the
+  landscape deforms.
+- CAVEAT (bug, recorded): the mode-A guard was missing — 'A' rows also
+  swapped structure (they duplicate B). True no-swap control is E2
+  (18/18 home share 0.807-0.81), which the back-phase matches exactly.
+  B-vs-C comparison (the actual dissociation) is unaffected.
+- Follow-up candidate: graded transplant — rotate prefs by angle theta,
+  plot recrown-time and entity-identity vs structural deformation;
+  gives a quantitative identity-survival curve.
