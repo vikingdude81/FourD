@@ -382,3 +382,25 @@ Findings:
 Honest verdict: Brel(=0)+pairing is a proof-grade DEATH certificate;
 conc+tr is an empirical BOIL certificate; neither yet a sufficiency
 certificate for hosting. Two failure modes, two axes, one scatter.
+
+## 5.9 E1 — entity watch: birth/death of substructures, directly observed
+
+4000-step runs, basin-occupancy time series (outputs/e1_entities.json/png):
+
+- cell600 / dodeca20 (closed): 0 entity births (occupancy never crosses
+  20%), leader flips every 1.7 steps, occupancy entropy 2.98-3.02 (~max
+  ln 24). Death signature = pure flicker, nothing ever born.
+- sub600_8 (host): 8731 births, entity lives mean 2.8 / max 38 steps,
+  entropy 1.34 -> a real ecology: entities are born, live, die.
+- dodeca19 (strong host): ONE immortal dominant basin (0 leader changes
+  in 4000 steps), entropy 0.79. Strong gap -> crystallization into a
+  single persistent entity, not an ecology.
+- random60 at long horizon: tr=0.98, z=-32.6 -> it boils at 4000 steps
+  despite z=+6 at 1000. HORIZON MATTERS: 'HOSTS' labels are
+  horizon-conditioned; logged as caveat for all short-run states.
+
+Taxonomy emerges: closed=no births; Goldilocks=entity ecology (finite
+lifespans); strong-gap=one immortal entity (order without negotiation).
+'dies and resurrects' is now directly observable as occupancy events.
+
+T7 (selection for hostability, evolving substrates) queued in background.
