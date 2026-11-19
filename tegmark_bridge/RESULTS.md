@@ -502,3 +502,39 @@ now mislabeling foreign prefs), C = bearer wiped (u_t + fatigue reset).
 - Follow-up candidate: graded transplant — rotate prefs by angle theta,
   plot recrown-time and entity-identity vs structural deformation;
   gives a quantitative identity-survival curve.
+
+## 5.14 B2 — graded transplant: identity radius and translating entities
+
+dodeca19 prefs rigidly rotated by theta in a fixed 2-plane at t=1500
+(planes/rotation identical across seeds; basin centers fixed in space).
+3 seeds x 8 angles. Outputs/b2_graded.json.
+
+theta  away_share15  away_leader  recrown15
+0      0.810         15           immediate (control clean)
+15     0.688         15           immediate
+30     0.384         15           167-212 steps
+45     0.106          8           never
+60     0.012          8           never
+90     0.000          8           never
+135    0.000          6           never
+180    0.000          6           never
+
+- Entity RIDES small deformations: leader stays basin 15 through 30 deg,
+  share decaying gracefully (0.81 -> 0.69 -> 0.38). IDENTITY RADIUS
+  between 30 and 45 degrees; the cliff is sharp.
+- Past the cliff the entity does NOT vanish: it is REBORN at a NEW
+  location, deterministically (same leader for all seeds at each theta).
+- Geometric check: rotating basin 15's center and finding nearest basin
+  centers predicts the handoff: 45-60 deg = knife-edge 15-vs-8 contest
+  (cos .864/.766 then .767/.756); 90+ deg basin 8 is the translated
+  shadow (observed leader 8 at 45-90; at 135-180 observed 6 vs predicted
+  8 with 8-vs-6 razor-thin cos .672/.644 — partial match, translation
+  confirmed at the contest level, exact bin handoff noisy at far angles).
+- Verdict: entity = relational shape of the structure (gap-shadow),
+  NOT a place. Rotate the geometry, the entity translates with it.
+  Combined with B1: bearer carries nothing; structure carries the
+  entity; and the entity survives relocation because it never lived at
+  a coordinate — it lived at the gap's shadow.
+- Market reading: a shifted/rotated GEX landscape should re-crown the
+  regime at the TRANSLATED king position, not the old strike bin.
+  Regime identity = relational shape, testable on strike-lattice shifts.
