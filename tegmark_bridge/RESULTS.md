@@ -444,3 +444,28 @@ dodeca19, 4000 steps, 12 seeds x N=128 + 3 seeds x N=64 + 3 x N=256:
   neighbor's basin inherits the world. Gap-as-rival-removal -> attractor
   monoculture. (Russell-zone reading: delete a repeller node, the attractor
   facing it takes the flow.)
+
+## 5.12 T6b — market through the multiset door (weighted prototypes + entity watch)
+
+Regime prototypes (kmeans on 504d SPY/SMH/IWM/MU directions) replicated
+proportional to cluster occupancy (total n=60), engine s3 N=128 2000
+steps x3 seeds. Outputs/t6b_weighted.json.
+
+k    unw z          wtd z        wtd tr  wtd life_mean/max  wtd share
+8    +4.7           +23.5        0.44    5.3 / 55           0.52
+16   -4.7           -13.0        0.53    2.7 / 21           0.39
+24   -20.0          -55.8 (ANTI) 0.29    1667 / 1999        0.79
+raw60: z=+122 tr=1.0 (boil) life_mean 1.37, births 5020 = flicker-only
+
+- Weighting CRYSTALLIZES: duplicates anchor a leader (share .14->.52 at
+  k8, .58->.79 at k24; k24-wtd leader never dies in 2000 steps).
+- But it does not rescue ANTI: k24 deepens (z -20 -> -55.8): the frozen
+  leader makes off-leader transitions clarity-LOSING events. Crystallized
+  market = immortal entity, anti-negotiation transitions.
+- The genuine win: k=8 WTD HOSTS (z=+23.5, tr=0.44, real entity ecology
+  mean life 5.3, max 55). Regime GRANULARITY was the hidden dial: coarse
+  weighted regimes -> ecology; fine weighted regimes -> monoculture;
+  raw daily directions -> flicker. Flicker->ecology->monoculture spans
+  the full E1 taxonomy IN MARKET DATA.
+- Brel fell under weighting (.06->.03) while z rose: fuel fraction is
+  not monotone in hosting; resolution/weights interact. CERT3 note.
