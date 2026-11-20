@@ -170,6 +170,26 @@ metaphysical reading: `METAPHYSICS.md`, lit dossier: `lit_entities/REPORT.md`.
   combos: (0°,×2) alive; **(30°,×2) DEAD** (both factors individually
   sublethal); (30°,×4) dead; (15°,×8) dead. ⇒ mortality is a region boundary;
   identity radius shrinks with engine chaos (critical noise ~4 at 0°, <2 at 30°).
+  AMENDED BY B3: the rotation axis measures grid-address loss, not form death.
+
+### B3 — co-rotating-frame transport (`b3_transport.py`, `b3b_addendum.py`)
+Rotate prefs by θ at t=1500, keep grid fixed, record continuous agent
+directions (eng.u_t) over away window [1600,2600), apply R(−θ) to them, then
+assign basins (replica rule argmax⟨u,center⟩; rule_match=1.000 vs engine
+history on every snapshot). Compare transported 24-bin occupancy vs
+no-rotation same-seed controls; baseline pairwise TV across control seeds
+= 0.0018–0.0023.
+- θ = 15..180°: transported leader = 15 at EVERY θ; transported share15
+  0.809–0.812; TV(transported vs control) 0.0005–0.0024 — inside the
+  run-to-run band except one seed at 90° and one at 180° marginally at/over
+  0.0023. Raw TV vs control grows 0.18→0.94 with θ (address loss only).
+- Wrong-transport controls at 45°: wrong plane TV 0.95, wrong angle (θ/3)
+  TV 0.53, no transport TV 0.83 — the collapse is specific to correct R(−θ).
+- Verdict: the form is the full distribution, not the winner; it rides the
+  structure equivariantly. B2's identity radius = fixed-grid artifact
+  (supersedes weakness #7 below). Zero history sediment at distribution
+  level. Real structural death now requires NON-rigid deformation
+  (gap-fill dodeca19→dodeca20, vertex displacement) measured co-rotating.
 
 ### Literature lane (claims about OTHER papers — verifiable independently)
 - VFD lit: papers registered incl. arXiv:2602.15029 (Karkada et al., symmetry
@@ -204,6 +224,8 @@ cd FourD
 .venv/Scripts/python.exe tegmark_bridge/b2_graded.py
 .venv/Scripts/python.exe tegmark_bridge/e3_agency.py
 .venv/Scripts/python.exe tegmark_bridge/e3b_lethality.py
+.venv/Scripts/python.exe tegmark_bridge/b3_transport.py
+.venv/Scripts/python.exe tegmark_bridge/b3b_addendum.py
 ```
 Raw JSON in `tegmark_bridge/outputs/` (gitignored; regenerate locally).
 Expected: seed-deterministic numbers within ±0.1 z on reruns (fixed seeds).
@@ -220,6 +242,8 @@ Expected: seed-deterministic numbers within ±0.1 z on reruns (fixed seeds).
 5. T7: single evolution run; duplicate-stabilizer claim from one champion.
 6. T6b market: single window/basket; k=8 HOSTS not certified across periods.
 7. dodeca19 radius measured in one plane family; "identity radius" is a
-   plane-specific number, not a global one.
+   plane-specific number, not a global one. SUPERSEDED by B3: the radius is
+   worse than plane-specific — it is a fixed-grid artifact; in the
+   co-rotating frame the form survives every rotation tested (≤180°).
 8. Horizon-conditioned states (random60) mean any label at 1000 steps needs
    the 4000-step check.

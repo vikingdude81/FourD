@@ -629,3 +629,59 @@ Metaphysical payload: the entity's mortality is a closed 2-manifold-ish surface 
 (structure-deformation x engine-chaos) space, computable by ladder bisection.
 Member-state attacks (E3) are off-manifold: they cannot reach it. Death requires
 moving the (structure, engine) pair across the surface.
+**Amended by B3 (§5.17): the ROTATION axis of this ladder measures address-loss,
+not form-death.** In the co-rotating frame the form survives all tested rotations.
+
+### 5.17 B3 — co-rotating-frame transport: specifying what survives across realizations
+
+Suggested by external frontier-model audit (recurrence-vs-continuity framing).
+Protocol (`b3_transport.py`, `b3b_addendum.py`; outputs b3_transport.json /
+b3b_addendum.json): rotate prefs by θ at t=1500 (B2 mechanism), leave the grid
+fixed, record CONTINUOUS agent directions eng.u_t over the away window
+[1600,2600), apply the inverse rotation R(−θ) to them, and only then assign
+basins (replicated engine rule argmax⟨u,center⟩, rule_match = 1.000 vs engine
+history at every snapshot). Compare the transported 24-bin occupancy against
+no-rotation controls at the same seed; baseline = pairwise TV across control
+seeds (0.0018–0.0023).
+
+θ   raw_leader  transported_leader  transported share15   TV(raw vs ctrl)  TV(transp vs ctrl)
+15   15          15                  0.810–0.811           0.184            0.0005–0.0010
+30   15          15                  0.809–0.811           0.534–0.539      0.0012–0.0013
+45    8          15                  0.809–0.811           0.828–0.833      0.0015–0.0016
+60    8          15                  0.809–0.812           0.926–0.927      0.0016–0.0021
+90    8          15                  0.809–0.811           0.938–0.939      0.0015–0.0024*
+135   6 (B2)     15                  0.809–0.812           —                0.0018–0.0021
+180   6 (B2)     15                  0.811                 —                0.0018–0.0023*
+(* = one seed marginally at/above baseline max 0.0023; everything else inside the band)
+
+Wrong-transport controls at θ=45 (b3b): wrong-plane R(−θ) → TV 0.95 (leader 2);
+wrong-angle R(−θ/3) → TV 0.53; no transport → TV 0.83. The TV collapse is
+specific to the correct inverse rotation.
+
+Findings:
+- **The form is the whole distribution, not the winner.** In the co-rotating
+  frame the FULL 24-bin population distribution matches the unrotated control
+  to within run-to-run noise at every θ tested (≤180°), leader back at 15 and
+  share restored to home value 0.81.
+- **The B2 identity radius (30–45°) is demoted: it is a property of the fixed
+  measuring grid, not of the entity.** What E3b logged as rotation-death (45°
+  never recrowns basin 15) is address-death: the form slides along its
+  rotation orbit and is fully intact; basin 8 is where the grid partially
+  sees the translated form. Raw TV grows with θ (0.18→0.94) exactly because
+  grid bins are fixed while the form moves.
+- **Zero hysteresis:** the transported away-window distribution equals what a
+  fresh run on the rotated structure produces — 1500 steps of prior history
+  left no sediment detectable in the distribution (fourth bearer-null
+  confirmation, now at distribution level, not just winner level).
+- Engine equivariance is empirically clean: no hidden symmetry-breaking in
+  initializations couples to the rotation.
+- **Consequence for the mortality surface:** pure rotation is a symmetry axis
+  — it cannot kill the form. The form's real structural death tests need
+  NON-rigid deformation: gap-filling (dodeca19→dodeca20 restores exact
+  closure = S2-verified true death), vertex displacement, partial-gap
+  interpolation — all measured in the co-rotating frame. Noise-axis deaths
+  (E3b ×4) remain real (transport = identity there).
+- Updated metaphysics: the Platonic form = the O(4)-orbit of the hosted
+  distribution; instantiations = grid addresses. "Death is translation"
+  (thesis 5) sharpens to "translation is not death": only symmetry-breaking
+  deformation or engine-phase change crosses the mortality surface.

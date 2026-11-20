@@ -84,6 +84,15 @@ representations; symmetry in the *substrate* destructively empties them.)
 B2: past the identity radius the entity does not smear — the leader role
 *translates* to basin 8, then 6, while the relational shape (gap-shadow geometry)
 is preserved at a new site. E3: member-level destruction is instantly repaired.
+B3 UPDATE (§5.17 RESULTS): the translation is exact. Undoing the imposed
+rotation on the recorded continuous directions, the FULL away-window
+population distribution matches the unrotated control within run-to-run
+noise at every θ ≤180° — leader back at 15, share 0.81. The "identity
+radius cliff" was a property of the fixed measuring grid, not of the form:
+**translation is not even death — only the address died.** The form is the
+O(4)-orbit of the hosted distribution; grid addresses are its slices.
+Real form-death needs symmetry-breaking (non-rigid) deformation or an
+engine-phase change; pure rotation cannot reach it.
 Reading: for these entities, **annihilation is exiting the hosting region of
 parameter space; everything short of that is relocation.** The user's earlier
 formulation — "the structure does not die; the dynamics hosted on it die, and a
