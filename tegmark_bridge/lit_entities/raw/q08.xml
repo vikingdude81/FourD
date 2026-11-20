@@ -1,0 +1,461 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/RVH7s6tA9h4evddV3z16u6nc+n8</id>
+  <title>arXiv Query: search_query=abs:"persistence conditions"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:59:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22persistence+conditions%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>23</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/math/0601103v2</id>
+    <title>Population Models With Delay in Dynamic Environment</title>
+    <updated>2006-03-15T18:32:03Z</updated>
+    <link href="https://arxiv.org/abs/math/0601103v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0601103v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the combined effects of periodically varying carrying capacity and survival rates on the fish population in the ocean (sea). We introduce the Getz type delay differential equation model with a control parameter which describes how fish are harvested. We will modify and extend harvesting model of an exploited fish population to include periodic and rotational harvesting rates. We study the existence of global solutions for the initial value problem, extinction and persistence conditions, and the existence of periodic solutions.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-01-05T17:52:37Z</published>
+    <arxiv:comment>15 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>L. Berezansky</name>
+    </author>
+    <author>
+      <name>L. Idels</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1212.5025v1</id>
+    <title>Persistence of complex food webs in metacommunities</title>
+    <updated>2012-12-20T13:14:53Z</updated>
+    <link href="https://arxiv.org/abs/1212.5025v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1212.5025v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Metacommunity theory is considered a promising approach for explaining species diversity and food web complexity. Recently Pillai et al. proposed a simple modeling framework for the dynamics of food webs at the metacommunity level. Here, we employ this framework to compute general conditions for the persistence of complex food webs in metacommunities. The persistence conditions found depend on the connectivity of the resource patches and the structure of the assembled food web, thus linking the underlying spatial patch-network and the species interaction network. We find that the persistence of omnivores is more likely when it is feeding on (a) prey on low trophic levels, and (b) prey on similar trophic levels.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-12-20T13:14:53Z</published>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Gesa A. Böhme</name>
+    </author>
+    <author>
+      <name>Thilo Gross</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.18818v1</id>
+    <title>Qualitative Analysis of a Three-Stage Anaerobic Digestion Model with Microbial Decay</title>
+    <updated>2026-04-20T20:38:19Z</updated>
+    <link href="https://arxiv.org/abs/2604.18818v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.18818v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We extend a three-stage anaerobic digestion model by incorporating microbial mortality into the hydrolysis of particulate organic matter. The model describes hydrolysis, acidogenesis, and methanogenesis, each with distinct dilution and decay rates, and accounts for non-monotonic growth in order to capture substrate inhibition. Two hydrolysis mechanisms are considered: a first-order formulation and a biomass-dependent one. The latter distinguishes hydraulic washout from intrinsic mortality and leads to different persistence conditions. For both models, we establish well-posedness and prove the positivity and boundedness of solutions. We then characterize all equilibria and analyze their local stability with respect to key operating parameters. The inclusion of microbial mortality provides a more general and biologically relevant framework, thereby enriching the qualitative dynamics compared to the classical AM2 model.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-20T20:38:19Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Radhouane Fekih-Salem</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.00178v3</id>
+    <title>Controlling synchronization dynamics via physics-informed neural networks</title>
+    <updated>2026-10-11T00:56:26Z</updated>
+    <link href="https://arxiv.org/abs/2601.00178v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.00178v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synchronization control in networked dynamical systems requires regulating not only whether coherence is achieved, but also when and to what extent it emerges. We propose a physics-informed neural network (PINN) framework for continuous-time synchronization regulation, in which system trajectories and control inputs are jointly parameterized and constrained by the governing dynamics. Macroscopic synchronization objectives are imposed directly at the trajectory level by enforcing persistence conditions on the order parameter after a prescribed target time. This formulation enables simultaneous control of synchronization time and coherence level without assuming any explicit feedback law or solving a strict optimal control problem. Numerical studies on networked Kuramoto oscillators demonstrate smooth synchronization with reduced transient control effort and competitive cumulative cost relative to analytical baselines. The framework remains effective in non-gradient and frustrated dynamics, highlighting physics-informed neural control as a flexible trajectory-level approach to synchronization regulation.</summary>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-01T02:36:35Z</published>
+    <arxiv:primary_category term="nlin.CD"/>
+    <arxiv:journal_ref>Phys. Rev. E 113, 064212 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Kaiming Luo</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.113.064212</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.113.064212" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.10581v1</id>
+    <title>On the formulation and analysis of a stage-structured eco-evolutionary model with pulsed disturbances</title>
+    <updated>2026-09-05T19:05:11Z</updated>
+    <link href="https://arxiv.org/abs/2609.10581v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.10581v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Motivated by the pulsed control and resulting evolution of harmful biological populations, we develop and analyze an ordinary differential equation model of an n-dimensional stage-structured population undergoing periodic disturbances. The eco-evolutionary model couples both ecological dynamics through life cycle information, and evolutionary dynamics of allele frequency changes. Building off prior work in eco-evolutionary models and theory of linear systems, we show that if a resistant allele is present in the population, the population will always approach full resistance. Furthermore, we establish persistence conditions and show that these depend solely on system dynamics at full resistance. Finally, we demonstrate the utility of this model via an application to the Spotted-Winged Drosophila, an invasive species often treated periodically with insecticides. We use a parameterized model to further understand the complexities of relationships between ecological and evolutionary features of a species and its resistance evolution due to pulsed disturbances.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-05T19:05:11Z</published>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Abigail D'Ovidio Long</name>
+    </author>
+    <author>
+      <name>Abigail Adjei</name>
+    </author>
+    <author>
+      <name>Swati Patel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.01368v7</id>
+    <title>Consensus and Flocking under Communication Failures for a Class of Cucker-Smale Systems</title>
+    <updated>2021-05-03T17:45:05Z</updated>
+    <link href="https://arxiv.org/abs/1904.01368v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.01368v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we study sufficient conditions for the emergence of asymptotic consensus and flocking in a certain class of non-linear generalised Cucker-Smale systems subject to multiplicative communication failures. Our approach is based on the combination of strict Lyapunov design together with the formulation of a suitable persistence condition for multi-agent systems. The latter can be interpreted as a lower bound on the algebraic connectivity of the time-average of the interaction graph generated by the communication weights, and provides quantitative decay estimates for the variance functional along the solutions of the system.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-02T12:20:44Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>Systems and Control Letters, 152-104930 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Benoît Bonnet</name>
+    </author>
+    <author>
+      <name>Émilien Flayac</name>
+    </author>
+    <arxiv:doi>10.1016/j.sysconle.2021.104930</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.sysconle.2021.104930" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.15661v2</id>
+    <title>Renormalization-group locking of finite anisotropic propagation cones in Yukawa networks</title>
+    <updated>2026-08-22T17:00:22Z</updated>
+    <link href="https://arxiv.org/abs/2608.15661v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.15661v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Different field species can begin with finite anisotropic propagation geometries whose principal axes need not coincide. We ask whether local Yukawa interactions on a finite graph can nevertheless generate one common infrared spatial cone, even when the interactions that drive the locking become marginally irrelevant. Retaining the full finite mismatch between positive-definite spatial kinetic matrices, we derive the one-loop nonlinear matrix flow and show that its Thompson diameter is globally nonexpansive. On a connected graph, persistent normalized edge activity upgrades this to a uniform finite-window contraction, so all interacting sectors asymptotically share one relative propagation geometry. An explicit two-channel Pauli-Dirac Yukawa-quartic completion realizes the persistence conditions on an open weak-coupling set of finite-mismatch initial data. In four dimensions the Yukawa couplings vanish in the infrared, yet their accumulated interaction time diverges, leaving a Gaussian endpoint with a common spatial cone. For a controlled two-plateau extremal class, graph distance also fixes the first nonzero short-time order of the diameter decrease. Thus common-cone locking can emerge from renormalization-group dynamics rather than being imposed as a microscopic common structure.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-16T10:10:58Z</published>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Shuai Zeng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.19968v1</id>
+    <title>How Group Lives Go Well</title>
+    <updated>2025-04-28T16:40:06Z</updated>
+    <link href="https://arxiv.org/abs/2504.19968v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.19968v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper explores the ontological space of group well being, proposing a framework for representing collective welfare, group functions, and long term contributions within an ontology engineering context. Traditional well being theories focus on individual states, often relying on hedonistic, desire satisfaction, or objective list models. Such approaches struggle to account for cases where individual sacrifices contribute to broader social progress, a critical challenge in modeling group flourishing. To address this, the paper refines and extends the Counterfactual Account (CT) of well being, which evaluates goodness of an event by comparing an individual's actual well being with a hypothetical counterpart in a nearby possible world. While useful, this framework is insufficient for group level ontologies, where well being depends on functional persistence, institutional roles, and historical impact rather than immediate individual outcomes. Drawing on Basic Formal Ontology (BFO), the paper introduces a model in which group flourishing is evaluated in terms of group functional, where members bear roles and exhibit persistence conditions akin to biological systems or designed artifacts. This approach enables semantic interoperability for modeling longitudinal social contributions, allowing for structured reasoning about group welfare, social institutions, and group flourishing over time.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-28T16:40:06Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>John Beverley</name>
+    </author>
+    <author>
+      <name>Regina Hurley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1510.05296v2</id>
+    <title>Seasonal species interactions minimize the impact of species turnover on the likelihood of community persistence</title>
+    <updated>2016-01-20T17:26:24Z</updated>
+    <link href="https://arxiv.org/abs/1510.05296v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1510.05296v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many of the observed species interactions embedded in ecological communities are not permanent, but are characterized by temporal changes that are observed along with abiotic and biotic variations. While work has been done describing and quantifying these changes, little is known about their consequences for species coexistence. Here, we investigate the extent to which changes of species composition impacts the likelihood of persistence of the predator-prey community in the highly seasonal Bialowieza Primeval Forest (NE Poland), and the extent to which seasonal changes of species interactions (predator diet) modulate the expected impact. This likelihood is estimated extending recent developments on the study of structural stability in ecological communities. We find that the observed species turnover strongly varies the likelihood of community persistence between summer and winter. Importantly, we demonstrate that the observed seasonal interaction changes minimize the variation in the likelihood of persistence associated with species turnover across the year. We find that these community dynamics can be explained as the coupling of individual species to their environment by minimizing both the variation in persistence conditions and the interaction changes between seasons. Our results provide a homeostatic explanation for seasonal species interactions, and suggest that monitoring the association of interactions changes with the level of variation in community dynamics can provide a good indicator of the response of species to environmental pressures.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-10-18T19:38:07Z</published>
+    <arxiv:comment>This manuscript is IN PRESS in Ecology. Previous version had a mistake in one reference, this has been corrected</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Serguei Saavedra</name>
+    </author>
+    <author>
+      <name>Rudolf P. Rohr</name>
+    </author>
+    <author>
+      <name>Miguel A. Fortuna</name>
+    </author>
+    <author>
+      <name>Nuria Selva</name>
+    </author>
+    <author>
+      <name>Jordi Bascompte</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.03233v1</id>
+    <title>A Trustworthiness-based Metaphysics of Artificial Intelligence Systems</title>
+    <updated>2025-06-03T15:45:46Z</updated>
+    <link href="https://arxiv.org/abs/2506.03233v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.03233v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern AI systems are man-made objects that leverage machine learning to support our lives across a myriad of contexts and applications. Despite extensive epistemological and ethical debates, their metaphysical foundations remain relatively under explored. The orthodox view simply suggests that AI systems, as artifacts, lack well-posed identity and persistence conditions -- their metaphysical kinds are no real kinds. In this work, we challenge this perspective by introducing a theory of metaphysical identity of AI systems. We do so by characterizing their kinds and introducing identity criteria -- formal rules that answer the questions "When are two AI systems the same?" and "When does an AI system persist, despite change?" Building on Carrara and Vermaas' account of fine-grained artifact kinds, we argue that AI trustworthiness provides a lens to understand AI system kinds and formalize the identity of these artifacts by relating their functional requirements to their physical make-ups. The identity criteria of AI systems are determined by their trustworthiness profiles -- the collection of capabilities that the systems must uphold over time throughout their artifact histories, and their effectiveness in maintaining these capabilities. Our approach suggests that the identity and persistence of AI systems is sensitive to the socio-technical context of their design and utilization via their trustworthiness, providing a solid metaphysical foundation to the epistemological, ethical, and legal discussions about these artifacts.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-03T15:45:46Z</published>
+    <arxiv:comment>To appear in the proceedings of 2025 ACM Conference on Fairness, Accountability, and Transparency (FAccT '25)</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Andrea Ferrario</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1803.03037v1</id>
+    <title>On the nonexistence of degenerate phase-shift multibreathers in a zigzag Klein-Gordon model</title>
+    <updated>2018-03-08T10:58:57Z</updated>
+    <link href="https://arxiv.org/abs/1803.03037v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1803.03037v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we study the existence of low amplitude four-site phase-shift multibreathers for small values of the coupling $ε$ in Klein-Gordon (KG) chains with interactions longer than the classical nearest-neighbour ones. In the proper parameter regimes, the considered lattices bear connections to models beyond one spatial dimension, namely the so-called zigzag lattice, as well as the two-dimensional square lattice. We examine initially the persistence conditions of the system, in order to seek for vortex-like waveforms. Although this approach provides useful insights, due to the degeneracy of these solutions, it does not allow us to determine if they constitute true solutions of our system. In order to overcome this obstacle, we follow a different route. In the case of the zigzag configuration, by means of a Lyapunov-Schmidt decomposition, we are able to establish that the bifurcation equation for our model can be considered, in the small energy and small coupling regime, as a perturbation of a corresponding non-local discrete nonlinear Schrödinger (NL-dNLS) equation. There, nonexistence results of degenerate phase-shift discrete solitons can be demonstrated by exploiting the expansion of a suitable density current of the NL-dNLS, obtained in recent literature. Finally, briefly considering a one-dimensional model bearing similarities to the square lattice, we conclude that the above strategy is not efficient for the proof of the existence or nonexistence of vortices due to the higher degeneracy of this configuration.</summary>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-08T10:58:57Z</published>
+    <arxiv:comment>20 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="nlin.PS"/>
+    <author>
+      <name>T. Penati</name>
+    </author>
+    <author>
+      <name>V. Koukouloyannis</name>
+    </author>
+    <author>
+      <name>M. Sansottera</name>
+    </author>
+    <author>
+      <name>P. G. Kevrekidis</name>
+    </author>
+    <author>
+      <name>S. Paleari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2012.01215v3</id>
+    <title>Stochastic persistence in degenerate stochastic Lotka-Volterra food chains</title>
+    <updated>2021-11-17T15:49:06Z</updated>
+    <link href="https://arxiv.org/abs/2012.01215v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2012.01215v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a Lotka-Volterra food chain model with possibly intra-specific competition in a stochastic environment represented by stochastic differential equations. In the non-degenerate setting, this model has already been studied by A. Hening and D. Nguyen. They provided conditions for stochastic persistence and extinction. In this paper, we extend their results to the degenerate situation in which the top or the bottom species is subject to random perturbations. Under the persistence condition, there exists a unique invariant probability measure supported by the interior of $\mathbb{R}_+^n$ having a smooth density.
+  Moreover, we study a more general model, in which we give new conditions which make it possible to characterise the convergence of the semi-group towards the unique invariant probability measure either at an exponential rate or at a polynomial one. This will be used in the stochastic Lotka-Volterra food chain to see that if intra-specific competition occurs for all species, the rate of convergence is exponential while in the other cases it is polynomial.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-02T13:55:41Z</published>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Michel Benaïm</name>
+    </author>
+    <author>
+      <name>Antoine Bourquin</name>
+    </author>
+    <author>
+      <name>Dang H. Nguyen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.01760v2</id>
+    <title>Nonparametric Identification and Estimation of Earnings Dynamics using a Hidden Markov Model: Evidence from the PSID</title>
+    <updated>2023-09-01T01:45:00Z</updated>
+    <link href="https://arxiv.org/abs/2306.01760v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.01760v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a hidden Markov model designed to investigate the complex nature of earnings persistence. The proposed model assumes that the residuals of log-earnings consist of a persistent component and a transitory component, both following general Markov processes. Nonparametric identification is achieved through spectral decomposition of linear operators, and a modified stochastic EM algorithm is introduced for model estimation. Applying the framework to the Panel Study of Income Dynamics (PSID) dataset, we find that the earnings process displays nonlinear persistence, conditional skewness, and conditional kurtosis. Additionally, the transitory component is found to possess non-Gaussian properties, resulting in a significantly asymmetric distributional impact when high-earning households face negative shocks or low-earning households encounter positive shocks. Our empirical findings also reveal the presence of ARCH effects in earnings at horizons ranging from 2 to 8 years, further highlighting the complex dynamics of earnings persistence.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-25T14:47:19Z</published>
+    <arxiv:primary_category term="stat.AP"/>
+    <arxiv:journal_ref>(2023) 788-793</arxiv:journal_ref>
+    <author>
+      <name>Tong Zhou</name>
+    </author>
+    <arxiv:doi>10.1109/ICAIBD57115.2023.10206080</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICAIBD57115.2023.10206080" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.18115v1</id>
+    <title>LLM-Augmented Computational Phenotyping of Long Covid</title>
+    <updated>2026-03-18T15:02:05Z</updated>
+    <link href="https://arxiv.org/abs/2603.18115v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.18115v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Phenotypic characterization is essential for understanding heterogeneity in chronic diseases and for guiding personalized interventions. Long COVID, a complex and persistent condition, yet its clinical subphenotypes remain poorly understood. In this work, we propose an LLM-augmented computational phenotyping framework ``Grace Cycle'' that iteratively integrates hypothesis generation, evidence extraction, and feature refinement to discover clinically meaningful subgroups from longitudinal patient data. The framework identifies three distinct clinical phenotypes, Protected, Responder, and Refractory, based on 13,511 Long Covid participants. These phenotypes exhibit pronounced separation in peak symptom severity, baseline disease burden, and longitudinal dose-response patterns, with strong statistical support across multiple independent dimensions.
+  This study illustrates how large language models can be integrated into a principled, statistically grounded pipeline for phenotypic screening from complex longitudinal data. Note that the proposed framework is disease-agnostic and offers a general approach for discovering clinically interpretable subphenotypes.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-18T15:02:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jing Wang</name>
+    </author>
+    <author>
+      <name>Jie Shen</name>
+    </author>
+    <author>
+      <name>Amar Sra</name>
+    </author>
+    <author>
+      <name>Qiaomin Xie</name>
+    </author>
+    <author>
+      <name>Jeremy C Weiss</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1404.1168v1</id>
+    <title>Persistence based analysis of consensus protocols for dynamic graph networks</title>
+    <updated>2014-04-04T07:21:45Z</updated>
+    <link href="https://arxiv.org/abs/1404.1168v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1404.1168v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article deals with the consensus problem involving agents with time-varying singularities in the dynamics or communication in undirected graph networks. Existing results provide control laws which guarantee asymptotic consensus. These results are based on the analysis of a system switching between piecewise constant and time-invariant dynamics. This work introduces a new analysis technique relying upon classical notions of persistence of excitation to study the convergence properties of the time-varying multi-agent dynamics. Since the individual edge weights pass through singularities and vary with time, the closed-loop dynamics consists of a non-autonomous linear system. Instead of simplifying to a piecewise continuous switched system as in literature, smooth variations in edge weights are allowed, albeit assuming an underlying persistence condition which characterizes sufficient inter-agent communication to reach consensus. The consensus task is converted to edge-agreement in order to study a stabilization problem to which classical persistence based results apply. The new technique allows precise computation of the rate of convergence to the consensus value.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-04-04T07:21:45Z</published>
+    <arxiv:comment>This article contains 7 pages and includes 4 figures. it is accepted in 13th European Control Conference</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Nilanjan Roy Chowdhury</name>
+    </author>
+    <author>
+      <name>Srikant Sukumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.19316v1</id>
+    <title>Persistent mixed worldviews in the theory of chosen preferences</title>
+    <updated>2026-09-16T18:30:08Z</updated>
+    <link href="https://arxiv.org/abs/2609.19316v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.19316v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Bernheim, Braghieri, Martínez-Marquina, and Zuckerman (2021, American Economic Review) develop a theory of chosen preferences and conjecture convergence to pure worldviews at low mindset flexibility. We show that the (original) conjecture fails: with arbitrarily many worldviews, a common-value action sustains mixed worldviews in every stationary equilibrium from a relatively open set of initial worldviews, even when all pure worldviews are absorbing.
+  However, finite linear programs characterize a sufficient persistence condition. Conversely, mixed accumulation points require shared valuation maxima. If each implementable action has a unique maximizing evaluator, every existing stationary equilibrium converges to purity for all interior flexibility and discount parameters. Experienced utility converges without uniqueness. In existing equilibria, small payoff perturbations preserve compromise over fixed horizons with high probability. Strictly tailored worldviews yield existence and a one-step equilibrium characterization at sufficiently low mindset flexibility; weak implementation can preclude stationary pure-strategy existence. The persistence and convergence results extend to stationary randomization.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.TH" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-16T18:30:08Z</published>
+    <arxiv:comment>53 pages</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Ziran Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0711.3915v2</id>
+    <title>Distributed Consensus Algorithms in Sensor Networks: Link Failures and Channel Noise</title>
+    <updated>2008-09-08T02:29:42Z</updated>
+    <link href="https://arxiv.org/abs/0711.3915v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0711.3915v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The paper studies average consensus with random topologies (intermittent links)
+  \emph{and} noisy channels. Consensus with noise in the network links leads to the bias-variance dilemma--running consensus for long reduces the bias of the final average estimate but increases its variance. We present two different compromises to this tradeoff: the $\mathcal{A-ND}$ algorithm modifies conventional consensus by forcing the weights to satisfy a \emph{persistence} condition (slowly decaying to zero); and the $\mathcal{A-NC}$ algorithm where the weights are constant but consensus is run for a fixed number of iterations $\hat{\imath}$, then it is restarted and rerun for a total of $\hat{p}$ runs, and at the end averages the final states of the $\hat{p}$ runs (Monte Carlo averaging). We use controlled Markov processes and stochastic approximation arguments to prove almost sure convergence of $\mathcal{A-ND}$ to the desired average (asymptotic unbiasedness) and compute explicitly the m.s.e. (variance) of the consensus limit. We show that $\mathcal{A-ND}$ represents the best of both worlds--low bias and low variance--at the cost of a slow convergence rate; rescaling the weights...</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-11-25T18:19:42Z</published>
+    <arxiv:comment>Final version to appear in a future issue of IEEE Transactions of Signal Processing</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Soummya Kar</name>
+    </author>
+    <author>
+      <name>José M. F. Moura</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.07352v1</id>
+    <title>New estimates of ongoing sea level change and land movements caused by Glacial Isostatic Adjustment in the Mediterranean region</title>
+    <updated>2023-01-18T07:44:58Z</updated>
+    <link href="https://arxiv.org/abs/2301.07352v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.07352v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Glacial Isostatic Adjustment (GIA) caused by the melting of past ice sheets is still a major cause of sea-level variations and 3-D crustal deformation in the Mediterranean region. However, since the contribution of GIA cannot be separated from those of oceanic or tectonic origin, its role can be only assessed by numerical modelling, solving the gravitationally self-consistent Sea Level Equation. Nonetheless, uncertainties about the melting history of the late-Pleistocene ice sheets and the rheological profile of the Earth's mantle affect the GIA predictions by an unknown amount. Estimating the GIA modelling uncertainties would be particularly important in the Mediterranean region, due to the amount of high quality geodetic data from space-borne and ground-based observations currently available, whose interpretation demands a suitable isostatic correction. Here we first review previous results about the effects of GIA in the Mediterranean Sea, enlightening the variability of all the fields affected by the persistent condition of isostatic disequilibrium. Then, for the first time in this region, we adopt an ensemble modelling approach to better constrain the present-day GIA contributions to sea-level rise and geodetic variations, and their uncertainty.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-18T07:44:58Z</published>
+    <arxiv:comment>This is a pre-copyedited, author-produced PDF of an article accepted for publication in Geophysical Journal International following peer review. The version of record is available online at: https://doi.org/10.1093/gji/ggab508</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>Geophysical Journal International, Volume 229, Issue 2, May 2022, Pages 984-998</arxiv:journal_ref>
+    <author>
+      <name>Giorgio Spada</name>
+    </author>
+    <author>
+      <name>Daniele Melini</name>
+    </author>
+    <arxiv:doi>10.1093/gji/ggab508</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/gji/ggab508" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.22627v2</id>
+    <title>Anchoring and Mixed-Norm Contractions in Averaging-Learning Dynamics</title>
+    <updated>2026-02-28T12:36:07Z</updated>
+    <link href="https://arxiv.org/abs/2602.22627v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.22627v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A single informed agent can draw an arbitrarily large network to the ground truth. This is the sharpest consequence of the "Averaging plus Learning" framework studied here, where agents update opinions by socially averaging neighbours while some receive private feedback at heterogeneous rates. The key is a graph-theoretic property we call condensely anchored, which implies convergence to the correct consensus on fixed networks. In the original framework of Popescu and Vaidya (2023), every agent was required to learn. Removing that requirement changes the problem fundamentally: the underlying graph must now carry the signal from a handful of anchors to everyone else. When learning rates decay to zero, a persistence condition on the rates alone suffices, with no uniform connectivity or aperiodicity assumed. The hardest case is intermittent connectivity, where no single time step contracts in any standard norm. A mixed-operator-norm framework is developed that extracts two-step contraction from the interplay between aggregate learning mass and entrywise diffusion of influence, a mechanism new to consensus literature. Finally, we demonstrate the framework's robustness: vanishing noise preserves convergence to the ground truth, whereas persistent noise drives the system to a limiting law.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-26T04:58:40Z</published>
+    <arxiv:comment>38 pages, 8 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Ionel Popescu</name>
+    </author>
+    <author>
+      <name>Jeven Syatriadi</name>
+    </author>
+    <author>
+      <name>Tushar Vaidya</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.09293v2</id>
+    <title>Star network non-n-local correlations can resist consistency noises better</title>
+    <updated>2023-09-06T02:19:23Z</updated>
+    <link href="https://arxiv.org/abs/2307.09293v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.09293v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Imperfections from devices can result in the decay or even vanish of non-n-local correlations as the number of parties n increases in the polygon and linear quantum networks ([Phys. Rev. A 106, 042206 (2022)] and [Phys. Rev. A 107, 032404 (2023)]). Even so this phenomenon is also for the special kind of noises, including consistency noises of a sequence of devices, which means the sequence of devices have the same probability fails to detect. However, in the paper, we discover that star network quantum non-n-local correlations can resist better consistency noises than these in polygon and linear networks. We first calculate the noisy expected value o f star network non-n-locality and analyze the persistency conditions theoretically. When assume that congener devices have the consistency noise, the persistency number of sources n has been rid of such noises, and approximates to the infinity. Polygon and linear network non-n-local correlations can not meet the requirements. Furthermore, we explore the change pattern of the maximal number of sources nmax such that non-nmax-local correlation can be demonstrated in the star network under the influence of partially consistent noises, which is more general than consistent ones.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-18T14:35:00Z</published>
+    <arxiv:comment>23pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Kan He</name>
+    </author>
+    <author>
+      <name>Yueran Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.03292v4</id>
+    <title>Data Science from 1963 to 2012</title>
+    <updated>2024-10-22T17:57:48Z</updated>
+    <link href="https://arxiv.org/abs/2311.03292v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.03292v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consensus on the definition of data science remains low despite the widespread establishment of academic programs in the field and continued demand for data scientists in industry. Definitions range from rebranded statistics to data-driven science to the science of data to simply the application of machine learning to so-called big data to solve real-world problems. Current efforts to trace the history of the field in order to clarify its definition, such as Donoho's "50 Years of Data Science" (Donoho 2017), tend to focus on a short period when a small group of statisticians adopted the term in an unsuccessful attempt to rebrand their field in the face of the overshadowing effects of computational statistics and data mining. Using textual evidence from primary sources, this essay traces the history of the term to the 1960s, when it was first used by the US Air Force in a surprisingly similar way to its current usage, to 2012, the year that Harvard Business Review published the enormously influential article "Data Scientist: The Sexiest Job of the 21st Century" (Davenport and Patil 2012) and the American Statistical Association acknowledged a profound disconnect between statistics and data science (Rodriguez 2012). Among the themes that emerge from this review are (1) the long-standing opposition between data analysts and data miners that continues to animate the field, (2) an established definition of the term as the practice of managing and processing scientific data that has been occluded by recent usage, and (3) the phenomenon of data impedance -- the disproportion between surplus data, indexed by phrases like data deluge and big data, and the limitations of computational machinery and methods to process them. This persistent condition appears to have motivated the use of the term and the field itself since its beginnings.</summary>
+    <category term="cs.GL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-06T17:35:35Z</published>
+    <arxiv:comment>48 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.GL"/>
+    <author>
+      <name>Rafael C. Alvarado</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.02401v1</id>
+    <title>USP-Mamba: Unmixing-Derived Spectral and Structural Prompting for Hyperspectral Image Super-Resolution</title>
+    <updated>2026-08-03T15:47:20Z</updated>
+    <link href="https://arxiv.org/abs/2608.02401v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.02401v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hyperspectral image super-resolution aims to reconstruct high-resolution imagery while preserving dense spectral information. Recently, Mamba-based models have shown promising potential for this task by capturing long-range dependencies with linear computational complexity. Nevertheless, their causal sequence modeling requires two-dimensional hyperspectral features to be unfolded along predefined scanning orders, which disrupts spatial adjacency and restricts the effective propagation of contextual information. Moreover, state-space parameterization of existing models is predominantly derived from generic learned representations, without explicit alignment with the intrinsic characteristics of the hyperspectral image. To address this issue, we propose an Unmixing-derived Spectral and Structural Prompting Mamba framework, termed USP-Mamba, which adapts Mamba state evolution through composition-aware spectral priors and image-dependent structural prompts. Specifically, an unmixing-informed spectral prompt captures the global material composition of the input image and provides persistent conditioning throughout reconstruction. Injected into the Mamba sequence and progressively adapted across layers, it steers state evolution toward composition-consistent reconstruction. We introduce feature-level structural prompts comprising spatial and frequency components to provide image-dependent local guidance. The spatial prompt promotes structure-sensitive state encoding for local detail preservation, while the frequency prompt enables region-adaptive transitions between homogeneous regions and high-frequency details. Finally, complementary Hilbert and Semantic-Guided Neighboring scans preserve spatial continuity and strengthen non-local semantic dependency modeling. Extensive experiments on different datasets demonstrate that the proposed method consistently outperforms representative approaches.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-03T15:47:20Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Shi Chen</name>
+    </author>
+    <author>
+      <name>Jie Zhang</name>
+    </author>
+    <author>
+      <name>Yicong Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.24365v2</id>
+    <title>Persistent and anti-persistent stride-to-stride fluctuations: an ARFIMA decomposition consistent with closed-loop sensorimotor control</title>
+    <updated>2026-05-21T13:34:12Z</updated>
+    <link href="https://arxiv.org/abs/2604.24365v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.24365v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Stride-to-stride fluctuations in human walking carry a fractal correlation structure that reverses sign under external cueing: self-paced gait is persistent, whereas metronomic or visually cued gait is anti-persistent. Three decades of detrended fluctuation analysis (DFA) have established this reversal as a scaling-exponent shift, but DFA cannot distinguish genuine long-memory dynamics from short-memory autoregressive moving-average (ARMA) processes that produce the same apparent exponent. We fit the full eight-model ARFIMA(1,d,1) family to stride interval and stride speed series from three datasets (N = 70 subjects) spanning overground walking, fixed-speed treadmill walking, metronomic and visual cueing, and graded positional constraint. Model evidence is aggregated through BIC-based Schwarz weights, and the fractional differencing parameter d together with the autoregressive and moving-average coefficients phi and theta are estimated by Bayesian model averaging. Three findings emerge. (i) Long-memory specifications decisively outweigh ARMA alternatives under both persistent and anti-persistent conditions, establishing cued gait anti-persistence as a genuine fractional phenomenon. (ii) DFA alpha overestimates d + 0.5 by 0.25 to 0.34 units, a discrepancy jointly attributable to short-memory components that DFA conflates with long-memory persistence and to a finite-sample negative bias inherent to exact ML-ARFIMA estimation. (iii) The estimated (d, phi, theta) parameters are consistent with a corrective sensorimotor model in which a fractal intrinsic generator, a reactive feedback correction, and a motor-delay component together shape stride-to-stride fluctuations. Whether a single mechanistic model can account quantitatively for the observed parameter ranges across rhythmic, spatial, and unconstrained conditions is a question that the present analysis motivates but cannot alone resolve.</summary>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.NC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-27T12:00:29Z</published>
+    <arxiv:comment>Main article: pp. 1-42 (5 figures, 3 tables). Supplementary Materials appended: S1 - Effect of series length on ARFIMA and DFA outcomes (Hausdorff Tier 3), pp. 43-47; S2 - Morris elementary-effects screening of the ARFIMA/DFA pipeline, pp. 48-59. Reproduction archive: doi:10.5281/zenodo.19676064</arxiv:comment>
+    <arxiv:primary_category term="q-bio.QM"/>
+    <author>
+      <name>Philippe Terrier</name>
+    </author>
+  </entry>
+</feed>

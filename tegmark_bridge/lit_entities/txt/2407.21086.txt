@@ -1,0 +1,281 @@
+Non-Platonic Autopoiesis of a Cellular Automaton Glider in Asymptotic Lenia
+Q. Tyrell Davis1,
+1Independent Researcher
+Boulder, Colorado, United States
+qtd.science.wrought049@passmail.net
+Figure 1:
+A non-Platonic glider in asymptotic Lenia.
+With step size ∆t = 0.2, the glider persists for 100 up-
+date steps, but disappears earlier for step sizes ∆t = 0.17
+or 0.26. The rules supporting this glider are defined by a
+target function (Equation 5) with µT = 0.12 and σT =
+0.005, and neighborhood kernel K with µK = 0.5 and
+σK
+= 0.15 and native radius k0
+= 13 pixels (r
+=
+1.0 at 13 pixels from kernel center).
+Code available at
+https://github.com/riveSunder/fractal persistence.
+Instruc-
+tions for replicating results at commit 09437415...
+Introduction
+Like Life, Lenia CA support a range of patterns that move,
+interact with their environment, and/or are modified by
+said interactions. These patterns maintain a cohesive, self-
+organizing morphology, i.e. they exemplify autopoiesis, the
+self-organization principle of a network of components and
+processes maintaining themselves (Varela et al., 1974), and
+a framework for investigating the life-like properties of CA
+(Beer, 2004, 2015).
+Lenia dynamics are described by PDEs. This descrip-
+tion lends itself to simulation with computers, as in classical
+physics, albeit incurring the ‘necessary evil’ of discretiza-
+tion.
+Unlike simulating classical physics, where a trade-
+off of precision and accuracy in exchange for keeping time
+and computational costs feasibly low is made, a subset of
+patterns in Lenia and similar systems have been shown to
+lose their autopoietic competence when simulated with dis-
+cretization parameters too fine (Davis, 2023; Kojima and
+Ikegami, 2023; Davis and Bongard, 2022). For these pat-
+terns in the context of their respective rules, simulation ap-
+pears part and parcel to their ability to self-organize: they
+exhibit non-Platonic autopoiesis.
+Lenia has been expanded with a number of variations on
+the original. In this work I examine a glider in asymptotic
+Lenia (abbreviated ‘ALenia’ in this work) (Kawaguchi et al.,
+2021). ALenia replaces the growth function with a target
+function: the update rule is then defined by the difference
+between the output of the target function and the current cell
+states.
+Standard Lenia uses a clipping function to constrain cell
+values to a range from 0 to 1, but ALenia’s update scheme
+does away with the need. Recent work implementing ALe-
+nia as a reaction-diffusion system reported that non-Platonic
+behavior in standard Lenia may depend on the clipping func-
+tion, and that ALenia gliders are likely not affected by non-
+Platonic dissolution (Kojima and Ikegami, 2023). In this
+work I show an example of a glider in ALenia that depends
+on a certain simulation coarseness for autopoietic compe-
+tence: when simulated with too fine spatial or temporal res-
+olution the glider no longer maintains its morphology or dy-
+namics.
+Lenia and Asymptotic Lenia
+An instance of Lenia has states A defined as cell (or pixel)
+values at coordinates x = (xh, xw) that change over time
+t. The update rule has a form similar to the Euler method,
+adding the product of the result of differential equation ∂A
+∂t
+and step size ∆t:
+A(x, t + ∆t) =
+
+A(x, t) + ∆t · ∂A
+∂t
+1
+0
+(1)
+Unlike the Euler method, Equation 1 constrains cell val-
+ues A(x, t) in the range R[0, 1]. Hard truncation, repre-
+sented by [·]1
+0, is typically used, but many pattern-rule pairs
+arXiv:2407.21086v1  [nlin.CG]  30 Jul 2024
+
+work equally well with a smooth squashing function.
+Lenia dynamics are defined by a differential equation, aka
+the growth function G(·).
+∂A
+∂t = G(K ⊛A(x, t))
+(2)
+Where K is a neighborhood kernel (e.g. top left in Figure
+1) and ⊛represents convolution. The growth function takes
+a similar form to that of a Gaussian, stretched to output val-
+ues from -1 to 1:
+G(x) = 2 · e
+−
+ x−µG
+σG
+2
+−1
+(3)
+Where µG and σG set the peak and width of the curve and
+x = K ⊛A(x, t) represents cell neighborhoods.
+The neighborhood kernel K(r) = e
+−
+ r−µK
+σK
+2
+is also
+Gaussian-like, and acts on radial coordinates r. Neighbor-
+hood kernels are normalized to sum to 1.0.
+ALenia replaces the growth function G with a target func-
+tion T. ∂A
+∂t is then the difference of cell values A(x, t) and
+target function applied to cell neighborhoods K ⊛A(x, t)
+∂A
+∂t = T(K ⊛A(x, t)) −A(x, t)
+(4)
+ALenia’s target function is unstretched, yielding values
+from 0 to 1:
+T(x) = e
+−
+ x−µT
+σT
+2
+(5)
+As a result of the asymptotic target function, ALenia ob-
+viates the need to truncate cell values.
+Autopoiesis and Discretization
+I simulated the glider in Figure 1 across a range of spatial
+and temporal resolutions defined by ∆t and kr, respectively.
+I modified temporal resolution ∆t by simply us-
+ing a different value for the step size dt.
+In pseu-
+docode: A = A + dt * (T(conv(A,K)) - A). To
+smoothly vary spatial resolution, I change the size of the
+neighborhood kernel K(r) by normalizing to kernel ra-
+dius kr (in pixels): xx, yy = meshgrid(x, y); r
+= sqrt(xx**2 + yy**2) / kr. I used scikit-image
+(Van der Walt et al., 2014) to rescale patterns1 and define
+glider stability by homeostasis of glider ‘mass’, i.e. the sum
+of cell values. I chose normalized (relative to starting) cell-
+sum thresholds of 0.9 to 1.3 based on empirical observations
+of typical variation for a stable glider.
+Results are shown in Figure 2. Gain of stability when
+moving from fine to coarse simulation parameters (∆t, kr)
+is consistent with non-Platonic autopoiesis, as is a loss of
+stability when increasing kr and/or decreasing ∆t.
+1skimage.transform.rescale with scale factor
+= kr/k0
+and
+order=5
+spline
+interpolation,
+and
+anti aliasing=True when downscaling.
+Figure 2:
+ALenia glider persistence with respect to ∆t
+and kr shows non-Platonic loss of autopoiesis. Persistence
+in accumulated time units is indicated by dark colors, with a
+transition from blue to green at the arbitrary threshold of 10
+time units, the maximum simulation time. ‘X’, triangle, and
+star symbols mark ∆t = 0.26, 0.20, and 0.17 from Figure
+1, respectively. The lower persistence map is a zoom to the
+region in the small orange rectangle indicated by the arrow,
+showing retained details of apparent fractal structure.
+
+Figure 3:
+Adorbium, a CA pattern that resides in an adap-
+tive moment estimation CA. Red channel is grid states, green
+is the first moment m and, and blue is the second moment v.
+Adorbium CA parameters are β1
+= 0.8, β2
+= 0.99, ϵ =
+10−8, µG = 0.167, σG = 0.013, µK = 0.5, σK = 0.15,
+and kernel radius kr = 13 pixels.
+This document accompa-
+nies a video exploration of this glider’s autopoietic simuliverse
+available at https://youtu.be/pH1x-6FzmTo. Code is available at
+https://github.com/riveSunder/fractal persistence/
+Appendix: The Eidolic Principle: Exploring
+the Fractal Simuliverse in a Continuous
+Cellular Automaton
+Introduction
+The Anthropic Principle posits that only a universe in which
+life and intelligent observers emerge can be consciously observed
+(Dicke, 1957; Carter, 1974). The principle reminds us that while it
+may seem that the universe and its physics are tailored to us, our
+perspective is biased.
+The Eidolic Principle similarly notes the the specificity of physi-
+cal parameters supporting self-organizing patterns (such as gliders)
+in simulations of continuous cellular automata (CA). Only one or
+a few fundamental self-organizing patterns are typically found in a
+given point in the parameter space of a continuous CA.
+Self-organizing patterns in continuous CA depend on implemen-
+tation details as well as physical parameters, and can lose the abil-
+ity to self-organize at both too coarse and too fine simulation set-
+tings (Davis and Bongard, 2022; Kojima and Ikegami, 2023; Davis,
+2023).
+This work explores the persistence map (Figure 4) of a CA
+pattern, the boundaries of which retain intricate fractal detail
+across several orders of magnitude.
+The pattern resides in a
+CA framework based on adaptive moment estimation optimization
+(adam)(Kingma and Ba, 2014). The pattern (Figure 3 is reminis-
+cent of, and shares a neighborhood kernel with, Orbium gliders
+from the continuous CA framework Lenia (Chan, 2019).
+The adam CA framework updates grid states A(x, t) by first
+calculating the first moment mt+∆t = β1mt + (1 −β1)G(Kn ⊛
+At), second moment vt+∆t = β2vt + (1 −β2)G(Kn ⊛At)2. m
+and v are then used to calculate the update function ∂A
+∂t =
+m
+√v+ϵ,
+which modifies grid states At proportional to step size ∆t.
+At+∆t = At + ∆t
+m
+√v + ϵ
+(6)
+Why do CA Persistence Maps Exhibit Fractal
+Detail Across Scale?
+Cellular automata that support ‘interesting’ dynamics2 are charac-
+terized by variation between chaos and order over space and time.
+A hallmark of chaotic behavior is sensitivity to arbitrarily small dif-
+ferences in initial conditions. This appears to be the case where the
+boundary between CA glider persistence and instability remains
+rough down to the limits of floating point precision. Fractal pat-
+terns have likewise been shown for neural network trainability with
+respect to hyperparameters Sohl-Dickstein (2024) (a significant in-
+fluence on the work presented here) and fractal structure is likely in
+other complex systems with outputs that are a priori undecidable.
+2While the notion of interesting is ambiguous to define, in CA
+we often think of self-organization and complex interactions, as
+exhibited quintessentially by gliders, as worth investigating.)
+Figure 4: Persistence map Red channel indicates space-filling
+and blue channel vanishing loss of persistence, while the green
+channel indicates persistence up to an arbitrary max simulation
+time of 16.0 simulation time units. Luminance is proportional to
+accumulated time units.
+
+References
+Beer, R. D. (2004). Autopoiesis and cognition in the game of life.
+Artificial Life, 10(3):309–326.
+Beer, R. D. (2015). Characterizing autopoiesis in the game of life.
+Artificial life, 21(1):1–19.
+Carter, B. (1974). Large number coincidences and the anthropic
+principle in cosmology. In Symposium-international astro-
+nomical union, volume 63, pages 291–298. Cambridge Uni-
+versity Press.
+Chan, B. W.-C. (2019). Lenia - biology of artificial life. Complex
+Systems, 28:251–286.
+Davis, Q. T. (2023).
+Discretization-dependent dissolution of
+gliders in (dis)continuous systems:
+Non-platonic self-
+organization in complex systems.
+Innovations in Machine
+Intelligence (IMI), 3:1–23.
+Davis, Q. T. and Bongard, J. (2022). Step size is a consequential
+parameter in continuous cellular automata. ALIFE 2022: The
+2022 Conference on Artificial Life, 43.
+Dicke, R. H. (1957). Gravitation without a principle of equivalence.
+Reviews of Modern Physics, 29(3):363.
+Kawaguchi, T., Suzuki, R., Arita, T., and Chan, B. (2021). In-
+troducing asymptotics to the state-updating rule in Lenia. In
+ALIFE 2021: The 2021 Conference on Artificial Life. MIT
+Press.
+Kingma, D. P. and Ba, J. (2014). Adam: A method for stochastic
+optimization. CoRR, abs/1412.6980.
+Kojima, H. and Ikegami, T. (2023). Implementation of Lenia as
+a reaction-diffusion system. In ALIFE 2023: Ghost in the
+Machine: Proceedings of the 2023 Artificial Life Conference.
+MIT Press.
+Sohl-Dickstein, J. N. (2024).
+The boundary of neural network
+trainability is fractal. ArXiv, abs/2402.06184.
+Van der Walt, S., Sch¨onberger, J. L., Nunez-Iglesias, J., Boulogne,
+F., Warner, J. D., Yager, N., Gouillart, E., and Yu, T. (2014).
+scikit-image: image processing in python. PeerJ, 2:e453.
+Varela, F. G., Maturana, H. R., and Uribe, R. (1974). Autopoiesis:
+The organization of living systems, its characterization and a
+model. Biosystems, 5(4):187–196.

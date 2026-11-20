@@ -1,0 +1,3014 @@
+Artificial life of an active droplets system: a quantitative lifecycle analysis
+Matteo Scandola,1, 2 Silvia Holler,2 Richard J. G. L¨offler,3 Martin
+M. Hanczyc,2, 4, ∗Raffaello Potestio,5, 6, † and Roberto Menichetti5, 6, ‡
+1Laboratoire Jean Perrin, UMR 8237 Sorbonne Universit´e/CNRS,
+Institut de Biologie Paris Seine, 4 Place Jussieu, F-75005 Paris, France
+2Department of Cellular, Computational and Integrative Biology (CIBIO),
+University of Trento, via Sommarive 9, I-38123 Trento, Italy
+3Centre for Star and Planet Formation, Globe Institute,
+University of Copenhagen, Copenhagen, Denmark
+4Chemical and Biological Engineering, University of New Mexico, Albuquerque, NM, 87106, USA
+5Physics Department, University of Trento, via Sommarive, 14 I-38123 Trento, Italy
+6INFN-TIFPA, Trento Institute for Fundamental Physics and Applications, I-38123 Trento, Italy
+(Dated: November 25, 2025)
+The study of synthetic active matter systems holds the promise for designing smart materials and
+devices with emergent characteristics akin to those of living organisms, eventually opening the doors
+to the realization of artificial life. Such an investigation, however, is challenged by the difficulty in-
+herent in identifying the relationship between the features of the elementary constituents and the
+emergent properties of the whole; to this end, a key step consists in the accurate quantification of
+the system’s observed behavior. Here, we report the study of 50 self-propelled oil droplets floating
+on the surface of an aqueous solution. 25 droplets are stained with a red dye, and the other 25 are
+stained blue: the colorants affect the droplets’ interfacial tension properties differently, consequently
+influencing their collective dynamics. Droplet trajectories extending for up to 5 hours are extracted
+from video recordings with a tracking pipeline developed ad hoc. The structural and dynamical
+analysis of the system reveals a “life-to-death” cycle unfolding in qualitatively distinct stages, show-
+casing a complex interplay between individual droplet mobility and collective organization. The
+tools developed and the results obtained in our work pave the way to the in silico modelling as well
+as the experimental design of synthetic active matter systems displaying life-like and programmable
+behavior.
+I.
+INTRODUCTION
+Active matter encompasses systems composed of self-
+driven constituents that continuously dissipate energy
+and use it to move or exert mechanical forces on their
+environment [1]. Such systems are widespread, arising
+from biological and synthetic origins as well as from a
+combination of both. In biological contexts, they occur
+at all possible levels of scales and complexity, ranging
+from bio-polymers like microtubules and actin [2] (both
+integral components of the cellular cytoskeleton), to liv-
+ing collectives as cells, bacteria, schools of fish, and flocks
+of birds [3].
+Synthetic active matter systems, in con-
+trast, are engineered assemblies capable of self-propelled
+and dynamic behavior reminiscent of those observed in
+their biological counterparts.
+Examples include, e.g.,
+light-activated particles, self-propelled droplets, catalytic
+Janus colloids, and vibrated granular rods [4], all of which
+convert energy into directed motion.
+Finally, combin-
+ing synthetic and biological active components is a re-
+cent avenue that could give rise to novel, hybrid behav-
+iors not found in either system alone [5]. Irrespective of
+their origin, a pivotal feature of active matter systems
+∗Electronic address: martin.hanczyc@unitn.it
+†Electronic address: raffaello.potestio@unitn.it
+‡Electronic address: roberto.menichetti@unitn.it
+is that, even in the case in which the individual con-
+stituent entities display a relatively plain morphology,
+they emergently can exhibit extremely complex behav-
+ior, characterized by intriguing phenomena such as coher-
+ent motion [6, 7], dynamic self-assembly [8, 9], motility-
+induced phase separation [10, 11], and active turbulence
+[12]. Furthermore, from a purely theoretical standpoint,
+the body of knowledge of equilibrium statistical physics
+displays limited applicability in the investigation of self-
+propelled systems, rendering active matter an invaluable
+source—as well as a testbed—for advancing the field of
+non-equilibrium statistical mechanics [13–16].
+Within the broad realm of synthetic active matter, ar-
+tificial life research focuses on constructing and investi-
+gating simplified chemical systems that operate far from
+equilibrium and showcase life-like properties, with the
+purpose of shedding light on the physical principles un-
+derlying living matter.
+The system realizations inves-
+tigated in this field exhibit a wide repertoire of behav-
+iors observed in living organisms, including, besides mo-
+tion [17, 18], fission and fusion [19], oscillation [20, 21],
+chemotaxis [22–24], and phototaxis [25, 26].
+Active
+droplets are often experimentally employed in this en-
+deavor [17, 18, 27]; compared to other examples within
+the synthetic active matter domain, however, a character-
+istic feature of the droplets systems employed in artificial
+life research is their typical scale [4], as they generally
+consist of millimeter to centimeter-sized agents, either
+self-propelling on the surface of an aqueous solution or
+arXiv:2511.17786v1  [cond-mat.soft]  21 Nov 2025
+
+2
+a)
+Stage 1
+b)
+Stage 2
+c)
+Stage 3
+d)
+Stage 4
+e)
+Stage 5
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+f)
+Stage 1
+Stage 2
+Stage 3
+Stage 4
+Stage 5
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+6,
+g)
+Blue droplets
+Red droplets
+All droplets
+/4
+0
+/4
+0
+1
+2
+3
+4
+5
+6
+P [1/rad]
+h)
+/4
+0
+/4
+i)
+/4
+0
+/4
+j)
+/4
+0
+/4
+k)
+/4
+0
+/4
+l)
+Blue droplets
+Red droplets
+20
+10
+0
+10
+20
+x [mm]
+20
+10
+0
+10
+20
+y [mm]
+m)
+20
+10
+0
+10
+20
+x [mm]
+n)
+20
+10
+0
+10
+20
+x [mm]
+o)
+20
+10
+0
+10
+20
+x [mm]
+p)
+20
+10
+0
+10
+20
+x [mm]
+q)
+FIG. 1: (a-e) Snapshots of the experimental setup, with progression from left to right illustrating typical droplet configurations
+at the onset of each evolutionary stage of the system. The images are circled with the color of the corresponding stage, as
+indicated in the key provided in the plots below. (f-g) Time dependence of the droplets’ velocity polarization ΦS and hexatic
+order parameter Ψ6,S, respectively defined in Eq. 6 and 8 of the main text. Colored vertical bars mark the onset of each
+evolutionary stage. (h-l) From left to right: turning angle distribution PS, see Eq. 11, of the blue and red droplet populations
+at the onset of each evolutionary stage. (m-q) From left to right: blue-blue dimer distributions DBB, see Eq. 12, at the onset
+of each evolutionary stage.
+being immersed in the bulk, moving on the bottom of
+the container. Their size, along with their relatively sim-
+ple composition (typically less than five chemical con-
+stituents), makes them experimentally very accessible
+and requires no advanced laboratory equipment. In these
+systems, the self-propelled motion of the droplets origi-
+nates from the delicate interplay between the features
+of their constituents and the surrounding environment:
+their activity is based on the generation of a chemical
+gradient and on the solutal Marangoni effect, in which ob-
+jects release surfactants creating an inhomogeneous con-
+centration field that lowers the surface tension, which in
+turn generates a bulk convection and surface flow towards
+areas with higher surface tension. The initial motion is
+likely caused by random perturbations of the surfactant
+gradient that are subsequently self-stabilized by the in-
+duced motion of the source of the surfactant [28–30]. Any
+mechanism that prevents saturation of the surface by the
+surfactant, such as evaporation or dissolution, will main-
+tain the gradient and consequently the motion until the
+system reaches equilibrium.
+In the context of artificial life research, in this study we
+focus on a droplet system first reported on by Tanaka and
+coworkers [27], which expresses collective flocking behav-
+ior with emergent patterns that change over the course
+of an experiment and was suggested to be able to model
+complex biological phenomena. The system is instanti-
+ated by multiple droplets, composed of a mix of paraf-
+
+3
+fin oil and the Ethyl Salicylate (ES) active ingredient,
+floating on an aqueous phase containing another surfac-
+tant (typically Sodium Dodecyl Sulfate). While the exact
+physicochemical mechanism lying at the origin of the dy-
+namics of this system is still not fully understood, it is
+supposed that the ES released from the droplets likely
+reacts with the surfactant already present on the sur-
+face to form micellar aggregates that disperse in the bulk
+aqueous phase. This removes a portion of both types of
+surfactants from the water surface, locally raising sur-
+face tension (a portion of the ES is also evaporated from
+the surface). As a result, complex spatiotemporal gra-
+dients develop, where the surface tension is lower than
+the equilibrium case in the close vicinity of the droplets
+and higher further away [31], giving rise to a close-range
+repulsion and long-range attraction mechanism between
+the agents. At the same time, the droplets, being slightly
+denser than the bulk water phase, are deforming the
+meniscus of the latter, resulting in capillary attraction
+that competes with the short-range repulsion caused by
+the Marangoni effect. Finally, being the system closed,
+the bulk aqueous phase as well as the surrounding atmo-
+sphere gradually become saturated with ES; this dimin-
+ishes the droplet-induced gradients and results in the evo-
+lution of cluster formation over time, ending in a “death”
+state in which the droplets are largely steady and ar-
+ranged in a crystal-like hexagonal pattern.
+Experimental systems such as the one described above
+represent an exciting model platform illustrating the
+principle of life-like emergence, where unexpected higher
+order structures come to be from fairly simple interac-
+tions in a collective—namely, “the whole is greater than
+the sum of its parts”. While these experiments are per se
+fascinating and visually striking from the intuitive stand-
+point of emergence, the practical challenge remains to
+properly quantify their outcomes and extract meaningful
+statistical information from them, to aid in understand-
+ing the underlying physics that lies at the origin of the
+observed properties.
+The present work aims, through a combined experi-
+mental and theoretical effort, to address this challenge
+while also iterating on the complexity of the experiment
+proposed by Tanaka et al. [27]. From a methodological
+perspective, a robust tracking pipeline is developed that
+processes raw experimental videos of the self-propelled
+system to extract accurate trajectories of the droplets’
+centers, effectively mapping these hydrodynamic enti-
+ties onto point-like particles.
+The subsequent analysis
+of these trajectories, based on a series of metrics rooted
+in statistical physics, enables a systematic quantifica-
+tion of the droplets’ dynamical and structural proper-
+ties at each stage of the system’s evolution, shedding
+light on their emergent behavior in all the phases that
+range from artificial life to quiescence—or “death”. Al-
+though here applied to a specific case study, the proposed
+tracking pipeline and resulting semi-automated workflow
+(from experimental videos to a quantitative analysis of
+the agents’ trajectories) is general and adaptable to other
+synthetic active matter realizations.
+From an applied perspective, several studies indicate
+that the dyes that are often added to the active droplets
+to increase their contrast with the background can af-
+fect the oil-water interfacial tension, hence influencing
+the droplets’ features—such as the magnitude of their
+self-propulsion—and behavior [32–34].
+Here, we thus
+enhance the sophistication of the Ethyl Salicylate ac-
+tive droplet system of Ref. [27] by mixing two differ-
+ent species of agents: “blue” droplets, stained with Su-
+dan black B dye; and “red” droplets, stained with Oil
+red O dye. Apart from this difference, the droplets are
+identical in composition, and the experimental setup re-
+mains the same as the one introduced by Tanaka and
+coworkers [27]. More specifically, we consider a system
+of 50 self-propelled ES/paraffine droplets, 25 blue and
+25 red, moving at the top of an SDS solution within a
+Petri dish. Other experiments have shown that the co-
+existence of different types of active droplets can lead
+to new and more complex behaviors compared to the
+single-component case [33–36], so that even the minimal
+change in composition considered here could yield inter-
+esting phenomena.
+Through the detailed analysis of the droplets’ trajecto-
+ries enabled by our tracking pipeline, it is observed that
+the features of the agents depend on their color and, as
+a result, the emergent traits of the mixed system change
+compared to the homogeneous case [27]. Specifically, over
+the course of an experiment (up to six hours), the col-
+lective behavior of the droplets is found to pass through
+a sequence of phases, or stages, each characterized by
+qualitatively and quantitatively different system-wide dy-
+namic and structural properties. Five snapshots of the
+experimental setup are presented in Fig. 1, corresponding
+to the five main stages we identify in the system’s evolu-
+tion. These range from a disordered, high-activity phase
+at the onset of the experiment, displaying no organized
+patters; to an intermediate phase in which medium-sized,
+transient structures emerge; to, finally, the realization of
+a persistent arrangement in a quasi-regular assembly of
+the agents at late times and for vanished activity. Inter-
+estingly, due to the distinct features of the two coexist-
+ing species of droplets, some of the individual stages are
+reminiscent of phenomena observed in active Brownian
+particle systems—e.g., motility-induced phase separation
+[37]. The fact that these stages occur in sequence, further
+doing so in a reproducible manner across different exper-
+iments, makes the whole setup particularly fascinating,
+and underlines the necessity for a comprehensive and ac-
+curate pipeline, as the one proposed here, to track and
+quantify the collective motion of this synthetic, life-like
+active matter system. On the one hand, as a first step
+in the development of more complex realizations of arti-
+ficial life displaying, e.g., tailored or even programmable
+properties—presumably first in silico, through the con-
+struction of dedicated theoretical models, and then prac-
+tically due to the overwhelmingly large size of the exper-
+imental parameter space of this class of systems. On the
+
+4
+other hand, to advance our understanding of the physical
+principles underlying biological life itself.
+II.
+MATERIALS AND METHODS
+In the following sections, we illustrate the various tech-
+nical aspects of our work. In particular, Sec. II A is de-
+voted to the description of the experimental setup; in
+Sec. II B we lay out the pipeline used to reconstruct
+the motion of the droplets from experimental videos,
+which involves segmentation and classification, linking,
+and postprocessing phases; in Sec. II C we list, describe,
+and explain the tools employed in analysis of the data.
+A.
+Experimental setup and data acquisition
+For the preparation of droplets, stock solutions of 2
+mM Oil red O (BioReagent, Sigma-Aldrich) and Sudan
+black B (certified by the Biological Stain Commission,
+Sigma Aldrich) in ethyl salicylate (Sigma Aldrich CAS:
+118-61-6) were respectively prepared by weighing off ap-
+propriate amounts of dyes and adding them to a 50 ml
+Falcon tube. The dye was solubilized by 10 minutes of
+sonication at room temperature. The droplet stock so-
+lutions were prepared by mixing appropriate amounts of
+ethyl salicylate, paraffin oil (puriss., CASNumber: 8012-
+95-1, Sigma-Aldrich), and dye stock solution in 20 ml
+glass vials to obtain stock solutions of ethyl salicylate
+with 20wt% paraffin oil, with 0.001wt% of either dye. A
+glass Petri dish with a diameter of ≈8.6 cm was placed
+onto a LED flat panel for controlled illumination.
+25
+ml of 10g/l aqueous solution of sodium dodecyl sulfate
+(SDS, Sigma Aldrich, CAS: 151-21-3) was added to the
+dish using a micropipette obtaining a layer of ∼4 mm.
+A tip dipped in the blue droplets solution was inserted
+for few seconds at the water-air-glass Petri dish interface
+to prime the surface with ethyl salicylate, preventing ini-
+tial fission of the droplets. The desired number of 20µl
+droplets were placed onto the SDS solution (first the blue
+droplets and then the red ones) in the Petri dish using a
+micropipette. The Petri dish was then covered with a 20
+cm diameter glass Petri dish. The behavior was filmed
+using a Logitech CD920 HD Pro Webcam for between
+3 and 6 hours. All experiments were performed at lab
+temperature (19±1◦C)).
+B.
+Tracking
+Multi-object tracking (MOT) is essential for perform-
+ing quantitative analyses of video-recorded moving ob-
+jects. In this work, a semi-automated tracking pipeline
+has been developed to extract accurate and reliable
+droplet trajectories from the video footage of the exper-
+iments. Aside from the positions of its center, these tra-
+jectories contain additional features of each droplet, in-
+cluding its color, eccentricity, and area. The latter can be
+used to compute the “radius” (as perceived from above)
+of the detected object by approximating it to a circle.
+Hereafter, we describe each of the three steps involved in
+the tracking pipeline, namely segmentation and classifi-
+cation, linking, and post-processing.
+1.
+Instance segmentation and classification
+For each experimental realization of the system, the
+positions of (the centers of) the droplets, along with in-
+formation on their shape and color, were extracted via
+instance segmentation and classification performed on
+every frame of the video recording using the StarDist
+Python package [38–40]. StarDist employs a neural net-
+work that predicts, for each pixel, the probability of be-
+ing part of an object, the distance of the pixel to the
+object boundary along several radial directions, and a
+probability distribution over classes of object categories.
+The model relies on a slightly modified 3D variant of
+ResNet [41] for the backbone of the network, with two
+additional 3 × 3 convolutional layers with 128 channels
+and ReLU activations, each one feeding three output lay-
+ers; the latter are, respectively, (i) the object probabil-
+ity output as single-channel output convolutional layer
+with sigmoid activation; (ii) the polygon distance out-
+put as convolutional layer with as many output channels
+as there are radial directions n, with no additional acti-
+vation function; and (iii) the object classification output
+as a convolutional layer with as many output channels
+as the number of classes, plus one for the background.
+For the current application, the StarDist neural network
+was trained on a diverse set of images extracted from
+experimental video recordings, covering different light-
+ing conditions and imaging settings.
+The training set
+included manually labeled droplet instances to provide
+ground truth annotations.
+29
+31
+34
+37
+39
+42
+45
+47
+x [mm]
+60
+63
+66
+68
+71
+73
+76
+79
+y [mm]
+a)
+Frame i
+29
+31
+34
+37
+39
+42
+45
+47
+x [mm]
+b)
+Frame i
+FIG. 2: Example of instance segmentation and classification
+performed with StarDist.
+(a) Close-up of a portion of an
+original experimental image. (b) Predicted instance positions
+and rays overlaid on the image of panel (a).
+In each frame, the features of the detected instances,
+the latter being either actual droplets or possible spuri-
+
+5
+ous objects, were extracted by measuring the properties
+of the corresponding labeled image.
+The most impor-
+tant features are the instances’ centroid positions, their
+color, and their area, see Fig. 2. Assuming each instance
+to be circular on the x-y plane, its area allowed us to
+determine the “radius” of the object as perceived from
+above (hereafter referred to simply as the radius). We
+note that pixel units were converted into physical ones
+through image scale calibration. This was achieved by
+measuring the Petri dish diameter in pixels, comparing
+it to its known physical diameter, and computing the cor-
+responding scale factor. All relevant instance properties
+were then rescaled accordingly.
+As previously mentioned, at this stage the identified in-
+stances comprise actual droplets as well as spurious net-
+work detections; in the present case, to filter out most of
+the latter, it was sufficient to require instances to have
+a radius greater than 1.25 mm. Across all experimen-
+tal realizations, we found that approximately 0.016 %
+of frames contained an incorrect number of detected in-
+stances after this first filtering step. All encountered er-
+rors in a frame involved fewer than 3 detections of spu-
+rious objects (an issue solved in the linking step, vide
+infra) or a single droplet instance missed in the detec-
+tion (tackled in the post-processing step via interpola-
+tion, vide infra).
+2.
+Linking and trajectory reconstruction
+The second step of the tracking pipeline consists of
+linking the detected instances—once filtered as detailed
+above—across frames while preserving their identities
+over time, thereby reconstructing the corresponding tra-
+jectories. This amounts to determining the most likely
+assignment of instances between consecutive frames, a
+process visually depicted in Fig. 3. In this work, identity
+matching was achieved by relying on the initial assump-
+tion that the motion of droplets on short timescales—
+in our case, the ones associated with the frame rate
+∆t = 1/30 s of the experimental videos—can be approx-
+imated with that of a set of N non-interacting Brow-
+nian particles; under such conditions, the probability
+that the droplets will exhibit a set of displacements
+{δi} = (δ1, .., δN) in a time interval ∆t, P ({δi}, ∆t),
+reads
+P ({δi}, ∆t) =
+
+1
+4πD∆t
+N
+exp
+ 
+−
+N
+X
+i=1
+|δi|2
+4D∆t
+!
+,
+(1)
+where D is the diffusion coefficient. The most likely iden-
+tity assignment between consecutive frames corresponds
+to the one that maximizes P({δi}, ∆t). The implemen-
+tation of this procedure was performed via the Trackpy
+python package [42], which also accounts for the possi-
+bility that an instance might be missed in the detection
+stage for a few frames and then seen again. The result-
+ing data can still contain some spurious, short trajecto-
+ries of small defects that survived the filtering performed
+in the segmentation and classification step described in
+Sec. II B 1.
+This problem was solved by requiring the
+trajectory of an object to last at least 99 % of the video
+frames to be attributed to an actual droplet.
+62
+66
+70
+74
+79
+83
+x [mm]
+66
+70
+74
+78
+82
+86
+y [mm]
+a)
+Frame i
+62
+66
+70
+74
+79
+83
+x [mm]
+b)
+Frame i + 1
+FIG. 3:
+Example of instance linking between consecutive
+frames of an experimental video. The colors distinguish the
+droplet class, and the arrows connecting panels (a) and (b)
+represent the matching of the identities of the droplets be-
+tween frames i and i + 1.
+The end of the linking stage provided us with sub-
+pixel accurate droplets’ trajectories—see Fig. 4 for a
+graphical example—that were, however, still affected by
+small-amplitude noise at short timescales. Such noise is
+not entirely physical and arises also from uncertainties
+in the StarDist reconstruction of the droplets’ centers,
+with the latter becoming more relevant once the agents’
+self-propulsion has largely subsided. The final phase of
+the tracking pipeline, discussed in the following section,
+addresses both this issue and that of droplet instances
+missed by the detection in a few frames of a video, doing
+so through the application of an interpolation and noise
+suppression procedure to the trajectories generated by
+the linking step.
+50.33
+52.42
+54.52
+56.62
+58.72
+60.81
+62.91
+x [mm]
+46.13
+48.23
+50.33
+52.42
+54.52
+56.62
+58.72
+y [mm]
+Sample trajectory
+58.66
+58.72
+58.77
+58.82
+58.87
+58.92
+58.98
+x [mm]
+52.32
+52.37
+52.42
+52.48
+52.53
+52.58
+52.63
+y [mm]
+Zoomed in
+Original trajectory
+Kalman trajectory
+UKF + RTS trajectory
+FIG. 4:
+Left:
+segment of a test droplet trajectory recon-
+structed by our tracking pipeline.
+Right:
+close-up of the
+region indicated by the green frame in the left panel.
+We
+display (i) the raw trajectory (red line); (ii) the trajec-
+tory obtained by applying the unscented Kalman filter to
+the raw data (blue line); and (iii) the trajectory result-
+ing from the unscented Kalman filter combined with the
+Rauch–Tung–Striebel smoother, with dashed lines indicating
+the associated confidence interval.
+
+6
+3.
+Post-processing
+The third and final phase of our tracking pipeline is the
+post-processing of the trajectories obtained at the end
+of the linking procedure. Here, having already removed
+previous spurious detections, the motion and features of
+those droplets that were—for an extremely limited subset
+of frames, see Sec. II B 1—not detected by StarDist were
+linearly interpolated, and the effect of the network’s mea-
+surement noise on the trajectories was suppressed using
+the unscented Kalman filter (UKF) proposed by Julier
+and Uhlman [43], together with the Rauch-Tung-Striebe
+(RTS) smoother [44]. For the sake of brevity, we will not
+elaborate on the details of the two algorithms here, refer-
+ring the interested reader to Ref. [45] for their in-depth
+description.
+The UKF is an extension of the standard Kalman fil-
+ter formulated to perform recursive state estimation in
+systems with nonlinear dynamic and measurement mod-
+els, thus overcoming the linearity constraint of the orig-
+inal algorithm [46]. In this framework, the system state
+is represented as a Gaussian random variable (GRV),
+xk ∼N(ˆxk, Pk), where ˆxk denotes the state estimate and
+Pk the error covariance matrix. The state distribution
+is approximated using a minimal set of deterministically
+chosen points generated according to Van der Merwe’s
+algorithm [47], which encode the true mean and covari-
+ance of the GRV. When transformed by the nonlinear
+transition model, these points yield posterior mean and
+covariance estimates that are accurate to third order in
+a Taylor series expansion [45].
+Regarding the specifics of our implementation, we es-
+timated the measurement noise covariance matrix R as
+R = σ2
+r
+
+1 0
+0 1
+
+(2)
+where σ2
+r = 0.01 px2 and considered a simple 2D second-
+order model with transition matrix F and measurement
+matrix H given by
+F =
+
+
+1 ∆t 0
+0
+0
+1
+0
+0
+0
+0
+1 ∆t
+0
+0
+0
+1
+
+,
+H =
+
+1 0 0 0
+0 0 1 0
+
+(3)
+while the process noise covariance matrix Q reads
+Q=
+
+
+σ2
+x
+σx ˙x
+0
+0
+σ ˙xx
+σ2
+˙x
+0
+0
+0
+0
+σ2
+y
+σy ˙y
+0
+0
+σ ˙yy
+σ2
+˙y
+
+
+=σ2
+a
+
+
+∆t4
+4
+∆t3
+2
+0
+0
+∆t3
+2
+∆t2
+0
+0
+0
+0
+∆t4
+4
+∆t3
+2
+0
+0
+∆t3
+2
+∆t2
+
+
+.
+(4)
+We underline that, being the UKF a recursive Marko-
+vian filter, its state estimate at step k depends only on
+the prediction at the previous step k −1, and so on. To
+refine the results, we thus also incorporate future mea-
+surements into the estimate at step k by relying on an
+RTS smoother. The latter runs backward over the data
+and uses the UKF filter prediction along with its covari-
+ance matrix to produce smoothed state estimates that
+optimally account for both past and future observations.
+An example of a trajectory segment produced by this
+overall workflow in the regime of highest self-propulsion
+of the droplets is reported in Fig. 4. From the plot, it
+is possible to appreciate that the protocol suppresses the
+high-frequency and small-amplitude measurement noise
+of the neural network, resulting—as long as the activity
+of the droplets has not completely subsided—in trajecto-
+ries produced by the tracking pipeline that are character-
+ized by high resolution and accuracy. When the activity
+of the agents has largely vanished and these have become
+essentially steady, on the other hand, the network’s inac-
+curacies in the detection of the droplet centers can impact
+the results of the trajectory reconstruction beyond the
+30fps timescales of the experimental videos; this makes
+it difficult, at such a framerate, to distinguish real motion
+from noise. To address this issue, the output trajectories
+of our pipeline were finally subsampled from the original
+30 fps recording to 10 fps. By reducing the temporal res-
+olution, we effectively filter out small-timescale processes
+that cannot be reliably resolved in the phase in which
+droplets are largely immobile, ensuring that all the sub-
+sequent analyses are based on dynamical data that are
+robust and physically meaningful throughout the totality
+of the experiment.
+C.
+Trajectory windowing and analyzed metrics
+The natural statistical mechanics approach for investi-
+gating a non-equilibrium system involves performing en-
+semble averages of physical observables over multiple re-
+alizations of its time evolution to gain insight into its
+statistical behavior [48].
+This framework can be com-
+plemented if the system reaches a time-translationally
+invariant state—as occurs, for instance, under stationary
+non-equilibrium conditions; in such a case, if the system
+is ergodic with respect to such stationary distribution,
+ensemble averages over the latter can be replaced by time
+averages along a single, long trajectory, discarding the
+initial relaxation transient.
+In
+the
+case
+under
+examination,
+the
+droplets—
+essentially hydrodynamic entities—were mapped onto
+point-like particles, and the pipeline described in Sec. II B
+provided highly accurate trajectories of the agents ex-
+tracted from the experimental videos.
+While such a
+mapping renders the system amenable to a statistical-
+mechanics-based analysis, the limited number of real-
+izations available, together with the small number of
+droplets in the experimental setup considered, precludes
+a proper ensemble-averaged approach.
+Moreover, the
+progressive decay of self-propulsion prevents the system
+from reaching a stationary non-equilibrium state, except
+for the dynamically trivial inactive regime in which the
+agents have become essentially immobile; consequently,
+time-averaging along a single, long trajectory is not a
+
+7
+feasible strategy for characterizing the system’s statisti-
+cal behavior.
+Nevertheless, the macroscopic timescales over which
+the activity vanishes (on the order of three hours)
+are much larger than the characteristic ones of the
+droplets’ dynamics we aim to investigate.
+To resolve
+the time dependence of the system’s statistical prop-
+erties along its evolution, we hence rely on a window-
+based analysis. Specifically, we introduce time windows
+of duration Tw = 600 s and assume that, on such
+a timescale, the self-propulsion properties of the sys-
+tem do not change significantly—a condition not strictly
+valid in the initial regime of high activity—and pro-
+duce only a somewhat “adiabatic” modification of the
+droplets’ short-time dynamics.
+Furthermore, it is as-
+sumed that, for approximately constant self-propulsion,
+the system relaxes rapidly toward a non-equilibrium
+steady state. Under these strong assumptions of overall
+“quasi-stationary non-equilibrium conditions”—holding
+on timescales short compared to those of self-propulsion
+decay—we replace ensemble averages over independent
+realizations of the system characterized by comparable
+self-propulsion with time averages within each window,
+sliding the beginning of the latter along the whole trajec-
+tory by a stride of 10 s. Within this window-based frame-
+work, a series of time-dependent metrics is then employed
+to extract insight on the system’s behavior as its activ-
+ity wanes, including structural and dynamic observables.
+Such metrics are, respectively: (i) the average speed of
+the droplets; (ii) their velocity polarizations; (iii) their
+hexatic order parameters; (iv) their time- and species-
+averaged mean squared displacements (TSAMSD); (v)
+their velocity autocorrelation functions (VACF); (vi)
+their turning angle distributions; and (vii) the dimer dis-
+tributions introduced by Tanaka and coworkers [27].
+The droplets’ average speed is employed in this work
+as a proxy to quantify their level of self-propulsion over
+the course of the experiment. The average speed of an
+agent is defined as
+VS(tw) = ⟨⟨||vk(t)||⟩k∈S⟩t∈Tw,
+(5)
+where vk(t) = [xk(t + ∆t) −xk(t)]/∆t is the velocity of
+droplet k at time t as extracted from the reconstructed
+trajectory, ∆t is 0.1 s as for the subsampling described
+in II B 3, while ⟨·⟩t∈Tw indicates, in the following, the
+time average of the bracketed observable over a window
+of length Tw centered around the running time tw. Given
+the different behavior observed for the droplets depend-
+ing on their color, see Fig 1, we further consider a global
+speed parameter associated with the whole system as well
+as an independent one for each species. In this respect,
+the symbol ⟨·⟩k∈S in Eq. 5 indicates—and does so in the
+remainder of this work—an average of the bracketed ob-
+servable performed over all droplets (S = A) or restricted
+to the blue and red agents (S = B and R, respectively).
+The degree of collective orientational alignment in the
+motion of the droplets is here analyzed in terms of their
+velocity polarization Φ, which acts as an order parame-
+ter in the Vicsek model [6]. Accounting for the possible
+groupings S = A, B, R of species identities, the set of
+velocity polarizations considered in this work reads
+ΦS(tw)
+=
+
+ vk(t)
+∥vk(t)∥
+
+k∈S
+
+
+t∈Tw
+= ⟨∥⟨ˆek(t)⟩k∈S∥⟩t∈Tw,
+(6)
+where ˆek(t) is the versor of the velocity of droplet k (or
+its orientation in what follows) at time t. We note that
+in the case of a perfect alignment of the velocities of
+all droplets within the group S, one obtains that the
+corresponding polarization is ΦS = 1; on the other hand,
+random, uncorrelated orientations result in
+ΦS =
+*
+1
+NS
+sX
+k∈S
+|ˆek|2 +
+
+X
+k̸=j∈S
+ˆek · ˆej
++
+t∈Tw
+=
+1
+√NS
+,
+(7)
+and since, in the present case, the population consists
+of NB = 25 blue droplets and NR = 25 red ones, their
+disordered dynamics is associated with a set of baseline
+velocity polarizations of ΦB,R = 0.2 and ΦA ≈0.14.
+Albeit sensitive to the presence of collectiveness in the
+droplet’s motion, the velocity polarization is instead pos-
+sibly blind to what are eventual regularities in their spa-
+tial arrangement.
+To capture the latter, we here rely
+on (a slightly modified version of) the hexatic order pa-
+rameter Ψ6 measuring how closely, on average, the local
+environment around a droplet resembles perfect hexago-
+nal/hexatic symmetry [49]. Taking into account all pos-
+sible groupings of droplets, the resulting set of hexatic
+order parameters is here defined as
+Ψ6,S(tw) = Re
+
+
+**
+1
+6
+nk(t)
+X
+j∈S=1
+ei6[ηkj(t)−ηk1(t)]
++
+k∈S
++
+t∈Tw
+
+,
+(8)
+where nk is the number of S-neighbors of droplet k ∈S,
+and ηkj is the angle that the displacement vector rkj
+connecting the position of droplet k with that of its j-th
+neighbor forms with the x axis. We consider a droplet j
+to be in the neighborhood of k if |rkj| < 1.5dS, where
+dS is the mean diameter of the droplets of species S
+at the specific frame considered. Again, time averages
+in Eq. 8 are performed over windows of length Tw cen-
+tered around the running time tw, and the metric is com-
+puted separately for blue and red droplets (S = B, R),
+as well as among all droplets (S = A). Critically, Ψ6
+also captures the presence of partial hexatic order in the
+system—note in Eq. 8 the multiplicative factor of 1/6
+rather than 1/nk—in that q neighbors located on the
+edges of a hexagon centered around droplet k result for
+it in Ψ6,k = q/6. The recalibration of the neighbors’ an-
+gles with respect to the first of them taken as reference
+was introduced to render the metric rotationally invari-
+ant.
+The next step in the analysis involves investigating the
+translational and rotational diffusive properties of the
+
+8
+droplets and how these are influenced by the decay of
+self-propulsion. As for translational ones, we calculate
+the time- and species-averaged mean squared displace-
+ments (TSAMSD) δ2
+S and velocity autocorrelation func-
+tions (VACF) CS of the two populations S = B, R as a
+function of the running window time tw and the lag time
+τ. These TSAMSDs and VACFs read, respectively
+δ2
+S(τ, tw) = ⟨⟨(rk(t + τ) −rk(t))2⟩t∈Tw⟩k∈S , (9)
+CS(τ, tw) =
+1
+σ2
+S(tw)
+
+⟨δvk(t) · δvk(t + τ)⟩t∈Tw
+
+k∈S .(10)
+In Eqs. 9 and 10, tw is again the running time located
+at the center of the window of length Tw over which
+the time average ⟨·⟩t∈Tw is performed.
+Furthermore,
+δvk(t) = vk(t) −⟨vk(t)⟩t∈Tw, while σ2
+S(tw) is the vari-
+ance of the velocity of species S within the time window.
+The rotational diffusive properties of the system are
+instead analyzed via the droplet species’ distributions
+of turning angle ∆θ, the latter being the angle between
+two consecutive displacements of a droplet—note that,
+for each agent, the instantaneous direction of its motion
+is defined by the orientation ˆek(t) = (ˆek,x(t), ˆek,y(t)) of
+its velocity defined in Eq. 6. Starting from the droplet
+trajectories, the distribution PS(∆θ, tw) of species S at
+running time tw is calculated as
+PS(∆θ, tw) =
+
+⟨δ(θk(t + ∆t) −θk(t) −∆θ)⟩t∈Tw
+
+k∈S ,
+θk(t) = atan2
+ ˆek,y(t)
+ˆek,x(t)
+
+,
+(11)
+where atan2 is the extension of the conventional arctan
+function with image in [−π; π], the difference θk(t +
+∆t) −θk(t) has to be interpreted mod 2π (so that ∆θ ∈
+[−π, π]), and ∆t = 0.1 s as for the sub-sampling described
+in II B 3.
+Finally, the global structural arrangement of the sys-
+tem was analyzed by computing the average 2D distribu-
+tion of droplets around a dimer [27], varying the compo-
+sition of the latter to include blue-blue, red-red, as well
+as inter-species blue-red and red-blue pairs. Specifically,
+given the configuration of the system at time t, the dis-
+tribution DSS′(t) of droplets around S-S′ dimers, with
+S, S′ ∈(B, R), is computed by individually running over
+all the α = 1, ..., NS droplets in species S, and for each
+of them applying a roto-translation of the whole system
+that brings the α droplet in the origin and its nearest
+neighbor droplet from species S′ (the other member of
+the dimer) on the positive x axis; to construct DSS′(t),
+a 2D histogram of the droplet positions is subsequently
+generated that, however, only takes into account the S′
+species. The window-based version of this metric is then
+nothing but a time average of its instantaneous counter-
+part performed over the extent Tw of the window, namely
+DSS′(tw) = ⟨DSS′(t)⟩t∈Tw.
+(12)
+III.
+RESULTS
+Although characterized by a relatively plain chemi-
+cal composition, the active droplet system analyzed in
+this work exhibits—as already highlighted by Tanaka
+and coworkers [27] in the single-component case—an ex-
+tremely complex, life-like behavior during its temporal
+evolution, unfolding as the self-propulsion gradually de-
+cays. As highlighted in Fig. 1, a gradual increase in col-
+lective order is observed from a purely structural stand-
+point along the experiment; specifically, the system starts
+from an initial state of almost random and uniform spa-
+tial arrangement of the droplets within the Petri dish,
+then passes through the generation of transient struc-
+tures for intermediate times, and finally reaches a phase
+of maximal, closely packed, and quasi-crystalline hexag-
+onal order. Critically, this overall growth in structural
+regularity is accompanied by, and intertwined with, an
+evolution of the system’s dynamical properties: the dis-
+ordered behavior distinctive of the initial, high-activity
+regime progressively gives way to an increasingly coordi-
+nated motion of the agents, lastly reaching an essentially
+static phase when their propulsion has subsided. Further-
+more, the blue and red droplets manifest these structural
+and dynamic features differently due to their uneven ac-
+tivity levels—the one of the red agents being significantly
+higher during the early steps of the experiment—and dis-
+tinct rates of activity decay; starting from the homoge-
+neous distribution of the two species in the dish observed
+in the early phase of the system’s evolution, a gradual
+demixing transition occurs, eventually resulting, in the
+steady regime, in all blue droplets being organized in a
+cluster surrounded and caged by a chain of red ones, see
+Fig. 1.
+This sequence of steps, followed by the system over
+time—uncoordinated motion, generation of transient
+structures,
+and finally steady,
+demixed,
+and quasi-
+hexagonal order—appears to be qualitatively preserved
+across different experimental realizations, see Fig. S1 of
+Supporting Information. It is hence natural to begin our
+analysis looking for simple collective variables in terms
+of which we can characterize the “life-to-death cycle” of
+the system and adequately capture the interplay of its
+structural and dynamical features.
+A.
+Collective variables analysis and identification
+of the evolutionary stages
+Based on the preceding observations, the trajectories
+of the droplet centers extracted by our tracking pipeline
+were first inspected in terms of two sets of collective vari-
+ables, namely the velocity polarizations ΦS(tw) and hex-
+atic order parameters Ψ6,S(tw) respectively reported in
+Eq. 6 and 8 of Sec. II C. The analysis of these quantities
+for both the system as a whole (S = A) and separately
+by species (red/blue, S = B, R), is further flanked by
+the study of the droplets’ average speeds VS(tw) defined
+
+9
+0.00
+0.25
+0.50
+0.75
+1.00
+a)
+Blue
+Red
+All
+0.0
+0.5
+1.0
+6,
+b)
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.5
+1.0
+1.5
+V [mm/s]
+c)
+Stage 1
+Stage 2
+Stage 3
+Stage 4
+Stage 5
+FIG. 5: Temporal evolution of (a) the velocity polarization
+ΦS, see Eq. 6 (b) the hexatic order parameter Ψ6,S, see Eq. 8,
+and (c) the average speed VS, see Eq. 5, of the blue droplet
+population (blue line), the red droplet population (red line),
+and overall droplet population (black line) as a function of
+the window running time tw. Colored vertical bars indicate
+the onset of each evolutionary stage of the system.
+in Eq. 5, the latter enabling the interpretation of the
+orientational collective behavior of the agents’ motion—
+as captured by the polarizations ΦS—in the light of the
+amount of their self propulsion. We remind, in passing,
+that all time-dependent quantities under examination are
+defined as the time average of the corresponding instan-
+taneous value, performed in a sliding window of duration
+Tw = 600 s centered around the running time tw.
+The aforementioned metrics provide complementary
+information on the collective properties of the system
+over the course of its evolution.
+Specifically, the hex-
+atic order parameters Ψ6,S quantify the degree of spatial
+hexagonal order in the droplets’ arrangement, and are
+thus adequate to signal the emergence of structural reg-
+ularity in the system. On the other hand, the Ψ6,S are
+insensitive to any coordination in the droplets’ motion;
+this aspect is instead effectively captured by the veloc-
+ity polarizations ΦS, which are commonly employed to
+quantify the degree of collective orientational order in the
+dynamics of active agents (such as flocks of birds, swarms
+of insects, and schools of fishes [50–52]) while remaining
+blind to possible symmetries in their spatial configura-
+tion. Furthermore, the values attained by the velocity
+polarizations reflect the coherence of the droplets’ mo-
+tion irrespective of its intensity: hence, it is advisable
+to interpret the ΦS in the light of the average droplets’
+speeds VS.
+In conclusion, remodulations over time in
+the collective structural and dynamical properties of the
+system can thus be adequately accounted for via the si-
+multaneous investigation of the collective variables Ψ6,S
+and ΦS, plus the average speeds VS.
+The evolution of these quantities over the course of a
+representative experiment is shown in Fig. 5, with corre-
+sponding data from two additional realizations being pro-
+vided in the Supporting Information. Critically, a quali-
+tatively consistent behavior is observed for the temporal
+trend followed by the observables across the three exper-
+iments, exhibiting distinct, recognizable phases. These
+phases are not necessarily stationary—within each of
+them, a given collective variable may increase, plateau,
+or decrease—yet they remain clearly distinguishable from
+one another.
+Hence, it is conceptually tempting and
+practically convenient to partition the system’s history
+into five “evolutionary stages”: these are highlighted in
+Fig. 5, where vertical colored bars indicate the character-
+istic window running times tw marking the beginning of
+each stage. For times tw located in the middle of each bar
+in Fig. 5, specific observables representative of the early
+moments of each stage will be showcased in the following.
+a.
+Stage I —
+The first stage (hereafter referred to
+as I) identified through an inspection of the temporal
+behavior of the set of ΦS, Ψ6,S and VS is the one dis-
+playing the highest self-propulsion of the droplets, and is
+characterized by an overall absence of collective and per-
+sistent dynamic or structural order in the system, both at
+the global level and when analyzed by individual species
+(see Fig. 5).
+The high mobility of the agents in this
+stage can be evinced by their average speeds VS presented
+in Fig. 5c, which, although decreasing as the stage un-
+folds, attain the maximum values observed throughout
+the whole experiment. As for the lack of collective order,
+this is, from a dynamic standpoint, witnessed by veloc-
+ity polarizations ΦS (S = A, B, R) on average oscillating
+around 0.1 −0.2, except for a mild “bump” that appears
+towards the end of the stage; according to Eq. 7, this is
+indicative of an uncorrelated motion of the droplets. The
+absence of collective structural regularity in their spatial
+arrangement can instead be inferred by almost constant
+hexatic order parameters Ψ6,S along the stage and ly-
+ing below 2/6, with droplets hence having, on average
+and irrespective of their species, fewer than two nearest
+neighbors satisfying hexagonal symmetry, see Sec. II C.
+In terms of phenomenological behavior of the droplets,
+stage I extends from the initial, uncoordinated phase of
+the system’s spatial and dynamic organization to the
+one in which transient structures progressively emerge,
+where, in both cases, the two species are found to be ap-
+proximately homogeneously mixed, see Fig. 1a-b. Based
+solely on the analysis of velocity polarizations and hexatic
+order parameters during this stage, no extremely marked
+differences between the two species are apparent, suggest-
+ing that red and blue agents play an essentially equivalent
+role in both the uncoordinated and transient-structure
+regimes as far as these metrics reveal. However, an in-
+spection of the droplets’ average speeds VS reported in
+Fig. 5c indicates that the activity of the red species is sig-
+nificantly higher than that of its blue counterpart at the
+onset of the experiment and in the uncoordinated phase.
+VB and VR, on the other hand, decrease and become grad-
+ually comparable throughout stage I, plateauing towards
+its end to a common value; interestingly and consistently
+
+10
+with what observed via other metrics (see below), this
+suggest that the two droplet species display similar dy-
+namical properties in the series of transient structures
+that appear for intermediate activities.
+b.
+Stage II —
+At longer timescales and as the
+self-propulsion of the agents further weakens, the sys-
+tem transitions from this initial, overall disordered, and
+mixed phase into what we refer to as the second stage
+(II) of its evolution, see Fig. 5. The defining feature of
+this stage lies, compared to what was observed in I, in
+the emergence of a clear discrimination in the collective
+properties of the two species as quantified by their re-
+spective ΦS and Ψ6,S.
+In particular, during stage II,
+an ordering in the dynamics of the blue droplets progres-
+sively develops over time, with their velocity polarization
+rising from the uncorrelated baseline of ΦB = 0.2 to ap-
+proximately 0.5.
+This organization of the dynamics is
+accompanied by a gradual increase in the symmetry of
+the blue species’ spatial arrangement; this is indicated by
+the hexatic order parameter Ψ6,B reaching ∼0.6 by the
+end of stage II, corresponding to blue droplets being, on
+average, surrounded by four neighbors of the same color
+located on the edges of a hexagon. The red species, in
+contrast, persists in its disordered motion along II, as
+reflected by values of ΦR and Ψ6,R similar to the ones
+observed during stage I of the system’s evolution.
+As previously discussed, the late offset of stage I fea-
+tures, as does the beginning of stage II, red and blue
+agents with similar and quasi-stationary activities that
+participate in the generation of a series of transient struc-
+tures displaying an approximately homogeneous species
+composition, see Fig. 1b. With the resumption of the de-
+cline of self-propulsion during II—evidenced by the fur-
+ther reduction in the droplets’ average speeds throughout
+this stage, faster for the blue component—these struc-
+tures gradually give way to a demixing transition of the
+two species, culminating in the formation of a cluster
+of blue droplets with hexagonal symmetry that accounts
+for the the steady rise of Ψ6,B observed in Fig. 5. Dur-
+ing its growth, the cluster gets increasingly surrounded
+by the expelled red agents, whose disordered spatial ar-
+rangement is witnessed by the quasi-constancy of Ψ6,R
+across stages I and II. As for the system’s dynamics, the
+individual motion of the blue droplets within the cluster
+becomes, along stage II, more and more subdued over
+time and as their activity continues to decline; on the
+other hand, the cluster as a whole gradually acquires a
+collective orientational order in its motion, driven by the
+asymmetric “kicks” it receives from the surrounding and
+still relatively active red component—this being not only
+structurally, but also dynamically disordered, where we
+note that ΦR ≈0.2 in II. This interplay between the two
+species underlies the increase in the velocity polarization
+of the blue droplets observed in Fig. 5 throughout this
+stage.
+c.
+Stage III —
+The timescales at which the pre-
+viously discussed steady growth in the hexatic order pa-
+rameter and velocity polarization of the blue species halts
+mark the onset of the third stage of the system’s evolu-
+tion. During stage III, all the collective variables ΦB/R
+and Ψ6,B/R remain approximately constant, see Fig. 5.
+The cluster of blue droplets is fully formed, will per-
+sist for the remainder of the experiment, and its con-
+stituents have lost most, if not all, of their spontaneous
+self-propulsion.
+As in the late phase of stage II, the
+residual collective motion of blue droplets, highlighted
+again by a ΦB lying around 0.5, arises primarily from
+the random kicks that are imparted to the cluster by
+the surrounding red droplets, which remain both rela-
+tively active—though exhibiting a further decline in self-
+propulsion, evidenced by a decrease in VR along the
+stage—and dynamically/structurally disordered.
+d.
+Stage IV —
+As the red species’ self-propulsion
+ultimately vanishes, see Fig. 5c, the system takes its steps
+towards the terminal, “death” phase. In particular, stage
+IV is marked by a decline in the blue droplets’ veloc-
+ity polarization, which steadily decays over time to the
+baseline value of 0.2 (see Fig. 5a) signaling a return to
+uncorrelated motion—though with subtle differences to
+be discussed below. The decay of ΦB occurs at almost
+constant hexatic order parameter Ψ6,B and red species’
+velocity polarization ΦR, and is instead accompanied by
+a mild increase in Ψ6,R. A progressive extinction of the
+collective dynamics of the stable blue cluster is hence
+observed during IV; critically, this is driven by the red
+droplets losing their residual self-propulsion and contex-
+tually adopting a more symmetric arrangement around
+the cluster—note that Ψ6,R ≈0.3 at the end stage IV,
+with each red droplet having on average two nearest
+neighbors located at its sides. As a result, the persistent
+and inhomogeneous “kicks” provided by the red species
+become increasingly weaker and more isotropic, eventu-
+ally ceasing to drive the global displacement of the blue
+cluster.
+e.
+Stage V —
+When the self-propulsion of the red
+droplets has fully subsided, the system is found in its
+final phase, indicated in Fig. 5 as stage five (V) of the
+evolution. Here, the hexatic order parameters and veloc-
+ity polarizations of the two species remain largely con-
+stant over time, retaining the values they reached at the
+end of stage IV. In particular, both ΦB and ΦR settle at
+the 0.2 baseline characteristic of an uncorrelated motion,
+see Fig. 5; unlike in the high-activity regime, however,
+this value now arises from droplets that are almost en-
+tirely immobile (see the agents’ average speeds reported
+in Fig. 5c), so that the observed disorder in the orienta-
+tion of their velocities is primarily dictated by residual
+noise of small amplitude in the detection of their posi-
+tions. From a structural standpoint, stage V corresponds
+to a final, largely steady and quasi-crystalline configura-
+tion of the system, see Fig. 1e, in which the hexagonally
+ordered cluster of blue droplets is caged by a ring of red
+ones.
+
+11
+10
+1
+100
+101
+102
+ [s]
+10
+4
+10
+2
+100
+102
+2 [mm2]
+a)
+Stage 1
+Blue droplets
+Red droplets
+10
+1
+100
+101
+102
+ [s]
+b)
+Stage 2
+10
+1
+100
+101
+102
+ [s]
+c)
+Stage 3
+10
+1
+100
+101
+102
+ [s]
+d)
+Stage 4
+10
+1
+100
+101
+102
+ [s]
+e)
+Stage 5
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.5
+1.0
+1.5
+2.0
+short
+f)
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0
+1
+2
+3
+4
+5
+Kshort [mm2/s ]
+g)
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.5
+1.0
+1.5
+2.0
+long
+h)
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0
+5
+10
+15
+20
+Klong [mm2/s ]
+i)
+Stage 1
+Stage 2
+Stage 3
+Stage 4
+Stage 5
+FIG. 6: Results for the time- and species-averaged mean squared displacements (TSAMSD) of the two droplet populations, see
+Eq. 9. (a-e) Progression from left to right illustrates the dependence of the family of δ2
+S(τ, tw) TSAMSD curves on the lag time
+τ for the blue (blue line) and red (red line) species at the onset of each evolutionary stage of the system—that is, for window
+times tw located in the middle of each of the five colored vertical bars in the subsequent plots. (f-g) Temporal evolution of the
+short time-lag scaling exponents αshort
+S
+(tw) and generalized diffusion coefficients Kshort
+S
+(tw) of the two species, resulting from
+a power law fit, see Eq. 13, of the family of δ2
+S(τ, tw) profiles of the two species performed in the region τ ∈[0.1, 1] s. Colored
+vertical bars indicate the onset of each evolutionary stage. (h-i) Temporal evolution of the long-time lag scaling exponents
+αlong
+S
+(tw) and generalized diffusion coefficients Klong
+S
+(tw) of the two species, obtained from a power law fit of the blue and red
+droplets TSAMSD performed in the region τ ∈[50, 300] s.
+B.
+Time- and species-averaged mean squared
+displacements & Velocity autocorrelation functions
+In Sec. III A we highlighted how it is possible—also
+for practical convenience—to partition the global evo-
+lution of the system into five distinct stages based on
+the phenomenological behavior followed by the set of
+collective variables ΦS, Ψ6,S, and VS over time, stages
+that consistently emerge across all three experimental
+runs with only minor variations (see Supporting Informa-
+tion). Building on this partition, the remainder of this
+work will be devoted to analyzing a set of complemen-
+tary observables that capture different aspects of the sys-
+tem’s dynamical and structural properties, paying partic-
+ular attention to the influence that the decrease in self-
+propulsion has on these metrics. We begin this discussion
+focusing on the time- and species-averaged mean squared
+displacements (TSAMSDs, see Eq. 9) and velocity auto-
+correlation functions (VACFs, see Eq. 10) of the agents,
+which together provide insight into the droplets’ transla-
+tional diffusive features and the persistence of their mo-
+tion.
+To characterize the dynamics of the agents and its de-
+pendence on the gradual loss of activity, we thus first
+evaluated the TSAMSDs of the droplets δ2
+S(τ, tw) =
+⟨⟨(rk(t+τ)−rk(t))2⟩t∈Tw⟩k∈S. We remind that S = B, R
+marks the species identity, while tw is the running time
+located at the center of the window over which the time
+average ⟨·⟩t∈Tw is accumulated.
+MSDs constitute a fundamental tool for investigat-
+ing self-propelled systems, allowing one to identify the
+presence of distinct dynamical regimes—such as ballis-
+tic motion, normal/anomalous diffusion, or arrest—that
+may emerge across different timescales [53, 54]. A well-
+known example of this is provided by non-interacting
+active Brownian particles: here, theoretical predictions
+(neglecting short-time diffusion) [53] yield δ2(τ) ∝τ 2
+for time lags τ ≪τr = 1/Dr where Dr is the particles’
+rotational diffusion coefficient, corresponding to ballistic
+motion, while a diffusive regime with δ2(τ) ∝τ sets in
+at longer lags τ ≫τr. It is worth emphasizing that these
+results hold for (overdamped) particles endowed with a
+self-propulsion of constant magnitude, so that, in the
+droplet system considered in this work, one can reason-
+
+12
+ably expect that the presence or features of its dynamical
+regimes will be influenced by the non-stationarity of the
+agents’ activity [55–57]—as well as, naturally, their mu-
+tual interactions. The explicit inclusion in the TSAMSD
+δ2
+S(τ, tw) of the window running time tw, alongside the
+lag time τ and species identity S, aims at shedding light
+on these effects, tracking how the nature of the motion
+of the two droplet species evolves throughout the experi-
+ment as a consequence of the gradual decay of their self-
+propulsion.
+Representative curves displaying the τ dependence of
+the δ2
+S(τ, tw) for blue and red droplets at the beginning
+of each stage of the system’s evolution—specifically, for
+times tw located in the mid of the colored vertical bars
+of Fig. 5—are reported in Fig. 6a-e. We note that the
+profiles corresponding to (the onset of) stages I-IV ex-
+hibit an evident crossover behavior in τ, where for both
+species a single transition between a short and a long
+time-lag dynamic regime can be identified in Fig. 6a-d.
+On the other hand, the largely steady character of the
+system in stage V, see Fig. 6e, is such that some care is
+needed in the interpretation of the associated results. For
+this reason, the TSAMSD of stages I to early IV will, in
+the following, be analyzed separately from those ranging
+from late stage IV to V, IV marking the beginning of the
+system-wide ultimate decline in the self-propulsion of the
+agents.
+To enable a quantitative analysis of the two distinct
+dynamical regimes that are observed in the system for
+non-vanishing activities, two characteristic time-frames
+were introduced, namely a short-lag regime, τ ∈[0.1, 1] s,
+and a long-lag regime, τ ∈[50, 300] s.
+Based on this
+decomposition, the family of TSAMSD curves was then
+fitted separately in each of these two time intervals via a
+power-law relation of the form
+δ2
+S(tw, τ) ∼Kdr
+S (tw)τ αdr
+S (tw).
+(13)
+In Eq. 13, for each dynamical regime dr (short/long),
+each species S and at every window time tw, the free
+parameters of the fit are αdr
+S (tw) and Kdr
+S (tw), respec-
+tively representing the short/long time-lags “instanta-
+neous” dynamic scaling exponent and generalized diffu-
+sion coefficients of the droplets, where we underline that
+the quotes account for the fact that TSAMSD results
+were actually obtained by performing averages over a
+time window.
+The results of the power-law fits in the short time-lag
+regime indicate that the dynamics of the droplets, from
+stage I to the onset of stage IV (see Fig. 6a-d), follows a
+quite robust δ2
+S(τ, tw) ∝τ αshort scaling with αshort ≃2
+for both species and irrespective of the window running
+time tw, see Fig. 6f. This is indicative of a short-time
+ballistic motion of the agents, which persists from the
+initial, high-activity phase of uncorrelated dynamics of
+the system up to the one in which the cluster of blue
+droplets is fully formed and surrounded by the still rela-
+tively disordered and motile red component. In the short-
+lag region, the main discrepancy between the TSAMSD
+curves in Fig. 6a-d across droplet color and evolutionary
+stage lies in the differences that occur between the inter-
+cepts of the δ2
+B and δ2
+R curves with the vertical axis in a
+log-log scale; these intercepts are linked to the short time-
+lag generalized diffusion coefficients Kshort
+S
+in Eq. 13—a
+now formally counterintuitive naming given the presence
+of ballistic motion—whose variations over the course of
+the experiment, displayed in Fig. 6g, quite naturally fol-
+low those of the (square of the) agents’ average speeds
+VS(tw) reported in Fig. 5c.
+Specifically, as previously discussed, red droplets are
+faster than blue ones at the beginning of stage I, reflect-
+ing in Kshort
+R
+being larger than Kshort
+B
+and in the bal-
+listic portion of the red TSAMSD curve lying above its
+blue counterpart in Fig. 6a. A gradual equalization of
+the speeds of the two species is then observed as the se-
+ries of transient, mixed structures progressively emerge;
+when such parity is reached, we have Kshort
+R
+≈Kshort
+B
+and the blue and red TSAMSD curves are found to fully
+overlap over the whole range of analyzed lag times, as
+shown in Fig. 6b for the beginning of stage II. Consistent
+with the remainder of the metrics analyzed in this work,
+this suggests that the two droplet species contribute al-
+most evenly in the generation of the metastable struc-
+tures that appear for intermediate self-propulsion mag-
+nitudes. Subsequently, from stage II to early stage IV
+and with the emergence of the blue cluster, a steady de-
+crease in the speed of all agents takes place, with the
+decline occurring more rapidly in the blue component.
+This results in a progressive and asymmetric decrease in
+Kshort
+R
+, and Kshort
+B
+, and consequently in the intercepts of
+the TSAMSD curves of both species, leading the ballistic
+section of δ2
+B to locate again under δ2
+R, see Fig. 6c and d.
+As previously highlighted, increasing the time lag τ
+in the TSAMSD curves associated with the beginning
+of stages I-IV shown in Fig. 6a–d reveals a crossover
+behavior, with the agents entering the second dynami-
+cal regime that characterizes their motion over “long”
+timescales. The results of the power law fit via Eq.13
+in this long-lag regime, presented in Fig. 6f,g, reveal that
+from early stage I to the onset of stage IV the two droplet
+species on average exhibit similar and somewhat mildly
+sub-diffusive dynamics at long time-lags, as witnessed
+by the corresponding scaling exponents αS fluctuating
+around a mean ¯αlong ≲1, see Fig. 6h.
+On the other
+hand, the long time-lag generalized diffusion coefficients
+Klong
+S
+reported in Fig. 6i follow a temporal trend that is
+again qualitatively compatible with the one displayed by
+the droplet’s mean speeds VS in Fig. 5. More specifically,
+Klong
+R
+is significantly higher than its blue-species coun-
+terpart at the beginning of the experiment and during
+the phase of uncoordinated motion, but rapidly decays
+throughout stage I, eventually becoming comparable to
+Klong
+B
+as the series of transient structures appears—we
+remind that the red and blue TSAMSD profiles fully over-
+lap over these timescales, see Fig. 6b. Subsequently, with
+the demixing transition between the two species that un-
+folds during stage II and reaches stability in stage III,
+
+13
+0
+20
+40
+ [s]
+0.5
+0.0
+0.5
+1.0
+1.5
+C
+a)
+Stage 1
+0
+20
+40
+ [s]
+b)
+Stage 2
+0
+20
+40
+ [s]
+c)
+Stage 3
+0
+20
+40
+ [s]
+d)
+Stage 4
+0
+20
+40
+ [s]
+e)
+Stage 5
+FIG. 7: Velocity autocorrelation functions of the two droplet species, see Eq. 10. (a-e) Progression from left to right illustrates
+the τ-dependence of the family of CS(tw, τ) VACF curves for the blue (blue line) and red (red line) species at the onset of each
+evolutionary stage of the system—that is, for window times tw located in the middle of each of the five colored vertical bars in
+Fig. 5
+.
+both Klong
+B
+and Klong
+R
+continue to decrease, although
+the latter does so more slowly due to the higher resid-
+ual activity of the red species, which is furthermore not
+trapped within the blue cluster.
+We now proceed to examine the TSAMSD results for
+the two last stages of the system’s evolution (late IV and
+V), during which, with the ultimate disappearance of the
+droplets’ self-propulsion, the system enters its final, dy-
+namically steady, and structurally ordered state. In this
+respect, the δ2
+B and δ2
+R profiles associated with (the be-
+ginning of) stage V reported in Fig. 6e reveal a more in-
+tricate dynamical picture; in particular, notable changes
+in the scaling properties of the TSAMSD at both short
+and long time lags are observed with respect to the case
+of higher activities, which appear to be further accompa-
+nied by the emergence of additional dynamical regimes
+at intermediate values of 10 ≲τ ≲50 s.
+Regarding the dynamics of the droplets on short time
+lags, an analysis of the scaling exponents associated with
+the δ2
+S(τ, tw) curves reveals that, as the window time tw
+increases from the onset of stage IV, what was previously
+a ballistic motion of the agents at short lags gradually
+transitions to an approximately (super)diffusive behavior
+upon approaching stage V—first for the blue species and
+subsequently for the red one, see Fig. 6f. Conversely, the
+dynamical regime of both species at long time lags shifts
+from (sub)diffusive to ballistic in passing from IV to V,
+as evidenced by the rise in the corresponding scaling ex-
+ponents to αlong ≈2 appreciable in Fig. 6h. This remod-
+ulation in the short and long time-lag dynamic properties
+of the system as it approaches its “death” phase can be
+readily interpreted; in fact, a largely steady condition
+is reached—see the agents’ mean speeds in Fig. 5c and
+the short/long time lags generalized diffusion coefficients
+in Fig. 6g-i—while the red species’ residual activity ulti-
+mately disappear along stage IV, with the fully-formed
+cluster of blue droplets being surrounded and caged by
+a chain of red ones. Due to their limited mobility, the
+extracted trajectories of the droplets get, for short time
+lags, increasingly dominated by the noise in the detec-
+tion, which artificially renders the reconstructed dynam-
+ics of the agents diffusive-like on small timescales. The
+cluster as a whole (including the red species enclosing
+it), on the other hand, is still free to perform coherent,
+rigid-body motion of very low speed: such a collective
+movement reflects in the generation of a ballistic scal-
+ing of the TSAMSD of the two species at long time lags,
+contrarily to the (sub)diffusive behavior that was instead
+observed for higher self-propulsion magnitudes.
+Finally, in addition to the changes in these two limiting
+cases, intermediate dynamical regimes appear to emerge
+in the TSAMSD of both species within the mid-τ range
+of 10 ≲τ ≲50 s. These include plateaus in the droplets’
+average displacement, indicative of a certain degree of
+arrested dynamics (see Fig. 6e). A detailed inspection of
+the ensemble of the TSAMSD profiles along stages IV and
+V reveals that the features of these intermediate regimes
+(such as the number of independent plateaus and their
+length) depend strictly on the time window tw (data not
+shown), and their thorough characterization will be the
+subject of future work.
+We conclude this analysis of the system’s translational
+dynamic properties and their dependence on the activ-
+ity level with a brief and qualitative overview of the ve-
+locity autocorrelation functions (VACF) of the agents,
+CS(tw, τ), defined in Eq. 10.
+Representative curves of
+the τ dependence of the VACFs at the beginning of each
+evolutionary stage I-V of the system (again, for times tw
+located in the middle of the colored vertical bars in Eq. 5)
+are presented in Fig. 7 separately for the two components.
+Overall, in stage I and in the regime of the highest ac-
+tivity of the droplets, we observe a fast decorrelation of
+the velocity of both species, primarily as a consequence
+of the frequent collisions among the agents. The decorre-
+lation time increases substantially in stages II (where the
+red and blue curves again fully overlap), III, and IV, and
+hence as the structural organization of the agents grad-
+ually appears—first in the form of the series of mixed,
+transient structures and then with the emergence of the
+cluster of blue droplets. Finally, in stage V, when the
+system is largely immobile, we observe a swift decay of
+the VACF, consistent with the fact that, in this regime,
+the estimation of the droplets’ velocity is dominated by
+the noise in the detection.
+
+14
+C.
+Turning angle distributions
+We now turn our attention to the analysis of the
+droplets’ rotational diffusive features.
+Specifically, we
+consider the window-averaged distributions PS(∆θ, tw),
+S = B, R, defined in Eq. 11, where ∆θ ∈(−π, π] is the
+turning angle, i.e. the angle between the versor of the
+velocity of an agent computed at two consecutive times.
+A representative profile of PS(∆θ, tw) for the blue and
+red droplets in each evolutionary stage of the system (I-
+V) is presented in Figs. 8a-e, where, in all cases, tw was
+set to the initial one of the corresponding stage—that is,
+the center of the colored bars reported in Fig. 5.
+Re-
+gardless of the stage and the droplet species considered,
+a smooth dependence of the PS on ∆θ can be readily ap-
+preciated, with all the distributions being unimodal and
+centered around a vanishing turning angle. The extent of
+the droplets’ deviations from this preferred forward di-
+rection of motion, at the same time, critically depends on
+their species as well as on the specific evolutionary stage
+of the system, with the width of the profiles in Figs. 8a-e
+displaying an overall increase as the self-propulsion de-
+cays.
+To better quantify these features, a fit of the time-
+dependent ensemble of PS(∆θ, tw) to functional forms
+that allow an intuitive interpretation of the data proves
+necessary, and the first, most natural choice is to employ
+normal distributions wrapped on the unit circle, approx-
+imating them via von Mises functions [58]; this attempt,
+however, returns generally inadequate results due to the
+relatively long tails exhibited by the PS(∆θ, tw). In con-
+trast, Figs. 8a–e reveal that a good agreement, further
+consistent across the entire experiment, is achieved when
+each profile is fitted to a wrapped Cauchy distribution
+f W
+S (∆θ, µS(tw), γS(tw)), with
+f W
+S (∆θ, µS, γS) = 1
+2π
+sinh(γS)
+cosh(γS) −cos(∆θ −µS).
+(14)
+For each species and at every window time, the free
+parameters of the fit are µS and γS in Eq. 14, respectively
+representing the mode and half-width at half-maximum
+of the Cauchy distribution fS(∆ω, µS, γS) from which
+the wrapping on the unit circle is performed, where
+fS(∆ω, µS, γS) = 1
+π
+γS
+γ2
+S + (∆ω −µS)2 ,
+(15)
+and ∆θ = ∆ω mod 2π.
+Relying on the good agreement between the data for
+PS(∆θ, tw) and the corresponding fitted profiles, the evo-
+lution of the rotational diffusion properties of the droplets
+alongside the decay of their activity can now be investi-
+gated by analyzing the behavior, presented in Figs. 8f
+and g, of the set of time-dependent parameters µS(tw)
+and γS(tw) in Eq. 14. For each species S, the associated
+µS(tw) characterizes the “instantaneous” mean turning
+angle between two consecutive displacements of one of its
+droplets, where the quotes account for the fact that the
+PS(∆θ, tw) profiles underlying the fits were obtained via
+accumulating the distribution over a time window. Crit-
+ically, Fig. 8g reveals that both µS(tw) are compatible
+with zero throughout the whole experiment: this quan-
+titatively confirms what was already hinted by the vi-
+sual inspection of the reconstructed distributions, namely
+that droplets on average tend to maintain their direction
+of motion—that is, ∆θ = 0. We note that the fluctua-
+tions of the µS(tw) around this value somewhat increase
+(albeit remaining extremely small) in stages IV and V,
+when the system becomes largely arrested and dynamic
+results are dominated, on short timescales, by the noise
+in the detection.
+On the other hand, the scale factors γS(tw) in Eq. 14
+control the breadth of the associated distributions, thus
+characterizing the extent to which each droplet species
+can deviate from purely forward motion; furthermore,
+they capture, through their explicit time dependence, if
+and how the magnitude of such deviations evolves with
+the progressive decay of the self-propulsion. In contrast
+to the case of the µS(tw), the scale factors γS(tw) ob-
+tained from the fitting procedure and reported in Fig. 8g
+highlight a non-trivial species- and time- dependence of
+the system’s rotational diffusive properties.
+Addition-
+ally, the observed trends again support the partition of
+the system’s evolution into the set of stages initially iden-
+tified based solely on the droplets’ velocity polarizations
+and hexatic order parameters.
+More specifically, in the disordered state associated
+with the onset of stage I, both γB and γR are small
+(∼0.1 rad), reflecting how the strong self-propulsion
+characteristic of the early phase of the experiment leads
+to a quite markedly oriented motion for both species.
+Nonetheless, γB is slightly larger than its red compo-
+nent counterpart, indicating that the blue droplets, ini-
+tially less active, can exhibit somewhat broader turning
+angles.
+The two scale factors gradually become com-
+parable along stage I; this confirms, consistently with
+what was observed for the droplets’ average speed, the
+associated polarizations, the TSAMSDs, and the VACFs,
+that the two species display similar dynamic (albeit not
+structural, vide infra) properties in the series of transient
+structures that are generated on these timescales.
+During stages II and III and as the activity of the
+droplets continues its decrease, a steady growth in γB—
+and hence a smearing of the associated turning angle
+distribution—is observed, while the scale factor γR of
+the red component remains approximately constant to
+the value it had at the onset of the experiment and only
+displays a mild increase along III. This behavior is closely
+tied to the demixing transition that unfolds over such
+stages, culminating in the formation of the ordered clus-
+ter of blue droplets that gets increasingly caged by the
+red ones, see Figs. 1 and 5. The rise in γB reflects the
+fact that, alongside the growth of the blue cluster, the
+individual, self-propelled component of the motion of its
+constituent droplets fades, and is gradually replaced by
+the more randomly-oriented, collective dynamics of the
+
+15
+/4
+/8
+0
+/8
+/4
+ [rad]
+0
+1
+2
+3
+4
+5
+6
+P [1/rad]
+a)
+Stage 1
+/4
+/8
+0
+/8
+/4
+ [rad]
+b)
+Stage 2
+/4
+/8
+0
+/8
+/4
+ [rad]
+c)
+Stage 3
+/4
+/8
+0
+/8
+/4
+ [rad]
+d)
+Stage 4
+/4
+/8
+0
+/8
+/4
+ [rad]
+e)
+Stage 5
+Wrapped Lorentzian fit
+Wrapped Lorentzian fit
+Blue droplets
+Red droplets
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+[rad]
+f)
+Blue droplets
+Red droplets
+0
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+tw [s]
+0.010
+0.005
+0.000
+0.005
+0.010
+[rad]
+g)
+FIG. 8: Turning angle distributions of the two droplet species, see Eq. 11. (a-e) Progression from left to right illustrates the
+∆θ-dependence of the family of PS(∆θ, tw) turning angle distributions for the blue (blue line) and red (red line) species at the
+onset of each evolutionary stage of the system—that is, for window times tw located in the middle of each of the five colored
+vertical bars in the plots below. (f-g) Temporal evolution of the scale factor γS(tw) and of the mean µS(tw) of the blue and
+red droplet species resulting from the wrapped Lorentzian fit of the family of PS(∆θ, tw) profiles, see Eq. 14. Colored vertical
+bars indicate the onset of each evolutionary stage.
+cluster, driven by the asymmetric kicks it receives from
+the surrounding red species. This, by contrast, persists
+(although with decreasing strength) in its activity-driven,
+disordered motion, as other observables previously sug-
+gested and is now further witnessed by the consistency
+of γR throughout stages I–III.
+With the ultimate disappearance of the residual ac-
+tivity of the red species along stage IV, the scale fac-
+tor γR attains—albeit with a delay in the associated
+timescales—the value of γB, indicating an increasingly
+negligible role of self-propulsion in the motion the agents.
+Eventually, saturation of both scale factors to ∼0.6 rad
+is reached in the final, inactive stage (V) of the system, in
+which all droplets are essentially steady: here, as shown
+in Fig. 8e, the turning angle distributions of the two
+species become largely indistinguishable and extremely
+broad, again signaling that the short-timescale dynamics
+reconstructed by our tracking pipeline gets dominated by
+the noise in the extraction of the droplets’ center posi-
+tions from the experimental videos.
+D.
+Distribution of droplets around a dimer
+To conclude our investigation, we shift our focus
+to the patterns that can be identified in the global
+structural
+arrangement
+of
+the
+system
+through
+the
+set of (window-averaged) two-dimensional distributions
+DSS′(tw) around a droplet dimer.
+As outlined in
+Sec. II C, the methodology underlying these metrics
+draws inspiration from the work of Tanaka and collab-
+orators [27], who employed it in the context of a sys-
+tem which closely resembles the one examined in this
+study despite being mono-component.
+Specifically, in
+their analysis, Tanaka et al. considered, for each con-
+figuration observed in an experiment, all the possible
+dimers formed by an agent di and its nearest neighbor
+ni, where i = 1, . . . , N and N is the total number of
+droplets. They subsequently roto-translated the configu-
+ration so that di was placed at the origin of the frame of
+reference and ni laid along the positive x-axis, repeating
+this operation for all possible choices of di; the N repli-
+cas of each of the original snapshots resulting from this
+procedure were then employed to accumulate the aver-
+age two-dimensional density of agents around a droplet
+dimer, where they further tracked the evolution of this
+metric along the course of the experiment [27].
+Applying this analysis workflow to our system requires
+us to explicitly account for its binary nature; accordingly,
+we evaluated four distinct dimer distributions, obtained
+by varying both the species composing the dimer and the
+species of the surrounding droplets whose average spatial
+arrangement was to be inspected. Specifically, we consid-
+ered (i) the distribution of blue droplets around a blue
+dimer, DBB; (ii) the distribution of red droplets around
+a red dimer, DRR; (iii) the distribution of red droplets
+around a blue/red dimer, DBR, locating the origin of the
+frame of reference on the center of the blue droplet; and
+(iv) the distribution of blue droplets around a red/blue
+dimer, DRB, locating the origin of the frame of refer-
+ence on the center of the red droplet. All these metrics
+were calculated within a window-based framework, tw
+being the running time lying at the center of the window
+over which distributions were accumulated. By examin-
+ing the set of DSS′(tw) distributions, our aim is to quan-
+tify the spatial correlations and potential preferential in-
+teractions occurring between droplets that belong to the
+same or different species on a global scale, thus com-
+plementing the more local information provided by the
+hexatic order parameters Ψ6,S in Fig. 5b. Furthermore,
+
+16
+and in analogy with Ref. [27], we will assess how these
+features are influenced by the amount of self-propulsion
+of the agents.
+Fig.
+9
+displays
+a
+representative
+profile
+for
+the
+blue/blue, red/red, blue/red, and red/blue dimer dis-
+tributions across the five evolutionary stages (I–V) of
+the system. We underline that, in the plot, the set of
+DSS′(tw) associated with each stage was extracted at the
+beginning of the latter—specifically, for running times tw
+located in the mid of each of the colored vertical bars re-
+ported in Fig 5. In analogy with the previously discussed
+metrics, it follows that the presented distributions are re-
+spectively characteristic of, see Fig 1: (i) the system’s ini-
+tial phase of high self-propulsion and uncorrelated motion
+(early stage I); (ii) the onset of the blue droplet cluster
+formation starting from the series of transient structures
+(early stage II); (iii) the phase in which the fully-formed
+blue cluster is surrounded by the yet relatively disordered
+and active red species (the whole of stage III and the be-
+ginning of stage IV); and (iv) the system’s final stationary
+phase of quasi-hexagonal order (stage V).
+A bird’s eye view of the distributions in Fig. 9 re-
+veals the progressive increase in the regularity of the
+droplets’ spatial arrangement that accompanies the de-
+cay of their self-propulsion: in fact, while largely homo-
+geneous/diffused in the initial, high-activity phase, all
+the DSS′ gradually evolve to develop sharp and localized
+peaks as the system progresses toward its final, steady
+regime of “quasi-crystalline” order.
+Key differences in
+the profiles can however be appreciated depending on
+the identity of the agents considered in the calculations,
+where we remind that, in a DSS′ distribution, S′ de-
+termines not only the species of the nearest neighbor of
+droplet S within the dimer, but also the species of the
+surrounding droplets whose average density is evaluated.
+More specifically, at the beginning of the experiment
+and in the phase of highest self-propulsion of the sys-
+tem (early stage I), the distributions quantifying the red
+species’ average spatial arrangement—that is, DRR and
+DBR—are extremely homogeneous, see Fig 9b,c. In ad-
+dition to the excluded area associated with the impossi-
+bility of droplets’ overlap, the only other visible feature
+in these profiles is a “strip” located along the positive x-
+axis, highlighting a quite delocalized probability to find
+the red neighbor of a red/red or blue/red dimer in a
+range of distances within ∼[4.5 −20] mm—equivalent
+to roughly 1 to 4 droplet diameters. Overall, this is in-
+dicative of the fact that, due to their initial high speed
+(see Fig. 5c), red droplets are completely unstructured
+in this regime, and on average distribute themselves uni-
+formly throughout the Petri dish. The agents belonging
+to the slower blue species, on the other hand, exhibit a
+mild “liquid-like” structural order already at the onset
+of the experiment; this is evidenced, in the DBB pro-
+file reported in Fig. 9a, by a diffuse hierarchy of concen-
+tric elliptical rings surrounding the dimer, which reflect
+the average coordination of additional neighboring blue
+droplets besides the nearest one—whose location proba-
+bility along the x-axis is more neatly localized compared
+to the red species case. We note that this weak liquid-
+like ordering of the blue agents is not captured by the red
+counterpart due to its uniform spatial arrangement and
+high self-propulsion, as highlighted by the largely homo-
+geneous red/blue dimer distribution DRB presented in
+Fig. 9d.
+Moving towards lower activities, Figs. 9e-h report the
+dimer distribution characteristic of the initial phases of
+the demixing transition that, from the series of tran-
+sient structures, leads to the generation of the cluster
+of blue droplets (beginning of stage II). Compared to
+the results obtained in the early stage I, we observe
+that the liquid-like ordering in shells of the blue agents
+around a blue/blue dimer, highlighted by the elliptical
+rings present in the DBB distribution, has become more
+neatly defined; furthermore, this kind of large-scale struc-
+tural organization now extends also to the red species,
+with all the profiles in Fig. 9e-h being largely compatible
+in terms of liquid-like coordination of neighbors. Consis-
+tent with the remainder of the analyzed metrics, this sug-
+gests that red and blue droplets play an analogous role
+in the series of transient structures generated on these
+timescales, likely because of their similar activities—see
+the agents’ speed in Fig 5c. Subtle differences between
+the two species can instead be appreciated in terms of
+nearest neighbors’ arrangement, with the somewhat de-
+localized strips that characterized their average location
+in stage I being now replaced by sharper peaks. As for the
+red species (DRR and DBR in Fig. 9f,g), such peaks sug-
+gest a high probability of finding the red nearest neighbor
+at a distance of 1 diameter from the reference (blue or
+red) droplet composing a dimer, and the next-to-nearest
+neighbor at 2 diameters in the direction of the first neigh-
+bor, thus denoting that red droplets can arrange in short
+chain-like structures. In the case of the blue agents, these
+peaks are complemented by additional ones displaying
+hexagonal symmetry (DBB and DRB in Fig. 9e,h), mark-
+ing the appearance of what, later along this stage, will
+become the blue cluster.
+The set of dimer distributions displayed in Fig. 9i-p is
+instead representative of the phase of the system’s evolu-
+tion in which the cluster of blue droplets is fully formed,
+and is surrounded by the still relatively disordered and
+active red species driving its collective motion (stage III,
+Fig. 9i-l, and early stage IV, Fig. 9m-p). The structural
+regularity in the blue agents’ spatial arrangement can be
+appreciated in the DBB profiles reported in Fig. 9i and m;
+compared to their stage II counterpart, the fluid-like, dif-
+fused density rings of blue agents surrounding a blue/blue
+dimer have now disappeared, and the few localized peaks
+with hexagonal symmetry that previously only pertained
+to a droplet’s nearest neighbors and marked the cluster
+seed now extend over the totality of the blue agents. As
+for the red species, the DRR distributions of red droplets
+around a red/red dimer shown in Fig. 9j and n remain
+largely consistent with the stage II results, reflecting the
+still relatively active behavior and lack of regular and per-
+
+17
+x [mm]
+20
+10
+0
+10
+20
+y [mm]
+a)
+Dbb  at stage 1
+x [mm]
+y [mm]
+e)
+Dbb  at stage 2
+x [mm]
+y [mm]
+i)
+Dbb  at stage 3
+x [mm]
+y [mm]
+m)
+Dbb  at stage 4
+x [mm]
+y [mm]
+q)
+Dbb  at stage 5
+x [mm]
+20
+10
+0
+10
+20
+y [mm]
+b)
+Drr  at stage 1
+x [mm]
+y [mm]
+f)
+Drr  at stage 2
+x [mm]
+y [mm]
+j)
+Drr  at stage 3
+x [mm]
+y [mm]
+n)
+Drr  at stage 4
+x [mm]
+y [mm]
+r)
+Drr  at stage 5
+x [mm]
+20
+10
+0
+10
+20
+y [mm]
+c)
+Dbr  at stage 1
+x [mm]
+y [mm]
+g)
+Dbr  at stage 2
+x [mm]
+y [mm]
+k)
+Dbr  at stage 3
+x [mm]
+y [mm]
+o)
+Dbr  at stage 4
+x [mm]
+y [mm]
+s)
+Dbr  at stage 5
+20
+10
+0
+10
+20
+x [mm]
+20
+10
+0
+10
+20
+y [mm]
+d)
+Drb  at stage 1
+20
+10
+0
+10
+20
+x [mm]
+y [mm]
+h)
+Drb  at stage 2
+20
+10
+0
+10
+20
+x [mm]
+y [mm]
+l)
+Drb  at stage 3
+20
+10
+0
+10
+20
+x [mm]
+y [mm]
+p)
+Drb  at stage 4
+20
+10
+0
+10
+20
+x [mm]
+y [mm]
+t)
+Drb  at stage 5
+FIG. 9: Heat maps of the dimer distributions of the two droplet species defined in Eq. 12. In each column, from top to bottom:
+distributions between blue droplets DBB, red droplets DRR, blue-red droplets DBR, red-blue droplets DRB. In each row, from
+left to right: illustrative heat maps of the dimer distributions at the onset of each evolutionary stage of the system. Darker
+color indicates higher density (arbitrary units).
+sistent spatial organization of the red component. Com-
+pared to Fig. 9f, however, we note the appearance of
+a mild short-range hexatic ordering in the red nearest
+neighbors of a red droplet and, most importantly, the
+generation of a diffuse 8-shaped structure in DRR. Crit-
+ically, the latter stems from the average circular arrange-
+ment of the red species around the blue cluster, where the
+effect of this caging manifests also in the emergence of an
+asymmetry in the blue/red and red/blue dimer distribu-
+tions, see Fig. 9k,l,o,p. DBR, in fact, highlights a higher
+probability for a blue droplet to find a red agent in a circle
+oriented opposite to the one of its red nearest neighbor,
+the profile remaining relatively diffuse as a consequence
+of the residual self-propulsion of the red species. Com-
+plementarily, DRB indicates and higher likelihood for a
+red droplet of finding a blue droplet in a direction that
+is forward to that of its blue nearest neighbor, the more
+peaked nature of the distribution compared to DBR aris-
+ing from the regularly ordered arrangement of the blue
+agents in the cluster.
+Finally, with the disappearance of the residual self-
+propulsion of the red species, the system takes a step
+toward its ultimate, steady, and ordered phase.
+The
+corresponding DSS′ distributions, presented in Fig. 9q-t
+(early stage V), remain largely compatible with the re-
+sults obtained in stage III and IV; the only difference lies
+in the conversion of the residual diffused features present
+in the red/red, blue/red and red/blue profiles pertaining
+to the red species in sharper peaks, as a consequence of
+the globally vanished activity of the system.
+
+18
+IV.
+DISCUSSION AND CONCLUSIONS
+Artificial life research focuses on engineering synthetic
+active matter systems capable of exhibiting emergent be-
+haviors akin to those characteristic of living organisms
+[59]. Building on this vision, researchers in the field have
+devised chemical systems in which seemingly simple in-
+dividual constituents are nonetheless capable of collec-
+tively generating intricate phenomena such as coherent
+motion and other life-like processes [17–26]; understand-
+ing how these features arise in controlled experimental
+setups may contribute to elucidating the physical prin-
+ciples governing their living analogues, with potentially
+significant scientific, technological and societal gains.
+In this work, we investigated one such realization of ar-
+tificial life, consisting of 50 droplets of paraffin oil mixed
+with Ethyl Salicylate (ES) and suspended in an aque-
+ous solution of Sodium Dodecyl Sulfate (SDS) within a
+Petri dish, where each active agent is roughly a millime-
+ter in diameter. This system was recently proposed by
+Tanaka et al. [27], and in the case in which all droplets
+share the same chemical composition, it was shown to
+generate complex patterns of motion that resemble those
+observed in biological matter, patterns whose properties
+were further found to change along the course of the ex-
+periment due to the progressive decay in the droplets’
+self-propulsion. Increasing the complexity of the original
+setup, we here considered a situation in which half of the
+droplets are dyed red, while the other half are dyed blue;
+this different staining dramatically impacts the agents’
+features, with the red species having a stronger and
+longer-lasting activity than the blue one. Notably, the
+interplay of self-propulsions of different magnitudes and
+decay rates, hydrodynamic effects, and confinement re-
+sults in a collective, multi-body, and heterogeneous be-
+havior of the system throughout its evolution, in which,
+over roughly six hours, the agents pass from an initial
+regime of disordered motion to a static, species-demixed
+phase endowed with persistent structural order—a phe-
+nomenology consistently observed across all three inde-
+pendent experimental runs performed.
+The challenges in the study of this system begin with
+acquiring quantitative and accurate data from its inher-
+ently noisy video recordings, a necessary step to trans-
+late the intuitive notion of “emergent” and “life-like” be-
+havior observed in the experiments into a form suitable
+for a physics-based description, analysis, and character-
+ization. To this end, we developed a system-tailored—
+yet general and adaptable—data extraction pipeline that
+takes the raw video footage as input and returns the high-
+resolution trajectory of each droplet along with other rel-
+evant features. We note that, for the scope of this work,
+droplets were treated as point-like particles located at
+their centers; while such an approach neglects, e.g., hy-
+drodynamic effects and rotational inertia, it facilitates
+the systematic investigation of the system’s dynamical
+and structural properties. The trajectories obtained from
+this tracking pipeline were then processed through a se-
+ries of metrics drawn from statistical physics, allowing
+us to quantify how the system’s behavior evolves along
+the pathway it follows from an active, life-like state to a
+quiescent one of “artificial death”.
+The first step in the trajectory analysis has been the
+investigation of the system’s degree of global structural
+and dynamical organization along the course of the ex-
+periment; to this end, we relied on two sets of collective
+variables, namely the velocity polarizations ΦS and hex-
+atic order parameters Ψ6,S, where S marks the droplet
+species considered or the totality of the agents. The ΦS
+quantify the mutual alignment of droplet velocities and
+serve as a measure of the coherence in their motion [6];
+being blind to the motion intensity, these observables
+were interpreted in the light of the agents’ mean speeds
+VS.
+The hexatic order parameters, in contrast, assess
+how closely the neighbors of a droplet, depending on its
+species, are arranged at the vertices of a hexagon, and
+provide information on the emergence of structural or-
+dering in the droplets’ spatial arrangement [49].
+The concurrent inspection of these observables allowed
+us to identify five distinct stages of the system’s temporal
+evolution, further highlighting the different roles played
+by the red and blue droplet species due to their uneven
+activity levels and decay rates.
+These stages are, re-
+spectively: (i) an initial dynamically disordered and spa-
+tially homogeneous regime, followed by the emergence of
+a series of transient, loopy structures with mixed species
+composition; (ii) a growth in the dynamical and struc-
+tural ordering of the blue droplets, which display a faster
+self-propulsion decay and gradually organize in a cluster
+with hexagonal symmetry, expelling the red species; (iii)
+a stable demixed phase of the two types of agents, where
+the still relatively disordered and active red component
+governs the blue cluster’s collective dynamics; and even-
+tually (iv) a transition towards (v) the final “death”
+phase, in which droplets are arranged in a essentially
+fixed, quasi-regular and phase-separated structure, with
+the cluster of blue agents being surrounded and caged
+by a chain of red ones. Notably, these stages are semi-
+quantitatively the same for all three experimental runs
+performed.
+The system was subsequently investigated in terms of
+several additional observables, namely mean squared dis-
+placements, velocity autocorrelation functions, turning
+angle distributions, and density maps of droplets around
+a dimer. The analysis of these metrics and of their tem-
+poral dependence revealed a multifaceted picture of the
+system’s behavior, offering insights that extend beyond
+those inferred solely from the order parameters.
+The droplets’ translational diffusive properties were
+found to remodulate along the course of the experi-
+ment and as the system’s self-propulsion gradually de-
+cays. More specifically, in the early stages of the evolu-
+tion and for high activity levels, both species exhibited
+ballistic motion of the agents at short time lags and a
+(mildly sub-)diffusive regime at longer times, accompa-
+nied by rapidly decaying velocity autocorrelations indica-
+
+19
+tive of “collisional” dynamics. As time progresses and
+the activity of the droplets reaches intermediate levels,
+the ballistic and (sub-)diffusive character of their short-
+and long-time dynamics persists; still, long-time veloc-
+ity autocorrelations emerge, reflecting sustained direc-
+tional motion arising from the appearance of collective
+organization.
+Finally, once mobility has vanished and
+an ordered, largely steady cluster has fully formed (now
+comprising, albeit demixed, the entirety of the agents),
+the short-time lag dynamics of the individual droplets
+becomes increasingly dominated by the noise in the de-
+tection, while the long-lag behavior turns to ballistic due
+to the extremely slow, collective drift of the cluster.
+Subsequently, we investigated the properties and time-
+dependence of the distributions PS of turning angle be-
+tween two consecutive displacements of a droplet. For
+each species, the associated PS quantifies the directional
+coherence of the motion at the level of one of its agents.
+As shown in Fig. 8, both such curves are compatible
+with a (wrapped) Cauchy law, with means consistently
+around zero throughout the whole experiment and widths
+that instead evolve over time. The distributions are ini-
+tially rather narrow and indicative of a neatly forward-
+directed motion of the droplets; as activity gradually de-
+cays, both PS distributions broaden—albeit differently
+for the two species—indicating that the agents’ displace-
+ments increasingly span a wider range of directions from
+one frame to the next.
+The finding that the droplets’ turning angle profiles
+are compatible with a Cauchy distribution represents an
+interesting result of this work, where we note that this
+angle differs from the one typically considered in theoret-
+ical descriptions of active matter—the focus in such cases
+being usually on the angle between two consecutive orien-
+tations of the self-propulsion vector alone [54]. Whether
+the observed Cauchy-like distribution of the turning an-
+gle between what, in our case, are instead consecutive
+displacements is a feature of the individual droplets or it
+emerges as a collective phenomenon, originating from the
+multi-body interactions among the agents, is the subject
+of ongoing investigation.
+Lastly, we analyzed the droplets’ structural arrange-
+ment relying on the method proposed by Tanaka et
+al. [27], aligning trajectory frames relative to a refer-
+ence dimer and calculating the average density of droplets
+around it, varying both the dimer identity and the species
+examined. The resulting maps revealed a steady progres-
+sion of the system as self-propulsion gradually decays:
+from an initially roughly uniform distribution, to the for-
+mation of well-defined “solvation shells”, and finally to
+hexatic order.
+Blue droplets attained structural regu-
+larity rapidly, while red droplets organized more slowly.
+Crucially, the asymmetry in the maps observed from in-
+termediate activity levels through the ultimate system’s
+“death” phase revealed the asymmetry in the droplets’
+behavior, with red agents preferentially arranging in a
+layer encircling the blue droplets.
+In conclusion, the results of this work reach in two
+directions.
+First, we have introduced, in a known ex-
+perimental active droplets system [27], a small yet con-
+sequential element of novelty, namely the two dyes and
+the different activities they determine in the agents they
+stain; this led to the onset of emergent behavior hith-
+erto unseen in this specific realization of artificial life,
+such as demixing and species-dependent spatial segrega-
+tion.
+Three instances of the system under study have
+been investigated for an extended time frame, allowing
+us to verify not only the unfolding of qualitatively dis-
+tinct stages of their evolution, but also the consistency
+of such stages across the different instances. Second, we
+have developed a general, efficient, and accurate tracking
+pipeline—which we make publicly available—that takes
+in the raw and extensive video recordings of the exper-
+iments and returns the detailed, high-resolution trajec-
+tory of each droplet, allowing us to carry out a quantita-
+tive investigation of the system’s properties.
+The results obtained pave the way for both fundamen-
+tal investigations and practical developments.
+On the
+system side, the specific artificial life realization exam-
+ined in this work can be broadened by playing with sev-
+eral parameters, including droplet number density, num-
+ber and type of dyes (and thus agents’ activity levels),
+and size and shape of the container, to investigate how
+these factors influence the system’s emergent properties
+and its overall “life-to-death” cycle. Additionally, the un-
+specific functioning of the tracking and analysis pipeline
+lends itself to the study of greatly different systems, mak-
+ing it an enabling tool to boost the investigation of meso-
+to macro-scale active matter.
+Last but not least, we observe that one of the most
+challenging aspects in the development of artificial life
+systems is the construction of accurate and predictive
+in silico models, whose critical importance lies not only
+in the fundamental understanding they offer but also in
+the efficient exploration of parameter space they enable,
+thereby guiding the design of experimental artificial life
+realizations akin to the one investigated here. The mod-
+elling step has to rely on an accurate and informative
+body of quantitative empirical data to identify the salient
+physical features of the system and faithfully embed them
+into a mathematical description: the protocol developed
+for and applied in this work, which allows the acquisition
+of high-resolution data and their intelligible interpreta-
+tion, thus ushers in new opportunities for understand-
+ing artificial life, supporting its computer-aided investi-
+gation, and ultimately fostering the development of novel
+systems with tailored properties and, in the long term,
+genuinely programmable life-like behaviors.
+V.
+ACKNOWLEDGMENTS
+This project has in part received funding from the
+European Union’s Horizon Europe EIC 2023 Pathfinder
+Open programme under grant agreement No 101129734.
+Views and opinions expressed are however those of the
+
+20
+author(s) only and do not necessarily reflect those of the
+European Union or European Innovation Council and
+SMEs Executive Agency (EISMEA). Neither the Euro-
+pean Union nor the granting authority can be held re-
+sponsible for them.
+R.J.G.L. was supported by Grant
+62828 from the John Templeton Foundation. The opin-
+ions expressed in this publication are those of the au-
+thor(s) and do not necessarily reflect the views of the
+John Templeton Foundation.
+VI.
+DATA AND SOFTWARE AVAILABILITY
+The datasets generated and analyzed during this study
+are available from the corresponding author upon rea-
+sonable request.
+All software used in this work, in-
+cluding the tracking and analysis pipeline, is available
+at https://github.com/skandiz/DropleX, under the
+MIT license. Detailed instructions for reproducing the
+analyses and figures in this paper are included in the
+repository.
+VII.
+AUTHOR CONTRIBUTIONS
+RM, RP, and MH (equal contribution) conceived the
+study and proposed the work plan; RL, SH, and MH
+designed and performed the experiments; MS and RM
+designed the droplet tracking and trajectory analysis
+pipelines; MS implemented the pipelines; MS and RM
+carried out the data analyses; RM and MS, together
+with RP and MH, interpreted the results; RM and MS
+drafted the paper, supported by RP and RL. All authors
+reviewed the results and approved the final version of the
+manuscript.
+[1] G. Gompper, H. A. Stone, C. Kurzthaler, D. Saintillan,
+F. Peruani, D. A. Fedosov, T. Auth, C. Cottin-Bizonne,
+C. Ybert, E. Cl´ement, et al., “The 2025 motile active
+matter roadmap,” Journal of Physics: Condensed Mat-
+ter, vol. 37, no. 14, p. 143501, 2025.
+[2] R. G. Winkler and G. Gompper, “The physics of ac-
+tive polymers and filaments,” The Journal of Chemical
+Physics, vol. 153, p. 040901, 07 2020.
+[3] N. T. Ouellette, “A physics perspective on collective ani-
+mal behavior,” Physical Biology, vol. 19, no. 2, p. 021004,
+2022.
+[4] M. Te Vrugt and R. Wittkowski, “Metareview: a survey
+of active matter reviews,” The European Physical Journal
+E, vol. 48, no. 3, p. 12, 2025.
+[5] Z. Chen, J. Chen, S. Jung, H.-Y. Kim, M. L. Preti,
+C. Laschi, Z. Ren, M. Sitti, R. J. Full, and G.-Z. Yang,
+“Bioinspired and biohybrid soft robots: Principles and
+emerging technologies,” Matter, vol. 8, no. 4, 2025.
+[6] T. Vicsek, A. Czir´ok, E. Ben-Jacob, I. Cohen, and
+O. Shochet, “Novel type of phase transition in a sys-
+tem of self-driven particles,” Phys. Rev. Lett., vol. 75,
+pp. 1226–1229, Aug 1995.
+[7] A. Kaiser, A. Snezhko, and I. S. Aranson, “Flocking
+ferromagnetic colloids,” Science advances, vol. 3, no. 2,
+p. e1601469, 2017.
+[8] W. Wang, W. Duan, S. Ahmed, A. Sen, and T. E. Mal-
+louk, “From one to many: Dynamic assembly and collec-
+tive behavior of self-propelled colloidal motors,” Accounts
+of chemical research, vol. 48, no. 7, pp. 1938–1946, 2015.
+[9] B. V. Hokmabad, A. Nishide, P. Ramesh, C. Kr¨uger, and
+C. C. Maass, “Spontaneously rotating clusters of active
+droplets,” Soft matter, vol. 18, no. 14, pp. 2731–2741,
+2022.
+[10] C. Bechinger, R. Di Leonardo, H. L¨owen, C. Reichhardt,
+G. Volpe, and G. Volpe, “Active particles in complex
+and crowded environments,” Reviews of modern physics,
+vol. 88, no. 4, p. 045006, 2016.
+[11] A. K. Omar, K. Klymko, T. GrandPre, and P. L. Geissler,
+“Phase diagram of active brownian spheres:
+Crystal-
+lization and the metastability of motility-induced phase
+separation,” Physical review letters, vol. 126, no. 18,
+p. 188002, 2021.
+[12] R. Alert, J. Casademunt, and J.-F. Joanny, “Active tur-
+bulence,” Annual Review of Condensed Matter Physics,
+vol. 13, no. 1, pp. 143–170, 2022.
+[13] M. C. Marchetti, J.-F. Joanny, S. Ramaswamy, T. B. Liv-
+erpool, J. Prost, M. Rao, and R. A. Simha, “Hydrody-
+namics of soft active matter,” Reviews of modern physics,
+vol. 85, no. 3, pp. 1143–1189, 2013.
+[14] H. L¨owen, “Inertial effects of self-propelled particles:
+From active brownian to active langevin motion,” The
+Journal of chemical physics, vol. 152, no. 4, 2020.
+[15] ´E. Fodor, R. L. Jack, and M. E. Cates, “Irreversibility
+and biased ensembles in active matter:
+Insights from
+stochastic thermodynamics,” Annual Review of Con-
+densed Matter Physics, vol. 13, no. 1, pp. 215–238, 2022.
+[16] A. Cavagna, L. Di Carlo, I. Giardina, T. S. Grigera,
+S. Melillo, L. Parisi, G. Pisegna, and M. Scandolo, “Nat-
+ural swarms in 3.99 dimensions,” Nature Physics, vol. 19,
+no. 7, pp. 1043–1049, 2023.
+[17] M. M. Hanczyc, “Droplets:
+unconventional protocell
+model with life-like dynamics and room to grow,” Life,
+vol. 4, no. 4, pp. 1038–1049, 2014.
+[18] R. J. L¨offler, S. Tanaka, S. Holler, M. M. Hanczyc, et al.,
+“Ecosystem of clusters made of self-propelled droplet
+surfers,” in ALIFE: PROCEEDINGS OF THE ARTI-
+FICIAL LIFE CONFERENCE, MIT Press, 2023.
+[19] F. Caschera, S. Rasmussen, and M. M. Hanczyc, “An oil
+droplet division-fusion cycle,” ChemPlusChem, vol. 78,
+no. 1, p. 52, 2013.
+[20] A.
+Jancik-Prochazkova,
+C.
+C.
+Mayorga-Martinez,
+J. Vyskoˇcil, and M. Pumera, “Swarming magnetically
+navigated indigo-based hydrophobic microrobots for oil
+removal,” ACS Applied Materials & Interfaces, vol. 14,
+no. 40, pp. 45545–45552, 2022.
+[21] S. Krishna Mani, S. Al-Tooqi, J. Song, A. Sapre, L. D.
+Zarzar, and A. Sen, “Dynamic oscillation and motion
+of oil-in-water emulsion droplets,” Angewandte Chemie,
+vol. 136, no. 6, p. e202316242, 2024.
+[22] J. Cejkova, M. Novak, F. Stepanek, and M. M. Hanczyc,
+
+21
+“Dynamics of chemotactic droplets in salt concentration
+gradients,” Langmuir, vol. 30, no. 40, pp. 11937–11944,
+2014.
+[23] S. Holler, C. Porcelli, I. A. Ieropoulos, and M. M.
+Hanczyc, “Transport of live cells under sterile conditions
+using a chemotactic droplet,” Scientific reports, vol. 8,
+no. 1, p. 8408, 2018.
+[24] S. Holler and M. M. Hanczyc, “Autoselective transport of
+mammalian cells with a chemotactic droplet,” Scientific
+Reports, vol. 10, no. 1, p. 5525, 2020.
+[25] K. Suzuki and T. Sugawara, “Phototaxis of oil droplets
+comprising a caged fatty acid tightly linked to internal
+convection,” ChemPhysChem, vol. 17, no. 15, pp. 2300–
+2303, 2016.
+[26] S. Zarghami, Y. Xiao, P. Wagner, L. Florea, D. Diamond,
+D. L. Officer, and K. Wagner, “Dual droplet functional-
+ity: Phototaxis and photopolymerization,” ACS Applied
+Materials & Interfaces, vol. 11, no. 34, pp. 31484–31489,
+2019.
+[27] S. Tanaka, S. Nakata, and T. Kano, “Dynamic order-
+ing in a swarm of floating droplets driven by solutal
+marangoni effect,” Journal of the Physical Society of
+Japan, vol. 86, no. 10, p. 101004, 2017.
+[28] L. Rayleigh, “Iv. measurements of the amount of oil nec-
+essary iu order to check the motions of camphor upon wa-
+ter,” Proceedings of the Royal Society of London, vol. 47,
+pp. 364–367, 12 1890.
+[29] S. Nakata, Y. Iguchi, S. Ose, M. Kuboyama, T. Ishii,
+and K. Yoshikawa, “Self-rotation of a camphor scraping
+on water: New insight into the old problem,” Langmuir,
+vol. 13, pp. 4454–4458, 8 1997.
+[30] K. Nagai, Y. Sumino, H. Kitahata, and K. Yoshikawa,
+“Mode selection in the spontaneous motion of an alcohol
+droplet,” Physical Review E, vol. 71, p. 065301, 6 2005.
+[31] S. Tanaka, S. Nakata, and M. Nagayama, “A surfactant
+reaction model for the reciprocating motion of a self-
+propelled droplet,” Soft Matter, vol. 17, no. 2, pp. 388–
+396, 2021.
+[32] R. J. L¨offler, J. Gorecki, and M. Hanczyc, “Better red
+than dead: On the influence of oil red o dye on com-
+plexity of evolution of a camphor-paraffin droplet on the
+water surface,” in The 2018 Conference on Artificial Life,
+pp. 574–579, MIT Press, 2018.
+[33] R. L¨offler, New Materials for Studies on Nanostructures
+and Spatio-temporal Patterns Self-organized by Surface
+Phenomena. PhD thesis, Institute of Physical Chemistry,
+Polish Academy of Sciences, 2021.
+[34] C. Watanabe, S. Tanaka, R. J. G. L¨offler, M. M. Hanczyc,
+and J. G´orecki, “Dynamic ordering caused by a source-
+sink relation between two droplets,” Soft Matter, vol. 18,
+pp. 6465–6474, 2022.
+[35] C. H. Meredith, P. G. Moerman, J. Groenewold, Y. J.
+Chiu, W. K. Kegel, A. van Blaaderen, and L. D. Zarzar,
+“Predator–prey interactions between droplets driven by
+non-reciprocal oil exchange,” Nature Chemistry, vol. 12,
+pp. 1136–1142, 2020.
+[36] R.
+Mallick,
+C.
+Watanabe,
+and
+S.
+Tanaka,
+“Self-
+propulsion of liquid droplet assemblies controlled by the
+functionalities of their components,” Physical Chemistry
+Chemical Physics, vol. 27, pp. 8878–8886, 4 2025.
+[37] Y. Fily and M. C. Marchetti, “Athermal phase separation
+of self-propelled particles with no alignment,” Phys. Rev.
+Lett., vol. 108, p. 235702, Jun 2012.
+[38] U. Schmidt, M. Weigert, C. Broaddus, and G. Myers,
+“Cell detection with star-convex polygons,” in Medi-
+cal Image Computing and Computer Assisted Interven-
+tion - MICCAI 2018 - 21st International Conference,
+Granada, Spain, September 16-20, 2018, Proceedings,
+Part II, pp. 265–273, 2018.
+[39] M. Weigert, U. Schmidt, R. Haase, K. Sugawara, and
+G. Myers, “Star-convex polyhedra for 3d object detec-
+tion and segmentation in microscopy,” in The IEEE
+Winter Conference on Applications of Computer Vision
+(WACV), March 2020.
+[40] M. Weigert and U. Schmidt, “Nuclei instance segmen-
+tation and classification in histopathology images with
+stardist,” in The IEEE International Symposium on
+Biomedical Imaging Challenges (ISBIC), 2022.
+[41] K. He, G. Gkioxari, P. Doll´ar, and R. Girshick, “Mask
+r-cnn,” in 2017 IEEE International Conference on Com-
+puter Vision (ICCV), pp. 2980–2988, 2017.
+[42] D. B. Allan, T. Caswell, N. C. Keim, C. M. van der Wel,
+and R. W. Verweij, “soft-matter/trackpy: v0.6.1,” Feb.
+2023.
+[43] S. J. Julier and J. K. Uhlmann, “New extension of the
+Kalman filter to nonlinear systems,” in Signal Processing,
+Sensor Fusion, and Target Recognition VI (I. Kadar, ed.),
+vol. 3068, pp. 182 – 193, International Society for Optics
+and Photonics, SPIE, 1997.
+[44] H. E. Rauch, F. Tung, and C. T. Striebel, “Maximum
+likelihood estimates of linear dynamic systems,” AIAA
+Journal, vol. 3, no. 8, pp. 1445–1450, 1965.
+[45] E. Wan and R. Van Der Merwe,
+“The unscented
+kalman filter for nonlinear estimation,” in Proceedings
+of the IEEE 2000 Adaptive Systems for Signal Pro-
+cessing, Communications, and Control Symposium (Cat.
+No.00EX373), pp. 153–158, 2000.
+[46] G. Kouskoulis, C. Antoniou, and I. Spyropoulou, “A
+method
+for
+the
+treatment
+of
+pedestrian
+trajectory
+data noise,” Transportation Research Procedia, vol. 41,
+pp. 782–798, 2019. Urban Mobility – Shaping the Fu-
+ture Together mobil.TUM 2018 – International Scientific
+Conference on Mobility and Transport Conference Pro-
+ceedings.
+[47] R. Merwe and E. Wan, “Sigma-point kalman filters for
+probabilistic inference in dynamic state-space models,”
+Proceedings of the Workshop on Advances in Machine
+Learning, 06 2003.
+[48] R. Zwanzig, Nonequilibrium Statistical Mechanics. Ox-
+ford University PressNew York, NY, Apr. 2001.
+[49] A. Jaster, “The hexatic phase of the two-dimensional
+hard disk system,” Physics Letters A, vol. 330, no. 1-2,
+pp. 120–125, 2004.
+[50] A. Cavagna, A. Cimarelli, I. Giardina, G. Parisi, R. San-
+tagati, F. Stefanini, and M. Viale, “Scale-free correlations
+in starling flocks,” Proceedings of the National Academy
+of Sciences, vol. 107, no. 26, pp. 11865–11870, 2010.
+[51] A. Reynolds, “Swarming insects may have finely tuned
+characteristic reynolds numbers,” Biomimetics, vol. 9,
+no. 11, 2024.
+[52] C. Huang, F. Ling, and E. Kanso, “Collective phase
+transitions in confined fish schools,”
+Proceedings of
+the National Academy of Sciences, vol. 121, no. 44,
+p. e2406293121, 2024.
+[53] J. R. Howse, R. A. Jones, A. J. Ryan, T. Gough,
+R. Vafabakhsh, and R. Golestanian, “Self-motile colloidal
+particles:
+from directed propulsion to random walk,”
+Physical review letters, vol. 99, no. 4, p. 048102, 2007.
+
+22
+[54] D. Breoni, M. Schmiedeberg, and H. L¨owen, “Active
+brownian and inertial particles in disordered environ-
+ments:
+Short-time expansion of the mean-square dis-
+placement,” Physical Review E, vol. 102, no. 6, p. 062604,
+2020.
+[55] F. Peruani and L. G. Morelli, “Self-propelled parti-
+cles with fluctuating speed and direction of motion in
+two dimensions,” Physical review letters, vol. 99, no. 1,
+p. 010602, 2007.
+[56] S. Babel, B. Ten Hagen, and H. L¨owen, “Swimming
+path statistics of an active brownian particle with time-
+dependent self-propulsion,” Journal of Statistical Me-
+chanics:
+Theory and Experiment, vol. 2014, no. 2,
+p. P02011, 2014.
+[57] L. L. Gutierrez-Martinez and M. Sandoval,
+“Time-
+dependent propulsion of fully inertial active stochastic
+particles: theory and simulations,” Journal of Physics:
+Condensed Matter, vol. 37, no. 13, p. 135102, 2025.
+[58] K. V. Mardia and P. E. Jupp, Directional statistics. John
+Wiley & Sons, 2009.
+[59] W. Aguilar, G. Santamar´ıa-Bonfil, T. Froese, and C. Ger-
+shenson, “The past, present, and future of artificial life,”
+Frontiers in Robotics and AI, vol. 1, p. 8, 2014.

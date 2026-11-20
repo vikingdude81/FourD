@@ -1,0 +1,1595 @@
+A CATEGORY THEORY ACCOUNT OF AI IDENTITY
+Andrea Ferrario1,2,3
+1 Institute of Biomedical Ethics and History of Medicine, University of Zürich, Zürich, Switzerland
+2 SUPSI, Dalle Molle Institute for Artificial Intelligence (IDSIA), Lugano, Switzerland
+3 ETH Zürich, Zürich, Switzerland
+August 4, 2026
+ABSTRACT
+Artificial intelligence (AI) systems are routinely modified after deployment through retraining,
+reconfiguration, and changes in their operational environments. These transformations raise a
+metaphysical question with direct consequences for AI governance: under what conditions does an
+AI system remain the same system over time or across deployments? Earlier trustworthiness-based
+work formulates synchronic and diachronic identity propositionally, by relating identity within a fixed
+AI system type to equality of trustworthiness levels. Such criteria specify when identity statements
+are true, but leave implicit the structure of the states compared, the transformations connecting them,
+and the temporal organization of persistence. We develop a category-theoretic formalization of AI
+identity. An AI system type is specified by a datum ♢= (F, P, LP ), consisting of a techno-function,
+a trustworthiness profile, and a trustworthiness-level function. Profile-relative states are connected by
+admissible lifecycle paths, which are restricted to trustworthiness-level-preserving transformations
+and quotiented to obtain a thin reachability category. Temporally admissible functors represent AI
+system histories, while time-synchronous natural transformations compare realized histories. The
+formalization yields two categorical interpretations of the earlier propositional criteria. A weak
+interpretation recovers identity, within a fixed datum ♢, as equality of trustworthiness level. A strong
+interpretation refines it by requiring mutual trustworthiness-preserving reachability, expressed through
+state isomorphism or natural isomorphism of realized histories. Category theory therefore replaces
+a single undifferentiated identity relation with a structured hierarchy of diachronic and synchronic
+criteria. The resulting framework identifies identity-related preconditions for transferring responsible
+AI claims, evidence, and governance procedures across versions or deployments, without treating
+categorical identity as sufficient by itself for such transfer.
+Keywords: AI identity; artificial intelligence systems; trustworthiness; category theory; artifact metaphysics; AI
+governance; lifecycle management; MLOps.
+1
+Introduction
+The idea that entities require identity criteria for ontological respectability has a long philosophical tradition, canonically
+expressed by Quine’s dictum “no entity without identity” [Quine, 1969, p. 44]. Identity criteria specify the conditions
+under which an entity at one time or in one setting is the same as, or different from, an entity at another. Without such
+criteria, it remains unclear what is being counted, compared, governed, or held responsible across change.
+Artificial intelligence (AI) systems make this longstanding problem especially pressing. Deployed AI systems are
+routinely modified through retraining, fine-tuning, recalibration, threshold adjustment, model replacement, rollback, data
+refresh, pipeline reconfiguration, monitoring interventions, and changes in their operational environments [Kreuzberger
+et al., 2023]. These transformations may be necessary to correct errors, respond to distribution shift, improve fairness
+or robustness, or adapt a system to changing operational or responsible AI requirements. Some systems are accessed
+globally through large numbers of personalized or deployment-specific instances. These changes and apparent
+multiplicity raise the metaphysical question: when does a changing AI system remain the same system? And, further,
+arXiv:2607.00220v2  [math.CT]  2 Aug 2026
+
+when are AI systems the same system? These classical metaphysical questions have immediate consequences for AI
+governance. A performance evaluation, fairness analysis, conformity assessment, or post-market monitoring result
+is produced for a particular system under particular conditions [EU AI Act, 2024]. Applying it to a later version or
+a different deployment presupposes that the relevant object has remained sufficiently identical. Similarly, regulatory
+concepts such as substantial modification distinguish changes that preserve the governed system from those that may
+generate a new object of evaluation or responsibility [EU AI Act, 2024, Ferrario and Hatherley, 2026, Ferrario, 2026b].
+Ferrario recently addressed this philosophical problem by adapting the function+ account of Carrara and Vermaas
+[2009] to the metaphysics of AI systems [Ferrario, 2025]. On this account, artifact kinds are fixed by their techno-
+functions, while the identity and persistence of their instances additionally depend on the operational principles and
+admissible configurations through which those functions are correctly realized. For AI systems, the relevant operational
+principle is expressed through trustworthiness: the collection of performance, robustness, fairness, explainability, safety,
+security, auditability, oversight, and related commitments that a system must satisfy in order to function correctly.
+Trustworthiness thereby provides a governance-relevant interpretation of the contextual and normative embedding
+that artifact metaphysics such as the function+ account by Carrara and Vermaas [2009] treats as constitutive of
+technological identity [EU High-Level Expert Group on Artificial Intelligence, 2019, EU AI Act, 2024]. On this
+basis, Ferrario introduced synchronic and diachronic criteria of AI identity that depend on how the trustworthiness of
+AI systems is operationalized and measured over time [Ferrario, 2025]. However, the criteria proposed in Ferrario
+[2025] are propositional: they specify synchronic and diachronic identity through biconditionals involving a fixed AI
+system type and equality of trustworthiness levels. They thereby provide truth conditions for identity claims at selected
+times, but do not yet represent the internal structure of the compared states, the admissible transformations connecting
+them, the directionality and composition of those transformations, or the temporal coherence of complete histories.
+In particular, equality of trustworthiness levels does not distinguish between states connected in one direction, states
+connected in both directions, and states between which no admissible transformation exists.
+In this work, we formalize Ferrario’s trustworthiness-based account of AI identity using category theory. Category
+theory is well suited to this task because it characterizes objects through their admissible transformations, invariants,
+compositions, and structural relations rather than through component-wise equality alone [Eilenberg and Mac Lane,
+1945, Lane, 1963, Mac Lane, 1971]. Historically, it emerged from the study of natural equivalences and may be
+understood as extending the structural perspective of Klein’s Erlanger Programm: what matters is not merely what an
+object contains, but which transformations preserve the structure regarded as essential [Marquis, 2008]. This perspective
+is particularly appropriate for AI systems, whose persistence may consist precisely in preserving governance-relevant
+structure through substantial material, computational, and organizational change. Thus, category theory makes it
+possible to lift the propositional criteria into a relational and temporal structure. The resulting categorical framework
+supports two interpretations of AI identity. The weak interpretation recovers Ferrario’s original propositional criteria:
+within a fixed type datum, states are identified whenever they belong to the same trustworthiness-level fibre. The
+strong interpretation adds a transformation-grounded condition: AI states are identical only when they are mutually
+reachable through admissible trustworthiness-level-preserving paths. At the level of realized AI system history functors,
+the corresponding strong criterion is natural isomorphism witnessed by time-synchronous comparison morphisms.
+Thus, the strong interpretation of AI identity is a stricter categorical refinement made available by representing the
+transformations and histories that the propositional formulation leaves implicit.
+Following Ferrario [2025], our category-theoretic construction begins with an AI system type datum ♢= (F, P, LP ),
+consisting of a techno-function F, a trustworthiness profile P, and a trustworthiness-level function LP . Profile-relative
+states combine quantified assessments qP ∈IP of the trustworthiness profile with their associated levels LP (qP ).
+Admissible AI lifecycle transformations generate a path category, which is restricted to trustworthiness-level-preserving
+paths and quotiented by an equivalence relation that abstracts from their concrete provenance. The resulting thin
+category Sys♢records directed trustworthiness-preserving reachability between states. Post-deployment AI system
+histories are represented by temporally admissible functors
+A♢: Tt0 →Sys♢.
+For a fixed observation time T ≥t0, their restrictions to the interval [t0, T], when instantiated by at least one deployed
+AI system realization—equivalently: token—define realized AI system histories. These form the objects of the category
+Traj♢,[t0,T ],
+whose morphisms are time-synchronous natural transformations comparing realized histories through states occupied at
+the same time. Ferrario’s AI identity criteria are then retrieved and expanded by studying identity and isomorphism
+in Sys♢, and natural isomorphism between realized AI system histories in Traj♢,[t0,T ]. Our formalization is neutral
+among competing metaphysical theories of persistence [Lowe, 1983, Baker, 2004, Williamson, 2013]. Its objects are
+profile-relative states and realized AI system histories rather than complete temporal parts or individuated concrete
+2
+
+AI system tokens. The functorial account may therefore be interpreted either as organizing time-relative stages or as
+representing the changing properties of enduring systems. Its central commitment is that AI system identity under
+change depends on temporally ordered states, admissible lifecycle transformations, realized histories, and explicitly
+specified trustworthiness invariants.
+This work makes three principal contributions.
+(i) It provides a categorical reconstruction of trustworthiness-based AI system identity by formalizing profile-relative
+states, admissible lifecycle paths, trustworthiness-preserving reachability, and realized AI system histories.
+(ii) It distinguishes a weak level-theoretic identity criterion from a strong transformation-grounded criterion. The weak
+criterion recovers equality of trustworthiness level [Ferrario, 2025], whereas the strong criterion requires mutual
+trustworthiness-preserving reachability, time-synchronously witnessed for comparisons of realized histories.
+(iii) It identifies identity-related preconditions for considering the transfer of responsible AI evidence, claims, and
+governance procedures across versions and deployments, without treating categorical identity as sufficient for
+unrestricted transfer.
+The remainder of the paper proceeds as follows. Section 2 introduces the required categorical notions. Section 3
+presents the trustworthiness-based metaphysical foundations. Section 4 constructs the state category Sys♢, and Section 5
+introduces temporally admissible AI system histories and the category of realized AI system histories Traj♢,[t0,T ].
+Section 6 develops the weak and strong identity criteria and illustrates them through examples. The final sections
+discuss the philosophical and governance implications of the categorical framework.
+2
+Categorical Preliminaries
+This section introduces the minimal categorical notions used in the remainder of the paper: categories, isomorphisms,
+functors, natural transformations, thin categories, categorical congruences, quotient categories, and maximal sub-
+groupoids. We refer to standard sources for examples and further details [Eilenberg and Mac Lane, 1945, Mac Lane,
+1971, Spivak, 2014, Yanofsky, 2024].
+Definition 1 (Category). A category C consists of:
+• a collection of objects Ob(C);
+• for each X, Y ∈Ob(C), a collection of morphisms HomC(X, Y );
+• for each object X, an identity morphism idX ∈HomC(X, X);
+• a composition operation
+◦: HomC(Y, Z) × HomC(X, Y ) →HomC(X, Z),
+satisfying associativity and unit laws.1
+Definition 2 (Isomorphism). A morphism f : A →B in a category C is an isomorphism if there exists a morphism
+g : B →A such that
+g ◦f = idA,
+f ◦g = idB.
+The morphism g is then uniquely determined and is called the inverse of f.
+Two objects A and B of C are isomorphic if there exists an isomorphism f : A →B in C. In that case, we write
+A ∼=C B.
+Definition 3 (Functor). A functor F : C →D assigns objects of C to objects of D and morphisms of C to morphisms of
+D, preserving identities and composition:
+F(idX) = idF(X),
+F(g ◦f) = F(g) ◦F(f).
+Maps between functors are called natural transformations:
+Definition 4 (Natural transformation). Given functors F, G : C →D, a natural transformation η : F ⇒G is a family of
+morphisms {ηX : F(X) →G(X)}X∈Ob(C) such that, for every morphism f : X →Y in C, the following naturality
+condition holds:
+G(f) ◦ηX = ηY ◦F(f).
+1Following [Yanofsky, 2024], we use “collections” for Ob(C) and HomC(X, Y ) instead of “sets” or “classes”. Nothing in the
+present paper depends on a particular choice of set-theoretic foundation or on size distinctions between small and large categories.
+3
+
+Definition 5 (Natural isomorphism). Let F, G : C →D be functors. A natural transformation η : F ⇒G is a natural
+isomorphism if every component
+ηX : F(X) →G(X)
+is an isomorphism in D. Equivalently, there exists a natural transformation η−1 : G ⇒F such that
+η−1 ◦η = idF,
+η ◦η−1 = idG.
+In this case, the functors F and G are said to be naturally isomorphic, written F ∼= G.
+Definition 6 (Functor category). Let C and D be categories. The functor category [C, D] has functors C →D as objects
+and natural transformations as morphisms. Identities and composition are defined componentwise.
+The following categorical notions are important.
+Definition 7 (Quotient category). Let C be a category, and suppose that each hom-set HomC(X, Y ) is equipped with
+an equivalence relation ∼compatible with composition: whenever f ∼f ′ and g ∼g′, with the relevant composites
+defined, then g ◦f ∼g′ ◦f ′. The quotient category C/∼has the same objects as C, and its morphisms are equivalence
+classes
+HomC/∼(X, Y ) = HomC(X, Y )/∼.
+Identities and composition are defined by
+idX = [idX],
+[g] ◦[f] = [g ◦f].
+Compatibility with composition ensures that these operations are well defined.
+Definition 8 (Thin category). A category C is thin if every hom-set contains at most one morphism.
+Proposition 1 (Commutativity in thin categories). Let C be a thin category. Then every diagram in C commutes
+whenever all the morphisms and composites occurring in the diagram exist.
+Proof. Any two paths in the diagram with the same source and target determine parallel composite morphisms. Since
+C is thin, the hom-set between any two objects contains at most one morphism. Hence the two composites must be
+equal.
+Note that a thin category is equivalently a preorder represented categorically. Given a preorder (X, ≤), define a category
+C(X,≤) with objects the elements of X and
+HomC(X,≤)(x, y) =
+{⋆x,y}
+if x ≤y,
+∅
+otherwise.
+Reflexivity gives the identity morphisms, transitivity gives composition, and each hom-set contains at most one
+morphism.
+Definition 9 (Core of a category). The core, or maximal subgroupoid, of a category C, denoted by Core(C), is the
+subcategory with the same objects as C and only the isomorphisms of C as morphisms.
+3
+Trustworthiness-Based Metaphysics of AI Systems
+Defining AI systems is notoriously difficult because the term encompasses a wide variety of software- and hardware-
+based artifacts. For the purposes of this paper, we adopt the definition provided in Article 3 of the EU AI Act.
+Accordingly, an AI system is
+a machine-based system that is designed to operate with varying levels of autonomy and that may
+exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the
+input it receives, how to generate outputs such as predictions, content, recommendations, or decisions
+that can influence physical or virtual environments (Art. 3, [EU AI Act, 2024]).
+This deliberately broad definition encompasses, among others, medical systems that predict pathophysiological states
+such as sepsis, decision-support systems used in financial services for credit lending or know-your-customer procedures,
+and conversational agents based on large language models. Having fixed the class of systems under consideration, we
+now turn to the property that anchors their identity in the present account: trustworthiness.
+4
+
+3.1
+Trustworthiness as an Anchor for AI System Identity
+3.1.1
+The function+ Account of Technical Artifacts
+Our account of AI identity builds on the function+ metaphysics of technical artifacts developed by Carrara and
+Vermaas [2009]. The motivation for their account lies in a longstanding dispute about whether artifacts possess
+genuine identity and persistence conditions. On a traditional anti-realist view of artifact kinds, artifacts do not have the
+metaphysical standing of natural entities. Natural things, such as organisms, appear to come with internal principles
+of development, activity, maintenance, and decay that help determine when they begin to exist, persist, and cease to
+exist. Artifacts, by contrast, seem to depend on human intentions, practices, and classifications. They “may not seem
+to be supplied with well-defined or well-grounded persistence conditions” [Lowe, 2014, p. 17, emphasis in original].
+A related difficulty concerns the basis on which artifacts should be individuated. If artifacts are individuated by their
+material parts, then ordinary repair, replacement, redesign, or reconfiguration threaten their persistence, as the ship of
+Theseus puzzle shows [Hobbes, 1655]. If they are individuated only by function, then their identity criteria seem too
+coarse-grained [Wiggins, 2001]: very different objects may perform the same function, and function alone therefore
+seems insufficient to determine what kind of artifact something is, or whether it remains the same artifact over time.
+Baker [2004] and Elder [2004] resist this anti-realist tendency by defending the metaphysical reality of artifacts and by
+treating artifact functions as identity-relevant. Carrara and Vermaas accept this realist re-orientation, but refine it with
+their function+ account. Their central point is that artifact identity cannot be fixed either by material constitution alone
+or by function alone. It requires a “conjunction” of function and constraints on its admissible realization. This is the role
+of the “+” in function+: an artifact kind is determined by a techno-function, namely the technical capacity that artifacts
+of that kind are designed to realize, together with an operational principle and a normal configuration specifying how
+that function is to be correctly realized in practice.2 The function+ account therefore permits substantial variation
+in material composition and technical realization. Two artifacts may instantiate the same kind and persist through
+change even when their components differ, provided that they retain the relevant techno-function and continue to realize
+it through admissible operational principles and configurations. The function+ framework is thus more permissive
+than mereological essentialism, but more discriminating than function-only individuation. In doing so, it explains how
+artifacts can have genuine metaphysical standing while remaining design-dependent, context-sensitive, and open to
+material variation.
+3.1.2
+Techno-Functions, Trustworthiness Profiles, and Level Functions
+Ferrario [2025] adapts Carrara and Vermaas’ function+ account to AI systems. The idea behind this maneuver is that
+identity of AI systems cannot be fixed by material or computational constitution alone: models, datasets, interfaces,
+deployment environments, documentation, monitoring procedures, and organizational arrangements may change while
+the system remains functionally continuous. Yet function alone is also too coarse-grained. Many AI systems may
+share a nominal function, such as classification, prediction, recommendation, or content generation, while differing
+substantially in the constraints, safeguards, performance expectations, and operational conditions under which they
+count as appropriately functioning. The function+ framework addresses this problem by preserving the centrality of
+designed AI function while requiring further criteria that specify how that function is realized and assessed in practice.
+Applying function+ to AI requires specifying the techno-function F of these systems, namely, the goal-directed
+technical capability that an AI system is designed to realize. It is related to, but not identical with, the system’s intended
+use in regulatory terminology—see Article 3 of the EU AI Act [EU AI Act, 2024]. The intended use describes the use
+for which the provider presents the system, including the relevant context and conditions of use. The techno-function
+captures the technical capability through which that use is made possible. 3 Thus, a system whose intended purpose
+is to support consumer-credit decisions may have the techno-function of inferring individualized credit-risk scores
+from applicant data according to a specified modeling pipeline. A system whose intended purpose is emergency-room
+decision support may have the techno-function of predicting a patient’s risk of sepsis from clinical observations. F
+characterizes the AI system kind at the level of designed capability, specifying what the system is meant to achieve,
+through which kinds of inputs, inferential procedures, models, and outputs.
+2Techno-functions can be specified at different levels of detail: broader specifications pick out wider artifact kinds, whereas finer
+specifications carve out narrower ones.
+3The distinction is especially important for generative and multi-purpose systems such as large language models. A broadly
+specified techno-function, such as next-token prediction or autocompletion, may support many intended uses, including drafting,
+summarization, tutoring, translation, or entertainment. In the present account, the techno-function anchors identity at the level of AI
+system kind, while the trustworthiness profile and level function capture the contextualized conditions under which that function
+counts as appropriately realized for a given intended use.
+5
+
+For AI systems, the operational principle discussed within function+ is expressed through trustworthiness: the
+collection of performance, robustness, fairness, explainability, safety, security, auditability, oversight, and related
+requirements that a system must satisfy in order to function correctly [EU AI Act, 2024, EU High-Level Expert Group
+on Artificial Intelligence, 2019]. These requirements constrain admissible implementations without fixing a unique
+model, software stack, hardware configuration, or organizational arrangement. These requirements are collected into a
+trustworthiness profile.
+Definition 10 (Trustworthiness profile, [Ferrario, 2025]). Let F be a techno-function. A trustworthiness profile for F is
+a finite specification
+P := {p1, . . . , pn}
+of trustworthiness dimensions, together with the requirements, measurement conventions, evidential conditions, and
+aggregation procedures through which those dimensions are assessed.
+The profile P also incorporates the intended-purpose, deployment, and institutional conditions under which these
+dimensions are interpreted. It therefore fixes the level of abstraction at which identity and persistence are evaluated.
+Typical dimensions include predictive performance, robustness, fairness, explainability, safety, security, auditability, and
+human oversight. Their relevance for AI governance is contextual: it depends, in particular, on the intended use of the
+system and the risk it poses to individuals, organizations, and society [EU AI Act, 2024]. Further, their definition and
+operationalization are possible at different levels of abstraction, according to contextualized standards of practice and
+governance cultures. However, these dimensions must be made measurable as trustworthiness should be operationalized
+through indicators that can be assessed in practice and used to support effective AI governance [Ala-Pietilä et al., 2020,
+Kaur et al., 2022]. For a system assessed under P, let
+qP = (qP 1, . . . , qP n) ∈IP = [0, 1]n
+denote its quantified trustworthiness assessment. Each coordinate qP i is the normalized score assigned to dimension
+pi under the measurement, normalization, and aggregation procedures fixed by P, and may represent the most recent
+auditable estimate available rather than an instantaneous measurement. Thus, any numerical agreement in [0, 1] is
+meaningful only relative to the common measurement protocol specified by P: scores obtained through different
+metrics or assessment procedures are not treated as directly comparable unless P includes an explicit rule translating
+them into the same canonical coordinate. Different dimensions may rely on distinct metrics and aggregation rules
+[Rabanser et al., 2026]; for a broader survey, we refer to Kemmerzell et al. [2025]. Let
+LP : IP →[K],
+qP 7→LP (qP ),
+be a trustworthiness-level function, where [K] = {1, . . . , K}. The vector qP ∈IP records quantified trustworthiness
+measurements, while LP (qP ) represents the resulting degree of correct functioning through a finite set of levels. LP is
+part of the AI governance datum and maps the quantified assessment qP of the trustworthiness profile P to a finite set
+of governance-relevant levels. Preferred choices are interpretable and auditable functions, such as stepwise mappings
+defined by inequalities on the components of qP : changes within a plateau are treated as tolerable variation, whereas
+crossing a boundary marks a governance-relevant transition requiring escalation, reassessment, or updated safeguards
+[Ferrario, 2025, Ferrario and Hatherley, 2026]. Such boundary crossings are treated as governance-relevant transitions
+requiring reassessment or escalation as they may constitute ‘substantial modifications’ under the EU AI Act [EU AI
+Act, 2024, Ferrario, 2026b]; as explained at the end of this section, they also have direct metaphysical consequences.
+Definition 11 (AI system type datum). An AI system type datum is a triple
+♢= (F, P, LP ),
+where F is a techno-function, P is a trustworthiness profile for systems realizing F, and LP is the trustworthiness-level
+function.
+The datum ♢combines the three elements that determine trustworthiness-based AI system identity [Ferrario, 2025].
+Thus, Ferrario’s adaptation of the function+ account developed by Carrara and Vermaas [2009] to AI systems is simi-
+larly governance-oriented. It evaluates AI system identity relative to a fixed techno-function and to the trustworthiness
+requirements under which that function is correctly realized, with particular emphasis on the quantified assessment of
+those requirements. Finally, while the measurement and aggregation procedures used to produce the coordinates of qP
+are fixed components of P, and hence of the type datum ♢, the assessment vector qP , by contrast, is not part of ♢.
+In fact, it varies across times, deployments, copies, instantiations, and concrete AI system tokens, and will constitute
+the variable component of the profile-relative states introduced in the remainder of this work. Table 1 summarizes the
+primitive components of our formalization.
+6
+
+Symbol
+Description
+F
+Techno-function: functional capability the AI system is designed to realize, understood as the
+capability that enables its intended use in a specified domain of use.
+P = {p1, . . . , pn}
+Trustworthiness profile: the finite set of trustworthiness dimensions, together with their
+requirements, measurement conventions, evidential conditions, normalization rules, and
+aggregation procedures.
+qP ∈IP = [0, 1]n
+Quantified trustworthiness profile: the normalized assessment vector produced under the
+measurement and aggregation procedures fixed by P.
+LP : IP →[K]
+Trustworthiness-level function: the governance-level map assigning each quantified profile to a
+finite trustworthiness level.
+x = (qP , LP (qP )) ∈S♢
+♢-relative AI system state: a profile-relative state consisting of a quantified trustworthiness profile
+and its associated trustworthiness level.
+U♢
+Set of admissible primitive lifecycle transformations: the fixed vocabulary of primitive
+transformations allowed for systems of type ♢, each interpreted as a relation on S♢.
+Table 1: Primitive components of the formalization.
+accuracy
+0
+1
+t
+t′
+t′′
+time
+robustness
+0
+1
+t
+t′
+t′′
+a(t)
+a(t′)
+a(t′′)
+accuracy
+robustness
+LP (qP )
+level 1
+level 2
+level 3
+Figure 1: Left: two normalized trustworthiness dimensions, here accuracy and robustness, evolve over time under
+gradual degradation and local improvement. Right: the trustworthiness-level function LP maps quantified profiles
+qP = (qP,acc, qP,rob) to trustworthiness levels LP (qP ). In this example, level 3 is assigned on [0.7, 1] × [0.7, 1], level
+2 on [0.4, 1] × [0.4, 1] \ [0.7, 1] × [0.7, 1], and level 1 on the remaining part of [0, 1] × [0, 1]. The states a(t) and a(t′)
+lie on level 3, so they satisfy τ♢(a(t)) = τ♢(a(t′)). The state a(t′′) lies on level 2, so the diachronic identity criterion
+at t and t′′ or t′ and t′′ is not satisfied. This makes visually explicit the trustworthiness comparisons used in Ferrario’s
+synchronic and diachronic identity criteria, prior to the categorical formalization of states and histories.
+3.1.3
+Trustworthiness-Based AI Identity Criteria
+Fix a type datum ♢= (F, P, LP ), and let a(t) and b(t) denote AI systems of type ♢considered at time t. Let
+qa
+P (t), qb
+P (t) ∈IP be their quantified trustworthiness profiles, and define τ♢(a(t)) := LP (qa
+P (t)), τ♢(b(t)) :=
+LP (qb
+P (t)). The AI identity criteria proposed by Ferrario [2025] can then be stated as follows.
+Definition 12 (Synchronic and diachronic AI identity). Let a and b be AI systems of the fixed type ♢.
+Their synchronic identity relative to ♢at time t is defined by
+a(t) =♢b(t)
+⇐⇒
+τ♢(a(t)) = τ♢(b(t)).
+(1)
+The diachronic identity relative to ♢of a between times t1 and t2 is defined by
+a(t1) =♢a(t2)
+⇐⇒
+τ♢(a(t1)) = τ♢(a(t2)).
+(2)
+These criteria express identity relative to the abstraction fixed by ♢: fixing ♢does not determine a unique AI system
+token and it leaves substantial room for variation within those constraints. Different copies of the same system
+7
+
+template may be deployed in distinct but type-compatible contexts, pursue the same techno-function, satisfy the same
+high-level requirements documented, for example, in a common conformity assessment [EU AI Act, 2024], and be
+evaluated by the same level function LP , while still receiving different quantified assessments qa
+P (t) and therefore
+possibly different trustworthiness levels. They may also differ in model versions, data pipelines, hardware and software
+configurations, interfaces, and deployment channels—for instance, one copy may be accessed through a web browser
+and another through a mobile application—and may undergo different MLOps interventions. Despite these changes,
+these instantiations may remain identical in the sense specified by Definition 12 if their trustworthiness levels coincide.
+Figure 1 illustrates how quantified trustworthiness measurements qa
+P (t) are mapped by the level function LP to
+trustworthiness levels τ♢(a(t)) = LP (qa
+P (t)), which are the values compared in Ferrario’s synchronic and diachronic
+AI identity criteria in Definition 12. At this stage, the metaphysical status of a(t) and b(t) remains deliberately
+underdetermined. These symbols denote AI systems considered at particular times, but the criteria in Definition 12 do
+not yet specify what an AI system state is, which transformations may connect such states, how these transformations
+compose, or how histories of AI system states should be represented over time. Furthermore, the biconditionals in
+Definition 12 characterize =♢as a type-relative equivalence relation induced by equality of trustworthiness levels.
+They do not provide a structural account of the states being related, the admissible transformations connecting
+them, or the temporal organization of identity-preserving histories. The category-theoretic construction developed in
+Sections 4 and 5 supplies this missing structure. It defines profile-relative states, admissible lifecycle transformations,
+trustworthiness-preserving reachability, temporally ordered histories, and time-synchronous comparisons between
+realized histories. As a result, the propositional criteria in Definition 12 can be recovered and enriched: the weak
+interpretation identifies systems through equality of trustworthiness levels, while the strong interpretation refines identity
+through transformation-grounded reachability and categorical isomorphisms.
+4
+The Category Sys♢of AI System States
+4.1
+Abstract AI System States and Their Transformations
+Fix an AI system type datum ♢= (F, P, LP ). We introduce the last two primitive elements of our formalization:
+♢-relative AI system states and their transformations. We summarize them in Table 1.
+Definition 13 (♢-relative AI system state). A ♢-relative AI system state is an element x = (qP , k) ∈S♢, where
+S♢= {(qP , LP (qP )) | qP ∈IP } ⊆IP × [K].
+For x = (qP , k) ∈S♢, the vector Qx := qP ∈IP is the quantified trustworthiness profile of x, and the value
+τ♢(x) := k = LP (qP ) is its trustworthiness level.
+By construction, S♢is the graph of the level function LP : IP →[K] specified as part of the type datum ♢. A state of
+an AI system, in the sense used here, is therefore a P-relative numerical state in IP × [K]. It is a governance-relative
+representation of an AI system, rather than a complete description of its computational, material, organizational,
+or environmental configuration. A single state may be instantiated by a multitude of AI systems: different copies,
+deployments, model implementations, hardware choices, or software stacks may determine the same vector qP and
+the same level LP (qP ). This construction follows from the function+-trustworthiness account developed in Ferrario
+[2025]: identity is assessed at the level fixed by ♢, rather than by hardware or software sameness. We now introduce
+transformations between such abstract states.
+Definition 14 (Primitive lifecycle transformation). Let U♢be the set of admissible primitive lifecycle transformations
+for AI systems of type ♢. Each r ∈U♢is associated with a relation Rr ⊆S♢×S♢. For states x, y ∈S♢, the statement
+(x, y) ∈Rr means that y may result from x through an admissible primitive lifecycle transformation recorded as r.
+The set U♢is a vocabulary of state transformations that are admissible and primitive. Let us discuss them in some detail.
+First, each r ∈U♢is interpreted through a relation Rr ⊆S♢× S♢. Thus, (x, y) ∈Rr means that y is an admissible
+possible outcome of applying the primitive lifecycle transformation recorded as r to a system in state x. This assertion
+concerns reachability at the level of abstract states only: it does not imply that r was actually executed in producing
+y from x. Crucially, the associated relations Rr need not preserve trustworthiness levels. Also note that distinct
+lifecycle paths may connect the same source and target states. For instance, one system may move from x to y by a
+model training update, followed by a data validation update, and then by a monitoring configuration
+update, while another system may reach the same state through the same three admissible transformations applied in a
+different order. We show this in Figure 2.
+Furthermore, admissibility of r ∈U♢is relative to the fixed type datum ♢and the lifecycle or governance regime
+under consideration. An intervention included in U♢must remain compatible with the techno-function F and with the
+8
+
+assessment framework fixed by P, although it may change the quantified assessment qP and may cross a trustworthiness-
+level boundary. The relation Rr records only the intervention’s possible effect at the level of the abstract state space.
+It need not be a function: the same intervention may produce different assessment outcomes under different data
+or deployment conditions, and different interventions may lead to the same abstract state. Examples of elements of
+U♢include model retraining, fine-tuning, threshold adjustment, data refresh, model rollback, and
+documentation update [Kreuzberger et al., 2023, Eken et al., 2025].
+Additionally, the elements of U♢are primitive relative to the chosen granularity. For instance, a transformation such
+as model retraining may be treated as primitive in a coarse vocabulary U♢, while a more refined vocabulary U′
+♢
+may decompose it, for instance, into training-data augmentation, hyperparameter tuning, and change of
+model class. Fixing U♢therefore fixes the level of description at which lifecycle paths are represented in the path
+category constructed below. A remark on vocabulary refinement is useful before moving to the categorical constructions.
+If U♢is refined, the resulting path categories record more detailed lifecycle provenance, that is, the lifecycle history
+by which an AI system state is produced, including the particular sequence of updates, interventions, configurations,
+measurements, and deployment conditions leading to that state. When a refined vocabulary extends a coarser one, the
+corresponding path categories are related by the inclusion of generators. In what follows, we fix one U♢and do not
+study these refinements further.
+model training
+update
+data validation
+update
+monitoring
+configuration update
+data validation
+update
+monitoring
+configuration update
+model training
+update
+(q1
+P , LP (q1
+P )) = x
+y = (q2
+P , LP (q2
+P ))
+Figure 2: Two distinct lifecycle paths connecting the same abstract states x and y. The transformations act on different
+components of the quantified trustworthiness profile qP , for instance predictive performance, robustness, monitoring,
+or auditability. In the upper path, the system moves from x to y through a model training update, followed by
+a data validation update, and then a monitoring configuration update. In the lower path, the same three
+admissible primitive transformations are applied in a different order.
+A typical structure for the relations Rr ⊆S♢× S♢where r ∈U♢can be given through inequalities on the quantified
+trustworthiness profiles. Let πj : IP →[0, 1] denote the projection onto the j-th profile coordinate, and assume that each
+coordinate is oriented so that larger values represent improvement. For a nonempty set of dimensions J ⊆{1, . . . , n},
+define
+RJ := {(x, y) ∈S♢× S♢| πj(Qx) ≤πj(Qy) for every j ∈J} ,
+where R∅:= S♢× S♢. The coordinates outside J are left unconstrained. Thus, a primitive transformation r ∈U♢
+intended to weakly improve the dimensions in J may then be represented by Rr = RJ, or more generally by a
+subrelation Rr ⊆RJ when additional preconditions or outcome constraints are required. Relational composition
+represents the sequential application of primitive transformations. If a transformation constrained by J1 is followed by
+one constrained by J2, then RJ2 ◦RJ1 = RJ2∩J1.
+4.2
+Categories of Abstract AI System States
+Building on the abstract state space S♢and the primitive lifecycle transformations collected in U♢, we now organize
+admissible state transformations categorically. As a result, we obtain the thin category Sys♢, equivalently the preorder
+of trustworthiness-level-preserving reachability on S♢. This category provides the formal basis for the account of AI
+system identity developed in the remainder of the work.
+Definition 15 (Lifecycle path category). Fix a type datum ♢= (F, P, LP ). The lifecycle path category Path♢is
+generated as follows. Its objects are the profile-relative states, so Ob(Path♢) = S♢. For every r ∈U♢and every pair
+x, y ∈S♢satisfying (x, y) ∈Rr, introduce a labelled arrow rx,y : x →y. A morphism f : x ⇝y is a finite path
+f =
+ x = x0
+r1
+−→x1
+r2
+−→· · ·
+rk
+−→xk = y
+
+,
+where ri ∈U♢and (xi−1, xi) ∈Rri for every i = 1, . . . , k. The identity morphism idx : x →x is the empty path at x,
+and composition is concatenation of paths.
+9
+
+Path♢is a free path category. Its morphisms are sequences of admissible primitive transformations between abstract
+states. These transformations are labelled at the granularity level fixed by U♢. Furthermore, Path♢preserves the
+lifecycle provenance represented by the chosen vocabulary as different paths between the same source and target remain
+distinct. It is abstract and does not assert that every path is realized by a deployed system or that its intermediate states
+occur in temporal order: considerations on realization and temporal admissibility are imposed only in Section 5. As
+Path♢is a free path category, it has no non-identity isomorphisms: even when paths f : x ⇝y and g : y ⇝x both
+exist, their composites are non-empty loops and are not equal to the empty identity paths. Thus, a path g representing
+an operational rollback may reconstruct a previous profile-relative state x without categorically inverting the path f that
+produced the current state y. In summary, Path♢is too large for our categorical construction of AI identity. As a next
+step, let us introduce trustworthiness levels into our construction.
+Definition 16 (Trustworthiness-level-preserving path). Let f =
+ x = x0
+r1
+−→x1
+r2
+−→· · ·
+rk
+−→xk = y
+
+be a morphism
+in Path♢. The path f is trustworthiness-level-preserving if τ♢(x0) = τ♢(x1) = · · · = τ♢(xk). Equivalently, every
+state occurring along f has the level τ♢(x) = τ♢(y).
+Let Pathτ
+♢denote the wide subcategory of Path♢having the same objects and only trustworthiness-level-preserving
+paths as morphisms. It is a category because identity paths preserve trustworthiness level and concatenation preserves
+this property. This pathwise condition is stronger than equality of endpoint levels: a path that leaves a level fibre and
+later returns to it is excluded.
+Level preservation does not require the states along a path to be equal. For f = (x0, . . . , xk), one may have Qxi̸ = Qxj,
+while τ♢(xi) = τ♢(xj) for all i, j. Thus, quantified trustworthiness profiles may vary along a path while remaining
+within one trustworthiness-level fibre.
+Definition 17 (Parallel-path equivalence). For every x, y ∈S♢, declare all morphisms in HomPathτ
+♦(x, y) equivalent.
+Thus, for parallel level-preserving paths f, g : x →y, write
+f ∼τ g.
+This equivalence abstracts from their lengths, intermediate states, transformation labels, and order.
+Proposition 2. The family of relations ∼τ is a categorical congruence on Pathτ
+♢.
+Proof. Each ∼τ is the universal equivalence relation on the corresponding hom-set. Moreover, composites of equivalent
+parallel morphisms are again parallel and therefore equivalent.
+The following category is key for this work.
+Definition 18 (AI system state category). The AI system state category of type ♢is the quotient category
+Sys♢:= Pathτ
+♢/∼τ.
+Its objects are the states in S♢. A morphism from x to y in Sys♢is an equivalence class [f]τ ∈HomSys♦(x, y) of
+trustworthiness-level-preserving paths f : x ⇝y in Pathτ
+♢. Identities and composition are given by
+idx = [idx]τ,
+[g]τ ◦[f]τ = [g ◦f]τ.
+Let us discuss Sys♢in some detail.
+The thinness of Sys♢, preorders, and trustworthiness-preserving reachability. Let ⪯τ be the relation on S♢:
+Definition 19 (Trustworthiness-preserving reachability preorder). For x, y ∈S♢, define
+x ⪯τ y
+⇐⇒
+there exists a trustworthiness-level-preserving path f : x ⇝y in Pathτ
+♢.
+The relation ⪯τ is reflexive, since every identity path preserves its trustworthiness level, and transitive, since the
+concatenation of two composable trustworthiness-level-preserving paths is again trustworthiness-level-preserving.
+Hence, (S♢, ⪯τ) is a preorder.
+Proposition 3 (Trustworthiness-preserving reachability). For every x, y ∈S♢, HomSys♦(x, y)̸ = ∅⇐⇒x ⪯τ y.
+Furthermore, whenever this hom-set is nonempty, it contains exactly one morphism. Consequently, Sys♢is the thin
+category associated with the trustworthiness-preserving reachability preorder (S♢, ⪯τ).
+Proof. By construction, a morphism from x to y in Sys♢is an equivalence class of trustworthiness-level-preserving
+paths from x to y. Hence such a morphism exists exactly when x ⪯τ y. Any two parallel level-preserving paths are
+identified by ∼τ, so the resulting morphism is unique.
+10
+
+Proposition 3 shows that the category Sys♢represents the abstract existence of trustworthiness-level-preserving
+reachability between profile-relative states in S♢. It does not retain the particular sequence of primitive transformations
+by which one state is reached from another; that information is represented in Pathτ
+♢. Instead, HomSys♦(x, y) is
+nonempty precisely when at least one trustworthiness-level-preserving path from x to y exists. Consequently, a
+morphism in Sys♢does not specify the length of a representative path, the number or types of transformations
+occurring in it, their order, their temporal ordering, or any causal relation among them. For instance, suppose that
+both x
+retraining
+−−−−−−−→y and x
+documentation update
+−−−−−−−−−−−−−→z
+retraining
+−−−−−−−→y preserve a common trustworthiness level at every
+step. These are distinct morphisms in Pathτ
+♢, since they have different lengths, intermediate states, and transformation
+labels. In Sys♢, however, they belong to the same equivalence class and give rise only to the unique morphism
+⋆x,y ∈HomSys♦(x, y). Accordingly, the preorder (S♢, ⪯τ) encodes the abstract notion of trustworthiness-preserving
+reachability among ♢-relative states relationally.
+Why is Sys♢a quotient category?
+The quotient construction separates two operations that play different conceptual
+roles. Passing from Path♢to Pathτ
+♢restricts admissible reachability to paths that remain within one trustworthiness-
+level fibre. Passing from Pathτ
+♢to Sys♢then identifies all parallel level-preserving paths, thereby removing their
+lifecycle provenance and retaining only the existence of trustworthiness-preserving reachability. Equivalently, although
+in a less explicit way, Sys♢could have been defined directly as the thin category associated with the preorder (S♢, ⪯τ)
+of Definition 19. The categories Path♢, Pathτ
+♢, and Sys♢are summarized in the upper part of Table 2.
+Thinness and isomorphism in Sys♢.
+For x, y ∈S♢, one has x ∼= y in Sys♢if and only if x ⪯τ y and y ⪯τ x. Indeed,
+these relations determine unique morphisms ⋆x,y ∈HomSys♦(x, y) and ⋆y,x ∈HomSys♦(y, x). Their composites are
+endomorphisms of x and y, respectively, and thinness implies ⋆y,x ◦⋆x,y = idx and ⋆x,y ◦⋆y,x = idy, since each
+endomorphism set contains only the identity morphism. Conversely, any isomorphism provides morphisms in both
+directions and therefore bidirectional trustworthiness-preserving reachability. Such an isomorphism expresses only
+mutual trustworthiness-level-preserving reachability between the two abstract states, not the reversal of a concrete
+lifecycle process.
+Category
+Objects
+Morphisms
+Description and role
+Path♢
+All abstract ♢-relative states
+x = (qP , LP (qP )).
+Finite paths of primitive
+admissible lifecycle
+transformations.
+Retains lifecycle provenance
+independently of realization and
+temporal order.
+Pathτ
+♢
+The same abstract states as
+Path♢.
+Paths whose states all have one
+common trustworthiness level.
+Restricts transformations to
+those compatible with
+trustworthiness-level invariance.
+Sys♢= Pathτ
+♢/∼τ
+All ♢-relative states.
+Equivalence classes of parallel
+level-preserving paths; each
+nonempty hom-set is a
+singleton.
+Forgets lifecycle provenance
+and retains abstract
+trustworthiness-preserving
+reachability. This reachability is
+independent of realization, time,
+and causal order. Equivalently
+defined as the thin category
+associated to the preorder
+(S♢, ⪯τ).
+T[t0,T ]
+Times t ∈[t0, T].
+A unique arrow t →t′
+whenever t ≤t′.
+Provides the shared temporal
+order for realized histories and
+same-time comparisons.
+[T[t0,T ], Sys♢]
+All functors T[t0,T ] →Sys♢.
+Natural transformations
+between such functors.
+Provides the ambient category
+of possible finite histories,
+whether realized or merely
+theoretical.
+Traj♢,[t0,T ]
+Temporally admissible AI
+system histories instantiated
+over [t0, T] by at least one
+deployed AI system token.
+Natural transformations whose
+components admit
+time-synchronous
+representatives through states
+realized at the relevant time.
+Represents realized AI system
+evolutions and their coherent
+same-time comparisons.
+Table 2: Main categories of the formalization. The construction moves from abstract lifecycle paths and trustworthiness-
+preserving reachability to time-indexed histories and realized AI system histories.
+11
+
+5
+AI system histories as Functors: The Category Traj♢,[t0,T]
+5.1
+Time as a Category
+As deployed AI system tokens evolve over time, it is necessary to embed time into our categorical approach to AI
+identity. To do so, we represent time as a poset category as follows.
+Definition 20 (Time category). Fix a deployment time t0 ∈R. Let Tt0 be the poset category induced by the total order
+on [t0, ∞). Its objects are time points, Ob(Tt0) = [t0, ∞), and its morphisms are given by
+HomTt0(t, t′) =
+{⋆t,t′}
+if t ≤t′,
+∅
+otherwise.
+Composition is induced by transitivity of ≤.
+A morphism ⋆t,t′ expresses that t′ is not earlier than t. Tt0 is thin.
+Definition 21 (Time-shift functor). Let T0 be the time category with objects [0, ∞). For each deployment time t0,
+define the time-shift functor st0 : T0 →Tt0 by st0(t) = t0 + t. If A : Tt0 →C is a functor, its elapsed-time
+reparameterization is eA = A ◦st0 : T0 →C.
+This allows copies or related systems deployed at different calendar times to be compared by time since deployment.
+In what follows, T denotes either an absolute time category Tt0 or the elapsed-time category T0, depending on the
+comparison at issue.
+5.2
+Time-Relative Histories of AI Systems as Functors
+The central idea is that each (post-deployment) history of AI systems—understood here as the trajectory through time
+of AI systems that continue to function correctly, i.e., preserve their trustworthiness level over time—can be represented
+as a time-order-preserving functor from the time category Tt0 to the state category Sys♢. Such histories include, for
+instance, those of deployed copies of a medical AI system used in a hospital emergency department. This functor
+assigns a profile-relative state to each time and the unique trustworthiness-preserving reachability morphism to each
+ordered pair of times. Since Sys♢is defined independently of temporal order, temporal admissibility additionally
+requires every assigned morphism to admit at least one representative compatible with the temporal evolution encoded
+by the functor. Let us elaborate on this construction in a few steps.
+From abstract states to time-ordered AI system states and their transformations.
+A morphism in Sys♢records
+only the existence of trustworthiness-level-preserving reachability between two abstract states. It may be represented
+by several paths in Pathτ
+♢, not all of which need to respect the temporal order of a history. To represent an AI system
+lifecycle, we therefore require that every morphism assigned to a temporal interval admit at least one representative
+whose intermediate states occur in the image of the history functor in non-decreasing temporal order.
+Let A♢: Tt0 →Sys♢be a functor. For every t ≥t0, write
+A♢(t) =
+ QA
+P (t), τ A
+♢(t)
+
+∈S♢,
+where QA
+P (t) =
+ qA
+P 1(t), . . . , qA
+P n(t)
+
+∈IP is the quantified trustworthiness profile assigned at time t, and τ A
+♢(t) =
+LP
+ QA
+P (t)
+
+is its trustworthiness level. For t ≤t′, denote by At,t′ := A♢(⋆t,t′) ∈HomSys♦(A♢(t), A♢(t′)) the
+morphism assigned to the unique time arrow ⋆t,t′ ∈HomTt0(t, t′) by functoriality of A♢.
+Definition 22 (A♢-time-ordered representative). Let A♢: Tt0 →Sys♢be a functor and let t ≤t′. A path
+f =
+ A♢(t) = x0
+r1
+−→x1
+r2
+−→· · ·
+rm
+−−→xm = A♢(t′)
+
+in Pathτ
+♢representing the morphism At,t′ is called an A♢-time-ordered representative over [t, t′] if either:
+(a) m = 0 and A♢(s) = A♢(t) for every s ∈[t, t′]; or
+(b) m ≥1 and there exist times t = s0 ≤s1 ≤· · · ≤sm = t′ such that xi = A♢(si) for every i = 0, . . . , m.
+Clause (a) represents stationary persistence over a non-degenerate interval: time may pass while the functor assigns the
+same profile-relative state. In the non-stationary case, every state occurring in the representative path must be assigned
+by the history at some time in the interval, in an order compatible with that of Tt0. Since the representative belongs
+to Pathτ
+♢, trustworthiness-level preservation is already built into the construction. That said, time ordering does not
+12
+
+turn the relations Rri into claims that the corresponding interventions were historically executed: the labels ri identify
+admissible transformations witnessing a temporally coherent path, not certified causal provenance. Time-ordered
+representatives are stable under concatenation. In fact, if t ≤t′ ≤t′′, concatenating time-ordered representatives over
+[t, t′] and [t′, t′′] yields a time-ordered representative over [t, t′′]. Functoriality ensures that the resulting path represents
+the composite morphism At′,t′′ ◦At,t′ = At,t′′. We arrive at a key definition for this work.
+Definition 23 (AI system history). Fix an AI system type datum ♢= (F, P, LP ) and a deployment time t0. An AI
+system history of type ♢is a functor
+A♢: Tt0 →Sys♢
+such that, for every t ≤t′, the morphism
+At,t′ ∈HomSys♦(A♢(t), A♢(t′))
+admits at least one A♢-time-ordered representative over [t, t′].
+By Definition 23, an AI system history assigns an abstract state to every time and encodes time-ordered, trustworthiness-
+preserving reachability to every ordered pair of states. We represent them in Figure 3.
+Time-relative states and AI system tokens. For each t ≥t0, the object A♢(t) is the ♢-relative state assigned by the
+history at time t. It records the quantified trustworthiness profile QA
+P (t) and the corresponding level τ A
+♢(t). At this
+stage, the history need not be instantiated by any concrete AI system token. We will discuss realization by deployed
+tokens in Section 5.3.
+Morphisms and temporal admissibility. For every t ≤t′, the unique morphism At,t′ records trustworthiness-level-
+preserving reachability between the two states. It may be represented by several paths in Pathτ
+♢but, because Sys♢
+is defined independently of time, not every such path need respect the temporal order of the history. Definition 23
+therefore requires only that the morphism admits at least one A♢-time-ordered representative. However, A♢does not
+select any particular lifecycle path; it records morphisms between temporally-ordered AI system states together with
+the existence of at least one temporally coherent representative.
+Functoriality and trustworthiness-level invariance. The category Tt0 contains a unique arrow ⋆t,t′ for every
+t ≤t′. Functoriality therefore requires the existence of a morphism At,t′ in Sys♢for every ordered pair of times.
+Since every morphism in Sys♢preserves trustworthiness level, it follows that τ A
+♢(t) = τ A
+♢(t′) for every t ≤t′.
+Consequently, τ A
+♢(t) = τ A
+♢(t′) for all t, t′ ≥t0, and the entire image of A♢lies within a single trustworthiness-level
+fibre L−1
+P (k) × {k} ⊆S♢for some k ∈[K]. Therefore, states with different trustworthiness levels are objects of Sys♢,
+but they cannot occur in the image of the same history functor. Indeed, no morphism in Sys♢can connect them—see
+Figure 3. A history functor therefore represents an uninterrupted trustworthiness-preserving evolution of AI states. A
+change of trustworthiness level marks the end of one such history and, where appropriate, the beginning of another.
+Non-uniqueness of histories through a state. The same state x ∈S♢may occur in the images of many distinct
+history functors. Such functors may describe different past or future evolutions of the quantified assessment QA
+P (t), and
+their morphisms may admit different lifecycle representatives. Nevertheless, whenever x lies in the image of a history
+functor, the entire image of that functor remains within the trustworthiness-level fibre containing x. Thus, distinct
+histories may pass through the same state while continuing through different quantified states, provided that all of them
+retain the same value of τ♢.
+The above considerations show that an AI system history is a time-indexed family of profile-relative states contained
+within one trustworthiness-level fibre, together with the unique reachability morphisms connecting every temporally
+ordered pair of those states and the requirement that each such morphism admit a time-ordered representative. In this
+way, the functor formalizes the persistence criterion proposed by Ferrario [2025]: quantified assessments and concrete
+implementations may change, while the degree of correct functioning encoded by the trustworthiness level remains
+invariant. We collect these functors in a category before returning to the study of AI identity criteria.
+5.3
+The Category Traj♢,[t0,T ]
+Finally, we organize the collection of AI system history functors into a trajectory category to study AI identity. Our
+strategy goes as follows. First, as Sys♢contains all theoretically possible ♢-relative states and abstract trustworthiness-
+level-preserving morphisms, we restrict our attention to history functors realized by deployed AI system tokens up to
+a fixed observation time. Then, to later address synchronic AI identity criteria, we impose a synchronicity condition
+on natural transformations between realized AI system history functors. Fix an observation time T ≥t0, interpreted
+as the present time of the analysis. Let T[t0,T ] be the full subcategory of Tt0 whose objects are the times t satisfying
+t0 ≤t ≤T. In this subsection, an AI system history over [t0, T] means a functor A♢: T[t0,T ] →Sys♢satisfying the
+temporal-admissibility condition of Definition 23 for every t ≤t′ in [t0, T].
+13
+
+τ♢= k
+Sys♢
+Pathτ
+♢
+A♢
+A♢
+C♢
+τ♢̸ = k
+A♢(t)
+A♢(t′)
+C♢(t′′)
+⋆A♦(t), A♦(t′)
+A♢(t)
+A♢(t′)
+C♢(t′′)
+t
+t′
+t′′
+Figure 3: The same trustworthiness-preserving reachability is represented at the path level and in the thin state category.
+In the lower Pathτ
+♢panel, two distinct paths connect A♢(t) and A♢(t′) within the common trustworthiness-level fibre
+τ♢= k. The lower path through the states on the displayed time guides is an A♢-time-ordered representative. The
+upper path is another representative of the same reachability morphism, but its intermediate states are not ordered by
+the displayed times. The two paths may also differ in length, intermediate states, and transformation labels. In the upper
+Sys♢panel, the same endpoint states are connected by one thick segment representing the unique element ⋆A♦(t),A♦(t′)
+of HomSys♦(A♢(t), A♢(t′)). C♢(t′′) has Sys♢-level copy disconnected from the A♢-component because it lies outside
+the trustworthiness-level fibre τ♢= k.
+Realized AI system histories. For a deployed AI system token u existing throughout [t0, T], let σu : [t0, T] →S♢
+denote its induced profile-relative state assignment, defined by
+σu(t) =
+ qu
+P (t), LP (qu
+P (t))
+
+.
+We arrive at a key definition:
+Definition 24 (Realized AI system history). An AI system history functor A♢: T[t0,T ] →Sys♢over [t0, T] is a realized
+AI system history if there exists at least one deployed AI system token u, existing throughout [t0, T], such that
+σu(t) = A♢(t)
+for every t ∈[t0, T].
+In that case, u is said to instantiate A♢.
+Let Hreal
+♢,[t0,T ] denote the collection of realized AI system history functors over [t0, T]. Multiple AI system tokens
+may instantiate the same realized history whenever they occupy the same ♢-relative state at every time t ∈[t0, T].4
+Since Sys♢is thin, this common object assignment also determines the morphisms assigned by the functor. For each
+t ∈[t0, T], define
+Sreal
+♢(t) :=
+n
+C♢(t)
+ C♢∈Hreal
+♢,[t0,T ]
+o
+⊆S♢.
+A state belongs to Sreal
+♢(t) precisely when it is occupied at time t by at least one deployed token instantiating a realized
+AI system history.
+Time-synchronous representatives. Let A♢, B♢∈Hreal
+♢,[t0,T ]. A categorical comparison between their states at time t
+should involve only states that are themselves realized at that same time. Thus, we arrive at:
+4Realization is understood here in a metaphysical rather than epistemic sense. Whether designers, auditors, or governance actors
+can determine that such an instantiation exists is a distinct epistemic and practical question. In particular, two deployed tokens may
+instantiate the same ♢-relative state only relative to the measurement conventions, normalization rules, and evidential standards fixed
+by P.
+14
+
+Definition 25 (Time-synchronous representative). Let t ∈[t0, T], and let h ∈HomSys♦
+ A♢(t), B♢(t)
+
+. A path
+f =
+ A♢(t) = x0
+r1
+−→x1
+r2
+−→· · ·
+rm
+−−→xm = B♢(t)
+
+in Pathτ
+♢representing h is called time-synchronous at t if
+xi ∈Sreal
+♢(t)
+for every i = 0, . . . , m.
+A time-synchronous representative may pass through states realized by AI system histories other than A♢and B♢,
+but every intermediate state must be occupied at time t by at least one deployed token. It therefore defines a vertical
+comparison between realized AI system histories. Importantly, the existence of such a representative does not mean that
+B♢(t) is realized by applying a sequence of instantaneous transformations to A♢(t). In fact, the representative is not a
+realized lifecycle trajectory, but an abstract comparison path in Pathτ
+♢whose intermediate states are realized at the
+same time t. Thus, time-synchronous representatives witness theoretical comparability between states occupied at the
+same time, not synchronic production of one state from another. We will show the existence of such representatives in
+some examples in Section 6.3.
+The restriction to Sreal
+♢(t) prevents time-synchronous comparison between the states A♢(t) and B♢(t) from being
+mediated by merely possible states. Without this restriction, two realized histories A♢and B♢could be compared at
+time t through intermediate states that are admissible in the abstract state space S♢, but not occupied by any deployed
+token of type ♢at that time. The resulting comparison would then be grounded in the abstract structure of Sys♢,
+rather than in the population of co-realized states. This would oversimplify synchronic comparison: it would treat
+mathematically admissible bridges through the abstract profile space as if they were available for comparing actually
+deployed systems. Requiring all states in a time-synchronous representative to lie in Sreal
+♢(t) ensures that vertical
+comparison remains a relation among states actually realized at the time of comparison, rather than a relation mediated
+by unoccupied points of the abstract state space.5
+We are now in the position to introduce the last category of this work.
+Definition 26 (Category of realized AI system histories). Fix the type datum ♢= (F, P, LP ) and an observation
+interval [t0, T]. The category of realized AI system histories of type ♢, denoted by
+Traj♢,[t0,T ],
+has object collection
+Ob
+ Traj♢,[t0,T ]
+
+= Hreal
+♢,[t0,T ].
+For realized histories A♢, B♢, define HomTraj♦,[t0,T ]
+ A♢, B♢
+
+to be the collection of natural transformations
+η : A♢⇒B♢
+in [T[t0,T ], Sys♢] such that every component ηt ∈HomSys♦(A♢(t), B♢(t)) admits at least one time-synchronous
+representative at t. Such natural transformations are called time-synchronous.
+Since a morphism in Traj♢,[t0,T ] is a natural transformation, its components satisfy, for every t ≤t′,
+Bt,t′ ◦ηt = ηt′ ◦At,t′.
+(3)
+Because Sys♢is thin, this equation holds automatically whenever all four morphisms exist.
+As with the preceding categorical constructions, the objects of Traj♢,[t0,T ] are realized AI system histories rather than
+individual AI system tokens. Distinct deployed tokens are represented by the same object whenever they instantiate the
+same time-indexed sequence of ♢-relative states. The morphisms compare realized histories pointwise through states
+realized at the same time. The following result establishes that these objects and morphisms form a category.
+Proposition 4. The category Traj♢,[t0,T ] is a thin subcategory of [T[t0,T ], Sys♢].
+5For example, suppose P has four quantified dimensions and qP ∈[0, 1]4. Then a tuple such as
+qP = (0.813, 0.742, 0.901, 0.615)
+determines an abstract state x = ((0.813, 0.742, 0.901, 0.615), LP (0.813, 0.742, 0.901, 0.615)) ∈S♢. But it need not be the case
+that any deployed AI system token in the population under analysis occupies exactly this ♢-relative state at a given time t. Cardinality
+considerations aside, the point is both practical and conceptual: even when quantified profiles are represented by floating-point
+values, the abstract state space S♢is too large, containing many admissible states that are not realized by any token at a given time.
+15
+
+Proof. For every realized history A♢, the component of its identity natural transformation at time t is idA♦(t). It is
+represented by the empty path at A♢(t), which is time-synchronous because A♢(t) ∈Sreal
+♢(t).
+Now let
+η : A♢⇒B♢,
+θ : B♢⇒C♢
+be time-synchronous natural transformations. For each t, concatenate a time-synchronous representative of ηt with one
+of θt. Every state of the resulting path belongs to Sreal
+♢(t), so it is a time-synchronous representative of (θ◦η)t = θt◦ηt.
+Hence time-synchronous natural transformations are closed under identities and composition. Finally, Sys♢is thin, so
+between two fixed functors there is at most one natural transformation. Therefore, Traj♢,[t0,T ] is thin.
+Morphisms and isomorphisms in Traj♢,[t0,T ]. The morphisms At,t′ and Bt,t′ encode the forward trustworthiness-
+preserving evolution of two realized histories between times t and t′. A component ηt ∈HomSys♦(A♢(t), B♢(t))
+compares their states at the same time t. Equation (3) expresses the compatibility of these same-time comparisons
+with temporal evolution. Both composites in equation (3) belong to HomSys♦(A♢(t), B♢(t′)). Since Sys♢is thin, they
+necessarily coincide.
+By definition, a time-synchronous representative of ηt contains only states in Sreal
+♢(t). It therefore introduces no
+state indexed by a different time into the comparison at t. Any stronger requirement that the assessments QA
+P (t) and
+QB
+P (t) use only evidence available by time t must be incorporated into the evidential and measurement conditions
+fixed by the trustworthiness profile P. A morphism in Traj♢,[t0,T ] is thus a coherent family of time-synchronous
+comparisons between realized AI system histories. Coherence follows automatically from the thinness of Sys♢. Since
+Traj♢,[t0,T ] is itself thin, two realized histories are isomorphic precisely when morphisms exist in both directions. Thus,
+A♢∼=Traj♦,[t0,T ] B♢if and only if HomTraj♦,[t0,T ](A♢, B♢)̸ = ∅and HomTraj♦,[t0,T ](B♢, A♢)̸ = ∅. Equivalently,
+for every t ∈[t0, T], the corresponding comparison morphisms in both directions must exist in Sys♢and admit
+time-synchronous representatives. Figure 4 illustrates these comparisons and their relation to trustworthiness-level
+invariance.
+Categorical comparability requires a shared type. Realized AI system histories with different type data are not
+directly comparable within the same trajectory category. If ♢= (F, P, LP ) and ♢′ = (F ′, P ′, LP ′) differ, then
+A♢∈Ob
+ Traj♢,[t0,T ]
+
+and
+B♢′ ∈Ob
+ Traj♢′,[t0,T ]
+
+belong to different categories, and there is no default morphism between them. Philosophically, this expresses the claim
+that identity comparisons presuppose a shared techno-function, trustworthiness profile, and level function [Ferrario,
+2025]. For example, an ICU-triage system and a consumer-credit system may both qualify as AI systems, but they do
+not share the type datum required for a direct identity comparison in this framework.
+Table 2 presents a summary of the time-relative categories Tt0, [T[t0,T ], Sys♢], and Traj♢,[t0,T ] presented in this section.
+6
+AI Identity in Category Theory
+Finally, we identify the notions of AI system identity that emerge from the categorical formalization and relate them to
+the AI identity criteria in Definition 12. Let Traj♢,[t0,T ] be the category of realized AI system histories of fixed type ♢
+introduced in Definition 26.
+6.1
+Equality of AI System History Functors in Traj♢,[t0,T ]
+We start our investigation of AI identity in Traj♢,[t0,T ] with a very strict concept: equality of functors.
+Proposition 5. Let A♢, B♢be objects of Traj♢,[t0,T ]. If
+A♢(t) = B♢(t)
+in Sys♢for every t ∈[t0, T], then
+A♢= B♢
+as functors, and hence as objects of Traj♢,[t0,T ].
+Proof. For every t ≤t′, both At,t′ and Bt,t′ are morphisms from the common state A♢(t) = B♢(t) to the common
+state A♢(t′) = B♢(t′). Since Sys♢is thin, these parallel morphisms are equal. The two functors therefore agree on
+objects and morphisms.
+16
+
+τ♢= k
+τ♢= ℓ< k
+ηt
+ηt′
+HomSys♦(x−, x+) = ∅
+A♢(t)
+B♢(t)
+A♢(t′)
+B♢(t′)
+B♢(t′′)
+x−= A♢(t⋆
+−)
+x+ = C♢(t⋆
++)
+C♢(t′′)
+Sreal
+♢(t)
+Sreal
+♢(t′)
+Sreal
+♢(t′′)
+Sreal
+♢(t′′)
+Sreal
+♢(t∗
+−)
+Sreal
+♢(t∗
++)
+At,t′
+Bt,t′
+Bt′,t′′
+Ct⋆
++,t′′
+Pathτ
+♢
+Sys♢
+A♢(t)
+B♢(t)
+A♢(t′)
+B♢(t′)
+x−= A♢(t⋆
+−)
+B♢(t′′)
+x+ = C♢(t⋆
++)
+C♢(t′′)
+Figure 4: The figure separates the path-level and state-category representations of realized AI system histories. In
+the lower Pathτ
+♢layer, the trustworthiness-level planes τ♢= k and τ♢= ℓ< k contain explicit path representatives.
+The solid polygonal paths are time-ordered representatives of the history morphisms At,t′, Bt,t′, Bt′,t′′, and Ct⋆
++,t′′,
+while the dashed paths ηt and ηt′ are time-synchronous representatives of the components of a natural transformation
+η : A♢⇒B♢. The slanted lines indicate the co-realized state sets Sreal
+♢(t), Sreal
+♢(t′), Sreal
+♢(t⋆
+−), Sreal
+♢(t⋆
++), and
+Sreal
+♢(t′′). In the upper Sys♢layer, the same states are connected by segments whenever the lower layer contains a
+trustworthiness-level-preserving time-ordered representative between them. Since Sys♢is thin, each such segment
+represents the unique morphism between its endpoints, and the naturality condition for the comparison of A♢and
+B♢holds. After A♢reaches x−= A♢(t⋆
+−) at level k, the post-drop state x+ = C♢(t⋆
++) lies at level ℓ< k. Hence
+HomSys♦(x−, x+) = ∅, represented in the upper layer by the absence of a connecting segment. The level drop
+therefore interrupts the history of A♢; if the post-drop evolution is realized, it is represented by a new history object
+beginning at t⋆
++, in Traj♢,[t⋆
++,T ].
+The functor equality is very strict and has limited usefulness for AI identity. It applies, for instance, to two deployed
+copies of the same AI system type that occupy the same profile-relative state at every time. Their deployment conditions
+must therefore be sufficiently compatible for the copies to have identical quantified profiles and trustworthiness levels
+throughout the observed interval. That said, equality of the history functors does not require the represented tokens to
+undergo the same lifecycle interventions.
+6.2
+Weak and Strong AI Identity Criteria
+The identity criteria in Definition 12 admit weak and strong categorical readings.
+Definition 27 (Weak and strong state identity). Fix the type datum ♢. For states x, y ∈S♢, the weak ♢-relative
+identity relation is defined by
+x ≡τ y
+⇐⇒
+τ♢(x) = τ♢(y).
+The strong ♢-relative identity relation is categorical isomorphism in Sys♢:
+x ∼=Sys♦y.
+17
+
+On the weak reading, two states are identical relative to ♢whenever they belong to the same trustworthiness-level
+fibre. On the strong reading, identity requires categorical isomorphism in Sys♢, that is, admissible trustworthiness-
+level-preserving reachability in both directions. However, for synchronic comparisons between realized histories, this
+strong condition must additionally be witnessed by time-synchronous representatives. Thus, ambient isomorphism in
+Sys♢is necessary but does not by itself establish strong synchronic identity in Traj♢,[t0,T ]. While the weak reading
+directly recovers the criterion of Ferrario [2025]—see Definition 12, the strong reading is a stricter category-theoretic
+refinement that follows from our formalization.
+The relations in Definition 27 are defined on the abstract state space S♢. However, AI system identity concerns states
+occupied by realized AI system histories. In other words, the relevant states are of the form A♢(t) for some realized
+history A♢∈Ob
+ Traj♢,[t0,T ]
+
+and some t ∈[t0, T]. These considerations motivate the following theorem.
+Theorem 1 (Weak and strong identity for realized AI system histories). Let A♢, B♢be objects of Traj♢,[t0,T ], and
+write
+a(t) = A♢(t),
+b(t) = B♢(t).
+Diachronic identity compares states a(t) and a(t′) along the same realized history, while synchronic identity compares
+states a(t) and b(t) at the same time t. Then the following statements hold.
+(i) For every t ≤t′, the history morphism At,t′ ∈HomSys♦(a(t), a(t′)) in Sys♢implies
+a(t) ≡τ a(t′).
+Hence every realized AI system history satisfies the weak diachronic identity criterion.
+(ii) For t ≤t′, the realized states a(t) and a(t′) satisfy strong diachronic identity,
+a(t) ∼=Sys♦a(t′),
+if and only if there exists a morphism in Sys♢from a(t′) to a(t). Equivalently, the realized history A♢satisfies strong
+diachronic identity throughout [t0, T] if and only if it factors through the maximal subgroupoid Core(Sys♢) ,→
+Sys♢.
+(iii) If, for some t ∈[t0, T], there exists a time-synchronous comparison morphism ηt ∈HomSys♦(a(t), b(t)), then
+a(t) ≡τ b(t).
+Consequently, the existence of a morphism η : A♢⇒B♢in Traj♢,[t0,T ] implies weak synchronic identity at
+every t ∈[t0, T].
+(iv) At time t, the realized states a(t) and b(t) satisfy strong synchronic identity if and only if a(t) ∼=Sys♦b(t) is
+witnessed time-synchronously; equivalently, if and only if there exist morphisms
+ηt ∈HomSys♦(a(t), b(t)),
+ρt ∈HomSys♦(b(t), a(t)),
+each admitting a time-synchronous representative at t. In particular,
+A♢∼=Traj♦,[t0,T ] B♢
+if and only if strong synchronic identity holds at every t ∈[t0, T].
+Proof. Every morphism in Sys♢admits at least one representative in Pathτ
+♢, and all states occurring along such a
+representative have one common trustworthiness level.
+For (i), the history morphism At,t′ therefore implies τ♢(a(t)) = τ♢(a(t′)), and hence a(t) ≡τ a(t′).
+For (ii), the history morphism At,t′ already provides trustworthiness-preserving reachability in the forward direction.
+Hence a(t) ∼=Sys♦a(t′) holds exactly when there is also a reverse morphism from a(t′) to a(t) in Sys♢. Since Sys♢is
+thin, the existence of morphisms in both directions forces their composites to be the corresponding identity morphisms.
+Thus the forward history morphism is an isomorphism in Sys♢. Requiring this for every t ≤t′ is precisely the condition
+that A♢factors through the inclusion Core(Sys♢) ,→Sys♢.
+For (iii), a time-synchronous comparison morphism ηt ∈HomSys♦(a(t), b(t)) is represented by a trustworthiness-
+level-preserving path. Consequently, τ♢(a(t)) = τ♢(b(t)), and therefore a(t) ≡τ b(t). If η : A♢⇒B♢is a morphism
+in Traj♢,[t0,T ], the same argument applies to every component ηt, yielding weak synchronic identity at every t ∈[t0, T].
+For (iv), suppose first that there exist time-synchronous morphisms
+ηt ∈HomSys♦(a(t), b(t)),
+ρt ∈HomSys♦(b(t), a(t)).
+18
+
+Their composites are endomorphisms of a(t) and b(t). Since Sys♢is thin, ρt ◦ηt = ida(t), ηt ◦ρt = idb(t). Thus,
+a(t) ∼=Sys♦b(t) through time-synchronous comparison morphisms. Now suppose that strong synchronic identity holds
+at every t ∈[t0, T]. Since Sys♢is thin, the comparison morphisms in each direction are unique whenever they exist.
+Then the two component families automatically define natural transformations
+η : A♢⇒B♢,
+ρ : B♢⇒A♢
+in Traj♢,[t0,T ]. Their composites are endomorphisms of A♢and B♢, respectively. Since Traj♢,[t0,T ] is thin, these
+composites are the corresponding identity natural transformations. Hence
+A♢∼= B♢
+in
+Traj♢,[t0,T ].
+The converse follows immediately because an isomorphism in Traj♢,[t0,T ] has time-synchronous components in both
+directions at every time.
+Theorem 1 clarifies how the weak and strong readings behave once they are applied to realized AI system histories.
+First, weak diachronic identity is automatic for every realized AI system history, even though the quantified profile,
+implementation, deployment conditions, or lifecycle provenance may vary along the history. Second, strong diachronic
+identity is stricter. It amounts to mutual trustworthiness-preserving reachability of the endpoint states. However, this
+does not mean that the realized lifecycle is temporally reversible: the reverse morphism from a(t′) to a(t) is a morphism
+in Sys♢, not necessarily a time-ordered reversal of the sequence of interventions. Third, time-synchronous comparison
+between realized histories implies weak synchronic identity. Thus, morphisms in Traj♢,[t0,T ], i.e., time-synchronous
+natural transformations, provide a categorical sufficient condition for weak synchronic AI system identity throughout
+the observed interval. Finally, isomorphisms in Traj♢,[t0,T ] of realized AI system history functors over [t0, T] capture
+strong synchronic identity of realized states over time.
+6.3
+Examples of AI Identity
+Example 1: Weak and strong diachronic identity under lifecycle change.
+Consider a credit-scoring AI system
+deployed at time t and subsequently recalibrated, retrained on refreshed data, and migrated to a new serving infrastructure
+at time t′ > t. These interventions may change its quantified profile, so that QA
+P (t)̸ = QA
+P (t′), while leaving its
+trustworthiness level unchanged. Then, the two states are weakly diachronically identical, a(t) ≡τ a(t′), even though
+they are not equal. However, how much profile variation is compatible with weak identity depends on the granularity of
+LP : a finer level function distinguishes smaller changes, whereas a coarser function permits greater variation within one
+level fibre. Strong diachronic identity holds when a reverse admissible trustworthiness-level-preserving path from a(t′)
+to a(t) also exists. Such a reverse morphism witnesses mutual trustworthiness-preserving reachability of the endpoint
+states. It need not undo the concrete interventions that produced the later state, nor need it represent a backward-in-time
+lifecycle trajectory. If an update instead produces
+τ♢(a(t′))̸ = τ♢(a(t)),
+the identity-preserving history segment terminates. The later state cannot belong to the same AI system history functor,
+although it may become the initial state of a new history segment after reassessment, remediation, or reclassification.
+The two segments are neither equal as functors nor isomorphic through time-synchronous natural transformations.
+Example 2: Weak synchronic identity under profile-relative rescaling.
+Let A♢, B♢: T[t0,T ] →Sys♢represent
+two copies of the same AI system type deployed in different but type-compatible settings, such as the same medical
+AI system used in two comparable clinics within the same geographic region. At time t, write a(t) = A♢(t) =
+(QA
+P (t), LP (QA
+P (t))) and b(t) = B♢(t) = (QB
+P (t), LP (QB
+P (t))). Suppose that the two profiles differ only in the i-th
+profile dimension, with QB
+P,i(t) = λQA
+P,i(t) for some λ ∈(0, 1), while QB
+P,j(t) = QA
+P,j(t) for every j̸ = i. The
+rescaling may represent reduced evidential support or deployment-specific attenuation of the i-th trustworthiness
+dimension.
+Assume that LP is insensitive to changes in the i-th coordinate along the rescaling range under consideration. It follows
+that LP
+ QA
+P (t)
+
+= LP
+ QB
+P (t)
+
+. Choose 1 = λ0 > λ1 > · · · > λm = λ, and define profiles Q(k)
+P (t) ∈IP by
+Q(k)
+P,j(t) =
+(λkQA
+P,i(t),
+j = i,
+QA
+P,j(t),
+j̸ = i.
+Let
+xk(t) =
+
+Q(k)
+P (t), LP (Q(k)
+P (t))
+
+,
+LP (Q(k)
+P (t)) = LP (QA
+P (t)), for all k = 0, . . . , m.
+19
+
+Suppose, in addition, that every xk(t) belongs to Sreal
+♢(t) and that each consecutive pair xk−1(t), xk(t) is connected by
+an admissible primitive transformation. Then the path
+f :
+ x0(t) = a(t) →x1(t) →· · · →xm(t) = b(t)
+
+is a time-synchronous trustworthiness-level-preserving representative of the morphism ηt ∈HomSys♦(a(t), b(t)). It
+witnesses categorical comparability at time t and therefore establishes weak synchronic identity between the two copies
+at that time.
+Example 3: Strong synchronic identity under an invertible profile transformation.
+Consider a vendor-hosted
+production system A♢and an operationally different local, white-labeled, or canary deployment B♢. Let A♢, B♢:
+T[t0,T ] →Sys♢be their realized AI system histories, and write a(t) =
+ QA
+P (t), LP (QA
+P (t))
+
+. Let φ : IP →IP be a
+bijection with inverse φ−1, and suppose that
+LP (φ(Q)) = LP (Q)
+for every Q ∈IP .
+Define
+QB
+P (t) = φ(QA
+P (t)),
+b(t) =
+ QB
+P (t), LP (QB
+P (t))
+
+.
+Suppose that the forward and inverse profile transformations are witnessed at time t by admissible time-synchronous
+representatives defining morphisms ηt ∈HomSys♦(a(t), b(t)) and ρt ∈HomSys♦(b(t), a(t)). Since Sys♢is thin,
+ρt ◦ηt = ida(t), ηt ◦ρt = idb(t), and hence a(t) ∼=Sys♦b(t). Thus, the two states satisfy strong synchronic identity at
+time t. If such time-synchronous representatives exist in both directions for every t ∈[t0, T], then the corresponding
+component families assemble into a natural isomorphism A♢∼=Traj♦,[t0,T ] B♢, and the two realized histories satisfy
+strong synchronic identity throughout the observed interval.
+The bijectivity of φ at the profile level does not by itself produce morphisms in Sys♢. Strong synchronic identity
+additionally requires that both directions be instantiated by admissible time-synchronous lifecycle paths. Governance-
+relevant examples include the identity transformation φ = idIP , for which B♢= A♢and ηt = ida(t). A nontrivial
+example is the coordinatewise power transformation φp(Q1, . . . , Qn) = ((Q1)p, . . . , (Qn)p), with p > 0, whose
+inverse is φ1/p. Such a transformation may represent an invertible nonlinear rescaling of the profile measurements:
+p > 1 gives greater prominence to high scores and compresses intermediate ones, whereas 0 < p < 1 expands
+intermediate and lower scores. More generally, one may use
+φp(Q1, . . . , Qn) = ((Q1)p1, . . . , (Qn)pn),
+where every pi > 0, with inverse given by the exponents 1/pi. Setting pi = 1 on selected coordinates allows only
+particular profile dimensions to be rescaled. These transformations can model invertible changes in normalization,
+reporting conventions, or dimension-specific governance sensitivity admitted by the measurement and normalization
+rules fixed within P. A change of measurement conventions not already covered by P would instead change the type
+datum and would not be represented within the same category Sys♢. Such transformations support strong synchronic
+identity only when the level function is invariant under the transformation and the forward and inverse transformations
+admit time-synchronous lifecycle representatives.
+7
+Discussion
+We developed a categorical account of AI system identity from a trustworthiness-based metaphysics of artifacts. The
+main contribution of the account is that it separates relations between AI system states that the original propositional
+criteria in [Ferrario, 2025] leave undifferentiated. While the biconditionals defining =♢in [Ferrario, 2025] identify
+AI systems, synchronically and diachronically, through equality of trustworthiness levels, the categorical construction
+recovers this weak criterion, but also adds directed and mutual reachability, temporally admissible histories, and
+time-synchronous comparison of realized AI system histories.
+7.1
+A Hierarchy of Identity and Reachability Relations
+Table 3 summarizes the identity-relevant relations introduced by the formalization. The original relation =♢is a
+type-relative equivalence relation induced by equality of trustworthiness levels. The categorical weak relation ≡τ
+recovers this level-theoretic criterion at the level of profile-relative abstract states. The preorder ⪯τ records directed
+trustworthiness-level-preserving reachability between abstract states: x ⪯τ y means that at least one admissible
+level-preserving path from x to y exists. Strong state-level identity is captured by isomorphism in Sys♢, that is, by
+mutual state reachability. Strong synchronic identity arises at the level of isomorphic realized history functors
+A♢∼=Traj♦,[t0,T ] B♢.
+20
+
+Thus, our formalization realizes a characteristically categorical idea: identity is not read off from internal descriptions
+alone, but from structure-preserving transformations [Mac Lane, 1965, 1971], and strong synchronic identity of AI
+systems is expressed by transformations between functors that encode their evolution over time.
+Relation
+Level
+Interpretation
+=♢
+Propositional AI identity
+criterion
+The original type-relative criterion of Ferrario [2025]. Synchronically
+and diachronically, it is defined by equality of trustworthiness levels
+within the fixed type datum ♢.
+≡τ
+Weak categorical identity
+For x, y ∈S♢,
+x ≡τ y
+⇐⇒
+τ♢(x) = τ♢(y).
+Applied to realized states, this yields weak diachronic identity
+a(t) ≡τ a(t′) and weak synchronic identity a(t) ≡τ b(t).
+⪯τ
+Directed reachability
+For x, y ∈S♢,
+x ⪯τ y ⇐⇒there exists a trustworthiness-level-preserving path x ⇝y.
+This is an abstract reachability relation. It does not, by itself, imply
+temporal ordering, causal realization, or operational recoverability.
+x ∼=Sys♦y
+Strong state-level identity
+State isomorphism in Sys♢, equivalently mutual
+trustworthiness-preserving reachability: x ⪯τ y and y ⪯τ x. For
+realized diachronic comparison, a(t) ∼=Sys♦a(t′) expresses strong
+identity of endpoint states.
+η : A♢⇒B♢
+Weak synchronic
+comparison of histories
+A morphism in Traj♢,[t0,T ] consists of time-synchronous comparison
+morphisms ηt ∈HomSys♦(a(t), b(t)) at every t ∈[t0, T]. Its
+existence implies weak synchronic identity a(t) ≡τ b(t) throughout
+the interval.
+A♢∼=Traj♦,[t0,T ] B♢
+Strong synchronic identity
+of realized histories
+Natural isomorphism of realized AI system history functors. It holds
+precisely when, at every t ∈[t0, T], the realized states a(t) and b(t)
+are mutually comparable through time-synchronous
+trustworthiness-preserving morphisms.
+Table 3: Hierarchy of identity, provenance, and reachability relations. Weak identity recovers equality of trustworthiness
+levels. Strong state-level identity adds mutual reachability in Sys♢. Strong synchronic identity of realized histories is
+captured by natural isomorphism in Traj♢,[t0,T ].
+This hierarchy also explains why the construction does not stop at the path categories. The free path category Path♢is
+too large for identity because it contains arbitrary admissible lifecycle paths, including paths that leave a trustworthiness-
+level fibre and later return to it. Restricting to Pathτ
+♢solves this problem by retaining only paths whose intermediate
+states preserve one trustworthiness level. However, Pathτ
+♢still remembers provenance, namely the particular recorded
+sequence of lifecycle transformations by which a state is reached. Distinct level-preserving paths between the same
+source and target remain distinct, and mutual reachability does not yet amount to categorical isomorphism: the
+composites of a path x ⇝y and a path y ⇝x are generally non-empty loops, not identity morphisms. Stopping at
+Pathτ
+♢would therefore yield a provenance-sensitive theory of level-preserving lifecycle paths, not a categorical theory
+of identity as isomorphism.
+The quotient Sys♢performs the required identity-relevant abstraction as it identifies parallel trustworthiness-level-
+preserving paths and retains only the fact that one state is reachable from another within the same trustworthiness-level
+fibre. We displayed this graphically in the upper parts of Figures 3 and 4. However, in Sys♢, an isomorphism
+does not assert that one concrete lifecycle process reverses another. A rollback, retraining, or recalibration may
+reconstruct a previous profile-relative state without undoing every computational, organizational, informational, or
+external consequence of the forward transformation. That is, isomorphism in Sys♢means only that both directed,
+trustworthiness-preserving reachability relations exist. Since Sys♢is thin, the two composites are equal to the
+corresponding identity morphisms in the quotient category. These identity morphisms are represented by empty paths,
+but the lifecycle loops witnessing mutual reachability need not be empty and need not undo one another.
+Similarly, natural isomorphism in Traj♢,[t0,T ] does not require realized AI system histories to coincide. It requires, for
+every time t ∈[t0, T], time-synchronous comparison morphisms whose composites are equal to the identity morphisms
+in Sys♢. Naturality is automatic once these components exist, because Sys♢is thin. Thus, natural isomorphism of two
+realized AI system histories expresses mutual same-time comparability of two realized AI system histories throughout
+21
+
+the interval, not equality of their raw lifecycle provenance. These natural isomorphisms can be constructed explicitly: a
+sufficient condition to obtain such natural isomorphisms is to exhibit, at every time t, trustworthiness-level-preserving
+invertible transformations between the assessed states of the two realized histories in both directions, as in Example 3.
+7.2
+Trustworthiness-Level Changes and Identity Interruption
+In addition, our categorical approach gives a precise sense in which trustworthiness-level changes are identity-
+interrupting events. If two states x−, x+ ∈S♢satisfy
+τ♢(x−)̸ = τ♢(x+),
+then no morphism from x−to x+ exists in Sys♢. Hence x−and x+ cannot both lie in the image of the same AI
+system history functor. They may both be states of AI systems of the same type datum ♢, but they are functorially
+incommensurable with respect to an uninterrupted identity-preserving history. A change of trustworthiness level
+therefore terminates one history segment and, if a post-change system is realized, begins another. This point has
+an important consequence for the design of the trustworthiness-level function LP . The function LP should not be
+so sensitive to ordinary variation, measurement noise, or expected operational fluctuation in qP that minor changes
+repeatedly push the system across level boundaries. If this happens, the system may appear to flicker in and out of
+existence with respect to a single identity-preserving history functor. This would make identity unstable, evidence
+transfer difficult to justify, and governance continuity practically unauditable [Ferrario, 2025, 2026c].
+For this reason, LP must be designed and validated as a robust governance tool. Its level boundaries should be
+tested during design under plausible operational scenarios, including measurement uncertainty, deployment variation,
+distribution shift, monitoring noise, and expected model updates [Ferrario, 2026c]. Changes in quantified assessments
+qP within a trustworthiness-level fibre should represent tolerable profile variation, while boundary crossings should
+mark genuine governance-relevant transitions, such as substantial modifications in the EU AI Act—see Article 3(23)
+therein [EU AI Act, 2024]. In practice, this may require margin conditions around level boundaries, scenario testing, and
+robustness analysis. Metaphysically, an unstable LP creates unstable identity histories. From a governance perspective,
+level functions should be auditable for their capacity to support persistence judgments under realistic lifecycle variation.
+7.3
+The Use of Categories and Compositionality
+One might ask whether the same formalization could be developed using graph-theoretic or transition-system language.
+The answer is partly affirmative: our construction begins with precisely such data, namely, the free path category
+Path♢. At this first level, graph theory and category theory are therefore closely aligned. However, the categorical
+language becomes important in the subsequent steps. It makes path composition explicit, isolates the level-preserving
+subcategory Pathτ
+♢, supports quotienting by parallel level-preserving paths, and yields the thin reachability category
+Sys♢. It then allows post-deployment histories to be represented as functors from a time category into Sys♢, and
+synchronic comparison between histories to be represented by natural transformations. Thus, category theory provides
+a unified language for the successive abstractions needed by the AI identity problem: from primitive transformations,
+to composed lifecycle paths, to trustworthiness-level-preserving reachability, to time-indexed histories, and finally to
+comparison between histories. This is also where the construction recovers the original propositional identity criteria
+while making a stronger criterion available. The stronger criterion is expressed categorically: state-level identity is
+captured by isomorphism in Sys♢, and history-level identity by natural isomorphism in Traj♢,[t0,T ]. This is where
+our construction follows a classical categorical strategy [Mac Lane, 1971] explicitly: instead of comparing objects
+only by their internal descriptions, it compares them through structure-preserving transformations, and then compares
+whole histories through transformations between functors. This is aligned with Freyd’s well-known characterization of
+category theory:6
+[...] and category theory is likewise better described as the theory of functors. [...] It is not too
+misleading, at least historically, to say that categories are what one must define in order to define
+functors, and that functors are what one must define in order to define natural transformations [Freyd,
+1964, p. 1]
+Finally, our categorical construction deliberately separates realization of specific AI system tokens from reachability of
+abstract states populated by these tokens over time. In doing so, we have not introduced a monoidal structure on the
+category of AI system histories. Monoidal categorical structures are tools for modeling compositionality in mathematics
+and computer science, such as in the case of concurrent resources, and interacting processes [Fong and Spivak, 2018,
+Spivak, 2014]. They would be natural if the aim were to model composition of AI system tokens, or the dynamics of
+6Freyd’s characterization of categories is also recalled by Mac Lane in his discussion of categorical algebra [Mac Lane, 1965].
+22
+
+parallel AI lifecycle resources. The present paper focuses on abstract states, using only concatenation of lifecycle paths
+between abstract states representing populations of AI tokens, composition in the thin reachability category, functorial
+composition over temporal intervals, and composition of natural transformations. Compositional operations on AI
+system states are a distinct problem considered in related work [Ferrario, 2026a].
+7.4
+Metaphysical Neutrality About Persistence
+The present formalism does not require the objects A♢(t) to be temporal parts, stages, or complete AI system tokens.
+Any state A♢(t) may be occupied by several concrete systems with different models, hardware, software stacks, or
+deployment histories. Likewise, the functor A♢represents an AI system history rather than defining the system as
+a mereological sum of instantaneous entities. A perdurantist interpretation remains possible: one may understand a
+history as organizing temporally ordered stages or temporal parts. But an endurantist interpretation is also possible: one
+may understand the same functor as representing how one persisting system bears different profile-relative properties
+over time. A stage-theoretic reading would require the additional claim that each state is itself a complete AI system
+individual. However, no such claim follows from the construction.
+The proposed framework is therefore neutral among the principal metaphysical theories of persistence. Its narrower
+commitment is that AI system identity under change requires temporally indexed profile-relative states, admissible
+lifecycle transformations, realized histories, and explicitly specified trustworthiness invariants. The framework tells
+us what must remain stable, reachable, comparable, or mutually reachable relative to ♢. That said, it does not settle
+whether the persisting AI system is best understood as an enduring continuant, a perduring four-dimensional entity, or a
+sequence of stages.
+7.5
+Recognizing Identity Relations in Governance Practice
+A further question concerns how these identity relations can be recognized in operational settings. This is an epis-
+temological and governance-oriented question, which is not at the core of the present work. Nonetheless, we will
+briefly comment on it. The application of the present formalization depends on the forms of documentation, monitoring,
+and lifecycle evidence available for determining whether the relevant identity conditions hold in practice. In fact, as
+identity is defined relative to a type datum ♢= (F, P, LP ), its application depends on artifacts that are increasingly
+required by AI governance regimes. In particular, the EU AI Act requires, for high-risk AI systems, documented risk-
+management processes, technical documentation kept up to date, automatic record-keeping and logging, documented
+quality-management procedures, and post-market monitoring systems that collect and analyse data on performance
+and compliance throughout the system’s lifetime [EU AI Act, 2024]. Such materials can document the system’s
+techno-function and intended use, the specification of the trustworthiness profile P, the measurement and aggregation
+procedures producing qP , the trustworthiness-level function LP , state-monitoring records, and lifecycle transformations
+such as retraining, recalibration, threshold adjustment, rollback, or deployment-environment change. They can therefore
+provide partial evidence for weak identity, directed reachability, mutual reachability, and identity interruption through
+trustworthiness-level changes. However, the detailed methodology for recognizing these relations “in the wild” requires
+an epistemology of AI system identity for governance and MLOps practice, and lies beyond the scope of the present
+paper. Relatedly, this material supporting categorical identity provides evidence for comparisons between AI system
+tokens, but not a sufficient epistemic warrant for all responsible AI claims.
+8
+Conclusion
+AI systems change after deployment through retraining, recalibration, reconfiguration, monitoring interventions, and
+changes in their operational environments. These transformations make identity a central problem for responsible AI:
+without explicit criteria of sameness, it remains unclear when evidence transfers across AI tokens, when explanations
+and fairness claims remain applicable, or when an update creates a governance-relevant discontinuity. To address
+these questions formally, we develop a categorical account of AI system identity grounded in techno-function and
+trustworthiness. The formalization distinguishes weak from strong identity criteria, recovering and extending the
+approach of Ferrario [2025]. Its central claim is that AI system identity is function-plus-trustworthiness identity.
+Category theory renders this claim temporal and structural without reducing an AI system to a model, a material
+implementation, or a disconnected sequence of snapshots. The account also remains neutral between endurantist and
+perdurantist theories of persistence.
+The framework provides a basis for analyzing identity-preserving updates, substantial modifications, and the transfer of
+evidence and accountability across versions and deployments. Its practical application requires explicit trustworthiness
+profiles, level functions, temporally coherent lifecycle records, and documented assumptions about admissibility and
+23
+
+reversibility. Where these elements are absent, the identity of a changing AI system remains insufficiently specified for
+reliable AI governance and for well-grounded epistemological and ethical assessments of human–AI interaction.
+Acknowledgments
+We acknowledge partial support by the Swiss National Science Foundation (SNSF), grant no. 229061. OpenAI’s
+ChatGPT version GPT-5.6 Thinking was used for language editing, including grammar and typo detection, improvements
+to English expression, and assistance in drafting and refining the TikZ code for the figures. The author reviewed and
+validated all outputs and remains solely responsible for the manuscript’s conceptual, mathematical, and content.
+References
+Pekka Ala-Pietilä, Yann Bonnet, Urs Bergmann, Maria Bielikova, Cecilia Bonefeld-Dahl, Wilhelm Bauer, Loubna
+Bouarfa, Raja Chatila, Mark Coeckelbergh, Virginia Dignum, et al. The Assessment List for Trustworthy Artificial
+Intelligence (ALTAI). European Commission, 2020.
+Lynne Rudder Baker. The ontology of artifacts. Philosophical Explorations, 7(2):99–111, 2004.
+Massimiliano Carrara and Pieter E Vermaas. The fine-grained metaphysics of artifactual and biological functional kinds.
+Synthese, 169(1):125–143, 2009.
+Samuel Eilenberg and Saunders Mac Lane. General theory of natural equivalences. Transactions of the American
+Mathematical Society, 58(2):231–294, 1945.
+Beyza Eken, Samodha Pallewatta, Nguyen Tran, Ayse Tosun, and Muhammad Ali Babar. A multivocal review of
+MLOps practices, challenges and open issues. ACM Computing Surveys, 58(2):1–35, 2025.
+Crawford L Elder. Real natures and familiar objects. The MIT Press, 2004.
+EU AI Act. Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying
+down harmonised rules on artificial intelligence. Technical report, European Union, June 2024. URL https:
+//eur-lex.europa.eu/eli/reg/2024/1689/oj.
+EU High-Level Expert Group on Artificial Intelligence.
+Ethics guidelines for Trustworthy AI.
+https://
+digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai, 2019.
+Andrea Ferrario. A trustworthiness-based metaphysics of artificial intelligence systems. In Proceedings of the 2025
+ACM Conference on Fairness, Accountability, and Transparency, pages 1360–1370, 2025.
+Andrea Ferrario. Convex compositionality of AI identity. Manuscript in preparation, 2026a.
+Andrea Ferrario. High-risk AI systems and the problem of identity in the European AI Act, 2026b. Accepted for
+publication (non-archival) at the 2026 ACM Conference on Fairness, Accountability and Transparency (FAccT ’26).
+Andrea Ferrario. A methodology for auditable trustworthiness levels in AI lifecycle governance. arXiv preprint
+arXiv:2607.16130, 2026c.
+Andrea Ferrario and Joshua Hatherley. Update opacity: Epistemic accessibility and governance under AI system change.
+arXiv preprint arXiv:2606.00037, 2026.
+Brendan Fong and David I Spivak. Seven sketches in compositionality: An invitation to applied category theory. arXiv
+preprint arXiv:1803.05316, 2018.
+Peter J. Freyd. Abelian Categories: An Introduction to the Theory of Functors. Harper & Row, New York, 1964.
+Thomas Hobbes. De Corpore. Andrew Crooke, London, 1655. Original Latin edition.
+Davinder Kaur, Suleyman Uslu, Kaley J Rittichier, and Arjan Durresi. Trustworthy artificial intelligence: A review.
+ACM Computing Surveys, 55(2):1–38, 2022.
+Nils Kemmerzell, Annika Schreiner, Haroon Khalid, Michael Schalk, and Letizia Bordoli. Towards a better understand-
+ing of evaluating trustworthiness in AI systems. ACM Computing Surveys, 57(9):1–38, 2025.
+Dominik Kreuzberger, Niklas Kühl, and Sebastian Hirschl. Machine learning operations (MLOps): Overview, definition,
+and architecture. IEEE Access, 11:31866–31879, 2023.
+Saunders Mac Lane. Natural associativity and commutativity. Rice University Studies, 49(4):28–46, 1963.
+E. J. Lowe. How real are artefacts and artefact kinds? In Maarten Franssen, Peter Kroes, Thomas A. C. Reydon, and
+Pieter E. Vermaas, editors, Artefact Kinds: Ontology and the Human-Made World, pages 17–26. Springer, 2014.
+Edward Jonathan Lowe. On the identity of artifacts. The Journal of Philosophy, 80(4):220–232, 1983.
+24
+
+Saunders Mac Lane. Categorical algebra. Bulletin of the American Mathematical Society, 71(1):40–106, 1965.
+Saunders Mac Lane. Categories for the Working Mathematician. Springer, 1971.
+Jean-Pierre Marquis. From a Geometrical Point of View: A Study of the History and Philosophy of Category Theory.
+Springer Science & Business Media, 2008.
+W. V. O. Quine. Ontological Relativity and Other Essays. Columbia University Press, New York, 1969.
+Stephan Rabanser, Sayash Kapoor, Peter Kirgis, Kangheng Liu, Saiteja Utpala, and Arvind Narayanan. Towards a
+science of AI agent reliability. arXiv preprint arXiv:2602.16666, 2026.
+David I. Spivak. Category Theory for the Sciences. MIT Press, Cambridge, MA, 2014. ISBN 9780262028134.
+David Wiggins. Sameness and Substance Renewed. Cambridge University Press, Cambridge, 2001.
+Timothy Williamson. Identity and discrimination. John Wiley & Sons, 2013.
+Noson S Yanofsky. Monoidal category theory: Unifying concepts in mathematics, physics, and computing. MIT Press,
+2024.
+25

@@ -1,0 +1,1193 @@
+arXiv:2506.03233v1  [cs.AI]  3 Jun 2025
+A Trustworthiness-based Metaphysics of Artificial Intelligence
+Systems
+Andrea Ferrario
+Institute of Biomedical Ethics and History of Medicine, University of Zürich
+Zürich, Switzerland
+ETH Zürich
+Zürich, Switzerland
+aferrario@ethz.ch
+Abstract
+Modern AI systems are man-made objects that leverage machine
+learning to support our lives across a myriad of contexts and appli-
+cations. Despite extensive epistemological and ethical debates, their
+metaphysical foundations remain relatively under explored. The
+orthodox view simply suggests that AI systems, as artifacts, lack
+well-posed identity and persistence conditions—their metaphysical
+kinds are no real kinds. In this work, we challenge this perspective
+by introducing a theory of metaphysical identity of AI systems.
+We do so by characterizing their kinds and introducing identity
+criteria—formal rules that answer the questions “When are two AI
+systems the same?” and “When does an AI system persist, despite
+change?” Building on Carrara and Vermaas’ account of fine-grained
+artifact kinds, we argue that AI trustworthiness provides a lens
+to understand AI system kinds and formalize the identity of these
+artifacts by relating their functional requirements to their physical
+make-ups. The identity criteria of AI systems are determined by
+their trustworthiness profiles—the collection of capabilities that
+the systems must uphold over time throughout their artifact histo-
+ries, and their effectiveness in maintaining these capabilities. Our
+approach suggests that the identity and persistence of AI systems
+is sensitive to the socio-technical context of their design and uti-
+lization via their trustworthiness, providing a solid metaphysical
+foundation to the epistemological, ethical, and legal discussions
+about these artifacts.
+CCS Concepts
+• Computing methodologies →Philosophical/theoretical foun-
+dations of artificial intelligence; Machine learning; Artificial
+intelligence; • Social and professional topics →Computing /
+technology policy; • Software and its engineering;
+Keywords
+artificial intelligence, machine learning, deep learning, identity,
+metaphysics, ontology, change, time
+ACM Reference Format:
+Andrea Ferrario. 2025. A Trustworthiness-based Metaphysics of Artificial
+Intelligence Systems. In The 2025 ACM Conference on Fairness, Accountability,
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+FAccT ’25, Athens, Greece
+© 2025 Copyright held by the owner/author(s).
+ACM ISBN 979-8-4007-1482-5/2025/06
+https://doi.org/10.1145/3715275.3732091
+and Transparency (FAccT ’25), June 23–26, 2025, Athens, Greece. ACM, New
+York, NY, USA, 11 pages. https://doi.org/10.1145/3715275.3732091
+1
+Introduction
+In everyday life, we count and classify seashells on the beach
+and stars in the night sky. We individuate mushrooms and birds
+while walking in the woods. There is something about natural
+entities such as seashells, stars, mushrooms, and birds that en-
+ables us to identify and categorize them in different metaphysical
+classes—referred to as ‘kinds’ [38]—based on principles that govern
+their nature [54]. Importantly, we can compare individual entities
+within these kinds and determine whether they are identical by
+applying metaphysically-grounded rules known as identity criteria
+[34, 37, 54]. These criteria also allow us discussing the different
+types of change these entities can undergo and assess whether
+these changes disrupt their existing over time, i.e., their persistence.
+This theory of metaphysical identity formalizes the identity and
+persistence of seashells, stars, mushrooms, and birds, granting them
+‘metaphysical respectability’ [38]. In fact, as Quine famously stated:
+“no entity without identity” [44, pag. 23]. Furthermore, knowing
+about these classes, identity criteria, and persistence conditions is
+important for our lives, allowing us to distinguish between bivalves
+and gastropods, black holes and supernovas, edible and poisonous
+mushrooms, as well as preserving endangered bird species: meta-
+physics guides ethics.
+For a long time, philosophers have debated whether artifacts—
+objects humans design to fulfill specific functions—enjoy a meta-
+physics comparable to those of natural entities and living beings.
+In fact, discussing the theory of metaphysical identity of statues,
+clocks, smartphones, and freight trains rapidly gives rise to philo-
+sophical puzzles due to their distinctive properties. These include
+their capacity to undergo different types of transformations, such as
+disassembly and reassembly over time. The Ship of Theseus puzzle
+is the most famous illustration of this problem [25]. Consequently,
+a widely held view is that artifacts are metaphysically deficient
+entities—their kinds are not real kinds [10, 53], lacking well-posed
+identity criteria and persistence conditions [36]. This means that we
+cannot precisely individuate and count spoons, chairs, and ships or
+meaningfully define their persistence as material objects subjected
+to change over time.
+In this work, we challenge this perspective on artifact kinds
+by introducing a theory of metaphysical identity of modern
+artificial intelligence (AI) systems. Namely, we argue that AI
+system kinds are real kinds: these artifacts have well-posed identity
+criteria and persistence conditions.
+
+FAccT ’25, June 23–26, 2025, Athens, Greece
+Ferrario A.
+Our approach proceeds in three steps. First, we conceptualize
+modern AI systems—referred to here simply as ‘AI systems’—as
+artifacts designed to employ machine learning models to assist
+humans across virtually all domains of society. Although these
+systems manifest in diverse shapes and forms they share a fun-
+damental trait: the necessity of retraining their machine learning
+models, a process that changes their logical and physical make-ups
+and that we posit as intrinsic to their nature as artifacts. Second, we
+apply Carrara and Vermaas’ function+ framework for the realism
+of artifact kinds [10] to the case of AI systems. To do so, we (1)
+characterize AI system kinds through their ‘techno-function’—the
+technical capability they are designed to fulfill, e.g., ‘to predict indi-
+vidualized credit risk scores,’ and (2) identify the trustworthiness
+of AI as their ‘operational principle’ [43]. Here, the trustworthiness
+of an AI system is a normatively rich and composite property that
+encompasses the capabilities an AI system must maintain to func-
+tion correctly within its context of application [15, 17, 26, 31, 39].
+Finally, our identity criterion for AI systems within a given kind
+stipulates that two AI systems are identical as systems of that kind
+if and only if they execute the same techno-function and adhere to
+the same trustworthiness criteria, while keeping compatible levels
+of trustworthiness. We project this criterion into synchronic, refer-
+ring to identity at a given time, and diachronic, referring to identity
+at different times, perspectives. As a result, our identity theory
+allows for the identification of AI systems with differing physical
+compositions, provided they satisfy compatible functional and op-
+erational requirements that are encoded in their trustworthiness.
+Hence, our theory introduces a trustworthiness-based conception
+of ‘technological identity’ for artifacts, in line with Carrara and
+Vermaas’ framework [10]. While consistent with Lowe’s view of
+complex artifacts as real kinds [36], our approach emphasizes that
+the identity criteria and persistence conditions of AI systems
+are contingent upon the socio-technical environments that
+shape their design and dictate their correct functioning.
+Our contribution tackles an open point in the philosophy of
+modern AI. While current research predominantly focuses on epis-
+temological and ethical inquires, including the epistemic opacity of
+AI systems [11, 14, 16, 46], fairness in machine learning [5, 7], and
+the nature of trust(worthiness) in human-AI interactions [15, 17],
+the general attitude with regard to the topic of the identity of AI
+systems is one of indifference. However, as recently suggested by
+Hatherley and Sparrow, identity and change of AI systems are
+an important source of societal risk [23]. For instance, in health-
+care, the rapid adoption of medical AI is prompting regulators,
+such as the US Food and Drug Administration, to grapple with
+defining the boundaries of AI identity over time and its impact
+on predictive performance of these systems [50]. Similarly, as AI
+systems evolve and their copies are deployed across healthcare en-
+vironments with varying normative and cultural conditions, ethical
+challenges emerge. These include the erosion of informed consent,
+disruptions to patient-doctor trust, and threats to the fairness and
+quality of care [23]. The increasing pervasiveness of AI systems
+in society demands that philosophers, social and computer scien-
+tists, and legal scholars address the identity and evolution of these
+systems over time in a culturally-sensitive yet structured way. Our
+contribution holds potential to trigger these discussions and guide
+a metaphysics-informed development and regulation of AI.
+2
+Identity, change, and identity criteria in
+metaphysics
+What is identity in metaphysics, exactly? According to Lowe, it is
+“indisputable that everything is identical to itself and with no other
+thing” [35, pag. 23]. This is a perspective shared by a number of
+philosophers, although it constitutes no well-posed definition. But,
+then, it is puzzling that such a basic relation should even be a topic
+to be investigated. If we attempt to do so, intuition suggests that
+identity should be an equivalence relation, namely, that identity is
+reflexive, symmetric, and transitive. However, not much else can
+be said about it without falling in logical contradictions, called
+‘puzzles,’ that have characterized metaphysics since long time—for
+a few examples, including the celebrated ‘Ship of Theseus,’ see
+Chapter 3 in [21]. These difficulties suggest that, similar to the term
+‘existence,’
+we should accept that identity is conceptually primi-
+tive [...] and thus that it is pointless to expect an in-
+formative answer to the question ‘What do we mean
+by identity?’ [38, pag. 25, emphasis in original].
+Further, continues Lowe:
+[i]dentity is univocal. There are not different kinds of
+identity for different kinds of things, any more than
+there are different kinds of existence – only different
+criteria of identity [38, pag. 24, emphasis in original].
+Thus, Lowe suggests that the difficulty of discussing identity in
+metaphysics can be overcome by introducing rules, called identity
+criteria, to determine under which conditions two entities, for
+instance, two seashells found on the beach, are identical and clarify
+the metaphysical sense in which this identity holds. Identity criteria
+are rules required for the ‘ontological respectability’ of what exists
+as “only entities which have clearly determined identity criteria
+are ontologically acceptable” [9, pag. 221]. Synchronic identity
+criteria formalize the identity of entities at any given time, telling
+us whether they are the same in a metaphysically precise sense.
+Diachronic identity criteria formalize existence over time, i.e.,
+persistence, of entities instead. They help addressing change over
+time, which occurs when a persisting entity enjoys different prop-
+erties at different times [21]. In fact, everyday perceptions suggest
+that plants, humans, software, and cars change around us; they
+undergo different types of transformation. A tree sap grows into
+an oak, an exercising man gains muscle mass. Software products
+are updated, while cars eventually begin to fail us, requiring the
+replacement of some parts. While some changes are qualitative,
+namely, they do not affect the persistence of the entity they refer
+to, others are such that this persistence stops, and a numerically
+different entity emerges. In the first case, we may say that the sap
+and the oak are the same plant, although enjoying different proper-
+ties, while a wooden log and the ash that remains after its burning
+are numerically different entities. Thus, if we were able to intro-
+duce identity criteria for plants, men, seasons, software, and cars
+we could argue under which transformations these entities persist,
+despite changing properties. In summary, using identity criteria we
+
+A Trustworthiness-based Metaphysics of Artificial Intelligence Systems
+FAccT ’25, June 23–26, 2025, Athens, Greece
+can individuate, count, and investigate change over time of
+what exists. It turns out that this can be done for a class of entities
+that we discuss in the section below.
+2.1
+Entities enjoying identity criteria: Sortal
+terms and their kinds
+In metaphysics, the entities for which identity criteria exist are
+called sortal terms, namely, “concept[s] of a distinct sort or kind
+of individuals” [38]. The term ‘kind’ denotes a collection of ‘in-
+dividuals,’ which may be concrete, such as pebbles, plants, cats,
+and humans, or abstract entities, such as mathematical objects.1
+Here, kinds and their individuals enjoy the same standing, where
+“[i]ndividuals are necessarily individuals of a kind, and kinds are
+necessarily kinds of individuals” [38, pag. 4, emphasis in original].2
+Thus, if an entity is an individual, such as the black cat sleeping on
+the couch in front of me, or my personal computer, it belongs to a
+kind, called cat and personal computer that metaphysically groups
+individuals of that sort. But how to determine whether an entity
+is an individual? The answer lies in the very definition of sortal
+terms, where it is stated that for any kind of individuals there is a
+criterion of identity for individuals of that kind [38]. Through these
+identity criteria we can determine whether two individuals 𝑥and 𝑦
+in a kind 𝜑are the same individual as individuals in 𝜑. Historically,
+Locke is the first philosopher to acknowledge explicitly the sortal
+relativity of criteria of identity [38], as he recognized that ‘man’
+and ‘person’ (both sortal terms) carry different criteria of identity
+[32]. More recently, it was Frege, in his Grundlagen der Arithmetik,
+who explicitly mentioned the need to introduce criteria of identity
+of mathematical objects [20]. In particular, the section of the Grund-
+lagen comprising §§62-69 states: “To obtain the concept of Number,
+we must fix the sense of numerical identity.” In §62, he specifies:
+“[i]f we are to use the symbol 𝑎to signify an object, we must have a
+criterion for deciding in all cases whether 𝑏is the same as 𝑎, even
+if it is not always in our power to apply this criterion.”
+Let 𝜑denote a kind, e.g., sets, cats, or clocks. Formally, a criterion
+of identity in 𝜑reads [38]:
+∀𝑥,𝑦in 𝜑,𝑥is identical with 𝑦(in symbols: 𝑥=𝜑𝑦) ↔
+𝑥and 𝑦satisfy 𝑅𝜑(𝑥,𝑦),
+(1)
+where 𝑅𝜑(𝑥,𝑦) is an equivalence relation that depends on the
+kind 𝜑.3 Thus, sortal kinds have different criteria of identity, as
+sortal terms enjoy different properties.4 For instance, a criterion
+of identity in the kind sets, whose elements are mathematical sets
+reads:
+1Entities that do not enjoy criteria of identity are, for instance, properties and, in
+general, not substantival nouns, such as ‘red thing’ [38].
+2There are no ‘bare particulars,’ as all individuals are necessarily instances of certain
+kinds and these are necessarily kinds of individuals [38].
+3In the literature, two types of identity criteria are usually presented: first- or second-
+order [9, 55]. For a discussion of formal constraints on identity criteria, we refer to [8,
+section 6.3]. Frege introduced a second-order criterion in §64 of his Grundlagen. The
+criterion in (1) is first-order instead.
+4For instance, ‘man’ and ‘gold,’ says Lowe, are sortal terms as it seems that it is possible
+to determine whether “if 𝑥and 𝑦are men or quantities of gold, they are the same
+man or the same gold” [38, pag. 13, emphasis in original] in the kind man and gold.
+However, the rules to identify men and quantities of gold are different. In fact, ‘man’
+is a count noun, while ‘gold’ is a mass noun [38].
+∀𝐴, 𝐵sets, 𝐴=sets 𝐵↔𝐴and 𝐵have the same elements.
+This is the axiom of extentionality in axiomatic set theory [42].
+With concrete entities, one can consider
+∀𝑥,𝑦in 𝜑,𝑥=𝜑𝑦↔(∀𝑃, 𝑃(𝑥) ↔𝑃(𝑦))
+(2)
+instead. The criterion in (2) establishes identity through the
+principle of indiscernibles (right-to-left) and the principle of the indis-
+cernibility of identicals—also called ‘Leibniz’s Law’—(left-to-right),
+where 𝑃denotes any property of individuals in 𝜑. However, the
+use of (2) gives rise to puzzles of identity that stimulated different
+perspectives on the metaphysics of concrete objects throughout
+time. We refer to Gallois’ monograph for more details [21]. For
+identity criteria of humans, we suggest consulting the ‘Personal
+Identity’ page of the Stanford Encyclopedia of Philosophy (SEP)
+instead [41].
+A couple remarks to structure the remainder of this work after
+these technical sections. Considerations so far suggest that com-
+mitting to the idea that AI systems are sortal terms requires (1)
+characterizing the different kinds of AI systems, and (2) introduc-
+ing the identity criteria that govern each kind (including persistence
+conditions). In the remainder of this paper, we aim to address this
+problem as follows. First, recognizing that AI systems are artifacts
+[49], we start by characterizing artifact kinds [8, 19]. Next, we in-
+vestigate what principles allow distinguishing different kinds of AI
+systems. Importantly, we do not aim to introduce an ontology
+of AI systems, namely, a formal and exhaustive classification of
+all different kinds of AI systems and the relations between them.
+Rather, our goal is to introduce a theory of identity of AI systems
+characterizing the different kinds of AI systems by considering the
+functional and socio-technical dimensions of these artifacts and
+introducing the identity criteria that govern them.
+3
+Artifacts and their kinds: An overview
+Artifacts, such as spoons, coins, cars, smartphones, and satellites are
+“objects intentionally made to serve a given purpose” [4, pag. 1].5
+Some are rather simple, such as spoons and coins, while others, such
+as cars, smartphones, and satellites, are complex systems composed
+of a myriad of parts that contribute to their correct functioning.
+Depending on the chosen account, the purpose of an artifact is
+realized through a function that may be characterized as technical
+or social, intended or accidental [19]. In the literature, different
+accounts of artifactual functions aim to capture the relationship
+between an artifact’s design, its use, and its purpose. For instance,
+some authors propose that artifactual functions are determined
+by the intentions of their designers, while others argue that func-
+tions are established through the practices and goals of their users.
+Additionally, some scholars highlight the causal-role functions of
+artifacts as components within more complex systems—such as the
+role of a spam filter within an email management system—while
+others adopt etiological accounts, where a function is derived from
+5Note that the term ‘artifact’ can mean different things outside the domain of philoso-
+phy. For instance, in signal processing, an artifact refers to unintended, spurious, or
+undesirable alteration or distortion in a signal. In this work, we follow the philosophical
+perspective.
+
+FAccT ’25, June 23–26, 2025, Athens, Greece
+Ferrario A.
+the artifact’s history of selection and use [10]. Regardless of their
+structural complexity or the functional account adopted, a common
+view in the study of artifacts emphasizes their dual nature: they
+are simultaneously material objects and functional entities [3, 30].
+Their role in characterizing artifact kinds results in contrasted meta-
+physical perspectives that we summarize in what follows.
+3.1
+The metaphysics of artifacts
+3.1.1
+Artifact kinds are not real kinds. Traditionally, artifacts never
+enjoyed a metaphysical status comparable to the one of natural be-
+ings. According to this view, which dates back to Aristotle, chairs,
+ships, robots, and smartphone applications to lose weight “may
+not seem to be supplied with well-defined or well-grounded persis-
+tence conditions” [36, pag. 1, emphasis in original].6 In fact, authors
+hold that artifacts exist only mind-dependently, that is, as products
+of human intentionality, lacking real essences and ‘principles of
+activity,’ such as things that exist in nature, e.g., seaweed or mam-
+moths, do [54].7 In fact, seaweed and mammoths are guided by
+“law-like norms of starting to exist, existing, and ceasing to exist
+by reference to which questions of identity and persistence can be
+arbitrated” [54, pag. 83]. As a result, artifact kinds are not real kinds
+[54]—a famous position called antirealism on artifact kinds [53].
+Two consequences arise from this antirealist stance. First, artifact
+kinds evade precise characterization because their functions, for
+the antirealist, do not specify their essence as they are indepen-
+dent of the physical make-up of the artifact. For instance, should
+a folded-up chair, which cannot currently serve its function, still
+be considered an individual of the kind chair [10, 54]? In addition,
+it seems rather easy to individuate, count, and talk about the per-
+sistence of artifacts [36]. However, serious attempts to define the
+identity and persistence of objects such as chairs, excavators, and
+chest strap heart rate monitors lead to metaphysical puzzles due
+to their capacity for assembly and reassembly [21]. Possibly, the
+only well-posed identity criterion that can be introduced for arti-
+facts is ‘mereological essentialism’ [54], which states that artifacts
+are identical if and only if they share the same physical make-up.
+However, this criterion is too strict to be useful, as only physically
+immutable entities could persist.
+3.1.2
+Some artifact kinds are real kinds: the function+ approach.
+Antirealism on artifact kinds has been challenged by different schol-
+ars who assert that at least some artifact kinds can be real kinds
+[2, 3, 9, 12, 36]. To elaborate on this point, we start by relying once
+again on Lowe, who contends that not all artifacts are metaphysi-
+cally equal. Machines such as clocks, engines, and tractors seem to
+possess a unifying principle of activity governed by ‘laws of action’—
+engineering principles that dictate how the artifact’s components
+collectively achieve its function. These engineering principles mir-
+ror the way an organism’s parts contribute to its overall functioning
+under a biological principle of activity [36]. Hence, Lowe commits
+to the idea that complex artifacts emerge as candidates for having
+real kinds, identity criteria, and persistence conditions. Additionally,
+6Aristotle divided things into those that ‘exist by nature’ and are ‘products of art,’
+namely, artifacts (Physica, Book II, 192 b 28). As the art of making something, called
+‘tékhn¯e,’ requires intentional agency, an artifact is an object that has been intentionally
+made (for some purpose).
+7Artifacts are mind-dependent objects, although they are “only causally mind-
+dependent, not constitutively mind-dependent” [36, pag. 20].
+several scholars argue that, regardless of the functional account
+adopted, artifact functions should be considered an integral part
+of their essence. This view provides a foundation for discussing
+artifact kinds and their identity criteria. As Kornblith puts it: “At
+least for the most part, it seems that what makes two artifacts mem-
+bers of the same kind is that they perform the same function” [29,
+p. 112, emphasis ours]. Thus, endorsing the realism of (some) arti-
+fact kinds requires the conjunction of functions with other features
+of artifacts [8].8
+An interesting type of conjunction is Carrara and Vermaas’ ‘func-
+tion+’ [10]. It characterizes artifact kinds via artifactual functions:
+two artifacts belong to the same kind if they have the same function.
+Further, it introduces identity criteria for artifacts as the conjunction
+of (1) their function, (2) an ‘operational principle,’ and (3) their
+‘normal configuration.’ The operational principle of an artifact are
+rules that specify “how characteristic parts [of the artifact]...fulfill
+their special function in combining to an overall operation which
+achieves the purpose [of the artifact]” [43, pag. 328]. In essence, the
+operational principle reflects Lowe’s idea of a unifying principle
+of activity for complex artifacts, where the artifact’s parts—e.g.,
+devices, interfaces, hardware, or software—work together under
+engineering norms to perform the artifact’s function [36]. The de-
+sign of each part is specified by a ‘normal configuration,’ instead.
+This concept refers to the “general shape and arrangement [of the
+artifact parts] that are commonly agreed to best embody the opera-
+tional principle” [52, pag. 209-210, emphasis ours]. To embody the
+operational principle at best, these configurations are typically de-
+rived from design principles, industry standards, and best practices
+in different engineering disciplines. They serve as reference models
+for how a system should be assembled, operated, or maintained to
+ensure it performs its intended function—an important point that
+will return in Section 5.1. Patents are typically used as the standards
+that formulate the operational principle of complex artifacts [52,
+pag. 345]. However, they do not specify normal configurations, as
+“the inventor of a machine will always try to obtain a patent in
+the wildest possible terms” [52, pag. 345] with no reference to the
+particulars of any constructed machine.
+In summary, Carrara and Vermaas’ function+ promotes the real-
+ism of artifact kinds by combining the functions of these objects
+with their internal structures and engineering principles. Endorsing
+function+, interesting consequences follow. First, as noted above,
+two artifacts having different functions are not in the same kind.
+Then, artifacts made to fly, let us say airplanes and rockets belong to
+the same artifact kind—that we may call flying artifacts. However,
+the identity criterion defined by function+—referred to as ‘tech-
+nological identity’ by Carrara and Vermaas [10]—asserts that an
+airplane and a rocket cannot be considered the same artifact within
+the category of flying artifacts. This distinction arises because these
+artifacts adhere to fundamentally different operational principles
+and configurations. (From an ontological perspective, one might
+argue that the category of flying artifacts can be further refined
+into subcategories such as airplanes, rockets, and others.) Finally,
+the technological identity criterion derived from function+ is “more
+8A first example of conjunction comes from Wiggins [54]. He states that, given an
+artifact 𝑎at time 𝑡and an artifact 𝑏at time 𝑡′, if 𝑎and 𝑏are in 𝜑, then 𝑎=𝜑𝑏↔
+there is a continuous material path between 𝑎and 𝑏and 𝑎and 𝑏perform the same
+function [54]. More details in [8].
+
+A Trustworthiness-based Metaphysics of Artificial Intelligence Systems
+FAccT ’25, June 23–26, 2025, Athens, Greece
+liberal” [10, p. 134] than mereological essentialism. Specifically,
+under function+, two artifacts belonging to the same kind may
+be identical despite their physical structures being different.
+Thus, despite potential puzzlement by some, these artifacts have
+the right to be regarded as being identical within their kind. Similar
+considerations hold for the persistence of artifacts. We argue that
+the function+ framework compellingly emphasizes the necessity
+of a functional approach to the metaphysics of artifacts [9, 36]. By
+treating complex artifacts as products of engineering, it establishes
+a connection between their function and physical configurations
+across their artifact histories. We will endorse this approach for AI
+systems opening the door to metaphysical considerations that we
+explore in what follows.
+4
+Metaphysics of AI systems: Their kinds and
+identity criteria
+4.1
+What are AI systems?
+4.1.1
+Different shapes and forms of AI systems. AI systems are
+computational artifacts, namely, artifacts of computer science [49].
+These systems typically consist of both software—such as machine
+learning models9—and hardware, which includes different devices,
+sensors, interfaces, and data processing units. They come in a no-
+table variety of forms, with diverse structures and capabilities.
+Large language model (LLM)-based conversational agents, such
+as ChatGPT, are AI systems that interact with users through apps
+or web-based applications. AI-powered decision-support systems
+include medical devices that monitor patients’ physiological signals
+in real-time, predicting risks such as sepsis or heart failure. Recom-
+mendation systems used by e-commerce platforms tailor content
+to users using machine learning models. Fraud detection systems,
+virtual assistants, and social robots are additional examples of mod-
+ern AI systems. Recent systematic reviews, such as [6, 28, 51], have
+begun to highlight evidence-based branches of a taxonomy for AI
+systems. However, they do not attempt to formalize one.
+4.1.2
+Machine learning retraining as redesign of AI systems. Despite
+this variability of shapes and forms, something can be said that is
+valid for all AI systems: these systems are dynamic to some extent,
+with components that can change over time due to software updates
+or hardware replacements, among others. A crucial form of update
+is the retraining of the machine learning models that AI sys-
+tems use to compute their outputs—such as scores, labels, images,
+or text. Retraining is essential to maintain the accuracy of these
+models in the face of changing environments and data patterns.10
+Retraining can involve different redesign procedures that differ sig-
+nificantly across different types of AI systems, in terms of both the
+frequency and the resources required. They may involve optimizing
+hyperparameters within the same model family using new data,
+switching to different model families, or redefining the statistical
+learning problem by, for instance, moving from binary classifica-
+tion to multi-class predictions. As a result, retraining does not only
+9In this work, we consider (trained) machine learning models as proper parts of AI
+systems. These models are artifacts, but not AI systems.
+10For instance, customer preferences may evolve, healthcare providers may introduce
+new treatments, and new types of input data become available. Designers must accom-
+modate these changes by updating the machine learning models to ensure that the
+system continues to perform effectively.
+affect the accuracy of the AI system, but also other properties that
+are important for the correct functioning of the system. In fact, it
+can help enforcing fairness constraints, improving explainability
+by refining decision boundaries, reducing unexpected behaviors
+that are hard to explain, or using more understandable features.
+Further, retraining may necessitate changes to the physical and
+logical configuration of the system, such as adding or removing
+interfaces and devices or modifying user functionalities based on
+the updated characteristics of the redesigned model. In this work,
+we adopt a broad interpretation of ‘retraining,’ defining it as a re-
+design procedure for an AI system centered around updating
+its machine learning models, which influences both the system’s
+functionality and, potentially, its physical make-up.11
+4.2
+Are AI system kinds real?
+We examine whether AI system kinds are real kinds by adopting
+the function+ approach discussed in Section 3.1. To do so, we char-
+acterize AI system kinds by analyzing their functions, operational
+principles, and normal configurations. A successful outcome of this
+analysis would allow us introducing identity criteria of AI systems
+using Carrara and Vermaas’ technology identity criterion straight-
+forwardly [10]. As will become evident, we will not succeed in our
+quest.
+4.2.1
+AI system functions and their specifications. The most widely
+used definitions of ‘artificial intelligence’ refer to the design of arti-
+facts that attempt simulating aspects of human intelligence [45, 48].
+Thus, at the highest level of abstraction, the function of AI sys-
+tems is to perform activities that attempt simulating cognitive and
+epistemic capabilities humans use to process and manage infor-
+mation, enabling tasks such as monitoring other systems, solving
+problems, and supporting decision-making. This function can be
+categorized into three types: prediction—the computation of nu-
+merical scores or labels for classifying data points or selecting
+optimal actions based on computational criteria, pattern recogni-
+tion—labeling data by identifying similarities between data points,
+and generation—producing new data in a specific format, such as
+textual strings, images, or audio samples, a capability particularly
+prominent in multimodal LLM-based applications. This level of
+functional description, however, is too coarse to provide a mean-
+ingful framework for understanding the identity of AI systems.
+Such broad categorizations could group vastly different systems—
+such as medical AI predicting risk scores, matchmaking algorithms
+assessing compatibility, facial recognition tools, and military tar-
+geting software—under the same kind, namely, predictors. Similarly,
+systems performing pattern recognition or generation would be
+grouped under equally broad categories. This is analogous to cate-
+gorizing both chairs and tables as ‘four-legged objects supporting
+other concrete entities.’ While technically accurate, such a level
+lacks practical relevance for studying identity criteria or addressing
+real-world applications.12 A more refined approach is to express
+11Redesign procedures that do not fall under the retraining umbrella comprise general
+user interface redesigns, energy efficiency improvements, and other form of hardware
+optimization that do not affect trained machine learning models.
+12Of course, AI systems can perform combinations of these high-level functions, as
+seen in LLM-based conversational agents. This possibility does not undermine our
+argument, as it neither depends on nor seeks to establish an ontology of AI systems.
+
+FAccT ’25, June 23–26, 2025, Athens, Greece
+Ferrario A.
+the function of an AI system using formulations such as ‘[to pre-
+dict/recognize/generate] X using Y,’ where X represents the object of
+the activity and Y the resources used to perform it.13 We refer to this
+level of functional specification as the ‘techno-function’ of the AI
+system, capturing the artifact’s technical capabilities as intended by
+its designers. The techno-function emphasizes what the system is
+designed to achieve and how it accomplishes its objectives through
+specific inputs, models, and routines. As with physical artifacts,
+the level of detail in techno-function specifications is not fixed and
+can vary depending on theoretical or practical considerations. In
+general, refining the specification of a techno-function narrows
+the corresponding kind of artifacts capable of performing it. This
+process leads to a sequence of nested AI system kinds, denoted as
+𝜑1 ⊃𝜑2 ⊃· · · ⊃𝜑𝑛⊃. . . , where each subsequent kind is charac-
+terized by an increasingly detailed techno-functional description.
+Since identity criteria are relative to the chosen kind, we can se-
+lect any level of specification within this hierarchy, examine the
+corresponding kind of AI systems, and proceed to analyze their
+operational principles and normal configurations.
+4.2.2
+Operational principles and normal configurations of AI sys-
+tems. By definition, the operational principle of an AI system con-
+sists of the rules that specify how its components fulfill their op-
+erations to achieve the system’s purpose, as defined by its techno-
+function. Crucially, there is no unique operational principle that
+universally applies to all AI systems performing the same techno-
+function. This lack of uniqueness arises from the diverse applica-
+tions of AI systems, particularly in high-risk domains, and their
+reliance on machine learning. In fact, the conditions that determine
+the correct functioning for these systems are strongly influenced by
+the norms and practices of the social systems in which they are de-
+signed and deployed. Normative expectations affecting AI systems
+are notoriously complex, including, for instance, considerations
+of performance, transparency, and fairness affecting the design of
+their machine learning models, as well as inclusion (e.g., for users
+with disabilities) or control over their users. This list is not ex-
+haustive. Altogether, these considerations contribute shaping
+their logical and physical configurations throughout their
+artifact histories. After all, as noted by Lowe: “[t]he existence
+and identity conditions of the members of artefact kinds plausibly
+carry reference to human or other intelligent artificers and utilizers
+of them” [36, pag. 20, emphasis in original]. Thus, unlike much
+simpler artifacts, such as spoons, or nails, we contend that there
+is no universal operational principle for medical AI systems, spam
+filters, AI-powered surveillance tools, or LLM-based conversational
+systems. Rather, operational principles are relative to the social
+system where these systems are designed and deployed and can be
+modified throughout the artifact history.
+Further, while common artifacts have well-defined normal con-
+figurations, or admit few variations of them, such as electric kettles,
+AI systems typically fail those. The operational principle of an AI
+13For instance, we may state that the AI system 𝑆performs the function of
+(1) predicting the output 𝑋(e.g., a numerical score) using data 𝑌(e.g., sociode-
+mographic and financial information),
+(2) predicting the output 𝑋using data 𝑌, and model 𝑍(e.g., a feedforward neural
+network with 𝑁neurons and 𝑀layers),
+and so on. This progressive refinement parallels the classification of physical objects
+in ontology.
+system is implemented in different ways in a social system. Compo-
+nents of AI systems can be specified through engineering standards,
+such as patents or industry guidelines. For instance, the US Patent
+US10191537B2 describes customized haptic feedback for wearable
+devices, while the ISO/IEC 24775 series provides standards for data
+storage management. However, many AI systems, such as spam
+filters, LLM-based conversational agents, sepsis predictors, or deep-
+fake generators, lack patents or industry standards, even though
+some of their individual components may adhere to them. Addi-
+tionally, the use of services, such as Google’s AutoML,14 further
+promotes building custom AI systems without adhering to specific
+engineering standards, but, rather, pragmatic design aspects.
+In summary, developing a theory of identity for AI systems based
+on the function+ framework presents some challenges. While the
+techno-function seems to be the appropriate functional level for
+characterizing AI system kinds, these artifacts present relativized
+operational principles and, in general, lack standardized normal
+configurations. In the following section, we address these challenges
+using a key concept in the ethics of AI: trustworthiness. It will help
+us bridging the gap between the techno-functional characterization
+of AI systems and the absence of universal artifact principles and
+their standards.
+5
+Our approach: A trustworthiness-based
+metaphysics of AI systems
+5.1
+The trustworthiness of AI systems
+Quite literally, the trustworthiness of AI systems is their capability
+to be ‘worthy of our trust.’ Although trust is a notoriously chal-
+lenging construct to define—one that has engaged philosophers
+in conceptual debates for a long time (for an overview, see the
+excellent SEP entry ‘Trust’ [40])—most scholars agree that it is
+possible to conceptualize the trustworthiness of AI systems. This is
+typically achieved by adopting a principled approach. In such an
+approach, different actors within a social system identify principles
+that technology should uphold to mitigate various risks and steer
+the development of AI systems in alignment with societal norms
+and practices.15 A well-known example comes from the European
+Commission’s High-Level Expert Group on Artificial Intelligence,
+which, in 2018, proposed that trustworthy AI should be lawful,
+ethical, and robust. This framework emphasizes principles such
+as human agency, technical robustness, safety, and transparency
+[13]. These principles are then translated by designers into sys-
+tem capabilities, including accuracy, fairness, safety, transparency,
+and technical reliability [17, 31]. Collectively, these capabilities
+constitute the trustworthiness of AI, which, in turn, is referred to
+as a second-order—or ‘composite’—capability of AI that is expres-
+sion of the normative and practical demands of a social system
+[15, 18, 27, 39]. Further, the trustworthiness of an AI system is
+context-dependent. In fact, not all AI systems—even in the same
+social system—require the same degree of accuracy, fairness, or
+14https://cloud.google.com/automl
+15Here, ‘social system’ can refer to different types of organizations expressing prin-
+cipled considerations on what makes AI worthy of our trust, including research
+groups, private companies, non-profit organizations, and supranational entities
+[1, 13, 22, 26, 33].
+
+A Trustworthiness-based Metaphysics of Artificial Intelligence Systems
+FAccT ’25, June 23–26, 2025, Athens, Greece
+explainability to function as intended or, at least, to the same de-
+gree. For instance, while providing detailed yet comprehensible
+explanations of a medical AI’s predictions is considered critical
+in intensive care contexts, this requirement is less pertinent for
+machine learning-based spam filters. In personalized marketing,
+the accuracy of recommendations may be less critical than it is in
+AI-supported airport traffic monitoring routines.
+The need for contextualizing the trustworthiness of AI systems
+has prompted Jacovi et al. to define trustworthiness as the capability
+of an AI system to fulfill explicit, predefined commitments, referred
+to as contracts [26]—an approach that stems from Hawley and
+Talliant works on ‘contractual trust’ [24, 47]. These contracts are
+the capabilities of the AI system that constitute its trustworthiness,
+such as predictive performance, fairness and technical reliability,
+and are typically specified by the system’s designers, evaluated, and
+enforced during retraining routines. For instance, in their work, Ja-
+covi et al. explicitly mention “model correctness,” i.e., accuracy, and
+“transparency” as genuine examples of AI contracts [26]. Typically,
+an AI system is required to maintain different contracts, i.e., one
+per system capability (as in the examples above). In summary, trust-
+worthiness can be understood as the capability of an AI system to
+uphold predefined commitments that ensure its correct functioning
+[16, 27, 39]. In the terminology of the function+ approach, the trust-
+worthiness of an AI system encodes its operational principle.
+It gives us reasons to talk about a unifying principle of activity for
+these artifacts that is expressed via the rules dictated by the prop-
+erties that constitute it [36]. We define the collection of contracts
+that formulate the trustworthiness requirements of an AI system
+its ‘trustworthiness profile.’ Just as the operational principle of
+traditional artifacts is formalized through patents (see Section 4.2.2),
+the trustworthiness of AI systems is articulated through contracts.
+These contracts—along with accompanying documentation specify-
+ing evaluation methods—outline the configurations of the system’s
+components necessary to fulfill its ascribed techno-function. At
+a first glance, all configurations, both logical and physical, that
+satisfy the contracts the system is required to uphold could be con-
+sidered ‘normal.’ In practice, there exist multiple implementations
+that can fulfill the same contract. For instance, ‘maintain accuracy
+above 90%’ can be achieved through different machine learning
+models. Similarly, a fairness-related contract, such as ‘limit the false
+positive rate across demographic groups to a maximum of 7.5%,’
+might be satisfied through preprocessing training data or applying
+post-hoc adjustments to model outputs.16 There is no single best
+way to satisfy contracts, as required by the definition of ‘normal
+configuration’—see Section 3.1.2. Instead, there exist (equivalence)
+classes of normal configurations that realize the trustworthiness
+profile of an AI system with equal efficiency.
+Following the discussions in [15], we formalize this efficiency
+by means of a non-negative function 𝜏𝑥, where 𝜏𝑥(𝑡) denotes the
+16By increasing the level of specification for a contract, it is theoretically possible to
+narrow the range of normal configurations that satisfy it. However, we argue that no
+feasible level of specification can uniquely determine a single normal configuration for
+every contract. Achieving this would require imposing detailed constraints on every
+stage of the machine learning pipeline, including data distributions and their statistical
+properties under environmental shifts, preprocessing steps, feature engineering, and
+model selection. Such exhaustive requirements would result in contracts that are
+impractical to manage and overly rigid, hindering the adaptability of AI systems to
+real-world scenarios over time.
+trustworthiness level of the AI system 𝑥at time 𝑡. By definition,
+𝜏𝑥(𝑡) is a function of the levels of the individual capabilities—e.g.,
+accuracy—that 𝑥is required to uphold according to its contractual
+obligations over time. The hypothesis is that each such capabil-
+ity has levels—also depending on time—that can be formalized by
+means of its measurability [15]. (Different capabilities, e.g., accuracy
+and fairness, are measured with different instruments by system
+designers—see [15].) For instance, in a toy AI system 𝑥, trustwor-
+thiness is equated to accuracy with the contract ‘maintain accuracy
+above 90%.’ Then, 𝜏𝑥(𝑡) =
+
+
+1
+accuracy(𝑡) ≥0.9,
+0.5
+0.7 ≤accuracy(𝑡) < 0.9,
+0
+otherwise.
+is an
+example of trustworthiness function. Note that these levels are
+constant over intervals of predictive performance. Let 𝑡𝑥
+0 denote
+the time at which 𝑥is successfully deployed in its operational envi-
+ronment. In practice, some of the capabilities of the system 𝑥may
+start to degrade and even invalidate their corresponding contract at
+some time 𝑡≥𝑡𝑥
+0 . Eventually, some properties may decrease to the
+level that, overall, the trustworthiness levels 𝜏𝑥(𝑡) degrade as well,
+with the rate and pattern of degradation depending on the specific
+context in which 𝑥operates and the definition of 𝜏𝑥. To mitigate
+this decline, designers periodically retrain the machine learning
+models in the system, as discussed in Section 4.1.2. These retraining
+events partition the AI system’s life cycle into consecutive time
+intervals, with the endpoints of these intervals coinciding with
+retraining routines. At these points, the trustworthiness function
+𝜏𝑥exhibits discontinuities, as illustrated in Figure 1.
+Figure 1: Levels of trustworthiness over time of two AI sys-
+tems 𝑥and 𝑦in a kind 𝜑. They require retraining at 𝑡1 and 𝑡2
+due to rapid decreases in their trustworthiness levels. With
+reference to synchronic identity—see (3)—𝑥and 𝑦can be
+deemed identical at the times indicated by squares. With ref-
+erence to diachronic identity—see (4)—𝑦can persist through
+the interval [𝑡2,𝑡].
+Before introducing our identity criteria, we make a final ob-
+servation about contracts and the function 𝜏𝑥. While Jacovi et al.
+adopt high-level formulations for contracts, these could also be
+specified in greater detail. For instance, a contract might specify
+‘maintaining accuracy above 90%’ (accuracy) or ensuring the system
+‘maintains a 99.9% uptime over any 30-day period, with no single
+downtime exceeding 10 minutes’ (technical reliability). However,
+there is no universal standard for how contracts should be formu-
+lated. Recommendations focus on what system capabilities should
+be included in contracts [13], while evaluation methodologies and
+
+FAccT ’25, June 23–26, 2025, Athens, Greece
+Ferrario A.
+standardized documentation remain active areas of research—see
+[26, §3.2]. Similar considerations hold for 𝜏𝑥whose formulation
+may follow theoretical and practical considerations [15]. Then, in
+the forthcoming discussions, we assume that whenever the identity
+or persistence of artifacts 𝑥and 𝑦is considered, (1) a common level
+of formulation is established for the contracts that constitute their
+trustworthiness profiles, and (2) the trustworthiness functions 𝜏𝑥
+and 𝜏𝑦are expressed using the same formulation. These regularity
+assumptions are reasonable, for instance, in social systems produc-
+ing AI systems where standardized procedures are already in place
+or could be achieved through enforceable policies.
+5.2
+Trustworthiness-based identity criteria of
+AI systems
+We are now ready to introduce the identity criteria for AI system
+kinds at the core of our approach. While their general form are
+provided in the Appendix, we present here their two perspectives:
+synchronic identity and diachronic identity. Some notation: let
+𝑥and 𝑦be AI systems of kind 𝜑. Denote the state of 𝑥at any time
+𝑡′ by 𝑥(𝑡′), and similarly for 𝑦.
+Definition 5.1 (Identity Criteria for AI System Kinds). Let 𝑥
+and 𝑦be AI systems of kind 𝜑such that 𝑡𝑥
+0 = 𝑡𝑦
+0 := 𝑡0.
+(1) The criterion for synchronic identity in 𝜑is:
+𝑥(𝑡) =𝜑𝑦(𝑡) ↔𝑥(𝑡) and 𝑦(𝑡) are individuals of kind 𝜑,
+𝑥(𝑡) and 𝑦(𝑡) have equal
+trustworthiness profiles, and
+𝜏𝑥(𝑡) = 𝜏𝑦(𝑡), 𝑡≥𝑡0.
+(3)
+(2) The criterion for diachronic identity in 𝜑is:
+𝑥(𝑡1) =𝜑𝑥(𝑡2) ↔𝑥(𝑡1) and 𝑥(𝑡2) are individuals of kind 𝜑,
+𝑥(𝑡1) and 𝑥(𝑡2) have equal
+trustworthiness profiles, and
+𝜏𝑥(𝑡1) = 𝜏𝑥(𝑡2), 𝑡1,𝑡2 ≥𝑡0.
+(4)
+In the Appendix, we provide an analysis of these criteria, includ-
+ing their equivalence conditions and underlying rationale. Here,
+we briefly state the key points: two AI systems belonging to the
+same kind are identical at any given time if and only if they execute
+the same techno-function, adhere to identical operational principle
+specifications, and have equal trustworthiness levels at that time
+(synchronic identity). An AI system persists between times 𝑡1
+and 𝑡2 if and only if it belongs to its kind at 𝑡1 and 𝑡2 with the
+same trustworthiness profile and levels at those times (diachronic
+identity). In Wiggins’ terminology [54], conditions (3) and (4) rely
+on continuous in time ‘functional and operational’ paths. For in-
+stance, (4) requires such a path connecting 𝑥at 𝑡1 and 𝑥at 𝑡2 with
+‘equal’ endpoint conditions. Beyond the metaphysics of artifacts,
+the concept of ‘path’ is also utilized in the philosophy of mind,
+where (psychological) paths are employed by some to define per-
+sonal identity—see [41]. As a result, =𝜑is a trustworthiness-based
+technology identity criterion in the sense of Carrara and Vermaas
+[10].
+5.2.1
+Identity of AI systems: some examples. We move to a few
+examples of identity scenarios for AI systems.
+Identity of toy systems. Let 𝑥and 𝑦denote two toy AI systems
+designed by Bob to predict numerical scores on some tabular data.
+Since their deployment, the systems share the same techno-function
+and trustworthiness profiles, which coincides with accuracy—the
+only system property Bob cares about. While 𝑥operates as a locally
+run Jupyter Notebook used by Bob as a sandbox, 𝑦is deployed in
+Google Colab using Bob’s account. Despite differences in execu-
+tion environments (e.g., on-premises vs. cloud), these systems are
+identical at a given time if their accuracy is equal. However, the
+accuracy of the system 𝑥begins decreasing monotonically after a
+certain time, let us say 𝑡, ceteris paribus. Thus 𝑥(𝑡1) =𝜑𝑥(𝑡2) if
+false for all 𝑡1 and 𝑡2 such that 𝑡1 < 𝑡< 𝑡2.
+Identity in stable operational environments. Two AI-powered ma-
+chines begin operations on the same day in a warehouse, tasked
+with sorting parcels onto predefined tracks. Each machine uses a
+different deep learning model for classifying parcels and controlling
+the track switches. Suppose the two AI systems perform the same
+techno-function and maintain equal trustworthiness profiles since
+deployment. Further, they operate under constant trustworthiness
+levels over time due to stable environmental conditions. In this
+scenario, the machines are considered identical at any time 𝑡if and
+only if their trustworthiness levels are equal at 𝑡. This means that,
+despite potentially differing levels of accuracy, reliability, or safety,
+due to different logical and physical make-ups, overall, they satisfy
+their operational principle equally and they are deemed identical
+as sorting robots. Given the notable differences in their design and
+maintenance costs, management finds this argument difficult to
+accept.
+Faulty copies are not identical to well-functioning ones. Inspired
+by Hatherley and Sparrow’s work [23], consider 𝑥and 𝑦as two
+copies of an AI-powered diagnostic tool sold by the company ‘Bone
+Breaks AI’ to two hospitals for detecting small bone fractures in X-
+ray images. Upon deployment in the same day, both tools show the
+same trustworthiness profiles and levels. However, over time, the
+hospitals adopt different machine learning operations procedures
+to maintain and improve the tools. In one hospital, 𝑥undergoes
+frequent retraining with carefully curated and diverse datasets,
+following a rigorous evaluation routine. Meanwhile, in the other
+hospital, 𝑦is retrained less frequently, using smaller or less repre-
+sentative datasets, and without robust validation processes. As a
+result, 𝑥consistently outperforms 𝑦in terms of trustworthiness,
+with superior accuracy, reliability, and robustness after some time
+from their deployment. Despite what an orthopedic surgeon using
+𝑦at the second hospital might tell a patient who received a differ-
+ent prediction from 𝑥at the first hospital, the two systems are not
+identical. Further, the type of machine learning operations at the
+second hospital lead to the interruption of 𝑦’s persistence.
+One or two? A tech-company develops an LLM-based conversa-
+tional assistant to provide users with ‘knowledge pills,’ bite-sized
+insights for everyday use. The assistant answers general knowl-
+edge queries, such as recalling historical facts, operating with a
+consistent trustworthiness profile, while maintaining high answer
+relevancy and contextual relevancy in its responses. The assistant
+
+A Trustworthiness-based Metaphysics of Artificial Intelligence Systems
+FAccT ’25, June 23–26, 2025, Athens, Greece
+is deployed in a country, serving its users efficiently. One day, the
+company’s CEO surprises everyone at a board meeting announcing
+that the system must be deployed in another country in a more
+politically sensitive region, where new regulatory requirements
+mandate that AI systems adhere to stricter constraints, including
+compliance with local laws on acceptable language, censorship
+of politically and historically sensitive topics, and constraints to
+address socio-cultural biases. To adhere to these requirements, a
+team of engineers deploys a second instance of the AI system in
+the new country, modifying the system by fine-tuning its LLM
+with region-specific data, implementing content moderation algo-
+rithms, and adding what they referred to as ‘fairness constraints’ in
+a newly introduced ‘user safety’ contract. In a heated meeting on
+resource allocation for the engineering team, the CEO and the legal
+department insist that the second system is ‘just another version’ of
+the original system, emphasizing that both run on the same infras-
+tructure. Engineers argue that the technical changes are such that
+they face two numerically different systems instead. Metaphysical
+considerations may support their claim.
+Sometimes a new AI product is new. A fitness company develops
+an AI-powered app designed to provide personalized workout plans
+and real-time feedback based on users’ fitness data. Since its de-
+ployment, the app has maintained a stable trustworthiness profile
+with constant levels of accuracy, safety, and technical robustness.
+However, months after release, data engineers discovered a bug
+in its machine learning pipeline that caused a systematic bias—
+users with certain characteristics were consistently receiving less
+effective workout suggestions. As a result, the app’s trustworthi-
+ness levels began to decline. To address the issue, engineers opted
+for a major overhaul: replacing the original model with a more
+advanced one, using newly engineered features for better person-
+alization, but keeping the system’s trustworthiness profile. A few
+tests demonstrated that the app’s trustworthiness had returned to
+its original level. Encouraged by the results, the marketing team
+proposed relaunching the app as a brand-new version and asking
+its users a higher subscription fee. This seems to be justified at least
+metaphysically, as the system did not persist.
+The AI of Theseus? On the intermittent existence of AI systems.
+Endorsing the function+ approach, our theory of identity for AI
+systems avoids puzzles of identity, such as the Ship of Theseus,
+which in their classical formulations focus solely on the physical
+components of an artifact while neglecting its functional continuity
+[25, 34]. However, as stated in (4), if the trustworthiness levels of
+an AI system drop after deployment, the system eventually ceases
+to persist, and a numerically different AI system emerges. Does this
+imply that AI systems flicker in and out of existence? We argue
+that this is not the case. First, the function 𝜏𝑥can be meaningfully
+defined within a social system in a robust manner, ensuring it re-
+mains stable under (small) variations in the levels of the capacities
+that constitute the trustworthiness of system 𝑥. Second, a change
+in trustworthiness levels can be seen as analogous to disassembling
+an artifact to the point where it can no longer perform its function.
+For instance, while the collection of gears on a table constitutes the
+watch that was once on my wrist, it is not identical to it. Consti-
+tution and identity are fundamentally distinct relations [21]. Only
+when the parts are reassembled in a way that supports the watch’s
+function does a watch emerge. However, this is a different watch
+constituted by the parts that were once mine and the duration of
+the interval during which the watch was disassembled has no bear-
+ing on its identity. Similarly, retraining an AI system to restore its
+trustworthiness levels ensures the system’s correct functioning and
+allows it to persist once again as a system that may only share the
+physical make-up of the original.
+6
+Conclusions
+We introduced a theory of identity for AI systems grounded in the
+function+ approach, providing rules to individuate and count AI sys-
+tems as well as to discuss their persistence. Central to our approach
+is the concept of trustworthiness, which relates functional expec-
+tations with the logical and physical make-ups of these artifacts.
+Our theory emphasizes that the metaphysical identity of AI is inter-
+twined with the norms and practices of the social systems in which
+these artifacts are designed and deployed. Thus, the implications of
+retraining machine learning models, imposing fairness constraints,
+and measuring trustworthiness on the identity and persistence of
+AI systems hinges on socio-cultural perspectives, ethical and legal
+guidelines, as well as practical considerations specific to each of
+these social systems. Our theory underscores the need for standard-
+ization in these practices, including the adoption of reproducible
+methodologies to document trustworthiness contracts and measure
+AI capabilities consistently over time beyond, for instance, generic
+transparency requirements, such as those in the EU AI Act–see
+preamble 71 therein. By doing so, we can ground epistemological,
+ethical, and legal discussions about the present and future of AI in
+clearer metaphysical foundations, avoiding the pitfalls of semantic
+ambiguity. Armed with our theory of identity of AI systems, we can
+answer the epistemic question: ‘If 𝑥and𝑦are in the kind 𝜑, how can
+we know that 𝑥is the identical to 𝑦?’ [8]. Further, the ethical and
+legal aspects of questions such as ‘Is the system we use with this
+patient the same as one month ago?,’ ‘Is the other system better than
+this one?,’ or ‘Is the system now less opaque, more trustworthy, or
+hallucinating?’ can then be addressed with the clarity they deserve.
+Acknowledgments
+I am grateful to Michele Loi for helpful feedback on an earlier draft
+of this manuscript. I also thank the anonymous reviewers for their
+constructive comments, which helped strengthen the final version.
+This work was supported by the Swiss National Science Foundation
+(SNSF), grant no. 229061.
+Appendix
+We introduce our identity criteria for the AI system kinds that
+follows the function+ approach. We comment on its conditions and
+show how to retrieve synchronic and diachronic identity—see (3)
+and (4) in Section 5.2—from it.
+Definition 6.1 (Identity Criteria of AI Systems). Let 𝑥and 𝑦
+be AI systems of kind 𝜑such that their deployment times satisfy
+𝑡𝑥
+0 = 𝑡𝑦
+0 := 𝑡0. Consider 𝑥at time 𝑡1 and 𝑦at time 𝑡2, denoted by
+𝑥(𝑡1) and 𝑦(𝑡2), respectively. The identity criterion in 𝜑is defined
+as:
+
+FAccT ’25, June 23–26, 2025, Athens, Greece
+Ferrario A.
+𝑥(𝑡1) =𝜑𝑦(𝑡2) ↔𝑅𝜑(𝑥(𝑡1),𝑦(𝑡2)),
+where 𝑅𝜑(𝑥(𝑡1),𝑦(𝑡2)) holds if and only if the following condi-
+tions are satisfied:
+𝑥(𝑡1) and 𝑦(𝑡2) are individuals of kind 𝜑,
+(5)
+𝑥(𝑡1) and 𝑦(𝑡2) have equal trustworthiness profiles, and
+(6)
+𝜏𝑥(𝑡1) = 𝜏𝑦(𝑡2), 𝑡1,𝑡2 ≥𝑡0.
+(7)
+A few remarks on =𝜑. Condition (5) stipulates that the artifacts
+whose identity is to be checked are individuals of the kind 𝜑. Con-
+dition (6) enforces that the operational principle of both systems
+is the same, despite possible system retraining and different phys-
+ical make-ups. As mentioned in Section 5.1, we suppose that the
+trustworthiness profiles of 𝑥and 𝑦are formulated with the same
+level of specification. (Note that this relation is indeed an equiv-
+alence relation.) Thus, our identity criteria can be applied to AI
+systems developed within social systems that share comparable
+standards for trustworthiness requirements. Finally, condition (7)
+specifies that the operational performance of the systems must
+be equal at the times specified in the relation for identity in 𝜑
+to hold. Altogether, =𝜑stipulates that artifacts showing the same
+techno-function and operational principle, including its quantifi-
+cation, are deemed identical in 𝜑. In summary, =𝜑constitutes a
+trustworthiness-based technological identity criterion in the sense
+of Carrara and Vermaas [10]. This criterion is more liberal than
+mereological essentialism, as it allows identical artifacts to differ in
+their physical make-up.
+Is =𝜑an equivalence relation? It is not difficult to check that
+=𝜑is an equivalence relation. Reflexivity and symmetry from the
+definition of =𝜑. Transitivity is enforced by having equal trustwor-
+thiness profiles at the times considered in the identity criterion.
+However, transitivity is easily violated when attempting to compare
+trustworthiness levels directly using, for instance, distance-based
+conditions between 𝜏𝑥(𝑡) and 𝜏𝑦(𝑡) over intervals such as [𝑡1,𝑡2] or
+[𝑡0, max(𝑡1,𝑡2)], due to the triangular inequality of distance func-
+tions. Condition (7) ensures transitivity while relating operational
+performance of the artifact in an easy way. More mathematically
+complex conditions on the trustworthiness levels, while potentially
+preserving transitivity, tend to lose their connection to the function+
+framework and become less justifiable.
+Finally, when 𝑡1 = 𝑡2 = 𝑡, =𝜑provides a synchronic identity
+criterion for AI systems—see (3). Applying =𝜑to the same system
+𝑥across different times yields a diachronic identity criterion for
+the system—see (4) instead.
+References
+[1] AlgorithmWatch. [n. d.].
+AI ethics guidelines global inventory.
+https://
+algorithmwatch.org/en/ai-ethics-guidelines-global-inventory/.
+[2] L. R. Baker. 2004. The ontology of artifacts. Philosophical Explorations 7, 2 (2004),
+99–111.
+[3] L. R. Baker. 2007. The metaphysics of everyday life: An essay in practical realism.
+Cambridge: Cambridge University Press (2007).
+[4] L. R. Baker. 2008. The shrinking difference between artifacts and natural objects.
+In Newsletter on Philosophy and Computers, Piotr Boltuc (Ed.). American Philo-
+sophical Association Newsletters, Vol. 07. American Philosophical Association,
+2–5.
+[5] S. Barocas, M. Hardt, and A. Narayanan. 2021. Fairness and machine learning:
+Limitations and opportunities. MIT Press.
+[6] M. Benk, S. Kerstan, F. von Wangenheim, and A. Ferrario. 2024. Twenty-four years
+of empirical research on trust in AI: A bibliometric review of trends, overlooked
+issues, and future directions. AI & Society (2024), 1–24.
+[7] R. Binns. 2018. Fairness in machine learning: Lessons from political philosophy.
+In Proceedings of the 2018 Conference on Fairness, Accountability, and Transparency.
+PMLR, 149–159.
+[8] M. Carrara, S. Gaio, and M. Soavi. 2014. Artifact kinds, identity criteria, and logi-
+cal adequacy. In Artefact Kinds: Ontology and the Human-Made World, Maarten
+Franssen, Peter Kroes, Thomas A. C. Reydon, and Pieter E. Vermaas (Eds.).
+Springer, Dordrecht, 85–101.
+[9] M. Carrara and P. Giaretta. 2004. The many facets of identity criteria. Dialectica
+58, 2 (2004), 221–232.
+[10] M. Carrara and P. E. Vermaas. 2009. The fine-grained metaphysics of artifactual
+and biological functional kinds. Synthese 169 (2009), 125–143.
+[11] J. M. Durán and N. Formanek. 2018. Grounds for trust: Essential epistemic opacity
+and computational reliabilism. Minds and Machines 28 (2018), 645–666.
+[12] C. Elder. 2004. Real natures and familiar objects. MIT Press, Cambridge, MA.
+[13] European Commission. 2018. Ethics guidelines for trustworthy AI.
+https:
+//digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai Ac-
+cessed: 2025-01-15.
+[14] A. Facchini and A. Termine. 2021. Towards a taxonomy for the opacity of AI
+systems. In Conference on Philosophy and Theory of Artificial Intelligence. Springer,
+73–89.
+[15] A. Ferrario. 2024. Justifying our credences in the trustworthiness of AI systems:
+A reliabilistic approach. Science and Engineering Ethics 30, 6 (2024), 55.
+[16] A. Ferrario and M. Loi. 2022. How explainability contributes to trust in AI. In Pro-
+ceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency.
+1457–1466.
+[17] L. Floridi. 2019. Establishing the rules for building trustworthy AI. Nature
+Machine Intelligence 1, 6 (2019), 261–262.
+[18] L. Floridi, J. Cowls, T.C. King, and M. Taddeo. 2020. How to design AI for social
+good: Seven essential factors. Science and Engineering Ethics 26 (2020), 1771–1796.
+[19] M. Franssen, P. Kroes, T. A.C. Reydon, and P. E. Vermaas (Eds.). 2014. Artifact
+kinds: Ontology and the human-made world. Springer, Dordrecht.
+[20] G. Frege. 1884. Die Grundlagen der Arithmetik: Eine logisch-mathematische Unter-
+suchung über den Begriff der Zahl. W. Koebner, Breslau.
+[21] A. Gallois. 2016. The metaphysics of identity. Routledge.
+[22] Google. [n. d.].
+AI principles: Responsible AI practices.
+https://ai.google/
+responsibility/principles/. Accessed: 2025-01-18.
+[23] J. Hatherley and R. Sparrow. 2023. Diachronic and synchronic variation in
+the performance of adaptive machine learning systems: The ethical challenges.
+Journal of the American Medical Informatics Association 30, 2 (2023), 361–366.
+[24] K. Hawley. 2014. Trust, distrust and commitment. Noûs 48, 1 (2014), 1–20.
+[25] T. Hobbes. 1655. De corpore. Andrew Crooke, London. Original Latin edition.
+[26] A. Jacovi, A. Marasović, T. Miller, and Y. Goldberg. 2021. Formalizing trust in
+artificial intelligence: Prerequisites, causes and goals of human trust in AI. In Pro-
+ceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency.
+624–635.
+[27] D. Kaur, S. Uslu, K. J. Rittichier, and A. Durresi. 2022. Trustworthy artificial
+intelligence: A review. ACM Computing Surveys (CSUR) 55, 2 (2022), 1–38.
+[28] C. Knickrehm, M. Voss, and M. C. Barton. 2023. Can you trust me? Using AI to
+review more than three decades of ai trust literature. In 31st European Conference
+on Information Systems (ECIS 2023).
+[29] H. Kornblith. 1980. Referring to artifacts. The Philosophical Review 89, 1 (1980),
+109–114.
+[30] P.A. Kroes and A.W.M. Meijers. 2002. The dual nature of technical artifacts:
+Presentation of a new research programme. Techné 6, 2 (2002), 4–8.
+[31] B. Li, P. Qi, B. Liu, S. Di, J. Liu, J. Pei, J. Yi, and B. Zhou. 2023. Trustworthy AI:
+From principles to practices. Comput. Surveys 55, 9 (2023), 1–46.
+[32] J. Locke. 1847. An essay concerning human understanding. Kay & Troutman.
+[33] M. Loi, C. Heitz, A. Ferrario, A. Schmid, and M. Christen. 2019. Towards an
+ethical code for data-based business. In 2019 6th Swiss Conference on Data Science
+(SDS). IEEE, 6–12.
+[34] E. J. Lowe. 1983. On the identity of artifacts. The Journal of Philosophy 80, 4
+(1983), 220–232.
+[35] E. J. Lowe. 2002. A survey of metaphysics. Vol. 15. Oxford University Press Oxford.
+[36] E. J. Lowe. 2014. How real are artefacts and artefact kinds? In Artefact Kinds.
+Springer, 17–26.
+[37] E. J. Lowe. 2014. The ontology of artifacts. Philosophical Explorations 17, 2 (2014),
+98–117.
+[38] E. J. Lowe. 2015. More kinds of being: A further study of individuation, identity,
+and the logic of sortal terms. John Wiley & Sons.
+[39] J. Mattioli, H. Sohier, A. Delaborde, K. Amokrane-Ferka, A. Awadid, Z. Chihani, S.
+Khalfaoui, and G. Pedroza. 2024. An overview of key trustworthiness attributes
+and KPIs for trusted ML-based systems engineering. AI and Ethics 4, 1 (2024),
+15–25.
+
+A Trustworthiness-based Metaphysics of Artificial Intelligence Systems
+FAccT ’25, June 23–26, 2025, Athens, Greece
+[40] C. McLeod. 2023. Trust. In The Stanford Encyclopedia of Philosophy (Fall 2023 ed.),
+Edward N. Zalta and Uri Nodelman (Eds.). Metaphysics Research Lab, Stanford
+University.
+[41] E. T. Olson. 2024. Personal identity. In The Stanford Encyclopedia of Philoso-
+phy (Winter 2024 ed.), Edward N. Zalta and Uri Nodelman (Eds.). Metaphysics
+Research Lab, Stanford University.
+[42] C. Pinter. 2014. A book of set theory. Courier Corporation.
+[43] M. Polanyi. 2012. Personal knowledge. Routledge.
+[44] W. V. Quine. 1969. Ontological relativity and other essays. Columbia University
+Press, New York.
+[45] S. Russell and P. Norvig. 2020. Artificial intelligence: A modern approach (4th ed.).
+Pearson, Upper Saddle River, NJ.
+[46] J. Symons and R. Alvarado. 2016. Can we trust Big Data? Applying philosophy
+of science to software. Big Data & Society 3, 2 (2016), 2053951716664747.
+[47] J. Tallant. 2017. Commitment in cases of trust and distrust. Thought: A Journal
+of Philosophy 6, 4 (2017), 261–267.
+[48] A. M. Turing. 1950. Computing machinery and intelligence. Mind 59, 236 (1950),
+433–460.
+[49] R. Turner. 2018. Computational artifacts. Springer.
+[50] U.S. Food and Drug Administration (FDA). 2021. Artificial Intelligence/Machine
+Learning (AI/ML)-based software as a medical device (SaMD) action plan. https:
+//www.fda.gov/media/145022/ Accessed: 2025-01-15.
+[51] O. Vereschak, G. Bailly, and B. CaramIaux. 2021. How to evaluate trust in ai-
+assistd decision making? A survey of empirical methodologies. Proceedings of
+the ACM on Human-Computer Interaction 5 (2021), 1–39.
+[52] W. G. Vincenti. 1990. What engineers know and how they know it: Analytical
+studies from aeronautical history. Vol. 141. Johns Hopkins University Press.
+[53] D. Wiggins. 1980. Samething over time: Studies in the theory of identity. Oxford
+University Press, Oxford.
+[54] D. Wiggins. 2001. Sameness and substance renewed. Cambridge University Press.
+[55] T. Williamson. 2013. Identity and discrimination. John Wiley & Sons.

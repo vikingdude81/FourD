@@ -1,0 +1,1771 @@
+Emergence from Emergence: Financial Market Simulation via
+Learning with Heterogeneous Preferences
+Ryuji Hashimoto
+The University of Tokyo
+Tokyo, Japan
+hashimoto-ryuji419@g.ecc.u-
+tokyo.ac.jp
+Ryosuke Takata
+The University of Tokyo
+Tokyo, Japan
+Masahiro Suzuki
+The University of Tokyo
+Tokyo, Japan
+Yuki Tanaka
+The University of Tokyo
+Tokyo, Japan
+Kiyoshi Izumi
+The University of Tokyo
+Tokyo, Japan
+ABSTRACT
+Agent-based models help explain stock price dynamics as emergent
+phenomena driven by interacting investors. In this modeling tradi-
+tion, investor behavior has typically been captured by two distinct
+mechanisms—learning and heterogeneous preferences—which have
+been explored as separate paradigms in prior studies. However, the
+impact of their joint modeling on the resulting collective dynamics
+remains largely unexplored. We develop a multi-agent reinforce-
+ment learning framework in which agents endowed with hetero-
+geneous risk aversion, time discounting, and information access
+collectively learn trading strategies within a unified shared-policy
+framework. The experiment reveals that (i) learning with hetero-
+geneous preferences drives agents to develop strategies aligned
+with their individual traits, fostering behavioral differentiation and
+niche specialization within the market, and (ii) the interactions by
+the differentiated agents are essential for the emergence of realistic
+market dynamics such as fat-tailed price fluctuations and volatility
+clustering. This study presents a constructive paradigm for financial
+market modeling in which the joint design of heterogeneous pref-
+erences and learning mechanisms enables two-stage emergence:
+individual behavior and the collective market dynamics.
+KEYWORDS
+Emergent financial market, Agent-based simulation, Multi-agent
+reinforcement learning, Behavioral differentiation
+1
+INTRODUCTION
+Agent-based models (ABMs) [3, 23] simulate complex systems such
+as financial markets. ABMs in finance seek to construct artificial
+markets by designing investors’ behavior as agents to understand
+how price dynamics emerge from their interactions [13].
+To capture investors’ behavior as agents, previous work explored
+two mechanisms—learning and heterogeneous preferences. Learn-
+ing means that an investor discovers how to satisfy itself based on
+its own experiences [5, 11, 18, 26]. Heterogeneous preferences mean
+differences in traits among investors [16, 20]. Although recent stud-
+ies [6, 10, 29, 33] introduced both mechanisms, the impact of such
+a joint modeling on the resulting dynamics remains unexplored.
+To investigate how learning and heterogeneous preferences
+jointly shape investor behavior and market dynamics, we employ a
+multi-agent reinforcement learning (MARL) framework. Within this
+framework, we design learning mechanism driven by multifaceted
+preferences. Agents are endowed with individual traits—including
+risk aversion, time discounting, and informational constraints—
+and approximate optimal shared-policy in a market environment
+through repeated interactions with one another.
+In our experiment, we conduct simulations with the learned
+agents to investigate (i) behavioral differentiation arising from
+interactive learning within a unified framework where such hetero-
+geneity in preferences exists and (ii) the emergence of collective
+market dynamics through the interactions of these agents. For (i),
+first, within a shared-policy environment, we analyze how agents’
+trait values map to their order decisions, confirming that our uni-
+fied learning mechanism produces behavioral differentiation rather
+than mere averaging across types. We conduct ablation studies
+that homogenize or scramble traits and find reduced social wel-
+fare, suggesting that the learned differentiation underpins niche
+specialization and a functionally complementary order. For (ii), we
+show that our model achieves greater realism than baseline mod-
+els that incorporate either preference heterogeneity or learning,
+based on several metrics. By combining market consensus learned
+through agent interactions with behavioral differentiation, key em-
+pirical regularities of financial markets emerge—such as fat-tailed
+return distributions and volatility clustering—that characterize the
+complex price dynamics observed in reality.
+To summarize, through the joint modeling of learning and het-
+erogeneous preferences, we enable emergence from emergence. This
+notion captures a hierarchical process of emergence. The first is
+behavioral differentiation at the individual level and niche special-
+ization at the meso level. Within a unified learning framework,
+agents equipped with heterogeneous preferences competitively
+adapt in the same market environment. Despite sharing the same
+policy space, their strategies diverge endogenously, producing non-
+trivial diversity in investment behavior. Such differentiation fosters
+specialization into ecological niches and gives rise to a market-wide
+ecosystem of diverse trading roles. The second is the emergence of
+market-level dynamics. The interactions among these differentiated
+agents generate complex price dynamics that mirror the empirical
+regularities of real financial markets. Just as initially similar cells
+differentiate into distinct organs and self-organize into a life [24],
+arXiv:2511.05207v2  [cs.CY]  11 Nov 2025
+
+heterogeneous agents within a unified learning framework differ-
+entiate into diverse trading roles, which collectively self-organize
+into complex market dynamics.
+2
+RELATED WORK
+The recognition that investor heterogeneity is crucial for reproduc-
+ing stylized facts, market anomalies, and extreme events in financial
+markets has driven the development of ABM approaches [16, 20].
+For example, heterogeneity of risk aversions is proved to affect
+on equity risk premium [1] and excess volatility [4, 32]. Yuan and
+Chen [34] demonstrate that heterogeneous and dynamic risk aver-
+sion of investors plays a role to generate volatility clustering. Also,
+heterogeneous time horizon is demonstrated to cause information
+delay, resulting in persistence of stock price fluctuations [22].
+To capture the non-equilibrium nature of financial markets, the
+design of learning mechanism has also attracted attention. A repre-
+sentative example is the adaptive belief system [5, 18, 19], a frame-
+work in which agents iteratively update their forecasting rules
+based on past performance, thereby allowing market expectations
+to evolve endogenously. Other approaches, such as classifier sys-
+tems [26] and genetic algorithms [23], have likewise been employed
+to model how agents adapt to their environment and to explain the
+emergence of abrupt phenomena such as bubbles and crashes.
+Although recent studies have incorporated both preference het-
+erogeneity and learning into their models [6, 10, 29] and have
+proposed methods to calibrate the hyperparameters representing
+heterogeneity [12, 15], the impact of jointly modeling these two
+factors on system complexity and the underlying emergent mecha-
+nisms remains largely unexplored.
+We argue that learning and preference heterogeneity are the key
+drivers for establishing a multi-level emergent view of financial
+markets. In biology, complex living systems are explained through
+hierarchical emergent mechanisms [24], and similar multi-scale
+order is suggested to exist in human societies as another form of
+complex system [2, 14, 25]. However, a concrete explanation of
+such mechanisms in financial markets has not yet been attempted.
+3
+METHOD
+Figure 1 describes our simulation methodology. The core compo-
+nents of the method are a formulation as a partially observable
+Markov decision process (POMDP) in which agent traits are em-
+bedded in both the observations and the rewards, combined with
+shared-policy learning [29, 30], and a calibration of the distribution
+of agent traits via optimal transport (OT) [15].
+(1) POMDP formulation: Each agent operates under a POMDP,
+where its observation vector includes trait factors, allowing
+the policy to condition on who it is. These traits are also
+reflected in the reward function, such that each agent is
+pursuing a different goal, encouraging the emergence of
+preference-driven behavioral diversity.
+(2) Shared-policy learning across heterogeneous agents:
+A single neural network policy is trained to map observa-
+tions into actions, providing a unified learning framework
+within which heterogeneous traits give rise to endogenous
+behavioral differentiation.
+Trait-Conditioned
+Reward
+Action
+Agent Traits
+𝜎!
+𝛾!
+𝛼!
+𝜎"
+𝛾"
+𝛼"
+...
+...
+Shared Policy
+Environment
+(LOB Market)
+• Asset condition
+• Market condition
+...
+Sample each agent's 
+trait factors
+OT distance
+Synthetic Data
+Real-World Data
+Calibrate 
+hyperparameters
+POMDP
+Figure 1: Conceptual diagram of our MARL-based ABM for
+financial market simulations. Each agent is assigned indi-
+vidual traits when the simulation starts. A shared-policy,
+learned to satisfy each agent’s specific preference, governs
+agent behavior within a LOB market environment. The prior
+distribution of the agents’ trait factors are calibrated using
+OT so that the synthetic price series aligns with real data.
+(3) Data-driven calibration via OT: The prior distribution of
+agent traits is calibrated at the population level to minimize
+the OT distance between the synthetic data generated by the
+simulation and real-world financial data, thereby enhancing
+the empirical realism of the model.
+This section describes the method in the following order: (1) the
+limit order book (LOB) market environment where agents interact;
+(2) the POMDP formulation defined by the observation, action, and
+reward structure; (3) the learning procedure of the shared-policy;
+and (4) the OT-based calibration of agent trait distributions.
+3.1
+Simulation Structure
+Assume 𝑛∈N agents operate in a single market setting, with each
+simulation consisting of 𝑇𝑠𝑖𝑚∈N time steps. Figure 2 illustrates
+the structure of our simulation settings. At each time step 𝑡∈
+{1, . . . ,𝑇𝑠𝑖𝑚}, a randomly selected agent 𝑗∈{1, . . . ,𝑛} is allowed to
+place an order. Agent 𝑗submits an order specifying a signed order
+volume 𝑣𝑗
+𝑡∈Z and an order price 𝑝𝑗
+𝑡∈R+. The sign of 𝑣𝑗
+𝑡indicates
+whether the agent intends to buy or sell1.
+The market operates under the double auction rule, where orders
+are collected into a central LOB. The LOB displays anonymized
+prices and volumes at which agents are willing to buy or sell the
+stock, and the market matches orders.
+3.2
+POMDP and Shared-Policy Learning
+Let T 𝑗denote the set of time steps at which agent 𝑗is selected
+to place an order, with components 𝑡𝑗
+1 < 𝑡𝑗
+2 < . . . < 𝑡𝑗
+𝜄𝑗∈T 𝑗,
+where 𝜄𝑗represents the number of times agent 𝑗is selected during
+the simulation. Agent 𝑗aims to learn the optimal policy 𝜋𝑗∗that
+maximizes its expected cumulative discounted reward, defined as:
+𝜋𝑗∗= arg max
+𝜋𝑗E𝜋𝑗
+" 𝜄𝑗
+∑︁
+𝑖=1
+(𝛾𝑗)𝑖𝑔(𝒐𝑗
+𝑡𝑗
+𝑖
+, 𝒂𝑗
+𝑡𝑗
+𝑖
+; 𝑗)
+#
+(1)
+1For instance, if 𝑣𝑗
+𝑡= −2 and 𝑝𝑗
+𝑡= 300.0, agent 𝑗submits an order to sell 2 units of
+the stock at a price of 300.0.
+
+1
+𝑡
+𝑇!"#
+Agents w/ diverse traits
+𝜎$
+𝛾$
+𝛼$
+𝜎%
+𝛾%
+𝛼%
+...
+LOB Market
+volume
+price
+𝑝&
+#"'
+𝒐&
+(
+𝒂&
+(
+...
+𝑣&
+(
+𝑝&
+(
+Agent 𝑗
+Randomly select one agent
+Provide information
+for agent 𝑗
+Place
+an order
+Figure 2: Structure of the simulation. At each time step 𝑡, one
+of the 𝑛agents is selected to submit an order. Their order is
+placed into a LOB market, which matches buy and sell orders
+to determine transactions and update the market state.
+where E𝜋𝑗[·] denotes the expectation under the policy 𝜋𝑗, and 𝛾𝑗
+is agent 𝑗’s discount factor. The reward function 𝑔: R11 × R2 →R
+depends on the agent’s observation 𝒐𝑗
+𝑡𝑗
+𝑖
+∈R11 and action 𝒂𝑗
+𝑡𝑗
+𝑖
+∈R2
+at time step 𝑡𝑗
+𝑖.
+3.2.1
+Observation. Let 𝑡= 𝑡𝑗
+𝑖in the following sections. The obser-
+vation vector 𝒐𝑗
+𝑡∈R11 is a numerical representation of the market
+conditions and agent 𝑗’s personal trait factors. It comprises the
+following eleven components:
+• Holding asset ratio:
+𝑤𝑗
+𝑡𝑝𝑚𝑖𝑑
+𝑡
+𝑥𝑗
+𝑡
+• Holding asset-to-maximum order volume ratio:
+𝑤𝑗
+𝑡
+𝑣𝑚𝑎𝑥
+• Inverted buying power:
+𝑝𝑚𝑖𝑑
+𝑡
+𝑐𝑗
+𝑡
+• Return: 𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+• Volatility: 𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+• Asset volume-to-existing buy (sell) order volumes ratio:
+|𝑤𝑗
+𝑡|
+𝑏𝜉
+𝑡
+,
+|𝑤𝑗
+𝑡|
+𝑠𝜉
+𝑡
+• Blurred fundamental return: ˜𝑟𝑓,𝑗
+𝑡
+• Uninformedness: 𝜎𝑗
+• Risk aversion term: 𝛼𝑗
+• Discount factor: 𝛾𝑗
+𝑤𝑗
+𝑡∈Z and 𝑐𝑗
+𝑡∈R represent agent 𝑗’s stock position and holding
+cash amount at time step 𝑡, respectively. At the beginning of the
+simulation, 𝑤𝑗
+0 and 𝑐𝑗
+0 are randomly set as 𝑤𝑗
+0 ∼𝐸𝑥(𝑤), 𝑐𝑗
+0 ∼𝐸𝑥(𝑐)
+for each 𝑗, where 𝐸𝑥(𝜆) indicates an exponential distribution with
+expected value 𝜆, and 𝑤and 𝑐are the expected values of initial
+asset volume and cash amount. The agent’s total asset value, 𝑥𝑗
+𝑡,
+is given by 𝑥𝑗
+𝑡= 𝑐𝑗
+𝑡+ 𝑤𝑗
+𝑡𝑝𝑚𝑖𝑑
+𝑡
+, where 𝑝𝑚𝑖𝑑
+𝑡
+denotes the mid price
+at time 𝑡. 2. 𝑣𝑚𝑎𝑥∈N is an exogenously determined constant that
+specifies the maximum order volume an agent can place at time
+step 𝑡. 𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] ∈R represents the logarithmic return of the price
+series between 𝑡𝑗
+𝑖−1 and 𝑡𝑗
+𝑖, calculated as follows:
+𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] =
+1
+𝑡𝑗
+𝑖−𝑡𝑗
+𝑖−1
+𝑡𝑗
+𝑖∑︁
+𝑡′=𝑡𝑗
+𝑖−1+1
+log
+𝑝𝑚𝑖𝑑
+𝑡′
+𝑝𝑚𝑖𝑑
+𝑡′−1
+(2)
+𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] ∈R+ denotes the volatility:
+𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] =
+1
+𝑡𝑗
+𝑖−𝑡𝑗
+𝑖−1
+𝑡𝑗
+𝑖∑︁
+𝑡′=𝑡𝑗
+𝑖−1+1
+ 
+log
+𝑝𝑚𝑖𝑑
+𝑡′
+𝑝𝑚𝑖𝑑
+𝑡′−1
+−𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+!2
+(3)
+𝑏𝜉
+𝑡,𝑠𝜉
+𝑡∈R+ denote the weighted sum of order volumes within the
+price range on the LOB, extending up to 𝜉𝑝𝑚𝑖𝑑
+𝑡
+away from the mid
+price 𝑝𝑚𝑖𝑑
+𝑡
+𝑏𝜉
+𝑡
+=
+∑︁
+𝑝𝑚𝑖𝑑
+𝑡
+(1−𝜉)<𝑝<𝑝𝑚𝑖𝑑
+𝑡
+𝑣𝑏
+𝑡(𝑝) exp
+ 
+−𝜔𝑏|𝑝𝑚𝑖𝑑
+𝑡
+−𝑝|
+𝑝𝑚𝑖𝑑
+𝑡
+!
+(4)
+𝑠𝜉
+𝑡
+=
+∑︁
+𝑝𝑚𝑖𝑑
+𝑡
+<𝑝<𝑝𝑚𝑖𝑑
+𝑡
+(1+𝜉)
+𝑣𝑠
+𝑡(𝑝) exp
+ 
+−𝜔𝑠|𝑝𝑚𝑖𝑑
+𝑡
+−𝑝|
+𝑝𝑚𝑖𝑑
+𝑡
+!
+(5)
+𝜉∈R+ is a parameter that determines the maximum depth. 𝑣𝑏
+𝑡(·)
+and 𝑣𝑠
+𝑡(·) represent the buy and sell order volumes at specific prices
+displayed in the LOB. As shown in Equations (4) and (5), the existing
+order volumes are weighted by their distances from the mid price.
+𝜔𝑏,𝜔𝑠∈R+ are parameters that control the decay rate. The agent 𝑗
+receives a fundamental return blurred by Gaussian noise, the scale
+of which depends on their level of uninformedness 𝜎𝑗∈R+.
+˜𝑟𝑓,𝑗
+𝑡
+= log 𝑝𝑓
+𝑡
+𝑝𝑚𝑖𝑑
+𝑡
++ 𝜂𝑗
+𝑡, 𝜂𝑗
+𝑡∼N(0, (𝜎𝑗)2)
+(6)
+𝑝𝑓
+𝑡represents the actual fundamental price of the stock. In real-
+world stock markets, investors estimate a company’s intrinsic value,
+known as the fundamental price, based on various publicly avail-
+able information and make trading decisions accordingly. An unin-
+formedness 𝜎𝑗is introduced in Equation (6) to capture differences
+in investors’ ability to accurately perceive the fundamental price.
+The term N (0, (𝜎𝑗)2) denotes a Gaussian distribution with a mean
+of 0 and a variance of (𝜎𝑗)2.
+The agent 𝑗’s trait factors 𝜎𝑗, 𝛼𝑗, and 𝛾𝑗are randomly deter-
+mined before each simulation as ∀𝑗𝜎𝑗∼N  𝜇𝜎, (𝜆𝜎)2 , 𝛼𝑗∼
+N  𝜇𝛼, (𝜆𝛼)2 , 𝛾𝑗∼𝑈(𝜆𝛾,𝛾𝑚𝑎𝑥) where 𝑈(𝜆𝛾,𝛾𝑚𝑎𝑥) indicates uni-
+form distribution with minimum and maximum values 𝜆𝛾and𝛾𝑚𝑎𝑥.
+3.2.2
+Action. The action 𝒂𝑗
+𝑡∈R2 consists of the following two
+components to form the agent 𝑗’s order.
+• Scaled order volume ˜𝑣𝑗
+𝑡
+• Scaled order margin ˜𝑟𝑗
+𝑡
+Using ˜𝑣𝑗
+𝑡, ˜𝑟𝑗
+𝑡∈[−1, 1], the signed order volume 𝑣𝑗
+𝑡and order price
+𝑝𝑗
+𝑡is decided as follows.
+𝑣𝑗
+𝑡= ⌈𝑣𝑚𝑎𝑥˜𝑣𝑗
+𝑡⌉, 𝑝𝑗
+𝑡= 𝑝𝑚𝑖𝑑
+𝑡
+−𝑟𝑚𝑎𝑥· sign( ˜𝑣𝑗
+𝑡) · ˜𝑟𝑗
+𝑡· 𝑝𝑚𝑖𝑑
+𝑡
+(7)
+2The mid price is calculated as the average of the best bid and ask prices. The best bid
+(ask) price refers to the highest (lowest) price buyers (sellers) are willing to trade on
+the LOB.
+
+Here, ⌈·⌉is a ceiling function. 𝑟𝑚𝑎𝑥∈R+ denotes the maximum
+scaled order price margin.
+3.2.3
+Reward. The immediate reward for agent 𝑗at time step 𝑡
+is defined as 𝑟𝑗
+𝑡= 𝑔(𝒐𝑗
+𝑡, 𝒂𝑗
+𝑡; 𝑗), where the reward function 𝑔(·, ·) is
+specified as follows.
+𝑔(𝒐𝑗
+𝑡, 𝒂𝑗
+𝑡; 𝑗) = 𝑢𝑗
+𝑡−𝛽𝑠ℎ𝑜𝑟𝑡1(𝑤𝑗
+𝑡< 0) −𝛽𝑐𝑎𝑠ℎ1(𝑐𝑗
+𝑡< 0)
+−𝛽𝑖𝑙𝑙𝑖𝑞𝑢𝑖𝑑𝑖𝑡𝑦𝑙𝑡−𝛽𝑓𝑢𝑛𝑑𝑎𝑚𝑒𝑛𝑡𝑎𝑙𝑅𝑓
+𝑡
+(8)
+where, 𝛽𝑠ℎ𝑜𝑟𝑡, 𝛽𝑐𝑎𝑠ℎ, 𝛽𝑖𝑙𝑙𝑖𝑞𝑢𝑖𝑑𝑖𝑡𝑦, 𝛽𝑓𝑢𝑛𝑑𝑎𝑚𝑒𝑛𝑡𝑎𝑙∈R+ are weights cor-
+responding to each component of the reward function. The com-
+ponents of the reward function (Equation (8)) can be categorized
+into terms related to individual learning (the first, second, and third
+terms) and those related to collective learning (the fourth and fifth
+terms). The first term, 𝑢𝑗
+𝑡∈[−1, 1], represents agent 𝑗’s utility:
+𝑢𝑗
+𝑡= 2
+𝜋× Arctan
+
+𝜔𝑢(𝑥𝑗
+𝑡+ 𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]𝑤𝑗
+𝑡𝑝𝑚𝑖𝑑
+𝑡
+−𝛼𝑗
+2 𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] |𝑤𝑗
+𝑡𝑝𝑚𝑖𝑑
+𝑡
+|)
+
+(9)
+where 𝜔𝑢is a scaling factor for the utility. Equation (9) models
+the agent 𝑗’s constant absolute risk averse (CARA) utility [7], cap-
+turing the decrease in utility due to volatility and the agent’s risk
+aversion parameter. The Arctan function compresses utility values
+to account for varying wealth scales. The second and third terms
+in Equation (8) impose penalties for short selling and cash short-
+ages, respectively, where 1(·) denotes an indicator function. The
+fourth term represents an illiquidity penalty, reflecting investor
+discomfort when the stock market exhibits illiquidity. Illiquidity, 𝑙𝑡,
+is calculated as follows:
+𝑙𝑡= 1
+𝑏𝜉
+𝑡
++ 1
+𝑠𝜉
+𝑡
++ 𝜔𝑙
+ 
+max(𝑏𝜉
+𝑡,𝑠𝜉
+𝑡)
+min(𝑏𝜉
+𝑡,𝑠𝜉
+𝑡)
+−1
+!
+(10)
+where 𝑙𝑡increases when either the buy or sell order volume in the
+LOB is low or when the order volumes are imbalanced. Here, 𝜔𝑙is
+a scaling factor for the order volume imbalance. The fifth term in
+Equation (8) is a penalty for deviation from the fundamental price.
+The integrated fundamental return, 𝑅𝑓
+𝑡, is calculated as follows:
+𝑅𝑓
+𝑡=
+∑︁
+𝜏<𝑡′≤𝑡
+
+1
+𝑡+ 1 −𝑡′ log
+𝑝𝑓
+𝑡′
+𝑝𝑚𝑖𝑑
+𝑡′
+
+s.t. sign
+ 
+log 𝑝𝑓
+𝜏
+𝑝𝑚𝑖𝑑
+𝜏
+!
+≠sign
+ 
+log 𝑝𝑓
+𝑡
+𝑝𝑚𝑖𝑑
+𝑡
+!
+,
+sign
+ 
+log
+𝑝𝑓
+𝑡′
+𝑝𝑚𝑖𝑑
+𝑡′
+!
+= sign
+ 
+log 𝑝𝑓
+𝑡
+𝑝𝑚𝑖𝑑
+𝑡
+!
+, ∀𝜏< 𝑡′ < 𝑡
+(11)
+The term 𝛽𝑓𝑢𝑛𝑑𝑎𝑚𝑒𝑛𝑡𝑎𝑙𝑅𝑓
+𝑡imposes a larger penalty as the market
+price deviates from the fundamental price in the same direction for
+an extended period. This penalty encourage agents to collectively
+learn the consensus that market prices tend to fluctuate around the
+fundamental price.
+Rather than hard-coding behavioral rules, we design reward
+functions that encode individual preferences. It specifies what to op-
+timize, not how to act, providing a meta-level guidance for learning,
+without prescribing fixed action rules.
+3.2.4
+Shared-Policy Learning. We train a single shared-policy across
+all agents using proximal policy optimization (PPO) [27]. The details
+of the learning procedure are outlined in Algorithm 1. To preserve
+Algorithm 1 The framework for learning heterogeneous trading
+policy in financial market simulations.
+Require: 𝑇𝑟𝑜𝑙𝑙𝑜𝑢𝑡, the rollout length, 𝛽𝑎𝑐𝑡𝑜𝑟and 𝛽𝑐𝑟𝑖𝑡𝑖𝑐, the learn-
+ing rate for the actor and critic networks, and orthogonally
+initialized 𝜽and 𝝓, the parameters for actor and critic networks,
+𝐿𝑎𝑐𝑡𝑜𝑟(·) and 𝐿𝑐𝑟𝑖𝑡𝑖𝑐(·), loss functions for updating the networks.
+1: Set rollout buffer for all agents empty ∀𝑗𝐷𝑗= {}
+2: while not converge do
+3:
+Set trait factors of all agents by randomly sample
+∀𝑗𝑤𝑗
+0,𝑐𝑗
+0, 𝜎𝑗,𝛾𝑗, and 𝛼𝑗from prior distributions.
+4:
+Set previous order times of all agents ∀𝑗𝑡𝑗
+0 ←0
+5:
+for 𝑡∈{1, . . . ,𝑇𝑠𝑖𝑚} do
+6:
+Update fundamental price 𝑝𝑓
+𝑡
+7:
+Randomly sample an agent 𝑗∈{1, . . . ,𝑛}
+8:
+Retrieve the last order time of agent 𝑗, 𝑡𝑗
+𝑖−1 and set 𝑡𝑗
+𝑖←𝑡
+(current time step, 𝑖∈{1, . . . 𝜄𝑗})
+9:
+Get observation for the agent 𝑗, 𝒐𝑗
+𝑡𝑗
+𝑖
+10:
+Sample action 𝒂𝑗
+𝑡𝑗
+𝑖
+and its probability 𝜋𝜽𝑡𝑗
+𝑖
+(𝒂𝑗
+𝑡𝑗
+𝑖
+|𝒐𝑗
+𝑡𝑗
+𝑖
+)
+11:
+Convert action 𝒂𝑗
+𝑡𝑗
+𝑖
+to an order, submit the order to the
+market, and the market execute orders
+12:
+Calculate reward for agent 𝑗, 𝑟𝑗
+𝑡𝑗
+𝑖
+= 𝑔(𝒐𝑗
+𝑡𝑗
+𝑖
+, 𝒂𝑗
+𝑡𝑗
+𝑖
+; 𝑗)
+13:
+if 1 < 𝑖then
+14:
+𝐷𝑗= 𝐷𝑗∪
+
+𝒐𝑗
+𝑡𝑗
+𝑖−1
+, 𝒂𝑗
+𝑡𝑗
+𝑖−1
+, log 𝜋𝜽𝑡𝑗
+𝑖−1
+,𝑟𝑗
+𝑡𝑗
+𝑖
+, 𝒐𝑗
+𝑡𝑗
+𝑖
+
+15:
+if length of 𝐷𝑗equals 𝑇𝑟𝑜𝑙𝑙𝑜𝑢𝑡then
+16:
+Update
+actor
+and
+critic
+using
+rollout
+𝐷𝑗,
+𝜽𝑡
+←
+𝜽𝑡−1
+−
+𝛽𝑎𝑐𝑡𝑜𝑟∇𝐿𝑎𝑐𝑡𝑜𝑟(𝜽𝑡−1),
+𝝓𝑡
+←
+𝝓𝑡−1 −𝛽𝑐𝑟𝑖𝑡𝑖𝑐∇𝐿𝑐𝑟𝑖𝑡𝑖𝑐(𝝓𝑡−1)
+17:
+Clear rollout buffer for agent 𝑗𝐷𝑗= {}
+18:
+end if
+19:
+end if
+20:
+end for
+21: end while
+individual-level variation and stabilize learning, each agent main-
+tains its own experience buffer 𝐷𝑗, and the policy 𝜋𝜽is updated
+only when each buffer reaches a fixed rollout length 𝑇𝑟𝑜𝑙𝑙𝑜𝑢𝑡. This
+design is aimed to prevent the mixing of trajectories generated
+under different agent preferences, which could otherwise dilute the
+distinct behavioral strategies shaped by their respective traits.
+3.3
+Calibration of Agent Trait Distribution
+Since agent traits shape market-level behavior, it is crucial to cal-
+ibrate their population-level distribution such that the simulated
+data resembles empirical data. To achieve this, we adopt the OT-
+based method proposed by Hashimoto and Izumi [15], which quan-
+titatively compares the simulation outputs and empirical data. We
+begin by defining points 𝒙𝑘∈R𝑑, 𝑘∈{1, . . . , 𝐾}, where each
+𝒙𝑘is a 𝑑-dimensional feature vector sampled from stock price se-
+ries data. These points form a point cloud, represented as 𝑋=
+⊤ 𝒙1
+. . .
+𝒙𝐾
+ ∈R𝐾×𝑑, where 𝐾denotes the number of points.
+The OT distance between the two point clouds 𝑋𝑠𝑦𝑛∈R𝐾×𝑑and
+
+𝑋𝑟𝑒𝑎𝑙∈R𝐿×𝑑, is defined as:
+𝑂𝑇(𝑋syn,𝑋real) =
+min
+𝑃∈R𝐾×𝐿
+𝐾
+∑︁
+𝑘=1
+𝐿
+∑︁
+𝑙=1
+𝑋𝑘
+real −𝑋𝑙
+syn
+
+2
+2 𝑃𝑘,𝑙
+s.t. ∀𝑘,𝑙0 ≤𝑃𝑘,𝑙,
+𝐾
+∑︁
+𝑘=1
+𝑃𝑘,𝑙= 1
+𝐿,
+𝐿
+∑︁
+𝑙=1
+𝑃𝑘,𝑙= 1
+𝐾
+(12)
+where 𝑋𝑠𝑦𝑛and 𝑋𝑟𝑒𝑎𝑙are the point clouds derived from synthetic
+and real data, respectively. We denote the 𝑘-th row element of
+the point cloud 𝑋as 𝑋𝑘. 𝑃𝑘,𝑙denotes the 𝑘-th row and 𝑙-th col-
+umn element of the matrix 𝑃∈R𝐾×𝐿
++
+. We define three types of
+points, 𝒙𝑟, 𝒙𝑡∈R1, and 𝒙𝑎𝑠∈R9 to see the underlying order of
+return distribution, tail return distribution, and absolute return time
+series in the synthetic data. Let us define a series of one-minute
+log-return data, arranged in chronological order at equal inter-
+vals, and standardized to have a sample mean of 0 and a sample
+standard deviation of 1. Let this standardized series be denoted
+as
+
+(𝑟𝑡,𝑖)𝑇𝑙𝑒𝑛
+𝑡=1
+𝑁𝑑𝑎𝑦𝑠
+𝑖=1
+, where 𝑇𝑙𝑒𝑛represents the length of each time
+series, and 𝑁𝑑𝑎𝑦𝑠denotes the total number of collected series. Using
+𝑟𝑡,𝑖, the points are represented as:
+𝒙𝑟=
+
+𝑟𝑡,𝑖
+
+, 𝒙𝑡=
+
+˜𝑟(𝑘)
+
+,
+𝒙𝑎𝑠= ⊤
+|𝑟𝑡,𝑖|
+|𝑟𝑡+1,𝑖|
+|𝑟𝑡+10,𝑖|
+. . .
+|𝑟𝑡+70,𝑖|
+
+(13)
+where ˜𝑟(𝑘) is calculated as follows. Let 𝑟(𝑁), . . . ,𝑟(1) denote the de-
+scending order statistics of samples of absolute log-returns |𝑟1|, . . . , |𝑟𝑁|
+of size 𝑁(= 𝑇𝑙𝑒𝑛𝑁𝑑𝑎𝑦𝑠),
+˜𝑟(𝑘) = log 𝑟(𝑁−𝑘+1)
+𝑟(𝑁−𝐾)
+, 𝑘∈{1, . . . , 𝐾}
+(14)
+˜𝑟(𝑘) was introduced to see the underlying order of the tail distri-
+bution of log-returns, drawing from Hill [17]. We define the OT
+distances between real and synthetic point clouds computed using
+the points 𝒙𝑟, 𝒙𝑡, and 𝒙𝑎𝑠as 𝑂𝑇𝑟, 𝑂𝑇𝑡, and 𝑂𝑇𝑎𝑠, respectively. Dur-
+ing calibration, the agents with each candidate combination of 𝜆𝜎,
+𝜆𝛼, and 𝜆𝛾are independently trained, and compared with weighted
+average of OT distances ¯
+𝑂𝑇= 𝜔𝑟𝑂𝑇𝑟+ 𝜔𝑡𝑂𝑇𝑡+ 𝜔𝑎𝑠𝑂𝑇𝑎𝑠where
+𝜔𝑟,𝜔𝑡,𝜔𝑎𝑠∈R+ are the weights assigned to each distance.
+4
+EXPERIMENT
+Through the experiment, we conduct market simulations using
+agents trained by our method, and investigate the following two
+research questions: RQ1: How does agent heterogeneity in pref-
+erences lead to behavioral differentiation? and RQ2: How does it
+lead to collective dynamics? For RQ1, we analyze the relationship
+between the incorporated agent traits and their behavioral patterns.
+For RQ2, we evaluate the realism of the simulated outcomes by
+comparing them against baselines where either learning or hetero-
+geneity in preferences is modeled. Finally, we discuss the emergent
+mechanisms of stock market dynamics from these analyses.
+In the experiment, we searched the hyperparameters 𝜆𝜎, 𝜆𝛼,
+and 𝜆𝛾using OT-based calibration method. For real data, we used
+FLEX-FULL historical tick data [21].
+4.1
+Baselines
+We compare the realism of the simulation results between our
+method and the following baseline ABMs.
+• Zero intelligence (ZI-) Agent [9]: In financial market sim-
+ulations, ZI-Agents serve as a behaviorally naive benchmark.
+They submit one unit buy or sell orders randomly, without
+any optimization or strategic reasoning.
+• Fundamental-chartist-noise (FCN-) Agent [7]: FCN-Agent
+is a widely adopted agent model for LOB market simula-
+tions. It is primarily a mixture of fundamental and chartist
+investment strategies, incorporating heterogeneity in time
+horizons and risk aversion.
+• adaptive FCN-Agent (adFCN-Agent) [33]: adFCN-Agent
+is a variant of FCN-Agent, which adaptively selects between
+fundamental and chartist strategies based on their recent
+predictive accuracy.
+• Ours (fixed): Our method without trait heterogeneity. All
+agents’ trait factors are fixed with population mean.
+The FCN-Agent models only heterogeneity in preferences, whereas
+the adFCN-Agent with fixed risk aversion and time horizons across
+agents (adFCN-Agent (fixed)) models only learning. The key pa-
+rameters of these ABMs were calibrated using the OT distance ¯
+𝑂𝑇,
+in the same manner as in our model.
+4.2
+Evaluation Metrics
+In addition to the OT distances, we assessed whether the synthetic
+data exhibited key stylized facts observed in real financial markets.
+Following Cont [8] and Vyetrenko et al. [31], we considered the
+following stylized facts:
+• Kurtosis: The kurtosis of the stock return distribution is
+positive, indicating fat tails.
+• Tail coefficient (Tail coef.): The Hill tail exponent [17] is
+approximately three, reflecting the power-law behavior of
+extreme returns.
+• Autocorrelation coefficient (Acorr coef.): The estimated
+coefficient ˆ𝜁acorr
+𝑟
+in the linear regression of log Corr(|𝑟𝑡,𝑖|, |𝑟𝑡+𝜏,𝑖|)
+on log𝜏lies between 0 and 1, indicating the long memory
+property of absolute return series. Here, Corr(·, ·) denotes
+the correlation operator.
+• Volume-Volatility correlation (VV corr.): The correlation
+between the executed trading volume and the absolute return
+is positive.
+-0.90
+-0.60
+-0.30
+-0.00
+0.30
+0.60
+0.90
+risk aversion term 
+j
+-0.900
+-0.600
+-0.300
+-0.000
+0.300
+0.600
+0.900
+volatility V[tj
+i
+1,tj
+i]
+0.2291
+0.2182
+0.2070
+0.1954
+0.1837
+0.1719
+0.1601
+0.1799
+0.1687
+0.1571
+0.1454
+0.1334
+0.1214
+0.1095
+0.1295
+0.1181
+0.1063
+0.0944
+0.0824
+0.0703
+0.0583
+0.0783
+0.0667
+0.0549
+0.0429
+0.0308
+0.0188
+0.0070
+0.0265
+0.0149
+0.0031
+-0.0089
+-0.0208
+-0.0326
+-0.0443
+-0.0255
+-0.0370
+-0.0487
+-0.0605
+-0.0722
+-0.0838
+-0.0952
+-0.0772
+-0.0886
+-0.1001
+-0.1116
+-0.1230
+-0.1342
+-0.1452
+0.10
+0.05
+0.00
+0.05
+0.10
+0.15
+0.20
+Figure 3: Heatmap of the scaled order volume ˜𝑣𝑗
+𝑡derived from
+the obtained policy, with varying rescaled volatility 𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+and risk aversion term 𝛼𝑗.
+
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+signed scaled order margin sign(vj
+t) rj
+t
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+scaled order volume vj
+t
+[second quadrant]#:2952 average j:0.34
+[third quadrant]#:2351 average j:-0.43
+[first quadrant]#:2531 average j:-0.43
+[forth quadrant]#:2716 average j:0.38
+Figure 4: Scatter plot of agent action vectors from five simu-
+lations, with color coding for each quadrant. The size of each
+point represents the agent’s discount factor 𝛾𝑗.
+5
+RESULTS AND DISCUSSIONS
+This section presents and discusses our experimental results. RQ1
+analyzes the micro-level agent strategies and the meso-level ecologi-
+cal niches they form, while RQ2 examines the macro-level structures
+that drive collective market dynamics.
+5.1
+RQ1: Behavioral Differentiations
+5.1.1
+Behavioral Analyses. To investigate RQ1, we analyzed the
+learned policy obtained through our method to investigate how
+each trait factor contributes to shaping agent behavioral patterns.
+Figure 3 presents a heatmap illustrating the values of ˜𝑣𝑗
+𝑡while
+varying the two observation components, 𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖] and 𝛼𝑗. The
+values of the remaining variables were fixed. Figure 3 indicates that
+agents tended to sell stocks more actively as their risk aversion
+increased and market volatility rose.
+Figure 4 presents the scatter plot of agent actions ˜𝑣𝑗
+𝑡and ˜𝑟𝑗
+𝑡across
+five simulation trials. Agent actions are distributed across all quad-
+rants of the action space, defined by order volume and margin. The
+second and fourth quadrants represent behavior consistent with
+price-sensitive trading—selling above the mid price or buying below
+it—while the first and third quadrants reflect the opposite: trading
+at disadvantageous prices. The average discount factors 𝛾𝑗differ
+systematically across these regions. Agents acting in the second
+and fourth quadrants tend to have higher 𝛾𝑗values, suggesting a
+more patient, forward-looking attitude. Conversely, agents in the
+first and third quadrants exhibit lower average discount factors, in-
+dicating a more myopic preference structure. This pattern suggests
+that myopic agents are more willing to accept unfavorable prices
+to execute their trades immediately, prioritizing execution speed
+over price optimization. These findings indicate that the learned
+shared-policy is not mere averaged compromises, but rather reflect
+meaningful behavioral differentiation driven by agent traits.
+Figure 5 presents a box plot illustrating the relationship between
+agent uninformedness 𝜎𝑗and trading performance. Agents are
+j <q25
+q25
+j <q50 q50
+j<q75
+q75
+j
+range of uninformedness j
+0.10
+0.05
+0.00
+0.05
+profit or loss log(
+xj
+Tsim
+xj
+0 )
+median=0.0131
+ [-0.2761, 0.0642]
+median=-0.0034
+ [-0.2190, 0.0389]
+median=-0.0039
+ [-0.3787, 0.0418]
+median=-0.0088
+ [-0.4032, 0.0382]
+Figure 5: Box plot of agents’ trading performance over five
+runs. Agents are grouped by uninformedness 𝜎𝑗quartiles
+(qquartile(%)) on the horizontal axis, and vertical axis shows
+log returns. Boxes indicate medians and 90% ranges, showing
+the distribution of each trading performance.
+grouped into quartiles based on their level of uninformedness, with
+lower 𝜎𝑗indicating better access to information. The plot reveals a
+negative trend: as uninformedness increases, the profit distribution
+shifts downward. This pattern demonstrates how differences in
+access to information influence agent behavior and ultimately lead
+to disparities in trading performance.
+5.1.2
+Probing of the Shared-Policy. To further support our claim
+to answer RQ1 that agent behaviors are differentiated according
+to their individual traits, we conducted a probing analysis on the
+learned shared-policy network. Figures 6 show the t-SNE visual-
+izations of the internal representations extracted from the second
+hidden layer of the shared-policy network. These representations
+were collected across five independent evaluation episodes. These
+visualizations illustrate how different observation components are
+embedded in the learned internal representations. As shown in
+Figures 6 (i, j, k), the internal representations are systematically
+organized according to agent-specific traits. In the three visualiza-
+tions, the data points are distinctly clustered by their corresponding
+trait values. This consistent trait-wise separation in the second hid-
+den layer suggests that the network implicitly encodes a latent
+notion of who the agent is based on its individual preferences.
+Figures 6 (i, j, k) show smooth, continuous gradients along the
+latent dimensions when colored by each agent’s trait parameters, in-
+dicating that the shared-policy develops an internal representation
+that smoothly encodes who the agent is—i.e., its identity defined
+by long-lasting traits. In contrast, Figures 6 (c, f, g) reveal more
+clustered and discrete structures. These features correspond to the
+agent’s transient state, such as its current wealth or market liquidity.
+Notably, the reward function includes components like the cash
+shortage penalty and illiquidity penalty, which are implemented as
+piecewise constant functions—yielding sharply negative rewards
+when certain thresholds are crossed. This structural design likely
+induces discrete transitions in the agent’s internal representation of
+situational context. Together, these results suggest that the learned
+shared-policy not only encodes each agent’s stable identity (trait-
+driven preferences) in a smooth manner, but also dynamically reacts
+to short-term agent or market states in a thresholded, categorical
+
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+wj
+tpmid
+t
+xj
+t
+(a) Holding asset ratio:
+𝑤𝑗
+𝑡𝑝𝑚𝑖𝑑
+𝑡
+𝑥𝑗
+𝑡
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+wj
+t
+vmax
+(b) Holding asset-to-maximum or-
+der volume ratio:
+𝑤𝑗
+𝑡
+𝑣𝑚𝑎𝑥
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+pmid
+t
+cj
+t
+(c) Inverted buying power:
+𝑝𝑚𝑖𝑑
+𝑡
+𝑐𝑗
+𝑡
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+r[tj
+i
+1,tj
+i]
+(d) Return: 𝑟[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+V[tj
+i
+1,tj
+i]
+(e) Volatility: 𝑉[𝑡𝑗
+𝑖−1,𝑡𝑗
+𝑖]
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+|wj
+t|
+st
+(f) Asset volume-to-buy order ra-
+tio:
+|𝑤𝑗
+𝑡|
+𝑏𝜉
+𝑡
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+|wj
+t|
+st
+(g) Asset volume-to-sell order ra-
+tio:
+|𝑤𝑗
+𝑡|
+𝑠𝜉
+𝑡
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.15
+0.10
+0.05
+0.00
+0.05
+0.10
+0.15
+rf,j
+t
+(h) Blurred fundamental return:
+˜𝑟𝑓,𝑗
+𝑡
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+(i) Uninformedness: 𝜎𝑗
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+(j) Risk aversion: 𝛼𝑗
+100
+50
+0
+50
+100
+Dim 1
+75
+50
+25
+0
+25
+50
+75
+Dim 2
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+(k) Discount factor: 𝛾𝑗
+Figure 6: t-SNE visualizations of internal representations in the second hidden layer, colored by various observation components.
+Table 1: Ablation study on preference heterogeneity. We
+report the average of the discounted cumulative utility U
+(mean ± std. over five trials).
+Model
+Avg. Cum. Disc. Utility
+Ours
+1016.88 (±41.22)
+Ours (homo-𝛼𝑗)
+846.58 (±29.85)
+Ours (𝛼𝑗masked)
+799.32 (±83.47)
+Ours (homo-𝛾𝑗)
+861.98 (±51.02)
+Ours (𝛾𝑗masked)
+606.58 (±102.39)
+Ours (homo-𝛼𝑗)
+1009.98 (±44.00)
+Ours (𝛼𝑗masked)
+916.53 (±20.87)
+fashion. In doing so, the policy integrates both long-term traits and
+short-term states to adaptively adjust agent behavior, supporting
+the emergence of diverse and context-aware strategies.
+5.1.3
+Ablation Study. We conducted an ablation study to evaluate
+the role of preference heterogeneity in sustaining social welfare.
+Specifically, we ran five independent simulations for each setting
+and computed the sum of discounted cumulative utilities across all
+agents, denoted as U:
+U =
+𝑛
+∑︁
+𝑗=1
+𝜄𝑗
+∑︁
+𝑖=1
+(𝛾𝑗)𝑖𝑢𝑗
+𝑡𝑗
+𝑖
+(15)
+Two types of ablations were implemented: (i) homo, where the
+focal trait of agents is fixed to its population mean, thereby elim-
+inating heterogeneity, and (ii) masked, where the corresponding
+trait input to the shared-policy network is masked. As reported
+in Table 1, removing heterogeneity in key preference parameters
+such as risk aversion (𝛼𝑗) and time discounting (𝛾𝑗) leads to a sub-
+stantial reduction in overall social utility. This result highlights
+that when all agents share the same risk attitude or time horizon,
+the system loses the diversity of demand–supply matching that
+is otherwise enabled by heterogeneous preferences. For example,
+risk-tolerant agents and risk-averse agents, or short-term oriented
+and long-term oriented agents, complement each other in ways
+that increase aggregate welfare. The fact that utility decreases in
+both homo and masked settings provides evidence that preference-
+driven behavioral differentiation plays a critical role in enhancing
+welfare. Each agent adapts its strategy in alignment with its individ-
+ual preference, leading to a diversified financial ecosystem in which
+agents specialize in distinct niches. Preference heterogeneity, when
+coupled with learning, induces functional complementarity [28]
+among such agent niches—an organismic order in which no single
+subpopulation can reproduce the system’s performance alone.
+5.2
+RQ2: Emergence of Market Dynamics
+To address RQ2, Table 2 compares our method with baseline ABMs.
+FCN-Agent incorporates only heterogeneous preferences, while
+adFCN-Agent (fixed) and Ours (fixed) model only the learning
+
+Table 2: Comparison of key stylized facts and OT distances from real data across financial ABMs. A check mark (✓) denotes
+conformity to each stylized fact. OT columns show mean distances between synthetic and real point clouds (standard deviations
+in parentheses); the best values are in bold.
+Stylized Facts
+OT Distances from Real Data
+Kurtosis
+Tail coef.
+Acorr coef.
+VV corr.
+𝑂𝑇𝑟(×10−1)
+𝑂𝑇𝑡(×10−2)
+𝑂𝑇𝑎𝑠
+Real data
+7.79✓
+2.96✓
+0.71✓
+0.43✓
+—
+—
+—
+ZI-Agent
+1.19✓
+3.79
+—
+0.04✓
+1.80 (±0.79)
+1.00 (±0.52)
+0.34 (±0.03)
+FCN-Agent
+6.25✓
+3.23
+1.11
+0.08✓
+1.34 (±0.31)
+0.91 (±0.61)
+0.30 (±0.02)
+adFCN-Agent (fixed)
+31.38✓
+2.56
+1.01
+0.01✓
+2.34 (±0.45)
+1.05 (±0.62)
+0.26 (±0.02)
+adFCN-Agent
+10.38✓
+2.82✓
+0.77✓
+0.05✓
+0.65 (±0.27)
+0.48 (±0.30)
+0.26 (±0.04)
+Ours
+8.65✓
+2.99✓
+0.92✓
+0.16✓
+0.37 (±0.32)
+0.32 (±0.24)
+0.10 (±0.03)
+Ours (fixed)
+12.89✓
+3.44
+1.05
+0.16✓
+1.40 (±0.89)
+0.65 (±0.56)
+0.19 (±0.02)
+mechanism. In contrast, adFCN-Agent and Ours implement both
+heterogeneity and learning simultaneously. The results show that
+our model and adFCN-Agent successfully reproduce all the key
+stylized facts, whereas models that adopt only one of the two mech-
+anisms fail to capture certain empirical regularities. This finding
+suggests that both heterogeneous preferences and adaptive learning
+are indispensable drivers of collective dynamics in financial markets.
+Moreover, the OT distances reveal a clear advantage of our method.
+Across all three metrics, Ours achieves the lowest distance from
+real data, outperforming not only the purely heterogeneity-based
+and purely learning-based baselines, but also the adFCN-Agent.
+To summarize, the behavioral differentiation aligned with hetero-
+geneous preferences gives rise to realistic dynamics in financial
+markets through agent interactions. We refer to this hierarchical
+structure—where micro-level differentiation induces macro-level
+order—as emergence from emergence. The superior performance
+of Ours over adFCN-Agent can be attributed to the description of
+emergence from emergence, which more accurately reflects how
+real markets evolve through successive layers of adaptation and
+organization spanning individual and collective scales.
+Figure 7 shows examples of simulated market prices generated
+by our method. Market prices generally follow fundamental val-
+ues, indicating that agents have collectively learned the norm that
+prices should reflect fundamentals. At the same time, short-term
+deviations and fluctuations suggest market noise and diverse agent
+behaviors. Overall, the model strikes a balance between agent-level
+diversity and coherent market structure. Agents act differently, yet
+their interactions produce organized price dynamics.
+6
+CONCLUSION
+This study sought a bottom-up understanding of how financial
+market dynamics emerge by analyzing the roles of heterogeneous
+preferences and learning mechanism. In our MARL-based ABM,
+agent preferences are embedded in both observations and rewards,
+and agents learn a shared-policy that yields behaviors aligned with
+their preferences. Experiments showed that (i) agents differentiated
+their behavior according to preferences within a unified learning
+framework, leading to niche specialization, and (ii) interactions
+among differentiated agents reproduced realistic market dynamics.
+250
+500
+750
+1000
+1250
+1500
+1750
+2000
+300
+325
+350
+price
+250
+500
+750
+1000
+1250
+1500
+1750
+2000
+260
+280
+300
+price
+250
+500
+750
+1000
+1250
+1500
+1750
+2000
+time step
+300
+350
+400
+price
+market price
+fundamental price
+Figure 7: Representative examples of simulated market price
+series generated by our method.
+These findings demonstrate emergence from emergence: micro-
+level differentiation giving rise to macro-level dynamics. This mul-
+tilayered emergence parallels biological organization, where cells
+differentiate into organs and organs self-organize into a body, sug-
+gesting that financial markets likewise form higher-order structures
+through heterogeneous preferences and adaptive learning.
+Future research may extend such a hierarchical emergence to
+the loop of emergence by incorporating micro-macro loops in which
+agents repeatedly adapt to and shape evolving environments. Such a
+co-evolutionary dynamic enables the simulation as nonequilibrium
+systems, capturing more realistic patterns of structural change in
+financial markets.
+REFERENCES
+[1] Tyler Abbot. 2017. Heterogeneous risk preferences in financial markets. Paris
+December 2016 Finance Meeting EUROFIDAI - AFFI.
+[2] W. Brian Arthur. 1999. Complexity and the economy. Science 284, 5411 (1999),
+107–109.
+
+[3] Robert. L Axtell and J. Doyne Farmer. 2022. Agent-based modeling in economics
+and finance: Past, present, and future. Journal of Economic Literature (2022).
+[4] Harjoat S. Bhamra and Raman Uppal. 2013. Asset prices with heterogeneity in
+preferences and beliefs. The Review of Financial Studies 27, 2 (2013), 519–580.
+[5] William A. Brock and Cars H. Hommes. 1998. Heterogeneous beliefs and routes
+to chaos in a simple asset pricing model. Journal of Economic Dynamics and
+Control 22, 8 (1998), 1235–1274.
+[6] Carl Chiarella and Xue-Zhong He. 2002. Heterogeneous beliefs, risk and learning
+in a simple asset pricing model. Computational Economics 19 (2002), 95–132.
+[7] Carl Chiarella, Giulia Iori, and Josep Perelló. 2009. The impact of heterogeneous
+trading rules on the limit order book and order flows. Journal of Economic
+Dynamics and Control 33, 3 (2009), 525–537.
+[8] Rama Cont. 2001. Empirical properties of asset returns: stylized facts and statis-
+tical issues. Quantitative Finance 1, 2 (2001), 223–236. https://doi.org/10.1080/
+713665670
+[9] Wei Cui and Anthony Brabazon. 2012. An agent-based modeling approach to
+study price impact. In IEEE Conference on Computational Intelligence for Financial
+Engineering & Economics. 1–8.
+[10] Giovanni Dosi, Mauro Napoletano, Andrea Roventini, Joseph E. Stiglitz, and
+Tania Treibich. 2020. Rational heuristics? Expectations and behaviors in evolving
+economies with heterogeneous interacting agents. Economic Inquiry 58, 3 (2020),
+1487–1516.
+[11] Ido Erev and Alvin E. Roth. 1998. Predicting how people play games: Reinforce-
+ment learning in experimental games with unique, mixed strategy equilibria. The
+American Economic Review 88, 4 (1998), 848–881.
+[12] Benjamin Patrick Evans and Sumitra Ganesh. 2024. Learning and calibrating het-
+erogeneous bounded rational market behaviour with multi-agent reinforcement
+learning. In Proceedings of the International Conference on Autonomous Agents
+and Multiagent Systems. 534–543.
+[13] J. Doyne Farmer and Duncan Foley. 2009. The economy needs agent-based
+modeling. Nature 460 (2009), 685–6. https://doi.org/10.1038/460685a
+[14] J. Doyne Farmer and John Geanakoplos. 2009. The virtues and vices of equilibrium
+and the future of financial economics. Complexity 14, 3 (2009), 11–38.
+[15] Ryuji Hashimoto and Kiyoshi Izumi. 2025. Interpretable market simulations via
+optimal transport: Power law decomposition and implications for market design.
+In Proceedings of the ACM International Conference on AI in Finance.
+[16] Xue-Zhong He, Youwei Li, and Min Zheng. 2019. Heterogeneous agent models
+in financial markets: A nonlinear dynamics approach. International Review of
+Financial Analysis 62 (2019), 135–149.
+[17] Bruce M. Hill. 1975. A simple general approach to inference about the tail of a
+distribution. The Annals of Statistics 3, 5 (1975), 1163–1174.
+[18] Cars H. Hommes. 2001. Financial markets as nonlinear adaptive evolutionary
+systems. Quantitative Finance 1, 1 (2001), 149–167.
+https://doi.org/10.1080/
+713665542
+[19] Cars H. Hommes. 2002. Modeling the stylized facts in finance through simple
+nonlinear adaptive systems. Proceedings of the National Academy of Sciences 99,
+suppl_3 (2002), 7221–7228.
+[20] Lucas Iris, Cotsaftis Michel, and Bertelle Cyrille. 2017. Heterogeneity and self-
+organization of complex systems through an application to financial market with
+multiagent systems. International Journal of Bifurcation and Chaos 27 (12 2017),
+1750219.
+[21] Japan Exchange Group. 2025. Historical Data. https://www.jpx.co.jp/english/
+markets/paid-info-equities/historical/01.html.
+[22] Blake LeBaron. 1999. Evolution and time horizons in an agent-based stock market.
+Technical Report 1342. https://doi.org/10.1017/s1365100501019058
+[23] Blake LeBaron. 2006. Chapter 24 Agent-based computational finance. Handbook
+of Computational Economics, Vol. 2. Elsevier, 1187–1233.
+[24] Patrick McMillen and Michael Levin. 2024. Collective intelligence: A unifying
+concept for integrating biology across scales and substrates. Communications
+Biology 7 (2024), 378.
+[25] John H. Miller and Scott E. Page. 2007. Complex adaptive systems: An introduc-
+tion to computational models of social life (stu - student edition ed.). Princeton
+University Press.
+[26] R.G. Palmer, W. Brian Arthur, John H. Holland, Blake LeBaron, and Paul Tayler.
+1994. Artificial economic life: A simple model of a stockmarket. Physica D:
+Nonlinear Phenomena 75, 1 (1994), 264–274.
+[27] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+2017. Proximal policy optimization algorithms. arXiv:1707.06347
+[28] Neil D. Theise and Menas C. Kafatos. 2013. Complementarity in biological
+systems: A complexity view. Complexity 18, 6 (2013), 11–20.
+[29] Nelson Vadori, Leo Ardon, Sumitra Ganesh, Thomas Spooner, Selim Amrouni,
+Jared Vann, Mengda Xu, Zeyu Zheng, Tucker Balch, and Manuela Veloso. 2024.
+Towards multi-agent reinforcement learning-driven over-the-counter market
+simulations. Mathematical Finance 34, 2 (2024), 262–347.
+[30] Nelson Vadori, Sumitra Ganesh, Prashant Reddy, and Manuela Veloso. 2020.
+Calibration of shared equilibria in general sum partially observable Markov games.
+In Proceedings of the International Conference on Neural Information Processing
+Systems. Article 1184, 11 pages.
+[31] Svitlana Vyetrenko, David Byrd, Nick Petosa, Mahmoud Mahfouz, Danial Der-
+vovic, Manuela Veloso, and Tucker Balch. 2021. Get real: Realism metrics for
+robust limit order book market simulations. In Proceedings of the ACM Interna-
+tional Conference on AI in Finance. Article 2, 8 pages.
+[32] David Weinbaum. 2009. Investor heterogeneity, asset pricing and volatility
+dynamics. Journal of Economic Dynamics and Control 33, 7 (2009), 1379–1397.
+[33] Isao Yagi, Mahiro Hoshino, and Takanobu Mizuta. 2023. Impact of high-frequency
+trading with an order book imbalance strategy on agent-based stock markets.
+Complexity 2023, 1 (2023), 3996948.
+[34] Baosheng Yuan and Kan Chen. 2006. Impact of investor’s varying risk aversion
+on the dynamics of asset price fluctuations. Journal of Economic Interaction and
+Coordination 1 (2006), 189–214. Issue 2.

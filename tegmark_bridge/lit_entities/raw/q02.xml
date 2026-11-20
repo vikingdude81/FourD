@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yYbujAIMZynk7WrKVaaan+NpUtY</id>
+  <title>arXiv Query: search_query=abs:"diachronic identity"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22diachronic+identity%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.00220v2</id>
+    <title>A Category Theory Account of AI Identity</title>
+    <updated>2026-08-02T19:37:05Z</updated>
+    <link href="https://arxiv.org/abs/2607.00220v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.00220v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Artificial intelligence (AI) systems are routinely modified after deployment through retraining and changes in their environments. These transformations raise a metaphysical question: under what conditions does an AI system remain the same system over time or across deployments? Earlier work formulates synchronic and diachronic identity propositionally, by relating identity within a fixed AI system type to equality of trustworthiness levels. Such criteria specify when identity statements are true, but leave implicit the structure of the states compared, the transformations connecting them, and the temporal organization of persistence. We develop a category-theoretic formalization of AI identity. An AI system type is specified by a datum consisting of a techno-function, a trustworthiness profile, and a trustworthiness-level function. Profile-relative states are connected by admissible lifecycle paths, which are restricted to trustworthiness-level-preserving transformations and quotiented to obtain a reachability category. Temporally admissible functors represent AI system histories, while time-synchronous natural transformations compare realized histories. The formalization yields two categorical interpretations of the earlier AI identity criteria. A weak interpretation recovers identity as equality of trustworthiness level. A strong interpretation requires mutual trustworthiness-preserving reachability, expressed through state isomorphism or natural isomorphism of realized histories. Category theory therefore replaces a single AI identity relation with a structured hierarchy of diachronic and synchronic criteria. The resulting framework identifies identity-related preconditions for transferring responsible-AI claims, evidence, and governance procedures across versions or deployments, without treating categorical identity as sufficient by itself for such transfer.</summary>
+    <category term="math.CT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-30T21:54:36Z</published>
+    <arxiv:comment>25 pages, 4 figures. v2: improved notation and exposition, revised figures, and corrected typographical errors</arxiv:comment>
+    <arxiv:primary_category term="math.CT"/>
+    <author>
+      <name>Andrea Ferrario</name>
+    </author>
+  </entry>
+</feed>

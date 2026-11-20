@@ -538,3 +538,32 @@ theta  away_share15  away_leader  recrown15
 - Market reading: a shifted/rotated GEX landscape should re-crown the
   regime at the TRANSLATED king position, not the old strike bin.
   Regime identity = relational shape, testable on strike-lattice shifts.
+
+---
+
+## 7. Related work — entity-identity sweep (`lit_entities/`)
+
+Claim-derived arXiv sweep (12 queries, 142 unique indexed, 14 PDFs audited on disk;
+full dossier in `lit_entities/REPORT.md`). Verdict: no found paper combines
+entity demographics (E1/E2) + executable identity transplant (B1) + measured
+identity radius (B2). Two direct confirmations and three usable imports:
+
+- **2407.21086 "Non-Platonic Autopoiesis of a Cellular Automaton Glider in Asymptotic Lenia"** —
+  independent community reaches our immanent-forms conclusion by name: a glider survives
+  at engine step ∆t=0.2 and dies at 0.17/0.26. Form exists only as hosted dynamics.
+- **2402.10236 (Hamon et al.)** defines CA "individuals" as self-constituting structures
+  preserving spatiotemporal unity, and shows multi-entity runs preserving individuality —
+  a qualitative entity ecology; our E1 demographics are the quantitative version they lack.
+- **2512.09352** builds a structural-persistence order parameter Γ with bimodality test and
+  "structural zombie" (activity without architecture) ≈ our boiling state. Import: dip test
+  on z/tr distributions for phase separation.
+- **2506.03233 / 2607.00220 (Ferrario)**: diachronic identity = mutual reachability under
+  admissible transformations; our B2 identity radius is the measured instance.
+- **1802.01161 (Conitzer)**: "further facts" puzzle — B1 is an executable case where the
+  identity further-fact is absent.
+- **2005.03742 (Chan)**: Lenia soliton families incl. collision-survival and composite
+  "Synorbium" — suggests composite-entity test (multiset union of substrates → fused basin).
+- **2511.05207**: heterogeneous preferences → market niche specialization; supports T6b direction.
+
+**Wedge**: quantitative SAS census + identity certificates, between the CA/alife camp
+(phenomenology, no identity tests) and the AI-metaphysics camp (criteria, no simulations).

@@ -1,0 +1,1967 @@
+Closing the Loop: How Semantic Closure Enables Open-Ended Evolution?
+Amahury J. L´opez-D´ıaz and Carlos Gershenson
+School of Systems Science and Industrial Engineering, Binghamton University, 4400 Vestal Pkwy E, Binghamton, NY 13902, USA
+alpez@binghamton.edu
+Abstract
+This manuscript explores the evolutionary emergence of
+semantic closure—the self-referential mechanism through
+which symbols actively construct and interpret their own
+functional contexts—by integrating concepts from relational
+biology, physical biosemiotics, and ecological psychology
+into a unified computational enactivism framework. By ex-
+tending Hofmeyr’s (Fabrication, Assembly)-systems—a con-
+tinuation of Rosen’s (Metabolism, Repair)-systems—with a
+temporal parametrization, we develop a model capable of
+capturing critical properties of life, including autopoiesis, an-
+ticipation, and adaptation.
+Our stepwise model traces the
+evolution of semantic closure from simple reaction networks
+that recognize regular languages to self-constructing chem-
+ical systems with anticipatory capabilities, identifying self-
+reference as necessary for robust self-replication and open-
+ended evolution. Such a computational enactivist perspective
+underscores the essential necessity of implementing syntax-
+pragmatic transformations into realizations of life, providing
+a cohesive theoretical basis for a recently proposed trialectic
+between autopoiesis, anticipation, and adaptation to solve the
+problem of relevance realization. Thus, our work opens av-
+enues for new models of computation that can better capture
+the dynamics of life, naturalize agency and cognition, and
+provide fundamental principles underlying biological infor-
+mation processing.
+Introduction
+“How, therefore, we must ask, is it possible for us to
+distinguish the living from the lifeless if we can
+describe both conceptually by the motion of inorganic
+corpuscles?”
+Pearson, 1892
+The question posed by Karl Pearson over a century ago
+remains central to the philosophical and scientific discourse
+concerning the nature of life and its differentiation from
+non-life. Historically, science has attempted to resolve this
+conundrum through increasingly sophisticated physical and
+mathematical models. Early attempts, grounded in classical
+and later quantum physics, explored the possibility of undis-
+covered laws or unique features intrinsic to living matter
+(Schrodinger, 1946; Pattee, 1969b). The mid-20th century
+explosion in molecular biology and origin-of-life research,
+culminating in the discovery of DNA’s structure and genetic
+mechanisms, fostered the belief that conventional physical
+and chemical laws were sufficient to explain life. This view,
+championed by Kendrew (1967), marked the entrenchment
+of reductionism in theoretical biology. Yet, Pearson’s fun-
+damental inquiry persists partially unanswered.
+More recently, complex systems science (Bar-Yam, 1997;
+Mitchell, 2009; De Domenico et al., 2019; Ladyman and
+Wiesner, 2020) has emerged as an alternative paradigm to
+explain life. Complex systems science seeks universal prin-
+ciples across domains: from spin glasses and sandpiles to
+cells and societies. According to this narrative, life is an
+emergent autonomous pattern, produced by the non-linear
+interactions among its components.
+However, complex
+system science does not discriminate life from non-life in
+physical or functional terms.
+Furthermore, regardless of
+the many complex systems science models—nonlinear dy-
+namics (Strogatz, 2024), ergodic theory (Walters, 2000),
+self-organized criticality (Bak et al., 1988), agent-based
+models (Railsback and Grimm, 2019), networks (Newman,
+2018), game theory (Fudenberg and Tirole, 1991), among
+others—we have developed, rule-based self-organization
+can only yield limited novelty, which contrasts drastically
+with the open-ended evolutionary potential of life to inno-
+vate using circumscribed resources.
+As a complementary viewpoint to complex systems sci-
+ence, physical biosemiotics (pioneered by Howard Pattee)
+offers a radically different account of what distinguishes liv-
+ing from non-living systems (Pattee, 2019). Unlike mod-
+els that seek universal principles across domains through
+rule-based self-organization or statistical dynamics, Pattee
+argued that life originates in a fundamental complementar-
+ity between symbolic representation and physical dynam-
+ics (Pattee, 2007b). At the heart of this framework lies the
+concept of the epistemic cut: a necessary demarcation be-
+tween quiescent, rate-independent symbolic structures and
+the rate-dependent, energy-governed dynamics they con-
+trol (Pattee, 2001). This distinction, which does not corre-
+spond to an ontological dualism but an epistemic necessity,
+arXiv:2404.04374v7  [physics.bio-ph]  18 Oct 2025
+
+reframes the origin of biological order as dependent not only
+on physical laws, but on the emergence of symbol-mediated
+constraints capable of controlling those laws. Pattee’s work
+thus sets the stage for a theory of life in which measurement,
+control, and memory are not secondary features but primary
+requirements for evolvability and functional organization.
+This leads us to the concept of symbol. Biological sys-
+tems are pervaded by codes, from the genetic code to be-
+havioral signals (Barbieri, 2003, 2018). However, symbols
+do not exist in isolation, but are always part of a semiotic
+system (Pattee, 1969b, 2001). A semiotic system consist of
+(i) discrete, rate-independent symbol vehicles; (ii) interpret-
+ing structures—non-integrable constraints or codes; and (iii)
+organizations in which symbols and interpreting structures
+have functional value (Pattee, 1969a, 1986). These semiotic
+components conform to the pragmatic theory of commu-
+nication developed by Morris (1946), which distinguishes
+three irreducible dimensions: syntax (formal relations be-
+tween symbols), semantics (correspondence with referents),
+and pragmatics (usefulness or action-invoking roles).
+As shown by Cariani (1989), the three irreducible semi-
+otic axes are essential in understanding how organisms pro-
+cess and act on information.
+Still, such an irreducibility
+challenges our conception of modeling, since we are used to
+reducing everything to symbols and their syntax. In fact, the
+whole branch of artificial life is based on this premise (Pat-
+tee, 2019). The idea of reducing everything to syntax is not
+far-fetched. If we identify observables with symbols and
+their dynamical laws with syntax, then interpreting struc-
+tures acquired the role of non-holonomic (or non-integrable)
+constraints: flexible structures that control dynamics without
+eliminating configurational alternatives. These constraints,
+such as mechanical governors in machines or enzymes in
+cells, cannot be separated from the dynamics they influence.
+Unlike rigid constraints that merely reduce degrees of free-
+dom, non-integrable constraints retain degeneracy, enabling
+symbolic control without eliminating the system’s poten-
+tial variability. They serve as memory readers that bridge
+the epistemic cut by coupling quiescent symbols with rate-
+dependent trajectories (Pattee, 1969b).
+Importantly, constraints are epistemically but not ontolog-
+ically irreducible. Of course non-holonomic constraints are
+theoretically reducible to microscopic dynamics, but this re-
+duction obliberates their functional role. As von Neumann
+(1955) demonstrated, if we describe both a physical system
+S and its measuring device M within a single dynamical
+framework, we then require a new device M ′ to establish
+the initial conditions for the combined system S + M, and
+so on ad infinitum. This infinite regress reveals a deeper is-
+sue: measurement—the act of determining the initial state of
+a system—cannot be internalized within the same dynamical
+description without erasing its function.
+A measurement device, in this context, is not merely an-
+other physical system but a structure that establishes the ini-
+tial conditions under which dynamical laws operate. Mea-
+surement converts a physical state into a symbolic represen-
+tation, and as such, it plays a role distinct from the dynam-
+ics it constrains. Attempting to model both the system and
+its measurement apparatus within a unified dynamic elim-
+inates the crucial epistemic function of the measuring de-
+vice as a selector and interpreter of system states. Conse-
+quently, measurement—and by extension, control (as the in-
+verse process that translates symbolic instructions into phys-
+ical outcomes)—cannot be fully captured within a closed
+dynamical description. The pragmatic function of measure-
+ment and control disappears when subsumed into purely en-
+ergetic or dynamical laws. Thus, the epistemic distinction
+between symbol and referent, syntax and pragmatics, must
+be preserved if we are to retain explanatory power (Cariani,
+1989).
+Such a distinction also underpins a critique towards com-
+putationalism. Turing’s abstract machine (Turing, 1936) ma-
+nipulates symbols via syntactic rules independent of physi-
+cal implementation. The illusion that symbol systems are
+autonomous (detached from time, energy, or semantic con-
+tent) arises from this abstraction. Computation, while pow-
+erful for simulating complexity, cannot ground symbolic
+meaning in physical processes.
+This isolation is evident
+in programmable computers, where non-integrable hard-
+ware (e.g., switches, memory) allows symbolic control, yet
+the computer’s function appears implementation-free. As
+Hoffmeyer and Emmeche (1991) and Kull (1998) note, sym-
+bolic expression seems unconstrained by physical law. Yet,
+this view is misleading: computation is independent of its
+material implementation only in ideal noiseless, error-free
+symbol manipulation (Pattee, 1995); as Rosen (1987) and
+Emmeche (1996) argue, computationalism leads to syntacti-
+calization and derealization, masking the physical substrate
+of symbolic functions. This insight suggests that capturing
+the concurrent, adaptive, and information-sensitive behav-
+ior observed in living systems (Grozinger et al., 2019) re-
+quires a departure from classical, Turing-style architectures.
+Instead, it invites the development of computing paradigms
+that explicitly incorporate mechanisms of measurement and
+control (Calude et al., 1998).
+In this way, based on the epistemic cut, Pattee partially an-
+swered Pearson’s question: “It is not possible to distinguish
+the living from the lifeless by the most detailed “motion of
+inorganic corpuscles” alone. The logic of this answer is that
+life entails an epistemic cut that is not distinguishable by mi-
+croscopic (corpuscular) laws. As von Neumann’s argument
+shows, any distinction between subject and object requires
+a description of the constraints that execute measurement
+and control processes; and such a functional description is
+not reducible to the dynamics that is being measured or con-
+trolled.” (Pattee, 2001, p. 16).
+We can think of the genotype-phenotype interface as the
+primeval locus of this epistemic cut. Gene sequences are
+
+energetically degenerate and not distinguished by physical
+law; distinctions arise only when proteins fold into active
+configurations that break degeneracy and initiate function.
+These distinctions occur only within the context of a self-
+constructing system, making semantic closure—the self-
+referential condition where a system’s symbols control the
+construction of its own interpretive mechanisms—necessary
+for life (Pattee et al., 2012a; Pattee, 1995). Semantic clo-
+sure represents a circularity where genotype informs pheno-
+type, which in turn constructs and interprets the genotype,
+bridging syntax and pragmatics through self-referential dy-
+namics. However, as Walker and Davies (2013) emphasize,
+the real challenge of life’s origin is to understand how those
+instructional information control systems emerge naturally
+and spontaneously from mere molecular dynamics.
+Cur-
+rently, we lack a general model to explain how such seman-
+tic closure was originated (Pattee, 1995).
+This paper explores the origin and early evolution of se-
+mantic closure. First, we introduce Rosen’s thinking and an-
+alyze his (Metabolism, Repair)-systems, which later are ex-
+tended to Hofmyer’s (Fabrication, Assembly)-systems. Sec-
+ond, we develop a temporally parameterized extension of
+(F, A)-systems, unifying key properties of life, including au-
+topoiesis, anticipation, and adaptation. Third, we elucidate
+the origin and early evolution of semantic closure by pro-
+ceeding down the logical chain of assumptions, obtaining
+weaker versions of our model. Finally, we integrate these
+findings into a computational enactivist framework consis-
+tent with multiple theoretical results that have recently been
+obtained, showing that there is a self-referential takeover in
+the evolution of life. Throughout our manuscript, we pro-
+vide a biologically relevant example of (M, R)-system, dis-
+cuss the realizability of relational models, and propose some
+ways to extend our ideas, including open questions for our
+research program and a glossary explaining relevant terms
+that may be confusing to the reader.
+A Unified Representation of Life
+Throughout the last century, multiple models have been
+developed to explain the fundamental characteristics of
+life: the homeostat (Ashby, 1949), (M, R)-systems (Rosen,
+1958a,b), the kinematic automaton (von Neumann, 1966),
+autopoiesis (Varela et al., 1974; Maturana and Varela,
+1980), dissipative structures (Prigogine, 1978), autocatalytic
+sets (Kauffman, 1986; Maley et al., 2025), the chemo-
+ton (G´anti, 2003), the hypercycle (Eigen and Schuster,
+2012), among others. However, although the notion of or-
+ganizational closure is ubiquitous in all these contemporary
+frameworks, remarkably none of them cited others (Cornish-
+Bowden and C´ardenas, 2020), leaving aside a potential uni-
+fied model where all these conceptualizations turn out to be
+different faces of the same die. As Korbak (2023) noted,
+of all these models, Rosen’s (Metabolism, Repair)-systems
+are “general enough to encompass all kinds of mathemat-
+ical structures (and formal or computational models),” be-
+coming an epistemological infrastructure for all modeling in
+biology (Varenne, 2013).
+In a long series of papers dating back to 1958 (Rosen,
+1958a,b), and later condensed in the 1990s (Rosen, 1991),
+Robert Rosen introduced the (Metabolism, Repair)-systems
+paradigm, which was inspired by biotopology (Rashevsky,
+1954). At first, Rosen represented (M, R)-systems using
+graph theory, but he quickly transitioned to category the-
+ory, as this shift allowed him to better represent the min-
+imal functional relationships required for life.
+Histori-
+cally, Rosen’s early papers predate the widespread use of
+the Yoneda lemma, the Lawvere’s fixed-point theorem, and
+other fundamental category theory results. However, later
+reconstructions showed (M, R)-systems can indeed be de-
+rived functorially via Yoneda (Baianu and Marinescu, 1974).
+Instead, Rosen’s adoption of category theory followed
+Eilenberg-MacLane’s original viewpoint: any category em-
+beds faithfully into Set (the category of sets), so one
+may reason with sets without forfeiting structural general-
+ity (Eilenberg and MacLane, 1945; Rosen, 1958b). Our aim
+here is expository and biological: we keep the categorical
+language to make causes, closure, and realizability model-
+independent, but we avoid imposing extra axioms that would
+be needed to deploy powerful theorems that are not neces-
+sary for the present results.
+Let C be a concrete category, A, B ∈Ob(C), f
+∈
+H(A, B), and Φf ∈H(B, H(A, B)), where H(X, Y ) is
+a proper subset of the hom-set of all mappings from X to Y .
+According to Rosen (1971), by making A, B, and f suffi-
+ciently complex, it is possible to reduce every (M, R)-system
+to the following diagram:
+A
+f−→B
+Φf
+−−→H(A, B).
+(1)
+Unlike the traditional Newtonian approach, which gener-
+ally uses state-space-based models with well-defined transi-
+tion functions, Rosen’s approach relies on temporally invari-
+ant category theory models, which support multiple modes
+of causation consistent with Aristotle’s four causes. Accord-
+ing to Rosen, it is this very segregation into independent
+categories of causation that prevents the Newtonian picture
+from describing the entailments and linkage relations char-
+acteristic of life (Rosen, 1978, 1991). In diagram (1), A is
+the material cause of B, f is the efficient cause of B, and
+H(A, B) is the final cause of B. Here, Rosen leaves out the
+formal cause while making the efficient cause of f (which
+is Φf) internal to the system. At the same time, the efficient
+cause of Φf lies outside the system, requiring an external
+agent. To resolve this issue, Rosen used the evaluation map
+of C, which is defined as follows:
+evalC
+Y,X : Y X × X −→Y,
+(2)
+where Y X denotes the hom-set of all mappings from X to
+
+Y . The evaluation map evalC
+Y,X takes a mapping f ∈Y X,
+an input x ∈X, and returns the value f(x) ∈Y . Impor-
+tantly, given f ∈Y X, if we fix a specific x ∈X and vary
+f ∈Y X, we can define a new mapping ˆx : Y X −→Y ,
+which satisfies f(x) = ˆx(f). For Rosen’s purposes, the in-
+verse evaluation map allows the construction of hierarchical
+cycles that underlie his (M, R)-systems. Building on this
+foundation, Rosen extended the framework to explicitly in-
+corporate closure. By letting X = B and Y = H(A, B) in
+Eq. (2), we obtain:
+ˆb : H(B, H(A, B)) −→H(A, B).
+Mapping ˆb has a left-inverse if it is injective. This means
+that for every pair of maps Φ1, Φ2 ∈H(B, H(A, B)),
+ˆb(Φ1) = ˆb(Φ2) ⇒Φ1 = Φ2.
+Equivalently,
+Φ1(b) = Φ2(b) ⇒Φ1 = Φ2.
+(3)
+Implication (3) tells us that if two replacement maps
+agree at b, then they must agree everywhere. Thus, the re-
+placement map Φf is uniquely determined by its one value
+Φf(b) = f ∈H(A, B), endowing closure in (M, R)-
+systems with nothing but the ingredients of metabolism and
+replacement. Let us denote ˆb−1 as βb. Through this con-
+struction, Rosen derived a new (M, R)-system that incorpo-
+rates closure, expressed as:
+B
+Φf
+−−→H(A, B)
+βb
+−→H (B, H(A, B)) .
+(4)
+In Rosen’s words: “This construction has two important
+consequences: (a) it is the only formalism, to my knowledge,
+which incorporates replication of genetic components as an
+essential and natural consequence of metabolic activities,
+and (b) exhibits a new and most interesting formal equiv-
+alence between metabolic and replicative aspects in these
+systems” (Rosen, 1971). By combining the diagrams (1)
+and (4), Rosen arrived at the canonical (M, R)-system:
+βb ◦Φf ◦f : A
+f−→B
+Φf
+−−→H(A, B)
+βb
+−→H (B, H(A, B)) .
+(5)
+In Rosen (1971)’s terminology: f is the metabolic part
+(M) of the system (5), Φf is the repair (R) part of the sys-
+tem (5) and βb is the replicative part of the system (5).
+As Letelier et al. (2011) explains, it is much more logical
+from a biological point of view to use the terms “replace-
+ment” and “closure” rather than “repair” and “replication.”
+Rosen (1991) expresses (5) as the following diagram:
+f
+A
+B
+Φf
+(6)
+In diagram (6) the solid arrows represent the mappings
+showed in (5) and the dashed arrows represent the mor-
+phisms f, Φf, βb being applied to their respective input. As
+the reader could observe, implicitly Rosen is assuming there
+is a one-to-one correspondence between B and βb (C´ardenas
+et al., 2010). This guarantees closure to efficient causation.
+In biological terms, this means that all enzymes, all catalytic
+processes that are used within the system, need to be syn-
+thesized by the organization per se, without recourse to any
+external agent. According to Rosen, this is what character-
+izes life (Rosen, 1991).
+A biological example
+In the origins-of-life literature, reflexively autocatalytic and
+food-generated (RAF) networks (Letelier et al., 2010) and
+their seed-dependent autocatalytic system (SDAS) vari-
+ants (Cornish-Bowden and C´ardenas, 2020) give concrete
+instantiations of organizational closure at a chemical level.
+In RAF/SDAS, a fixed “food set” together with catalysis
+constraints selects admissible reaction maps.
+Seeds trig-
+ger higher-level closures that recursively generate their own
+catalysts.
+This clearly mirrors the role of H(A, B) (ad-
+missible metabolisms) and Φf (selector of the executable
+metabolism) here, while the replication step βb corresponds
+to the passage to higher-order closures once a viable cat-
+alytic configuration b is present. Thus, our categorical (M,
+R)-scaffold offers a unifying language that can explicitly
+host RAF/SDAS chemistries as particular choices of objects,
+morphisms, and admissibility constraints (Letelier et al.,
+2006).
+So far, our treatment of characterizing life has been heav-
+ily abstract. To help the reader digest this content, and at the
+same time, provide a clearer perspective on relational biol-
+ogy, we dedicate this short section to exemplify how can
+we map Rosen’s abstraction to biologically-relevant mor-
+phisms and objects. First, let us coarse-grain the core gene-
+expression machinery of a bacterial cell into four catalysts:
+RNAP, Rib, AARS, Chap,
+standing respectively for RNA polymerase, a ribosome,
+the (lumped) set of aminoacyl-tRNA synthetases, and a
+chaperone/assembly factor. As materials (transformables),
+we consider pools of precursors:
+AA (amino acids), NTP (nucleoside triphosphates),
+tRNA, rRNA, mRNA.
+We treat the genome G as a fixed parameter constraining
+admissible maps. The objects are now specified as sets of
+admissible configurations and their cartesian products:
+A := AA × NTP × tRNA × rRNA × mRNA,
+
+and
+B := RNAP × Rib × AARS × Chap.
+Therefore, an element a
+∈
+A gives material lev-
+els/compositions, while b ∈B is a 4-tuple of catalytic states.
+With this, metabolism f ∈H(A, B) is the composite action
+of the following schematic reactions (arrows labeled by their
+catalysts):
+Transcription:
+NTP
+RNAP
+−−−−−→mRNArpo, mRNAribo, mRNAaars, rRNA, tRNA,
+Charging:
+AA + tRNA
+AARS
+−−−−−→aa-tRNA,
+Translation:
+aa-tRNA + mRNA
+Rib
+−−−→P
+Folding/assembly:
+P + rRNA
+Chap
+−−−−→RNAP, Rib, AARS, Chap.
+Where P represents the pool of unfolded polypeptides,
+including RNAP/Rib/AARS/Chap chains. At the level of C,
+this induces a time-invariant morphism
+f : A −→B, a 7−→b = f(a),
+Let H(A, B) be the set of admissible metabolic maps
+compatible with (i) the fixed genome G,
+(ii) mass-
+balance/assembly constraints, and (iii) coarse-grained ki-
+netics.
+Given a catalytic configuration b ∈B (current
+RNAP/Rib/AARS/Chap states), the selector/replacement
+map
+Φf ∈H
+ B, H(A, B)
+
+returns the unique admissible metabolism fb ∈H(A, B)
+that this very configuration can realize on genome G:
+Φf(b) = fb, with fb(a) = b′ ∈B.
+Intuitively, the particular RNAP holoenzyme, ribosome
+stoichiometry, and AARS repertoire determine which A →
+B map is executable (promoter usage, translation capacity,
+assembly constraints). Now, let us pick a distinguished self-
+consistent configuration
+b⋆=
+ RNAPσ, Rib70S, AARScomplete, Chap∗
+
+∈B,
+where RNAPσ
+∈
+RNAP is a housekeeping σ-
+holoenzyme, Rib70S
+∈
+Rib an assembled ribosome,
+AARScomplete
+∈AARS a complete minimal set, and
+Chap∗∈Chap an adequate chaperone pool. We can re-
+strict the selector space to those admissible under G,
+S(G) := H
+ B, H(A, B)
+
+.
+S(G) contains selectors that (a) read the same genome G,
+(b) preserve the assembly/stoichiometry rules, and (c) dif-
+fer, if at all, only by regulation consistent with b⋆. On this
+reduced S(G) we assume an injective evaluation at b⋆:
+∀Φ1, Φ2 ∈S(G) : Φ1(b⋆) = Φ2(b⋆) =⇒Φ1 = Φ2.
+Equivalently, the evaluation map
+evalC
+A,B : S(G) −→H(A, B), Φ 7−→Φ(b⋆),
+is one-to-one. Hence it admits a left inverse on its image,
+βb⋆:= evalC
+−1
+Y,X
+: H(A, B) −→S(G) ⊆H
+ B, H(A, B)
+
+,
+so that βb⋆(f) = Φf and Φf(b⋆) = f. In this way, the
+(M, R)-loop is realized by the gene-expression core under
+G, with objects of C read as material/catalyst pools and mor-
+phisms as genome- and assembly-constrained transforma-
+tions between them. This same reading also lets RAF/SDAS
+early metabolisms serve as worked examples: A is a food-
+plus-intermediate pool, B the active catalyst set, H(A, B)
+the reaction-closure maps permitted by catalysis and avail-
+ability; Φf selects which closure a given b ∈B can realize,
+and βb records how one viable configuration pins down the
+entire selector.
+Realizing relational models
+Rosen’s assertion that no model of closure to efficient cau-
+sation could be Turing-simulable has often been misun-
+derstood or misrepresented in the literature (Lane, 2024).
+As emphasized by Cornish-Bowden and C´ardenas (2020),
+many critiques of Rosen’s claim stem from a failure to grasp
+the core logic of relational biology. This is entirely under-
+standable, as it is a fact that Rosen’s ideas changed abruptly
+over time (Pattee, 2007a). For example, Rosen himself in-
+vestigated the representation of relations, such as (1), using
+sequential machines, extensively exploring the implications
+of this approach (Rosen, 1964a,b, 1966). It was the inclusion
+of replication mechanisms, such as those represented by (4),
+that posed challenges (Baianu and Marinescu, 1974).
+Later, in what is possibly his best known work (Rosen,
+1991), he never used the term computable. Instead, Rosen
+referred to machines, mechanisms, and the notion of simu-
+lation. Nevertheless, we can get an idea of his late notion of
+computability from there:
+“Thus, the word ‘simulable’ becomes synonymous with
+‘evaluable by a Turing machine’. In the picturesque lan-
+guage of Turing machines, this means the following: if f is
+simulable, then there is a Turing machine T such that, for
+any word w in the domain of f, suitably inscribed on an in-
+put tape to T, and for a suitably chosen initial state of T, the
+machine will halt after a finite number of steps, with f(w)
+on its output tape.” (Rosen, 1991, p. 192)
+From the above, a myriad of interpretations have arisen,
+even calling into question the validity of Rosen’s argu-
+ments (C´ardenas et al., 2010). Despite this, it is a fact that
+
+Rosen’s reasoning lies in the impossibility of capturing self-
+reference by means of sequential models of computation. In
+the same way that a Turing machine cannot decide whether
+it halts on its own description (the Halting Problem), a single
+automaton cannot decide its own entailment structure when
+the entailments depend on itself in a circular manner. For
+example, if f is produced by B, but f is also the catalyst
+that turns A into B, then we end up needing f to define
+f. This is a classic impredicative loop (Soto-Andrade et al.,
+2011). Thus, even if we allow dynamic label reassignment,
+that does not help with the causal loop unless the automaton
+can change its own state transition structure during compu-
+tation based on its own internal outputs. That would require
+meta-computation, something not allowed in classical com-
+puter science.
+Using λ-calculus to represent relational models is theo-
+retically appealing (Mossio et al., 2009). Nevertheless, as
+shown by C´ardenas et al. (2010), the mathematical solu-
+tions it provides may not directly correspond to biological
+phenomena, necessitating further refinement and interpreta-
+tion. A promising resolution to this challenge is provided
+by Palmer et al. (2016), who propose that while a single au-
+tomaton cannot model an organism, a set of automata com-
+municating and sharing information might achieve this. It is
+clear that Palmer et al. (2016) wanted to create a model of
+Rosen’s replicative (M, R)-system rather than just another
+simulation (Mossio et al., 2009; Gatherer and Galpin, 2013;
+Zhang et al., 2016). However, at the end of their manuscript,
+they clarified that their communicating X-machine model
+does not, as the modeling relation requires, map to the (M,
+R)-system relations (Palmer et al., 2016). This creates even
+more obstacles if we want to model (not simulate) fabrica-
+tion, self-assembly, and an actively maintained assembly-
+enabling environment. As we shall see later, these three as-
+pects are essential to expand Rosen’s ideas.
+As Pattee (2019) points out, simulation accuracy does not
+translate into effective functional realizations. Most impor-
+tantly, simulations should never be conflated with realiza-
+tions.
+When we simulate life we get rid of its semantic
+and pragmatic aspects, focusing merely on its syntactic na-
+ture. Simulations—and more generally, consistent formal
+systems (i.e., not allowing contradictions)—require a prede-
+fined set of rules in which novelty is limited. Realizations of
+life, on the other hand, are capable of generating novelty by
+interacting directly with their environment, capturing with
+it those semantic-pragmatic aspects that simulation lacks.
+This distinction is critical because it underscores the lim-
+itations of purely algorithmic models in fully capturing the
+self-referential and anticipatory nature inherent in biological
+systems (Jaeger et al., 2024). We have characterized compu-
+tation as transformations from symbols to symbols, empha-
+sizing that both measurement and control are fundamentally
+irreducible to computation (von Neumann, 1955). Thus, if
+instead of merely simulating, we construct realizations of
+relational models, we can inherently incorporate measure-
+ment and control into their architecture, becoming capable
+of interacting with and adapting to their environment. This
+blueprint effectively transcends the purely symbolic defini-
+tion of computation we initially presented and allows us to
+better capture the essence of life (Cariani, 1989).
+Another relevant aspect when building life realizations
+is its inherent stochasticity (Grozinger et al., 2019).
+At
+the molecular origin of life, stochasticity manifested signif-
+icantly through ambiguity in early genetic codes and high
+translational error rates, resulting in heterogeneous pep-
+tide populations, called statistical proteins (Barbieri, 2018).
+These statistical proteins acted as transitional molecular
+forms that allowed primitive biological systems to broadly
+explore chemical and functional spaces, potentially provid-
+ing adaptive advantages and evolutionary pathways toward
+increased molecular specificity and coding accuracy. There-
+fore, regardless of its implementation substrate, any realiza-
+tion of life must be intrinsically stochastic.
+(F, A)-systems
+(M, R)-systems face two significant challenges. First, they
+depend on injectivity in H(A, B) to ensure closure, a con-
+dition that imposes strict mathematical constraints for the
+concrete category C (Rosen, 1963; Letelier et al., 2006).
+Second, the one-gene-one-enzyme hypothesis that originally
+inspired Rosen’s model is now recognized as overly sim-
+plistic (Horowitz, 1948). Thus, Rosen’s model is not bi-
+ologically sound.
+A promising alternative that addresses
+these limitations is provided by (Fabrication, Assembly)-
+systems (Hofmeyr, 2021). These systems extend Rosen’s
+approach by incorporating freestanding formal causes, al-
+lowing for the modeling of both physiological and evolu-
+tionary adaptation.
+To proceed, it is necessary to clarify what we mean by for-
+mal cause. As Hofmeyr (2018) explains, formal causation
+can be integrated with Aristotle’s other causes (material and
+efficient) in multiple ways. Broadly, formal causes can be
+either freestanding or intrinsic. In the freestanding case, the
+formal cause exists as an independently specified sequence
+of rules that directs either the material or efficient cause in
+carrying out a transformation toward a final cause. Exam-
+ples include a catalyst-template system where monomers are
+assembled into polymers, or tagging enzymes that act on
+target-tag pairs to produce a tagged target. In the first ex-
+ample, the enzyme (efficient cause) works in tandem with a
+separate template (formal cause); in the second, the material
+cause (target) interacts with an independent tag acting as the
+formal cause.
+By contrast, intrinsic formal causation occurs when the
+formal cause is embedded within the structure or properties
+of the material or efficient cause itself. Examples include
+enzyme active sites with specific substrate-binding proper-
+ties, and unfolded polymers folding into functional confor-
+
+mations under suitable conditions. In the first case, the en-
+zyme active site is an informed efficient cause—it can act
+only on specific substrates. In the second, the monomer se-
+quence of the polymer acts as an informed material cause—
+it folds predictably when placed in a particular physical con-
+text. After this clarification, we can now show the simplest
+representation of an (F, A)-system:
+A
+f−→B
+Φf
+−−→H(A, B),
+(7)
+D
+f−→H (B, H(A, B)) ,
+(8)
+where f = I×{f1}+f2, I = {I1, I2}, and B = B1+B2.
+Here, the addition symbol is not a simple algebraic sum but
+rather indicates that f2 is being incorporated into the overall
+process. In (F, A)-systems, f has a dual role: f1, guided
+by freestanding formal causes (I), produces B, while f2,
+an informed efficient cause, produces Φf. This allows the
+system to remain closed to efficient causation while being
+open to formal causation (Hofmeyr, 2018).
+From a biosemiotic perspective, this structure becomes
+especially revealing. As Cariani (1989) points out, three
+of Aristotle’s causes align naturally with the semiotic triad
+identified by Morris (1946): syntax corresponds to free-
+standing formal cause, semantics to efficient cause, and
+pragmatics to final cause.
+Furthermore, material cause
+translates as symbol vehicle (substrate), informed efficient
+causes are semantic interpreters whose specificity is embed-
+ded within them, and informed material causes are symbolic
+substrates whose syntax is materially inscribed. This trans-
+lation is highly suggestive. If (F, A)-systems are closed to
+efficient causation but open to freestanding formal causa-
+tion, they fundamentally exhibit semantic closure and pos-
+sess adaptive syntax. The latter implies that the system is
+no longer constrained by a fixed rule set, thus enabling the
+representation of affordances (Kauffman and Roli, 2021).
+As a result, (F, A)-systems achieve organizational closure
+and heritable variability while circumventing the need for
+injectivity in H(A, B) as a prerequisite for closure, thereby
+rendering the model more biologically realistic. Perhaps a
+much more intuitive way to understand the above is to look
+at the diagram that represents this class of models:
+I × {f1} + f2
+D
+A
+B1 + B2
+Φf
+(9)
+As shown by Hofmeyr (2021), (F, A)-systems allow the
+interpretation of concepts such as the metabolism and repair
+components of Rosen’s (M, R)-system (Rosen, 1958b), John
+von Neumann’s kinematic automaton (von Neumann, 1966),
+Howard Pattee’s symbol-function split via the symbol-
+folding transformation (Pattee et al., 2012b), Marcello
+Barbieri’s genotype–ribotype–phenotype ontology (Barbi-
+eri, 1981), and Tibor G´anti’s chemoton (G´anti, 2003). Thus,
+(F, A)-systems are endowed with features that character-
+ized life, such as thermodynamic openness, catalytic speci-
+ficity, catalytic closure, structural closure, information han-
+dling, reproduction, and evolvability (Cornish-Bowden and
+C´ardenas, 2020).
+In this way, (F, A)-systems provide a canonical frame-
+work for representing biological organization, demonstrat-
+ing how hierarchical cycles cannot be fully captured by al-
+gorithmic models due to their intrinsic collective impred-
+icativity (Jaeger et al., 2024). For further details on how
+(F, A)-systems can represent the logic underlying a self-
+manufacturing cell, we recommend consulting Hofmeyr
+(2021). In the next section, we demonstrate how (F, A)-
+systems can be temporally extended, naturally giving rise to
+anticipatory systems. This integration allows us to build a
+computational enactivist narrative that resolves the limita-
+tions of algorithmic approaches to modeling anticipation in
+non-human and non-cognitive living systems.
+Extending (F, A)-Systems
+One limitation of the current (Fabrication, Assembly)-
+system model is its blindness to the external environment.
+While it accounts for internal self-maintenance, it does not
+explicitly incorporate mechanisms for environmental sens-
+ing and response, both of which are essential for biologi-
+cal measurement (represented by perception carried out by
+sense organs) and control (represented by actions carried
+out by various effectors, such as motor and secretory or-
+gans) (Cariani, 1989). Notwithstanding, Hofmeyr notes that
+this limitation can be addressed by incorporating membrane
+receptors and signal transduction networks into the fabri-
+cation machinery (Hofmeyr, 2021). Because these compo-
+nents are encoded in DNA, they can be naturally integrated
+into the (F, A)-system manufacturing architecture. This in-
+sight highlights the importance of extending the model to
+capture adaptive responses, further enhancing its biological
+realism from an ecological point of view.
+Let I = {I1, I2, I3, I4} be an extended set of freestand-
+ing formal causes, where I3 and I4 specifically represent
+the instructions for manufacturing the sensing and response
+architectures, respectively. Associated respectively with I3
+and I4, we have f3 : X →Y (membrane receptors) and
+f4 : Y →Z (signal transducers) for external signals X, in-
+ternal signals Y , and intracellular responses Z. These map-
+pings are such that
+X
+f3
+−→Y
+f4
+−→Z
+Notice that these mappings do not form part of covalent
+metabolic chemistry. Thus, we can extend diagram (9) as
+follows:
+
+X
+Y
+Z
+f = I × {f1} + f3 + f4 + f2
+D
+A
+B1 + B2 + B3 + B4
+Φ
+(10)
+In diagram (10) B3 and B4 are the components from
+which membrane transporters and signal transducers are as-
+sembled (their unfolded polypeptides). The use of freestand-
+ing formal causes (I3, I4) to encode membrane receptors and
+signaling networks opens a door to embedding environmen-
+tal affordances (Gibson, 1979). In this context, affordances
+are not fixed properties of the world but transjective, rela-
+tional possibilities for action that emerge through an organ-
+ism’s embodied engagement with its environment. This per-
+spective, emphasized in both ecological psychology (Gib-
+son, 1979) and evolutionary accounts of agency (Jaeger
+et al., 2024), highlights the role of the agent in delimiting
+a meaningful “arena” of possible interactions. Similar to the
+view defended in Kauffman and Roli (2021), affordances are
+neither reducible to observer-independent features nor inter-
+nal subjective projections; rather, they are enacted through
+the dynamic, co-constitutive relation between organism and
+environment. Incorporating this framework within the ex-
+tended (F, A)-system highlights its capacity not just for self-
+maintenance but also for situated adaptive behavior.
+Biological systems, however, adapt across multiple time
+scales, including the rapid biochemical reactions of molec-
+ular processes, short-term learning, development, and evo-
+lution. These temporal scales are critical to understand how
+short-term dynamics influence long-term stability and vice
+versa (Mont´evil and Mossio, 2015). To capture this inter-
+play, we associate distinct time scales to each process within
+the (F, A)-system. Importantly, this approach aligns with
+the notion of constraint developed by Mont´evil and Mossio
+(2015), which is equivalent to Rosen’s concept of efficient
+causation. We start by rewriting the fundamental relations
+in our extended (F, A)-systems:
+A
+f−→B
+Φf
+−−→H(A, B),
+(11)
+D
+f−→H (B, H(A, B)) ,
+X
+f3
+−→Y
+f4
+−→Z,
+where f = I × {f1} + f2 + f3 + f4, I = {I1, I2, I3, I4},
+and B = B1 + B2 + B3 + B4. Each arrow shown in (11)
+represents a process, and thus it will have a characteris-
+tic temporal scale. For simplicity, let C = H(A, B) and
+E = H (B, H(A, B)). To emphasize the multifunctional
+role of f, we can rename the different mappings of (11) in
+the following way:
+A
+ϕ−→B
+ψ−→C
+(12)
+D
+θ−→E
+X
+α−→Y
+β−→Z.
+Thus, we assign a time scale τx to each process x ∈
+{ϕ, ψ, θ, α, β}. The mappings in (12) can now be rewritten
+as:
+A
+ϕ
+−→
+τϕ B
+ψ
+−→
+τψ C
+(13)
+D
+θ
+−→
+τθ E
+X
+α
+−→
+τα Y
+β
+−→
+τβ Z.
+Following Mont´evil and Mossio (2015), two scales must
+be considered for every efficient causation included in a
+closed system: one scale at which the efficient causation
+is associated with a time symmetry and another at which
+it is produced and/or maintained.
+Let ∆ϕ = τϕ −τψ,
+∆ψ = τψ −τθ, ∆θ = τθ −τψ, ∆α = τα −τψ, and
+∆β = τβ −τψ.
+Since the system is closed to efficient
+causation, at least one ∆i must be positive, and another ∆j
+(j̸ = i) must be negative (Mont´evil and Mossio, 2015). This
+maintains the temporal coherence of the organization, al-
+lowing for organizational closure as the system unfolds over
+time. Using the methodology proposed by Korbak (2023),
+we represent the temporal parametrization of (13) as the
+asynchronous dynamic Bayesian network shown in Figure 1.
+In Fig. 1, τ = τ (τϕ, τψ, τθ, τα, τβ), allowing us to model
+multiple parallel dependencies and interactions probabilisti-
+cally. Following Korbak (2023), we reinterpret each compo-
+nent and each solid line as a random variable, while rein-
+terpreting each dashed line as a dependency.
+The corre-
+sponding probabilistic graphical model is shown in Figure 2.
+Thus, the simulation of an (F, A)-system reduces to inferring
+the following joint distribution:
+p(ϕτ, ψτ, θτ, ατ, βτ, Aτ, Bτ, Cτ, Dτ, Eτ, Xτ, Yτ, Zτ, . . . ,
+ϕT , ψT , θT , αT , βT , AT , BT , CT , DT , ET , XT , YT , ZT ) =
+T −τ
+Y
+t≥0
+h
+p(At+τ) p(ϕt+τ | At+τ, Ct) p(Bt+τ | ϕt+τ) p(ψt+τ | Bt+τ, Et)
+p(Ct+τ | ψt+τ) p(Dt+τ) p(θt+τ | Dt+τ, Ct) p(Et+τ | θt+τ) p(Xt+τ)
+p(αt+τ | Xt+τ, Ct) p(Yt+τ | αt+τ) p(βt+τ | Yt+τ, Ct) p(Zt+τ | βt+τ)
+i
+.
+(14)
+Through ancestral sampling, we can infer this distribu-
+tion (Korbak, 2023). Moreover, this temporal parametriza-
+tion links (F, A)-systems to active inference, conceptualizing
+primitive living systems as generative models probabilisti-
+cally tailoring their internal states and environments. Since
+
+At
+Bt
+Ct
+Dt
+Et
+Xt
+Yt
+Zt
+At+τ
+Bt+τ
+Ct+τ
+Dt+τ
+Et+τ
+Xt+τ
+Yt+τ
+Zt+τ
+ϕt
+ψt
+θt
+αt
+βt
+ϕt+τ
+ψt+τ
+θt+τ
+αt+τ
+βt+τ
+τϕ
+τθ
+τψ
+τα
+τβ
+Figure 1: Temporal parametrization of extended (F, A)-systems.
+At
+ϕt
+Bt
+ψt
+Ct
+Dt
+θt
+Et
+Xt
+αt
+Yt
+βt
+Zt
+At+τ
+ϕt+τ
+Bt+τ
+ψt+τ
+Ct+τ
+Dt+τ
+θt+τ
+Et+τ
+Xt+τ
+αt+τ
+Yt+τ
+βt+τ
+Zt+τ
+τϕ
+τθ
+τψ
+τα
+τβ
+Figure 2: Probabilistic Graphical Model associated to the temporal parametrization of extended (F, A)-systems.
+the concept of Markov blanket (Friston, 2013) is compat-
+ible with embodied, enactive and extended conceptions of
+cognition (Clark, 2017), it is possible to construct such a de-
+pendency structure for (F, A)-systems. Such a construction
+is potentially compatible with other recent models that have
+been proposed to understand agency (Biehl and Virgo, 2022;
+Kiverstein et al., 2022; Egbert et al., 2023). These detailed
+explorations are beyond the scope of this paper.
+Here, it suffices to note that (F, A)-systems inherently em-
+body a form of anticipation. By integrating mechanisms for
+sensing and response through freestanding formal causes,
+and embedding them within asynchronous, multi-scale tem-
+poral structures, the system develops the capacity to inter-
+pret environmental inputs before they fully unfold. This an-
+ticipatory structure resonates with Rosen’s conception of an-
+ticipatory systems as those that contain internal models ca-
+pable of projecting future states and acting upon those pro-
+jections in the present (Rosen, 1978).
+In Rosen’s formal terms, such systems exhibit a predic-
+tive model whose outputs serve not merely as representa-
+tions, but as causal drivers of current behavior, apparently
+violating classical notions of causality, yet foundational for
+biological adaptivity (Rosen, 1978).
+Our temporally ex-
+tended (F, A)-systems instantiate this idea constructively:
+rather than relying on retrospective feedback, the system de-
+ploys present environmental cues to actively constrain fu-
+ture states through model-mediated inference. This marks
+a shift from mere reaction to primitive interpretation. Since
+we are showing that a genuine process of interpretation takes
+place within simple life forms, such as a cell, our extension
+of (F, A)-systems reconciles Barbieri’s code biology (Barbi-
+eri, 2019) with Pattee’s physical biosemiotics (Pattee, 2001).
+The following section is devoted to the study of weak ver-
+sions of the relational model developed thus far to explore
+the origin and evolution of semantic closure.
+Deriving Weaker Models for Primitive
+Semantic Closure
+From our previous analysis, we know that diagram (15) ac-
+counts for semantic closure. Having found a minimal model
+with this feature, we will now derive weaker versions of dia-
+gram (15) to glimpse the evolutionary emergence of seman-
+tic closure.
+
+X
+Y
+Z
+I × {f1} + f3 + f4 + f2
+D
+A
+B1 + B2 + B3 + B4
+Φ
+(15)
+Pattee (1969a) discusses how hierarchical levels of con-
+trol in biology emerge through evolution. In early life, sim-
+ple functional switches (e.g. enzyme activation or inhibi-
+tion) would allow a system to respond to internal changes,
+manage its own metabolic processes, and gradually evolve
+toward more complex forms of environmental interaction,
+where sensing and adaptation to external stimuli would be
+added later. Thus, our first step to proceed down our logical
+chain of assumptions and produce a weak version of the di-
+agram (15), is to eliminate f3 + f4 and B3 + B4, obtaining
+the diagram (16) shown below.
+I∗× {f1} + f2
+D
+A
+B1 + B2
+Φf
+(16)
+In diagram (16), I∗= {I1, I2}. Although digital informa-
+tion processing is a fundamental requirement for life (von
+Neumann, 1966; Waters, 2012; Marletto, 2015), according
+to Pattee (1969a) digital messengers emerge as a product
+of a synergistic process, akin to how formal rules of syntax
+and dictionaries evolved from the functional use of primi-
+tive symbols in a complex environment. Along these lines,
+digitization would have arisen as a natural outcome of the
+processes in reaction networks that had once been primar-
+ily analog. This implies that I∗= {I1, I2} in diagram (16)
+could not have existed at the beginning.
+Since early chemical systems relied only on geophysical
+and geochemical constraints, with no external formal causes
+or instructions (Pattee, 1969a), there are two possibilities to
+resolve infinite regress (Hofmeyr, 2018; Pattee, 2021). The
+first is that f1 is an informed efficient cause (a semantic in-
+terpreter whose specificity is embedded in it), as f2 already
+is. The second is that A, although primarily a material cause,
+assumes the role of an informed material cause (a symbolic
+substrate whose syntax is materially inscribed), similar to
+B1 and B2 (Hofmeyr, 2021). The second option represents
+the most plausible evolutionary pathway for implementing
+a weaker version of our (F, A)-system (Pattee, 2021). This
+leads us to the successor diagram below:
+f1 + f2
+D
+A∗
+1 + A∗
+2
+B1 + B2
+Φf
+(17)
+In diagram (17), A∗
+1 and A∗
+2 represent informed material
+causes, f1 maps the disjoint set A∗
+1 + A∗
+2 to the disjoint set
+B1 + B2, and f2 maps D to Φf. This evolutionary path-
+way relies on intrinsic constraints and properties rather than
+complex external mechanisms. Prior to this stage, however,
+f2 must be replaced by a non-informed efficient cause (f ∗
+2 ),
+and D must transition into an informed material cause (D∗):
+f1 + f ∗
+2
+D∗
+A∗
+1 + A∗
+2
+B1 + B2
+Φf
+(18)
+In diagram (18), D∗acts as an informed material cause
+that is prone to being transformed by f ∗
+2 into Φf. This ar-
+chitecture retains the autonomy and hierarchical closure of
+the system. If Φf = Φf1 + Φf2 and B2 is provided by
+the environment (and therefore does not have to be made
+from A∗
+2) then diagram (18) can be split into two compo-
+nents (Hofmeyr, 2021). The first component is:
+f1
+A∗
+1
+B1
+Φf1
+(19)
+Although this component is not closed to efficient cau-
+sation, given that it has the form of a non-replicating (M,
+R)-system, the states and inputs cannot be separated, so it
+cannot be instantiated as a finite-state automaton (Rosen,
+1964a). We can represent diagram (19) as the following hi-
+erarchical cycle:
+Φf1
+B1
+f1
+A∗
+1
+B1
+(20)
+As Palmer et al. (2016) explained, such a hierarchical cy-
+cle can be represented by an automaton with memory. We
+can then further split diagram (20) into
+Φf1
+B1
+f1
+(21)
+and
+f1
+A∗
+1
+B1
+(22)
+
+Both diagrams (21) and (22) can be represented using a
+finite state automaton (Rosen, 1964a; Palmer et al., 2016).
+The second component of diagram (18) is:
+f ∗
+2
+D∗
+B2
+Φf2
+(23)
+Unlike the first, this component is still closed to efficient
+causation and thus semantically closed. A rather pertinent
+observation is that there is a clear parallel between diagram
+(23) and the autogenic virus (“autogen” for short) proposed
+by Deacon (2021). Autogen arises from the interaction of
+two self-organizing processes: reciprocal catalysis and self-
+assembly, the former producing locally asymmetrically high
+concentrations of a small number of molecular species and
+the latter requiring persistently high local concentrations of
+a single species of component molecules. Autogen’s molec-
+ular logic is summarized by diagram (24).
+f + g
+a
+d
+n + c
+(24)
+In diagram (24) a and d are material substrates provided
+by the environment. In addition, f and c are molecular cat-
+alysts, while n and g are by-products of the chemical in-
+teraction, where g promotes self-assembly (Deacon, 2021).
+Since in diagram (23) f ∗
+2 represents the maintenance of
+the intracellular milieu Φf2 that makes self-assembly pos-
+sible (Hofmeyr, 2021), we can equate f + g ≜Φf2. Thus,
+n + c ≜f ∗
+2 , a ≜B2, and d ≜D∗. In this way, Deacon
+(2021)’s autogen is a particular case of the model presented
+here. Returning to diagram (23), before achieving closure to
+efficient causation, the chemical reaction network must have
+been open. This can be represented as:
+Φf2
+B2
+f ∗
+2
+D∗
+E
+(25)
+or
+f ∗
+2
+D∗
+Φf2
+B2
+E
+(26)
+In diagrams (25) and (26), E simply represents another
+chemical product. In both cases, this system is no longer
+closed to efficient causation, allowing its hierarchical en-
+tailments to be modeled using a stream X-machine (Palmer
+et al., 2016). When the functional entailments are further
+dismantled, simpler components acquired the form (21)-
+(22) and can be represented by finite state automata (Rosen,
+1964a). From the above we can glimpse a clear transition
+across the computational capabilities from simple chemical
+reactions to quasi-autonomous organisms, such as our ini-
+tial extended (F, A)-system. Based on our theoretical ob-
+servations, in the next section we propose an evolutionary
+narrative in computational enactivist terms (Korbak, 2021)
+for the origin of semantic closure. As we shall see, such an
+account is consistent with the experimental results obtained
+by Due˜nas-D´ıez and P´erez-Mercader (2019).
+Towards a Computational Enactivist
+Narrative for the Origin and Early Evolution
+of Semantic Closure
+Following the line of thought proposed by Pattee (1969a),
+the primordial ecosystem can be conceptualized as the first
+information-containing architecture on Earth, where primi-
+tive geochemical cycles gave rise to a well-defined syntax
+(based on chemistry) spontaneously and without requiring
+genetic instructions or initial metabolic control. Given a set
+of primordial geophysical and geochemical constraints—a
+primeval ecosystem language (Pattee, 1969a)—we can en-
+visage the emergence of simple bimolecular reactions, such
+as those represented in diagrams (21) and (22), which can be
+realized as finite-state automata. These simple chemical re-
+actions are capable of recognizing regular languages, a task
+that does not require counting or memory (Due˜nas-D´ıez and
+P´erez-Mercader, 2019).
+In this primitive world, molecules proficient in catalyzing
+key environmental reactions and processes became abun-
+dant over time (K¨uppers, 1990). Later, the diversity of such
+molecules allowed interactions and, in some cases, bonding,
+leading to systems of multiple interconnected reactions me-
+diated by common intermediate chemical species. In this
+panorama, some intermediates functioned both as the prod-
+uct of one reaction and as the reactant for another, forming
+networks of increasingly complex chemical reactions. These
+ideas align with the emergence of composomes (Segr´e and
+Lancet, 2000; Hunding et al., 2006) and their maintenance
+(Markovitch and Lancet, 2012).
+Such complex reactions can be represented through hier-
+archical functional entailments that are not closed to efficient
+causation (see diagrams (20), (25), and (26)) and can be re-
+alized using stream X-machines, as suggested by Palmer
+et al. (2016).
+This primitive form of memory based on
+the reuse of catalytic elements enables the recognition of
+more complex sequences of information (Hopcroft et al.,
+2001) and enhances the evolutionary robustness of such in-
+
+formation under changing environmental conditions (Walker
+and Davies, 2013). Despite their simplicity, these chemical
+reactions could encode correlations in environmental vari-
+ables (Bartlett and Louapre, 2022) and potentially exhibit a
+basic form of anticipation (Poole et al., 2017).
+This primeval landscape helps outline the evolutionary tri-
+alectic proposed by Jaeger et al. (2024), where the environ-
+ment plays a crucial role in shaping the catalytic abilities
+of chemical species via random mutations induced by geo-
+chemical and geophysical processes. This activity fosters
+molecular Darwinism (K¨uppers, 1990), where the regula-
+tion of terrestrial cycles and adaptation to abrupt changes
+become, respectively, the goals and actions of this transjec-
+tive trialectic. Furthermore, this competition among chem-
+ical components also fosters cooperative homeostatic loops
+that improve predictive capabilities and establish functional
+relationships (Levin, 2019; Heins et al., 2024).
+Chemical reactions can become increasingly complex ei-
+ther through the accumulation of catalytic mutations or
+by coupling chemical entities of varying complexity. Ei-
+ther pathway allows the emergence of simple autocatalytic
+processes represented by hierarchical cycles semantically
+closed (see diagram (23)), equivalent to Deacon (2021)’s au-
+togen. The impredicative nature of any system closed to ef-
+ficient causation can be interpreted as nested symbolic loops
+of computation—i.e., self-reference—that are transmuted
+into non-symbolic processes of self-replication (Sayama,
+2008). In this light, self-replication constitutes the threshold
+for open-ended evolution (Hern´andez-Orozco et al., 2018),
+wherein the evolutionary process itself becomes increas-
+ingly unconstrained and generative (Pattee and Sayama,
+2019).
+Evolution, therefore, emerges as a fundamentally
+syntax-pragmatic phenomenon, characterized by the unpre-
+dictability and emergence of future states. An insight consis-
+tent with the trialectic framework articulated by Jaeger et al.
+(2024).
+A distinction must be drawn between self-replication and
+self-reproduction. Self-reproduction requires a copier C act-
+ing on raw materials (Szathm´ary, 1995), whereas in self-
+replication, the copier C is null, being implicit in the laws
+of physics (Marletto, 2015). Examples of self-replication in-
+clude crystals, short RNA strands, and autocatalytic cycles.
+In resource-limited environments, chemical networks com-
+pete, self-replicate, and mutate through minor variations in
+composition, ensuring that each type of replicator produces
+at least one viable offspring, on average, per lifetime. This
+constitutes a primitive form of evolution (Marletto, 2015),
+characterized by natural selection with limited inheritance
+due to low robustness and accuracy in replication.
+Another important consideration is that, even at this
+primordial stage, geophysical and chemical processes are
+naturally cyclical, ensuring a constant energized, non-
+equilibrium, dynamic exchange between environment and
+self-replicators.
+Under these conditions, dynamic kinetic
+stability (DKS), a kinetic form of stability associated with
+entities capable of self-replication, emerges (Pascal and
+Pross, 2015). DKS guides self-replication toward greater ro-
+bustness (Pascal et al., 2023), enabling increasingly complex
+dynamics to arise as self-replicators proliferate (Alakuijala
+et al., 2024), preserving encoded environmental information
+and preventing its deterioration.
+As we pointed out before, the syntactic, semantic, and
+pragmatic dimensions of information are inseparable. Al-
+though the presence of semantic (or pragmatic) information
+in such a primordial state may seem improbable, meaning
+operates at multiple scales, being syntax-pragmatic interac-
+tions its only requirement for existence (Fields and Levin,
+2020). According to K¨uppers (1990), the protosemantics of
+biological information is defined by the carrier’s capacity to
+reproduce rapidly while maintaining high accuracy and sta-
+bility. This aligns with DKS and likely facilitated the devel-
+opment of sophisticated semantic closure (Pattee, 1995).
+Over time, the process of infotaxis likely also facilitated
+compartmentalization, enabling chemical networks to as-
+sociate mutually, enhancing their functionality and robust-
+ness.
+This progression can be represented by diagrams
+like (18), where formal causes are inherent within material
+causes (Hofmeyr, 2018). As these networks became more
+complex, they began to evolve formal causes inherent to ef-
+ficient causes, such as f2 in diagram (17). However, purely
+analog systems exhibited limited robustness and evolution-
+ary potential compared to analog systems supplemented by
+digital information control (Walker and Davies, 2013).
+Digitization emerged as a natural outcome of the evolu-
+tion of analog reaction networks, eventually resembling sys-
+tems like diagram (16), where I∗acts as a freestanding for-
+mal cause. This transition allowed chemical networks to
+communicate more efficiently among themselves and with
+their progeny, being capable of developing sophisticated
+mechanisms to sense and response to the environment, as
+shown in diagram (15). However, the emergence of truly
+open-ended evolution required more than enhanced signal-
+ing or compartmentalized inheritance. It demanded the ap-
+pearance of systems capable of constructing new functional
+configurations from internally stored, symbol-like instruc-
+tions, thus enabling not merely replication, but the contin-
+uous rewriting of what it means to persist. Such systems
+exhibit a form of universality grounded in discrete, mod-
+ular, and syntactically governed structures; codes that are
+not just molecularly embodied but materially inert, enabling
+symbolic reuse across vastly different contexts (Rocha and
+Hordijk, 2005).
+As these symbolic capacities expanded, the biosphere it-
+self began to resemble a distributed, asynchronous compu-
+tation over possible adaptations: not in the sense of simu-
+lating all paths, but in pruning the unviable ones through ir-
+reversible commitments like extinction (Hern´andez-Orozco
+et al., 2018). In this setting, survival is not merely the preser-
+
+vation of form, but the preservation of a semantic loop. A
+closure between symbolic description, constructed function,
+and environmental viability. What emerges is not just com-
+plexity, but a form of undecidable elaboration: a dynamical
+process in which the criteria for persistence are themselves
+continuously evolving, grounded in the dual logic of physi-
+cal constraint and symbolic freedom.
+Thus, we observe a continuum of increasing complexity,
+beginning with simple chemical reactions modeled as finite
+state automata (see diagram (19)) and culminating in organ-
+isms with cellular-like architectures, such as the extended (F,
+A)-system depicted in diagram (15), which exhibit nested
+loops of computation. In this way, our model explains the
+experimental observations made by Due˜nas-D´ıez and P´erez-
+Mercader (2019). Digitization would have been a gradual
+process, taking substantial time to unfold. Ultimately, digital
+life forms may have become dominant, as they are intrinsi-
+cally more robust and better equipped to survive in the long
+term, representing the lasting products of life’s evolutionary
+processes (Walker and Davies, 2013).
+Discussion
+Through our theoretical model, we have outlined a sequen-
+tial and hierarchical pathway for the origin and early evo-
+lution of semantic closure in nature. As noted by Jaeger
+et al. (2024), relevance realization is a process that cannot be
+fully captured algorithmically. Our narrative complements
+this view by situating autopoiesis and adaptation within a
+relational model that is closed semantically while remain-
+ing open syntactically. A simple temporal unfolding of this
+model equips even the simplest life forms with anticipatory
+mechanisms, validating autopoiesis, adaptation, and antici-
+pation based on active inference as syntax-pragmatic mutu-
+alistic processes (Pattee, 2007b).
+While Jaeger et al. (2024) highlight the apparent non-
+computability of relevance realization, their conception of
+computation centers around von Neumann architecture and
+Turing machines, ignoring computing architectures capa-
+ble of implementing measurement and control in their op-
+eration, which could reveal learning processes mirroring
+those observed in living systems. We think this narrative
+is more meaningful through the lens of computational enac-
+tivism (Korbak, 2021). This perspective anchors the active
+inference mechanisms of organisms in the temporal param-
+eterization of our relational model, taking into account both
+syntactic (computational) and pragmatic (enactive) aspects
+of life.
+Our model successfully captures numerous properties
+characteristic of living systems, with the notable exception
+of controlled growth (Cornish-Bowden and C´ardenas, 2020,
+2022). However, a recent study proposes a model inspired
+by Rosen’s original view of (M, R)-systems, capturing life
+as bipartite directed multigraphs (M´arquez-Zacar´ıas et al.,
+2025). This approach allows modeling controlled growth.
+As future work, one idea might be to relate their perspective
+with ours. Crucially, our model is flexible and independent
+of specific conditions, being agnostic to the substrate, pe-
+riod, or location in which life might have emerged (Abbot
+and Switzer, 2011; Loeb, 2014; Pearce et al., 2018; Balles-
+teros et al., 2019).
+The only fundamental environmental
+prerequisite in our framework is the presence of a primor-
+dial language that enables the processes underlying life to
+take root. This perspective aligns with the idea that sym-
+bol grounding is a necessary precursor to interpretation, as
+emphasized by Pattee (2021).
+As C´ardenas et al. (2018) demonstrated, the absence of
+strict hierarchies in organisms enables closure to efficient
+causation in relational models, a principle upheld in our ex-
+tended (F, A)-system. This makes circular causality a cor-
+nerstone of our narrative, which is fully compatible with the
+principle of biological relativity (Noble, 2012; Noble et al.,
+2019). Biological relativity posits that no single level of cau-
+sation is privileged to describe life, ruling out phenomena
+such as downward causation. Instead, this aligns with the
+concept of causal spreading, which suggests that any com-
+ponent within a biological system can influence any other,
+depending on context (Ball, 2023).
+While our narrative illustrates how primitive mechanisms
+of information control in life might have evolved, it does not
+claim to pinpoint the precise moment life began. Depending
+on the definition we use (Benner, 2010), life could be said
+to arise at various points in our framework. From a gradual-
+ist perspective, this ambiguity is not problematic (K¨uppers,
+1990; Gershenson, 2012). However, it is clear that after the
+emergence of structures closed to efficient causation (and,
+as a consequence, semantically closed), many of the defin-
+ing properties of life emerged. This marks what we might
+call a self-referential takeover, as chemical systems beyond
+this point acquire nested loops of computation. Our analysis
+demonstrates that self-referentiality is not only a necessary
+condition for life but also essential even for the simplest au-
+tocatalytic systems.
+Conclusion
+In this paper, we extended the (F, A)-systems proposed
+by Hofmeyr (2021) through a temporal parametrization.
+This extension captures not only fundamental properties
+of life, such as thermodynamic openness, catalytic speci-
+ficity, catalytic and structural closure, information handling,
+reproduction, and evolvability, but also anticipation.
+Us-
+ing this relational biological model, we systematically de-
+rived weaker versions that reveal a hierarchy of processes
+by which chemical systems acquired increasingly advanced
+computational (syntactic) and enactive (pragmatic) capabil-
+ities, consistent with the experimental findings of Due˜nas-
+D´ıez and P´erez-Mercader (2019).
+Semantic closure emerges as a key factor for robustness,
+self-replication, and thus the open-ended evolutionary dy-
+
+namics observed in living systems. Furthermore, by attribut-
+ing a self-referential nature to life, our computational enac-
+tivist framework aligns with Jaeger et al. (2024)’s resolu-
+tion of the problem of relevance. While life (and its con-
+sequences, such as agency and cognition) cannot be repre-
+sented by von Neumann architectures or Turing machines,
+our work encourages the exploration of architectures that ex-
+plicitly implement measurement, control, and stochasticity
+to realize life.
+Some problems remain open for future exploration. First,
+the formulation of a Markov blanket for the Asynchronous
+Dynamic Bayesian Network associated with our temporal
+parametrization could provide critical insights into relation-
+ships among emerging theoretical frameworks aimed at con-
+structing a general theory of agency (Egbert et al., 2023),
+providing a concrete model for the sensorimotor autonomy
+described by Kiverstein et al. (2022). Second, similarly to
+what we did with our extended (F, A)-systems, we can de-
+rive the temporal parametrizations and joint distributions for
+weak versions of our model, glimpsing the emergence of in-
+ternal models that guide adaptive action not just in (M, R)-
+systems, but across the entire zoo of systems closed to effi-
+cient causation discussed by Hofmeyr (2021). Third, once
+a taxonomy of semantically closed systems has been pro-
+vided, we could examine the consequences of having two
+or more relational entities occupying the same environment,
+forming an ecology where multiple cellular-like systems can
+be coupled to build multicellular organisms.
+Our work represents a step towards the unification of three
+intellectual traditions: relational biology, physical biosemi-
+otics, and ecological psychology; each of which fundamen-
+tally challenges mainstream reductionist and mechanistic
+views of life and cognition. Intriguingly, all three paradigms
+originated within the intellectual landscape of the North-
+eastern United States, reflecting a shared historical and ge-
+ographical milieu that fostered a relational, systemic, and
+meaning-centered conception of living systems.
+By sit-
+uating our extended (F, A)-systems at the intersection of
+these traditions, we have articulated a cohesive theoretical
+synthesis, tentatively termed “The Northeastern Synthesis,”
+highlighting the profound relevance of relational autonomy,
+semiotic processes, and affordance realization in biological
+information handling. In line with Stewart (1995)’s con-
+structivist perspective, we propose that our narrative has the
+potential to explain a wide range of phenomena, from the
+origin of life to high-level cognition.
+Author Contributions
+A.J.L.-D.: formal analysis, visualization, conceptualization,
+investigation, methodology, validation; C.G.: conceptual-
+ization, supervision, funding acquisition, validation.
+Acknowledgements
+The authors acknowledge Jan-Hendrik S. Hofmeyr, Hiroki
+Sayama, Juan P´erez-Mercader, Kate Nave, Luis M. Rocha,
+Cliff Joslyn, Dennis P. Waters, and Pedro M´arquez-Zacar´ıas
+for stimulating conversations and their valuable comments
+on earlier versions of this manuscript, as well as anonymous
+reviewers for constructive comments when submitting this
+work.
+Data Accessibility
+This article has no additional data.
+Funding Statement
+C.G. acknowledges support from the SSIE School.
+References
+Abbot, D. S. and Switzer, E. R. (2011). The Steppenwolf: a pro-
+posal for a habitable planet in interstellar space. The Astro-
+physical Journal Letters, 735(2):L27.
+Alakuijala, J., Evans, J., Laurie, B., Mordvintsev, A., Niklasson, E.,
+Randazzo, E., Versari, L., et al. (2024). Computational life:
+How well-formed, self-replicating programs emerge from
+simple interaction. arXiv preprint arXiv:2406.19108.
+Ashby, W. R. (1949). The electronic brain. Radio Electronics,
+pages 77–79.
+Baianu, I. and Marinescu, M. (1974). On a functorial construction
+of (m, r)-systems. Revue Roumaine de Math´ematiques Pures
+et Appliqu´ees, 19:388–391.
+Bak, P., Tang, C., and Wiesenfeld, K. (1988). Self-organized criti-
+cality. Physical review A, 38(1):364.
+Ball, P. (2023).
+What distinguishes the elephant from e. coli:
+Causal spreading and the biological principles of metazoan
+complexity. Journal of Biosciences, 48(2):14.
+Ballesteros, F., Fern´andez-Soto, A., and Mart´ınez, V. J. (2019).
+Diving into exoplanets: are water seas the most common?
+Astrobiology, 19(5):642–654.
+Bar-Yam, Y. (1997). Dynamics of Complex Systems. Studies in
+Nonlinearity. Westview Press, Boulder, CO, USA.
+Barbieri, M. (1981). The ribotype theory on the origin of life. Jour-
+nal of theoretical Biology, 91(4):545–601.
+Barbieri, M. (2003). The organic codes: an introduction to seman-
+tic biology. Cambridge University Press.
+Barbieri, M. (2018). What is code biology? Biosystems, 164:1–10.
+Barbieri, M. (2019).
+Code biology, peircean biosemiotics, and
+rosen’s relational biology. Biological Theory, 14:21–29.
+Bartlett, S. and Louapre, D. (2022). Provenance of life: Chem-
+ical autonomous agents surviving through associative learn-
+ing. Physical Review E, 106(3):034401.
+Benner, S. A. (2010). Defining life. Astrobiology, 10(10):1021–
+1030.
+
+Biehl, M. and Virgo, N. (2022). Interpreting systems as solving
+pomdps: a step towards a formal understanding of agency.
+In International Workshop on Active Inference, pages 16–31.
+Springer.
+Calude, C., Casti, J., and Dinneen, M. J. (1998). Unconventional
+models of computation. Springer Science & Business Media.
+C´ardenas, M. L., Benomar, S., and Cornish-Bowden, A. (2018).
+Rosennean complexity and its relevance to ecology. Ecolog-
+ical Complexity, 35:13–24.
+C´ardenas, M. L., Letelier, J.-C., Gutierrez, C., Cornish-Bowden,
+A., and Soto-Andrade, J. (2010). Closure to efficient causa-
+tion, computability and artificial life. Journal of Theoretical
+Biology, 263(1):79–92.
+Cariani, P. A. (1989). On the design of devices with emergent se-
+mantic functions. PhD thesis, State University of New York
+Binghamton, NY.
+Clark, A. (2017). How to knit your own markov blanket: Resist-
+ing the second law with metamorphic minds. In Philosophy
+and predictive processing, page 3. Frankfurt am Main: MIND
+Group.
+Cornish-Bowden, A. and C´ardenas, M. L. (2020). Contrasting the-
+ories of life: Historical context, current theories. in search of
+an ideal theory. Biosystems, 188:104063.
+Cornish-Bowden, A. and C´ardenas, M. L. (2022). The essence of
+life revisited: how theories can shed light on it. Theory in
+Biosciences, 141(2):105–123.
+De Domenico, M., Camargo, C., Gershenson, C., Goldsmith, D.,
+Jeschonnek, S., Kay, L., Nichele, S., Nicol´as, J., Schmickl,
+T., Stella, M., Brandoff, J., Salinas, ´A. J. M., and Sayama,
+H. (2019). Complexity explained: A grassroot collaborative
+initiative to create a set of essential concepts of complex sys-
+tems. https://complexityexplained.github.io.
+Deacon, T. W. (2021). How molecules became signs. Biosemiotics,
+14(3):537–559.
+Due˜nas-D´ıez, M. and P´erez-Mercader, J. (2019).
+How chem-
+istry computes: Language recognition by non-biochemical
+chemical automata. from finite automata to Turing machines.
+Iscience, 19:514–526.
+Egbert, M., Hanczyc, M. M., Harvey, I., Virgo, N., Parke, E. C.,
+Froese, T., Sayama, H., Penn, A. S., and Bartlett, S. (2023).
+Behaviour and the origin of organisms. Origins of Life and
+Evolution of Biospheres, pages 1–26.
+Eigen, M. and Schuster, P. (2012). The hypercycle: a principle
+of natural self-organization. Springer Science & Business
+Media.
+Eilenberg, S. and MacLane, S. (1945). General theory of natu-
+ral equivalences. Transactions of the american mathematical
+society, 58(2):231–294.
+Emmeche, C. (1996). The garden in the machine: The emerging
+science of artificial life. Princeton University Press.
+Fields, C. and Levin, M. (2020). How do living systems create
+meaning? Philosophies, 5(4):36.
+Friston, K. (2013). Life as we know it. Journal of the Royal Society
+Interface, 10(86):20130475.
+Fudenberg, D. and Tirole, J. (1991). Game theory. MIT press.
+G´anti, T. (2003).
+Chemoton theory: theory of living systems.
+Springer Science & Business Media.
+Gatherer, D. and Galpin, V. (2013). Rosen’s (m, r) system in pro-
+cess algebra. BMC systems biology, 7:1–11.
+Gershenson, C. (2012). The world as evolving information. In
+Unifying Themes in Complex Systems VII: Proceedings of the
+Seventh International Conference on Complex Systems, pages
+100–115. Springer.
+Gibson, J. J. (1979). The ecological approach to visual perception.
+Boston: Houghton Mifflin.
+Grozinger, L., Amos, M., Gorochowski, T. E., Carbonell, P.,
+Oyarz´un, D. A., Stoof, R., Fellermann, H., Zuliani, P.,
+Tas, H., and Go˜ni-Moreno, A. (2019).
+Pathways to cel-
+lular supremacy in biocomputing. Nature communications,
+10(1):5250.
+Heins, C., Millidge, B., Da Costa, L., Mann, R. P., Friston, K. J.,
+and Couzin, I. D. (2024). Collective behavior from surprise
+minimization. Proceedings of the National Academy of Sci-
+ences, 121(17):e2320239121.
+Hern´andez-Orozco, S., Hern´andez-Quiroz, F., and Zenil, H.
+(2018). Undecidability and irreducibility conditions for open-
+ended evolution and emergence. Artificial Life, 24(1):56–70.
+Hoffmeyer, J. and Emmeche, C. (1991).
+Code-duality and the
+semiotics of nature. On semiotic modeling, 134.
+Hofmeyr, J.-H. S. (2018).
+Causation, constructors and codes.
+Biosystems, 164:121–127.
+Hofmeyr, J.-H. S. (2021).
+A biochemically-realisable rela-
+tional model of the self-manufacturing cell.
+Biosystems,
+207:104463.
+Hopcroft, J. E., Motwani, R., and Ullman, J. D. (2001). Introduc-
+tion to automata theory, languages, and computation. Acm
+Sigact News, 32(1):60–65.
+Horowitz, N. H. (1948). The one gene-one enzyme hypothesis.
+Genetics, 33(6):612.
+Hunding, A., Kepes, F., Lancet, D., Minsky, A., Norris, V., Raine,
+D., Sriram, K., and Root-Bernstein, R. (2006). Compositional
+complementarity and prebiotic ecology in the origin of life.
+Bioessays, 28(4):399–412.
+Jaeger, J., Riedl, A., Djedovic, A., Vervaeke, J., and Walsh, D.
+(2024). Naturalizing relevance realization: why agency and
+cognition are fundamentally not computational. Frontiers in
+psychology, 15:1362658.
+Kauffman, S. and Roli, A. (2021). The world is not a theorem.
+Entropy, 23(11):1467.
+Kauffman, S. A. (1986). Autocatalytic sets of proteins. Journal of
+theoretical biology, 119(1):1–24.
+Kendrew, J. C. (1967). Phage and the origins of molecular biology.
+
+Kiverstein, J., Kirchhoff, M. D., and Froese, T. (2022).
+The
+problem of meaning: The free energy principle and artificial
+agency. Frontiers in Neurorobotics, 16:844773.
+Korbak, T. (2021). Computational enactivism under the free energy
+principle. Synthese, 198(3):2743–2763.
+Korbak, T. (2023). Self-organisation,(m, r)–systems and enactive
+cognitive science. Adaptive Behavior, 31(1):35–49.
+Kull, K. (1998).
+On semiosis, umwelt, and semiosphere.
+Semiotica-la haye then berlin-, 120:299–310.
+K¨uppers, B.-O. (1990). Information and the Origin of Life. Mit
+Press.
+Ladyman, J. and Wiesner, K. (2020). What Is a Complex System?
+Yale University Press.
+Lane, P. A. (2024). Robert rosen’s relational biology theory and his
+emphasis on non-algorithmic approaches to living systems.
+Mathematics, 12(22):3529.
+Letelier, J.-C., C´ardenas, M. L., and Cornish-Bowden, A. (2011).
+From l’homme machine to metabolic closure: steps towards
+understanding life. Journal of Theoretical Biology, 286:100–
+113.
+Letelier, J.-C., Jaramillo-Riveri, S., Honorato-Zimmer, R., Pereira,
+U., Contreras, D., Reynaert, B., Hernandez, V. C., Andrade,
+J. S., C´ardenas, M. L., and Cornish-Bowden, A. (2010). (m,
+r) systems and raf sets: common ideas, tools and projections.
+In Proc. of the Alife XII Conference.
+Letelier, J.-C., Soto-Andrade, J., Abarz´ua, F. G., Cornish-Bowden,
+A., and C´ardenas, M. L. (2006). Organizational invariance
+and metabolic closure: analysis in terms of (m, r) systems.
+Journal of theoretical biology, 238(4):949–961.
+Levin, M. (2019). The computational boundary of a “self”: devel-
+opmental bioelectricity drives multicellularity and scale-free
+cognition. Frontiers in psychology, 10:493866.
+Loeb, A. (2014). The habitable epoch of the early universe. Inter-
+national Journal of Astrobiology, 13(4):337–339.
+Maley, S. P., Gershenson, C., and Kauffman, S. A. (2025). Life
+finds a way: Emergence of cooperative structures in adaptive
+threshold networks. arXiv preprint arXiv:2507.13253.
+Markovitch, O. and Lancet, D. (2012). Excess mutual catalysis is
+required for effective evolvability. Artificial life, 18(3):243–
+266.
+Marletto, C. (2015). Constructor theory of life. Journal of The
+Royal Society Interface, 12(104):20141226.
+M´arquez-Zacar´ıas, P., Ortiz-Mu˜noz, A., and Bingham, E. P. (2025).
+The nature of organization in living systems. arXiv preprint
+arXiv:2503.03950.
+Maturana, H. and Varela, F. (1980). Autopoiesis and Cognition:
+The realization of living. Reidel Publishing Company, Dor-
+drecht.
+Mitchell, M. (2009). Complexity: A Guided Tour. Oxford Univer-
+sity Press, Oxford, UK.
+Mont´evil, M. and Mossio, M. (2015).
+Biological organisation
+as closure of constraints.
+Journal of theoretical biology,
+372:179–191.
+Morris, C. W. (1946). Signs, language and behavior. Prentice-Hall
+New York.
+Mossio, M., Longo, G., and Stewart, J. (2009). A computable ex-
+pression of closure to efficient causation. Journal of Theoret-
+ical Biology, 257(3):489–498.
+Newman, M. (2018). Networks. Oxford university press.
+Noble, D. (2012). A theory of biological relativity: no privileged
+level of causation. Interface focus, 2(1):55–64.
+Noble, R., Tasaki, K., Noble, P. J., and Noble, D. (2019). Bio-
+logical relativity requires circular causality but not symmetry
+of causation: so, where, what and when are the boundaries?
+Frontiers in physiology, 10:827.
+Palmer, M. L., Williams, R. A., and Gatherer, D. (2016). Rosen’s
+(m, r) system as an x-machine. Journal of Theoretical Biol-
+ogy, 408:97–104.
+Pascal, R. and Pross, A. (2015). Stability and its manifestation in
+the chemical and biological worlds. Chemical Communica-
+tions, 51(90):16160–16165.
+Pascal, R., Pross, A., Corning, P., Kauffman, S., Noble, D.,
+Shapiro, J., Vane-Wright, R., and Pross, A. (2023). Toward
+the physicalization of biology: seeking the chemical origin
+of cognition. Evolution “On Purpose”: Teleonomy in Living
+Systems; Vienna Series Theoretical Biology, pages 257–274.
+Pattee, H. (2021).
+Symbol grounding precedes interpretation.
+Biosemiotics, pages 1–8.
+Pattee, H. H. (1969a). How does a molecule become a message?
+Developmental Biology Supplement, 3:1–16.
+Pattee, H. H. (1969b). Physical problems of heredity and evolution.
+Towards a theoretical biology, 2:268–284.
+Pattee, H. H. (1986).
+Universal principles of measurement and
+language functions in evolving systems. In Complexity, lan-
+guage, and life: Mathematical approaches, pages 268–281.
+Springer.
+Pattee, H. H. (1995). Evolving self-reference: matter, symbols, and
+semantic closure. Communication and Cognition—Artificial
+Intelligence, 12:1–2.
+Pattee, H. H. (2001). The physics of symbols: bridging the epis-
+temic cut. Biosystems, 60(1-3):5–21.
+Pattee, H. H. (2007a).
+Laws, constraints, and the modeling
+relation–history and interpretations. Chemistry & biodiver-
+sity, 4(10):2272–2295.
+Pattee, H. H. (2007b).
+The necessity of biosemiotics: Matter-
+symbol complementarity. Introduction to biosemiotics: The
+new biological synthesis, pages 115–132.
+Pattee, H. H. (2019). Simulations, realizations, and theories of life.
+In Artificial life, pages 63–77. Routledge.
+
+Pattee, H. H., R. kaczaszek Leonardi, J., and Pattee, H. H. (2012a).
+Cell psychology: an evolutionary approach to the symbol-
+matter problem. LAWS, LANGUAGE and LIFE: Howard Pat-
+tee’s classic papers on the physics of symbols with contempo-
+rary commentary, pages 165–179.
+Pattee, H. H., Raczaszek-Leonardi, J., and Pattee, H. H. (2012b).
+Clues from molecular symbol systems. LAWS, LANGUAGE
+and LIFE: Howard Pattee’s classic papers on the physics of
+symbols with contemporary commentary, pages 155–163.
+Pattee, H. H. and Sayama, H. (2019). Evolved open-endedness, not
+open-ended evolution. Artificial Life, 25(1):4–8.
+Pearce, B. K., Tupper, A. S., Pudritz, R. E., and Higgs, P. G. (2018).
+Constraining the time interval for the origin of life on earth.
+Astrobiology, 18(3):343–364.
+Pearson, K. (1892). The Grammar of Science. W. Scott.
+Poole, W., Ortiz-Munoz, A., Behera, A., Jones, N. S., Ouldridge,
+T. E., Winfree, E., and Gopalkrishnan, M. (2017). Chemi-
+cal boltzmann machines. In DNA Computing and Molecu-
+lar Programming: 23rd International Conference, DNA 23,
+Austin, TX, USA, September 24–28, 2017, Proceedings 23,
+pages 210–231. Springer.
+Prigogine, I. (1978). Time, structure, and fluctuations. Science,
+201(4358):777–785.
+Railsback, S. F. and Grimm, V. (2019).
+Agent-based and
+individual-based modeling: a practical introduction. Prince-
+ton university press.
+Rashevsky, N. (1954).
+Topology and life: in search of general
+mathematical principles in biology and sociology. The bul-
+letin of mathematical biophysics, 16:317–348.
+Rocha, L. M. and Hordijk, W. (2005). Material representations:
+from the genetic code to the evolution of cellular automata.
+Artificial life, 11(1-2):189–214.
+Rosen, R. (1958a). A relational theory of biological systems. The
+bulletin of mathematical biophysics, 20:245–260.
+Rosen, R. (1958b). The representation of biological systems from
+the standpoint of the theory of categories.
+The bulletin of
+mathematical biophysics, 20:317–341.
+Rosen, R. (1963). Some results in graph theory and their applica-
+tion to abstract relational biology. The bulletin of mathemati-
+cal biophysics, 25(2):231–241.
+Rosen, R. (1964a). Abstract biological systems as sequential ma-
+chines. The bulletin of mathematical biophysics, 26:103–111.
+Rosen, R. (1964b). Abstract biological systems as sequential ma-
+chines ii: strong connectedness and reversibility. The bulletin
+of mathematical biophysics, 26:239–246.
+Rosen, R. (1966). Abstract biological systems as sequential ma-
+chines: Iii. some algebraic aspects. The bulletin of mathe-
+matical biophysics, 28:141–148.
+Rosen, R. (1971). Some realizations of (m, r)-systems and their
+interpretation.
+The bulletin of mathematical biophysics,
+33:303–319.
+Rosen, R. (1978). On anticipatory systems: I. when can a system
+contain a predictive model of another? Journal of Social and
+Biological Structures, 1(2):155–162.
+Rosen, R. (1987). On the scope of syntactics in mathematics and
+science: the machine metaphor.
+In Real brains: artificial
+minds, pages 1–23. Elsevier Science Publishing.
+Rosen, R. (1991). Life itself: a comprehensive inquiry into the
+nature, origin, and fabrication of life. Columbia University
+Press.
+Sayama, H. (2008). Construction theory, self-replication, and the
+halting problem. Complexity, 13(5):16–22.
+Schrodinger, E. (1946). What is life?: the physical aspect of the
+living cell. The Macmillan company.
+Segr´e, D. and Lancet, D. (2000). Composing life. EMBO reports,
+1(3):217–222.
+Soto-Andrade, J., Jaramillo, S., Guti´errez, C., and Letelier, J.-C.
+(2011). Ouroboros avatars: A mathematical exploration of
+self-reference and metabolic closure. In Advances in artifi-
+cial life ECAL 2011: Proceedings of the eleventh European
+conference on the synthesis and simulation of living systems,
+pages 763–770. The MIT Press, Cambridge, MA.
+Stewart, J. (1995). Cognition = Life: Implications for higher-level
+cognition. Behavioural processes, 35(1-3):311–326.
+Strogatz, S. H. (2024). Nonlinear dynamics and chaos: with ap-
+plications to physics, biology, chemistry, and engineering.
+Chapman and Hall/CRC.
+Szathm´ary, E. (1995). A classification of replicators and lambda-
+calculus models of biological organization. Proceedings of
+the Royal Society of London. Series B: Biological Sciences,
+260(1359):279–286.
+Turing, A. (1936). On the computable numbers with an application
+to the entscheidungs. problem,’Proc. London Math. Soc., Ser,
+2(42):230–265.
+Varela, F. J., Maturana, H. R., and Uribe., R. (1974). Autopoiesis:
+The organization of living systems, its characterization and a
+model. BioSystems, 5:187–196.
+Varenne, F. (2013). The mathematical theory of categories in bi-
+ology and the concept of natural equivalence in robert rosen.
+Revue d’histoire des sciences, 66(1):167–197.
+von Neumann, J. (1955). Mathematical foundations of quantum
+mechanics. Princeton University Press.
+von Neumann, J. (1966).
+Theory of self-reproducing automata.
+Edited by Arthur W. Burks.
+Walker, S. I. and Davies, P. C. (2013). The algorithmic origins of
+life. Journal of the Royal Society Interface, 10(79):20120869.
+Walters, P. (2000). An introduction to ergodic theory, volume 79.
+Springer Science & Business Media.
+Waters, D. P. (2012). Von neumann’s theory of self-reproducing au-
+tomata: a useful framework for biosemiotics? Biosemiotics,
+5(1):5–15.
+Zhang, L., Williams, R. A., and Gatherer, D. (2016). Rosen’s (m, r)
+system in unified modelling language. Biosystems, 139:29–
+36.
+
+Glossary
+(Fabrication, Assembly)-systems (F, A)-systems are an exten-
+sion of Rosen’s (Metabolic, Repair)-systems, proposed by Jan-
+Hendrik Hofmeyr, where “F” stands for Fabrication and “A” for
+Assembly, emphasizing the construction and self-maintenance
+capabilities in biological systems. 1
+(Metabolism, Repair)-systems (M, R)-systems are relational
+models developed by Robert Rosen, where “M” stands for
+Metabolism and “R” stands for Repair, representing biological
+systems as sets of functional components organized in mutual
+causal loops to maintain themselves. 1
+affordance An ecological psychology term introduced by J.J.
+Gibson, referring to the actionable possibilities that an environ-
+ment offers to an organism, inherently related to the organism’s
+capabilities and goals. 7
+category A category C consists of (i) A collection of objects, de-
+noted as Ob(C); (ii) For each pair of objects A, B ∈Ob(C), a
+collection of arrows (also called morphisms) from A to B, de-
+noted as H(A, B). This can be empty, but in general there can
+be multiple, sometimes infinite, arrows between objects. Thus,
+an arrow is (in general) not reducible to the pair of objects it
+connects; (iii) A binary operation ◦: H(B, C) × H(A, B) →
+H(A, C), called composition of morphisms, such that for any
+three objects A, B, and C, we have associativity and the exis-
+tence of an identity morphism for every object of C. 18
+computational enactivism A perspective combining principles of
+enactive cognition with computational models, focusing on how
+autonomous agents actively generate meaning through their in-
+teractions with the environment. 1
+concrete category A concrete category is a pair (C, U) such that
+C is a category and U : C →Set (the category of sets and
+functions) is a faithful functor. 3
+ecological psychology A branch of psychology focusing on how
+organisms perceive and act upon their environments, pioneered
+by J.J. Gibson, emphasizing the direct perception of affordances
+in the environment. 1
+efficient cause Refers to the mechanisms or catalysts (e.g., en-
+zymes) that directly facilitate biological processes, enabling re-
+actions and transformations to occur. 3
+faithful functor Let C and D categories and let F : C →D be
+a functor from C to D. The functor induces a function FX,Y :
+H(X, Y ) →H(F(X), F(Y )) for every X, Y ∈Ob(C). The
+functor F is said to be faithful if FX,Y is injective. 18
+final cause The purpose or functional end-state of biological sys-
+tems, interpreted in metabolic terms as the goal-directed main-
+tenance and survival of the organism. 3
+formal cause The organizational pattern or structural configura-
+tion of a biological system, determining how components inter-
+act and processes unfold, thus shaping the identity and function
+of the organism. 3
+impredicativity A logical condition where an entity or concept is
+defined in a self-referential way, typically leading to circular de-
+pendencies; important in biological and cognitive systems where
+processes often define themselves recursively. 7
+material cause In metabolic terms, the substances and resources
+necessary for a biological process or structure, constituting the
+raw materials involved in biological reactions. 3
+physical biosemiotics An approach developed by Howard Pattee,
+which studies the interplay between symbolic information (e.g.,
+genetic code) and physical constraints (e.g., biochemical reac-
+tions), emphasizing the fundamental role of symbols in biologi-
+cal systems. 1
+relational biology A theoretical framework that emphasizes the
+primacy of relationships and interactions over individual enti-
+ties, pioneered by Robert Rosen, to understand the organization
+of biological systems as networks of functional relations. 1
+relevance realization The fundamental process by which organ-
+isms transform ill-defined problems into well-defined ones by
+determining which environmental cues are pertinent to their sur-
+vival and functioning. The problem of relevance has also been
+called the problem of meaning, the symbol grounding problem,
+and the frame problem. 1

@@ -1,0 +1,566 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/rAMGUpiYHJo1hG2PW5uJsBSa0Zc</id>
+  <title>arXiv Query: search_query=abs:autopoiesis AND (abs:model OR abs:simulation)&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:35Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:autopoiesis+AND+(abs:model+OR+abs:simulation)&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>26</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2610.40524v1</id>
+    <title>A heterogenetic theory of living systems</title>
+    <updated>2026-10-29T17:32:25Z</updated>
+    <link href="https://arxiv.org/abs/2610.40524v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.40524v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of the dynamics of living systems and their mathematical representation essentially unfolds on two levels. Firstly, the principles of autopoiesis and operational closure describe how a living system produces and maintains itself. Secondly, living phenomena are recognised as historical, involving the evolution of dynamics and spaces of possibility that change over time. Currently, no differential model can incorporate both of these aspects. We propose adopting the differential heterogenesis framework, which enables us to define differential operators that change in space and time, producing event-based and historical dynamics. In this construction, heterogeneous operator assemblages will be constrained by the principles of autopoiesis and operational closure, providing a theoretical framework for event-based and historical living systems. Finally, we provide a specific example of assembly with Gray-Scott kinetic equations, along with numerical simulations and results.</summary>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-29T17:32:25Z</published>
+    <arxiv:primary_category term="q-bio.QM"/>
+    <author>
+      <name>Alessandro Sarti</name>
+    </author>
+    <author>
+      <name>Giovanna Citti</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.08310v1</id>
+    <title>Evolutionary simulations of autopoietic cells with cognition</title>
+    <updated>2015-12-28T02:54:23Z</updated>
+    <link href="https://arxiv.org/abs/1512.08310v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.08310v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The minimal requirements for life are autopoiesis and cognition. We propose autopoietic models with cognition and perform three classes of evolutionary simulation. In our models the plasticity of the metabolic cycle and the regulation function of the membrane are the bases for the cognition. The cognitive cells show the adaptation and the evolution. The environment also shows the evolution via the interaction with the system of cells. This is a prototype of the co-evolution of the living system and its environment.</summary>
+    <category term="q-bio.CB" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-28T02:54:23Z</published>
+    <arxiv:primary_category term="q-bio.CB"/>
+    <author>
+      <name>Hirotaka Matsufuji</name>
+    </author>
+    <author>
+      <name>Osamu Narikiyo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.14011v2</id>
+    <title>EGO: a Recursive and Self-Referential Cognitive Architecture for Artificial General Intelligence</title>
+    <updated>2026-07-17T07:11:10Z</updated>
+    <link href="https://arxiv.org/abs/2507.14011v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.14011v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Artificial General Intelligence (AGI) is interpreted as an emergent property of autonomous and self-organizing systems, grounded in the principles of autopoiesis and embodied cognition, overcoming the structural limitations of current Large Language Models (LLMs). We introduce EGO (Environment Generative Operator), a software architecture based on the formal E-language, capable of self-referentiality and of maintaining its internal organization, thereby realizing Maturana's autopoiesis and providing a bridge between artificial intelligence and biological theories of cognition. For further details, please refer to the technical document on arXiv.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-18T15:22:33Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Alberto Mangiante</name>
+    </author>
+    <author>
+      <name>Paolo Totaro</name>
+    </author>
+    <author>
+      <name>Domenico Ninno</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.07969v1</id>
+    <title>Simulated Autopoiesis in Liquid Automata</title>
+    <updated>2024-01-15T21:23:23Z</updated>
+    <link href="https://arxiv.org/abs/2401.07969v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.07969v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a novel form of Liquid Automata, using this to simulate autopoiesis, whereby living machines self-organise in the physical realm. This simulation is based on an earlier Cellular Automaton described by Francisco Varela. The basis of Liquid Automata is a particle simulation with additional rules about how particles are transformed on collision with other particles. Unlike cellular automata, there is no fixed grid or time-step, only particles moving about and colliding with each other in a continuous space/time.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-15T21:23:23Z</published>
+    <arxiv:comment>12 pages</arxiv:comment>
+    <arxiv:primary_category term="nlin.CG"/>
+    <author>
+      <name>Steve Battle</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.08569v1</id>
+    <title>Flow-Lenia: Emergent evolutionary dynamics in mass conservative continuous cellular automata</title>
+    <updated>2025-06-10T08:37:26Z</updated>
+    <link href="https://arxiv.org/abs/2506.08569v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.08569v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Central to the artificial life endeavour is the creation of artificial systems spontaneously generating properties found in the living world such as autopoiesis, self-replication, evolution and open-endedness. While numerous models and paradigms have been proposed, cellular automata (CA) have taken a very important place in the field notably as they enable the study of phenomenons like self-reproduction and autopoiesis. Continuous CA like Lenia have been showed to produce life-like patterns reminiscent, on an aesthetic and ontological point of view, of biological organisms we call creatures. We propose in this paper Flow-Lenia, a mass conservative extension of Lenia. We present experiments demonstrating its effectiveness in generating spatially-localized patters (SLPs) with complex behaviors and show that the update rule parameters can be optimized to generate complex creatures showing behaviors of interest. Furthermore, we show that Flow-Lenia allows us to embed the parameters of the model, defining the properties of the emerging patterns, within its own dynamics thus allowing for multispecies simulations. By using the evolutionary activity framework as well as other metrics, we shed light on the emergent evolutionary dynamics taking place in this system.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-10T08:37:26Z</published>
+    <arxiv:comment>This manuscript has been accepted for publication in the Artificial Life journal (https://direct.mit.edu/artl)</arxiv:comment>
+    <arxiv:primary_category term="nlin.CG"/>
+    <arxiv:journal_ref>Artificial Life (2025) 31(2): 228-248</arxiv:journal_ref>
+    <author>
+      <name>Erwan Plantec</name>
+    </author>
+    <author>
+      <name>Gautier Hamon</name>
+    </author>
+    <author>
+      <name>Mayalen Etcheverry</name>
+    </author>
+    <author>
+      <name>Bert Wang-Chak Chan</name>
+    </author>
+    <author>
+      <name>Pierre-Yves Oudeyer</name>
+    </author>
+    <author>
+      <name>Clément Moulin-Frier</name>
+    </author>
+    <arxiv:doi>10.1162/artl_a_00471</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/artl_a_00471" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.07144v1</id>
+    <title>Autopoiesis: A Self-Evolving System Paradigm for LLM Serving Under Runtime Dynamics</title>
+    <updated>2026-04-08T14:37:17Z</updated>
+    <link href="https://arxiv.org/abs/2604.07144v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.07144v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern Large Language Model (LLM) serving operates in highly volatile environments characterized by severe runtime dynamics, such as workload fluctuations and elastic cluster autoscaling. Traditional serving systems rely on static, human-engineered serving policies (e.g., scheduling algorithms and rescheduling strategies) to manage these dynamics. However, these policies must navigate deeply intertwined runtime trade-offs (e.g., scheduling overhead vs. execution efficiency, rescheduling frequency vs. reconfiguration overhead), whose optimal balance is workload-specific and shifts continuously as runtime conditions evolve, rendering any fixed policy fundamentally unable to adapt. We propose Autopoiesis, a novel online self-evolving system that shifts LLM serving from static policy deployment to continuous online policy evolution. First, Autopoiesis introduces an LLM-driven program synthesis workflow to evolve serving policies with respect to real-time observed dynamics, where the evolved policies reflect the optimal decision in navigating the complex, multi-dimensional trade-off space. Second, Autopoiesis enables this synthesis process to operate continuously during serving, observing real-world system behavior, and rewriting the policy code as runtime trade-offs shift, thereby transforming policy design from a one-time offline endeavor into an ongoing system component, enabling autonomous adaptation to evolving runtime conditions. Together, we establish a new paradigm: Serving policies are no longer static artifacts designed by humans before deployment, but living code that LLMs continuously evolve throughout deployment to navigate runtime trade-offs beyond human design. We evaluate Autopoiesis across diverse runtime dynamics and show up to 53% and on average 34% improvements over state-of-the-art LLM serving systems.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-08T14:37:17Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Youhe Jiang</name>
+    </author>
+    <author>
+      <name>Ran Yan</name>
+    </author>
+    <author>
+      <name>You Peng</name>
+    </author>
+    <author>
+      <name>Wenshuang Li</name>
+    </author>
+    <author>
+      <name>Taiyi Wang</name>
+    </author>
+    <author>
+      <name>Fangcheng Fu</name>
+    </author>
+    <author>
+      <name>Binhang Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0911.3638v1</id>
+    <title>The Two Faces of American Power: Military and Political Communication during the Cuban Missile Crisis</title>
+    <updated>2009-11-18T19:48:17Z</updated>
+    <link href="https://arxiv.org/abs/0911.3638v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0911.3638v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Purpose: The mismatches between political discourse and military momentum in the American handling of the Cuban missile crisis are explained by using the model of the potential autopoiesis of subsystems. Under wartime conditions, the codes of political and military communications can increasingly be differentiated. Design/methodology/approach: The model of a further differentiation between political and military power is developed on the basis of a detailed description of the Cuban missile crisis. We introduce the concept of a "semi-dormant autopoiesis" for the difference in the dynamics between peacetime and wartime conditions. Findings: Several dangerous incidents during the crisis can be explained by a sociocybernetic model focusing on communication and control, but not by using an organization-theoretical approach. The further differentiation of the military as a subsystem became possible in the course of the twentieth century because of ongoing learning processes about previous wars.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-11-18T19:48:17Z</published>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <arxiv:journal_ref>Kybernetes 35 (3/4) (2006) 547-566</arxiv:journal_ref>
+    <author>
+      <name>Michael Deinema</name>
+    </author>
+    <author>
+      <name>Loet Leydesdorff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.33445v1</id>
+    <title>From Intelligence to Autonomy: Foundations and Construction of Autonomous Agents for Future Intelligent Systems</title>
+    <updated>2026-10-24T04:47:10Z</updated>
+    <link href="https://arxiv.org/abs/2610.33445v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.33445v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Artificial intelligence is moving from one-off perception and generation tasks toward long-term planning, tool use, and interaction with real environments. Greater task competence, however, does not automatically yield autonomy: an external actor may still have to set goals, sustain operating conditions, detect failures, and approve updates. We define an autonomous agent as a system that, within explicit identity and authority boundaries, maintains both task goals and viability conditions, acts continuously using models of the world and itself, and adjusts its control mechanisms and long-term capabilities through feedback. We trace the conceptual path from homeostasis and feedback control to autopoiesis and biological autonomy. We then distinguish six lines of operationalization: computational autopoiesis, behavior-based robotics, agent formalization, adaptive software, embodied adaptation, and robotic self-modeling. On this basis, we propose a one-boundary, four-loop framework in which Operational, Viability, Reflexive, and Learning loops organize task execution, self-maintenance, metacontrol, and governed learning. Five paired simulation experiments test permission constraints, road-closure response, health maintenance, capability re-estimation, and cross-task learning. Their results provide preliminary evidence for the feasibility of these mechanisms, while broader environments and physical systems remain to be tested.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-24T04:47:10Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hongda Zhang</name>
+    </author>
+    <author>
+      <name>Ziqing Zhou</name>
+    </author>
+    <author>
+      <name>Yuning Chen</name>
+    </author>
+    <author>
+      <name>Linqiang Hu</name>
+    </author>
+    <author>
+      <name>Yi Liu</name>
+    </author>
+    <author>
+      <name>Ding Zhou</name>
+    </author>
+    <author>
+      <name>Zhao Huang</name>
+    </author>
+    <author>
+      <name>Haining Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01656v1</id>
+    <title>Imperfect Knowledge Management -- A Case Study in a Chilean Manufacturing Company</title>
+    <updated>2025-01-31T11:48:38Z</updated>
+    <link href="https://arxiv.org/abs/2502.01656v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01656v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To conceptualize living systems based on the processes that create them, rather than their interactions with the environment, as in systems theory. Maturana and Varela (1969) at the University of Chile introduced the term autopoiesis (from Greek self and production). This concept emphasizes autonomy as the defining feature of living systems. It describes them as self-sustaining entities that preserve their identity through continuous self-renewal to preserve their unity. Furthermore, these systems can only be understood in reference to themselves, as all internal activities are inherently self-determined by self-production and self-referentiality. This thesis introduces the Fuzzy Autopoietic Knowledge Management (FAKM) model, which integrates the system theory of living systems, the cybernetic theory of viable systems, and the autopoiesis theory of autopoietic systems. The goal is to move beyond traditional knowledge management models that rely on Cartesian dualism (cognition/action) where knowledge is treated as symbolic information processing. Instead, the FAKM model adopts a dualism of organization/structure to define an autopoietic system within a sociotechnical approach. The model is experimentally applied to a manufacturing company in the Maule Region, south of Santiago, Chile.</summary>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-31T11:48:38Z</published>
+    <arxiv:comment>Doctoral thesis, in French language. Keywords: Knowledge, Knowledge Management, Autopoiesis, Learning and Evolution</arxiv:comment>
+    <arxiv:primary_category term="cs.DB"/>
+    <arxiv:journal_ref>HAL tel-04583537 , version 1 (22-05-2024)</arxiv:journal_ref>
+    <author>
+      <name>Leoncio Jimenez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.04374v7</id>
+    <title>Closing the Loop: How Semantic Closure Enables Open-Ended Evolution?</title>
+    <updated>2025-10-18T13:50:00Z</updated>
+    <link href="https://arxiv.org/abs/2404.04374v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.04374v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This manuscript explores the evolutionary emergence of semantic closure -- the self-referential mechanism through which symbols actively construct and interpret their own functional contexts -- by integrating concepts from relational biology, physical biosemiotics, and ecological psychology into a unified computational enactivist framework. By extending Hofmeyr's (Fabrication, Assembly)-systems -- a continuation of Rosen's (Metabolism, Repair)-systems -- with a temporal parametrization, we develop a model capable of capturing critical properties of life, including autopoiesis, anticipation, and adaptation. Our stepwise model traces the evolution of semantic closure from simple reaction networks that recognize regular languages to self-constructing chemical systems with anticipatory capabilities, identifying self-reference as necessary for robust self-replication and open-ended evolution. Such a computational enactivist perspective underscores the essential necessity of implementing syntax-pragmatic transformations into realizations of life, providing a cohesive theoretical basis for a recently proposed trialectic between autopoiesis, anticipation, and adaptation to solve the problem of relevance realization. Thus, our work opens avenues for new models of computation that can better capture the dynamics of life, naturalize agency and cognition, and provide fundamental principles underlying biological information processing.</summary>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-05T19:35:38Z</published>
+    <arxiv:comment>18 pages, 2 figures; accepted for publication in J. R. Soc. Interface</arxiv:comment>
+    <arxiv:primary_category term="physics.bio-ph"/>
+    <author>
+      <name>Amahury J. López-Díaz</name>
+    </author>
+    <author>
+      <name>Carlos Gershenson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1011.3244v2</id>
+    <title>"Meaning" as a sociological concept: A review of the modeling, mapping, and simulation of the communication of knowledge and meaning</title>
+    <updated>2011-03-21T14:54:52Z</updated>
+    <link href="https://arxiv.org/abs/1011.3244v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1011.3244v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The development of discursive knowledge presumes the communication of meaning as analytically different from the communication of information. Knowledge can then be considered as a meaning which makes a difference. Whereas the communication of information is studied in the information sciences and scientometrics, the communication of meaning has been central to Luhmann's attempts to make the theory of autopoiesis relevant for sociology. Analytical techniques such as semantic maps and the simulation of anticipatory systems enable us to operationalize the distinctions which Luhmann proposed as relevant to the elaboration of Husserl's "horizons of meaning" in empirical research: interactions among communications, the organization of meaning in instantiations, and the self-organization of interhuman communication in terms of symbolically generalized media such as truth, love, and power. Horizons of meaning, however, remain uncertain orders of expectations, and one should caution against reification from the meta-biological perspective of systems theory.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-11-14T18:18:46Z</published>
+    <arxiv:primary_category term="nlin.AO"/>
+    <author>
+      <name>Loet Leydesdorff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.21086v1</id>
+    <title>Non-Platonic Autopoiesis of a Cellular Automaton Glider in Asymptotic Lenia</title>
+    <updated>2024-07-30T13:06:26Z</updated>
+    <link href="https://arxiv.org/abs/2407.21086v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.21086v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Like Life, Lenia CA support a range of patterns that move, interact with their environment, and/or are modified by said interactions. These patterns maintain a cohesive, self-organizing morphology, i.e. they exemplify autopoiesis, the self-organization principle of a network of components and processes maintaining themselves. Recent work implementing Asymptotic Lenia as a reaction-diffusion system reported that non-Platonic behavior in standard Lenia may depend on the clipping function, and that ALenia gliders are likely not subject to non-Platonic instability. In this work I show an example of a glider in ALenia that depends on a certain simulation coarseness for autopoietic competence: when simulated with too fine spatial or temporal resolution the glider no longer maintains its morphology or dynamics. I also show that instability maps of the asymptotic Lenia glider, and others in different CA framworks, show fractal retention of fine boundary detail down to the limit of floating point precision.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-30T13:06:26Z</published>
+    <arxiv:comment>Published at the 2024 Conference on Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="nlin.CG"/>
+    <arxiv:journal_ref>2024 Conference on Artificial Life</arxiv:journal_ref>
+    <author>
+      <name>Q. Tyrell Davis</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00786</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00786" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.16706v1</id>
+    <title>Exploring the Adaptive Behaviors of Particle Lenia: A Perturbation-Response Analysis for Computational Agency</title>
+    <updated>2023-05-26T07:52:44Z</updated>
+    <link href="https://arxiv.org/abs/2305.16706v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.16706v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A firm cognitive subject or ``individual'' is presupposed for the emergence of mind. However, with the development of recent information technology, the ``individual'' has become more dispersed in society and the cognitive subject has become increasingly unstable and adaptive, necessitating an update in our understanding of the ``individual''. Autopoiesis serves as a model of the cognitive subject, which is unstable and requires effort to maintain itself to adapt to the environment. In this study, we evaluated adaptivity for a highly extensible multi-particle system model Particle Lenia through the response perturbation. As a result, we found that Particle Lenia has a particle configuration that is both temporally unstable and has multiple stable states. This result suggests that Particle Lenia can express adaptive characteristics and is expected to be used as a computational model toward building an autopoietic cognitive agent.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-26T07:52:44Z</published>
+    <arxiv:comment>This paper has been accepted for ALIFE 2023</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <arxiv:journal_ref>Proceedings of the 2023 Artificial Life Conference Paper No: isal_a_00631, 40; 9 pages</arxiv:journal_ref>
+    <author>
+      <name>Kazuya Horibe</name>
+    </author>
+    <author>
+      <name>Keisuke Suzuki</name>
+    </author>
+    <author>
+      <name>Takato Horii</name>
+    </author>
+    <author>
+      <name>Hiroshi Ishiguro</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00631</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00631" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.10236v1</id>
+    <title>Discovering Sensorimotor Agency in Cellular Automata using Diversity Search</title>
+    <updated>2024-02-14T14:30:42Z</updated>
+    <link href="https://arxiv.org/abs/2402.10236v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.10236v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The research field of Artificial Life studies how life-like phenomena such as autopoiesis, agency, or self-regulation can self-organize in computer simulations. In cellular automata (CA), a key open-question has been whether it it is possible to find environment rules that self-organize robust "individuals" from an initial state with no prior existence of things like "bodies", "brain", "perception" or "action". In this paper, we leverage recent advances in machine learning, combining algorithms for diversity search, curriculum learning and gradient descent, to automate the search of such "individuals", i.e. localized structures that move around with the ability to react in a coherent manner to external obstacles and maintain their integrity, hence primitive forms of sensorimotor agency. We show that this approach enables to find systematically environmental conditions in CA leading to self-organization of such basic forms of agency. Through multiple experiments, we show that the discovered agents have surprisingly robust capabilities to move, maintain their body integrity and navigate among various obstacles. They also show strong generalization abilities, with robustness to changes of scale, random updates or perturbations from the environment not seen during training. We discuss how this approach opens new perspectives in AI and synthetic bioengineering.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T14:30:42Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <arxiv:journal_ref>Sci. Adv. 11 (44), eadp0834, (2025)</arxiv:journal_ref>
+    <author>
+      <name>Gautier Hamon</name>
+    </author>
+    <author>
+      <name>Mayalen Etcheverry</name>
+    </author>
+    <author>
+      <name>Bert Wang-Chak Chan</name>
+    </author>
+    <author>
+      <name>Clément Moulin-Frier</name>
+    </author>
+    <author>
+      <name>Pierre-Yves Oudeyer</name>
+    </author>
+    <arxiv:doi>10.1126/sciadv.adp0834</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1126/sciadv.adp0834" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.13740v1</id>
+    <title>Subverting machines, fluctuating identities: Re-learning human categorization</title>
+    <updated>2022-05-27T03:09:25Z</updated>
+    <link href="https://arxiv.org/abs/2205.13740v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.13740v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most machine learning systems that interact with humans construct some notion of a person's "identity," yet the default paradigm in AI research envisions identity with essential attributes that are discrete and static. In stark contrast, strands of thought within critical theory present a conception of identity as malleable and constructed entirely through interaction; a doing rather than a being. In this work, we distill some of these ideas for machine learning practitioners and introduce a theory of identity as autopoiesis, circular processes of formation and function. We argue that the default paradigm of identity used by the field immobilizes existing identity categories and the power differentials that co$\unicode{x2010}$occur, due to the absence of iterative feedback to our models. This includes a critique of emergent AI fairness practices that continue to impose the default paradigm. Finally, we apply our theory to sketch approaches to autopoietic identity through multilevel optimization and relational learning. While these ideas raise many open questions, we imagine the possibilities of machines that are capable of expressing human identity as a relationship perpetually in flux.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-27T03:09:25Z</published>
+    <arxiv:comment>In Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT '22), June 21-24, 2022, Seoul, Republic of Korea. First two authors contributed equally to this work</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Christina Lu</name>
+    </author>
+    <author>
+      <name>Jackie Kay</name>
+    </author>
+    <author>
+      <name>Kevin R. McKee</name>
+    </author>
+    <arxiv:doi>10.1145/3531146.3533161</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3531146.3533161" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1606.00799v1</id>
+    <title>Multi-Agent Modeling of Dynamical Systems: A Self-organized, Emergent, Homeostatic and Autopoietic Approach</title>
+    <updated>2015-10-02T17:01:17Z</updated>
+    <link href="https://arxiv.org/abs/1606.00799v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.00799v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This thesis presents the theoretical, conceptual and methodological aspects that support the modeling of dynamical systems (DS) by using several agents. The modeling approach permits the assessment of properties representing order, change, equilibrium, adaptability, and autonomy, in DS. The modeling processes were supported by a conceptual corpus regarding systems dynamics, multi-agent systems, graph theory, and, particularly, the information theory. Besides to the specification of the dynamical systems as a computational network of agents, metrics that allow characterizing and assessing the inherent complexity of such systems were defined. As a result, properties associated with emergence, self-organization, complexity, homeostasis and autopoiesis were defined, formalized and measured. The validation of the underlying DS model was carried out on discrete systems (boolean networks and cellular automata) and ecological systems. The central contribution of this thesis was the development of a methodological approach for DS modeling. This approach includes a larger set of properties than in traditional studies, what allows us to deepen in questioning essential issues associated with the DS field. All this was achieved from a simple base of calculation and interpretation, which does not require advanced mathematical knowledge, and facilitates their application in different fields of science.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-10-02T17:01:17Z</published>
+    <arxiv:comment>in Spanish</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Nelson Fernandez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.06387v3</id>
+    <title>The free energy principle made simpler but not too simple</title>
+    <updated>2023-05-30T17:15:06Z</updated>
+    <link href="https://arxiv.org/abs/2201.06387v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.06387v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper provides a concise description of the free energy principle, starting from a formulation of random dynamical systems in terms of a Langevin equation and ending with a Bayesian mechanics that can be read as a physics of sentience. It rehearses the key steps using standard results from statistical physics. These steps entail (i) establishing a particular partition of states based upon conditional independencies that inherit from sparsely coupled dynamics, (ii) unpacking the implications of this partition in terms of Bayesian inference and (iii) describing the paths of particular states with a variational principle of least action. Teleologically, the free energy principle offers a normative account of self-organisation in terms of optimal Bayesian design and decision-making, in the sense of maximising marginal likelihood or Bayesian model evidence. In summary, starting from a description of the world in terms of random dynamical systems, we end up with a description of self-organisation as sentient behaviour that can be interpreted as self-evidencing; namely, self-assembly, autopoiesis or active inference.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.NC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-17T12:51:27Z</published>
+    <arxiv:comment>44 pages, 9 Figures; 64 pages including graphical abstract, highlights and references</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Karl Friston</name>
+    </author>
+    <author>
+      <name>Lancelot Da Costa</name>
+    </author>
+    <author>
+      <name>Noor Sajid</name>
+    </author>
+    <author>
+      <name>Conor Heins</name>
+    </author>
+    <author>
+      <name>Kai Ueltzhöffer</name>
+    </author>
+    <author>
+      <name>Grigorios A. Pavliotis</name>
+    </author>
+    <author>
+      <name>Thomas Parr</name>
+    </author>
+    <arxiv:doi>10.1016/j.physrep.2023.07.001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.physrep.2023.07.001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0907.1968v1</id>
+    <title>Quantum Biology</title>
+    <updated>2009-07-11T15:33:53Z</updated>
+    <link href="https://arxiv.org/abs/0907.1968v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0907.1968v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A critical assessment of the recent developments of molecular biology is presented. The thesis that they do not lead to a conceptual understanding of life and biological systems is defended. Maturana and Varela's concept of autopoiesis is briefly sketched and its logical circularity avoided by postulating the existence of underlying {\it living processes}, entailing amplification from the microscopic to the macroscopic scale, with increasing complexity in the passage from one scale to the other. Following such a line of thought, the currently accepted model of condensed matter, which is based on electrostatics and short-ranged forces, is criticized. It is suggested that the correct interpretation of quantum dispersion forces (van der Waals, hydrogen bonding, and so on) as quantum coherence effects hints at the necessity of including long-ranged forces (or mechanisms for them) in condensed matter theories of biological processes. Some quantum effects in biology are reviewed and quantum mechanics is acknowledged as conceptually important to biology since without it most (if not all) of the biological structures and signalling processes would not even exist. Moreover, it is suggested that long-range quantum coherent dynamics, including electron polarization, may be invoked to explain signal amplification process in biological systems in general.</summary>
+    <category term="physics.gen-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-07-11T15:33:53Z</published>
+    <arxiv:primary_category term="physics.gen-ph"/>
+    <arxiv:journal_ref>A. Sergi, Atti della Accademia Peloritana dei Pericolanti Vol. LXXXVII, C1C0901001 (2009)</arxiv:journal_ref>
+    <author>
+      <name>Alessandro Sergi</name>
+    </author>
+    <arxiv:doi>10.1478/C1C0901001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1478/C1C0901001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.11368v2</id>
+    <title>Evolution of Autopoiesis and Multicellularity in the Game of Life</title>
+    <updated>2021-01-11T19:23:58Z</updated>
+    <link href="https://arxiv.org/abs/2009.11368v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.11368v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently we introduced a model of symbiosis, Model-S, based on the evolution of seed patterns in Conway's Game of Life. In the model, the fitness of a seed pattern is measured by one-on-one competitions in the Immigration Game, a two-player variation of the Game of Life. Our previous article showed that Model-S can serve as a highly abstract, simplified model of biological life: (1) The initial seed pattern is analogous to a genome. (2) The changes as the game runs are analogous to the development of the phenome. (3) Tournament selection in Model-S is analogous to natural selection in biology. (4) The Immigration Game in Model-S is analogous to competition in biology. (5) The first three layers in Model-S are analogous to biological reproduction. (6) The fusion of seed patterns in Model-S is analogous to symbiosis. The current article takes this analogy two steps further: (7) Autopoietic structures in the Game of Life (still lifes, oscillators, and spaceships -- collectively known as ashes) are analogous to cells in biology. (8) The seed patterns in the Game of Life give rise to multiple, diverse, cooperating autopoietic structures, analogous to multicellular biological life. We use the apgsearch software (Ash Pattern Generator Search), developed by Adam Goucher for the study of ashes, to analyze autopoiesis and multicellularity in Model-S. We find that the fitness of evolved seed patterns in Model-S is highly correlated with the diversity and quantity of multicellular autopoietic structures.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-23T20:26:28Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>Artificial Life, 27(1), 26-43 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Peter D. Turney</name>
+    </author>
+    <arxiv:doi>10.1162/artl_a_00334</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/artl_a_00334" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.21319v1</id>
+    <title>Active Inference Agency Formalization, Metrics, and Convergence Assessments</title>
+    <updated>2026-03-22T17:01:39Z</updated>
+    <link href="https://arxiv.org/abs/2603.21319v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.21319v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses the critical challenge of mesa-optimization in AI safety by providing a formal definition of agency and a framework for its analysis. Agency is conceptualized as a Continuous Representation of accumulated experience that achieves autopoiesis through a dynamic balance between curiosity (minimizing prediction error to ensure non-computability and novelty) and empowerment (maximizing the control channel's information capacity to ensure subjectivity and goal-directedness). Empirical evidence suggests that this active inference-based model successfully accounts for classical instrumental goals, such as self-preservation and resource acquisition.
+  The analysis demonstrates that the proposed agency function is smooth and convex, possessing favorable properties for optimization. While agentic functions occupy a vanishingly small fraction of the total abstract function space, they exhibit logarithmic convergence in sparse environments. This suggests a high probability for the spontaneous emergence of agency during the training of modern, large-scale models.
+  To quantify the degree of agency, the paper introduces a metric based on the distance between the behavioral equivalents of a given system and an "ideal" agentic function within the space of canonicalized rewards (STARC). This formalization provides a concrete apparatus for classifying and detecting mesa-optimizers by measuring their proximity to an ideal agentic objective, offering a robust tool for analyzing and identifying undesirable inner optimization in complex AI systems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-22T17:01:39Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Eduard Kapelko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09493v1</id>
+    <title>Social AI and The Equation of Wittgenstein's Language User With Calvino's Literature Machine</title>
+    <updated>2024-05-23T09:51:44Z</updated>
+    <link href="https://arxiv.org/abs/2407.09493v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09493v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Is it sensical to ascribe psychological predicates to AI systems like chatbots based on large language models (LLMs)? People have intuitively started ascribing emotions or consciousness to social AI ('affective artificial agents'), with consequences that range from love to suicide. The philosophical question of whether such ascriptions are warranted is thus very relevant. This paper advances the argument that LLMs instantiate language users in Ludwig Wittgenstein's sense but that ascribing psychological predicates to these systems remains a functionalist temptation. Social AIs are not full-blown language users, but rather more like Italo Calvino's literature machines. The ideas of LLMs as Wittgensteinian language users and Calvino's literature-producing writing machine are combined. This sheds light on the misguided functionalist temptation inherent in moving from equating the two to the ascription of psychological predicates to social AI. Finally, the framework of mortal computation is used to show that social AIs lack the basic autopoiesis needed for narrative façons de parler and their role in the sensemaking of human (inter)action. Such psychological predicate ascriptions could make sense: the transition 'from quantity to quality' can take place, but its route lies somewhere between life and death, not between affective artifacts and emotion approximation by literature machines.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T09:51:44Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <arxiv:journal_ref>International Review of Literary Studies, 6, no.1 (2024): 39-55</arxiv:journal_ref>
+    <author>
+      <name>W. J. T. Mollema</name>
+    </author>
+    <arxiv:doi>10.53057/irls/2024.6.1.4</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.53057/irls/2024.6.1.4" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.00751v1</id>
+    <title>Rethinking Cognition: Morphological Info-Computation and the Embodied Paradigm in Life and Artificial Intelligence</title>
+    <updated>2024-12-01T10:04:53Z</updated>
+    <link href="https://arxiv.org/abs/2412.00751v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.00751v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study aims to place Lorenzo Magnanis Eco-Cognitive Computationalism within the broader context of current work on information, computation, and cognition. Traditionally, cognition was believed to be exclusive to humans and a result of brain activity. However, recent studies reveal it as a fundamental characteristic of all life forms, ranging from single cells to complex multicellular organisms and their networks. Yet, the literature and general understanding of cognition still largely remain human-brain-focused, leading to conceptual gaps and incoherency. This paper presents a variety of computational (information processing) approaches, including an info-computational approach to cognition, where natural structures represent information and dynamical processes on natural structures are regarded as computation, relative to an observing cognizing agent. We model cognition as a web of concurrent morphological computations, driven by processes of self-assembly, self-organisation, and autopoiesis across physical, chemical, and biological domains. We examine recent findings linking morphological computation, morphogenesis, agency, basal cognition, extended evolutionary synthesis, and active inference. We establish a connection to Magnanis Eco-Cognitive Computationalism and the idea of computational domestication of ignorant entities. Novel theoretical and applied insights question the boundaries of conventional computational models of cognition. The traditional models prioritize symbolic processing and often neglect the inherent constraints and potentialities in the physical embodiment of agents on different levels of organization. Gaining a better info-computational grasp of cognitive embodiment is crucial for the advancement of fields such as biology, evolutionary studies, artificial intelligence, robotics, medicine, and more.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-01T10:04:53Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Gordana Dodig-Crnkovic</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.03361v2</id>
+    <title>The Evolutionary Origin of Values: implications for AI alignment, sentience and existential risk</title>
+    <updated>2026-08-14T20:34:26Z</updated>
+    <link href="https://arxiv.org/abs/2608.03361v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.03361v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>AI systems based on Large Language Models (LLMs) have prompted fears that they may harbor hidden goals, seek to dominate or eliminate humanity, or even suffer as sentient beings. We address these concerns by tracing the evolutionary origin of value in biological organisms. Values emerge from autopoiesis: living systems must actively maintain themselves against perturbation and dissipation. Natural selection has equipped them with hierarchies of "vicarious selectors" that guide their behavior toward fitness. LLMs, by contrast, are allopoietic and allotelic: they produce outputs for others, and their goals derive from user prompts rather than an autonomous drive. They lack the intrinsic motivation for self-preservation, dominance, or resource competition that underlies existential-risk scenarios, and the embodied vulnerability required for feeling or suffering. Still, because LLMs learn statistical patterns from human-generated text, they implicitly absorb human values as well as knowledge, allowing them to focus on what is relevant. That is why the "orthogonality thesis" separating intelligence from values does not apply to them. Such separation would in fact expose any intelligence to the frame problem: the combinatorial explosion of the search space that makes any realistic utility function physically uncomputable. That also precludes the convergence of instrumental values thesis. We conclude that the real alignment challenge lies not in preventing rogue AI agency, but in ensuring LLMs intelligently apply learned ethical values.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-04T09:09:31Z</published>
+    <arxiv:comment>submitted chapter for book: T. Veloz &amp; C. Rittberg (Eds.), AI and Human Values. Springer</arxiv:comment>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Francis Heylighen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.25062v1</id>
+    <title>Cultivating Machine Intelligence: The OMEGA Shift from Top-Down Optimization to Autopoietic Cognitive Ecologies</title>
+    <updated>2026-05-24T13:13:16Z</updated>
+    <link href="https://arxiv.org/abs/2605.25062v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.25062v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dominant artificial intelligence paradigm trains neural architectures via gradient descent against proxy objectives and reinforcement learning from human feedback. While remarkably capable, this top-down optimization inherently generates structural failure modes, including hallucination, sycophancy, reward hacking, and alignment fragility, which represent paradigmatic limitations rather than mere engineering defects. In response, we introduce RECLAIM (Recursive, Ecological, Cognitive, Lifelike, Adaptive, Intelligent Machine), a theoretical framework for cultivating intelligence through computational ecology rather than engineering it through strict optimization. The model is supported by four interlocking theoretical pillars. General Darwinism replaces gradients with blind variation and selective retention, while non-agentic emergence substitutes evaluative rewards with environmental physics to structurally prevent specification gaming against human intent. Concurrently, the Polya-Hebbian bridge applies Polya urn dynamics to Hebbian reinforcement for path-dependent specialization, and the free energy principle is integrated as environmental thermodynamics rather than as an agent objective. The architecture situates autopoietic units, bounded by Markov blankets and competing for finite computational energy, within a data ecology shaped by cognitive food chains and Red Queen arms races. This framework suggests the spontaneous emergence of dual-process cognition, sensory specialization, analogical reasoning, and intrinsic motivation as natural consequences of evolution under resource constraints. We conceptualize this paradigm transition as the OMEGA shift, representing a move from optimization and maximization to emergence through generative autopoiesis.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-24T13:13:16Z</published>
+    <arxiv:comment>Extended preprint. A shorter version of this work is currently under peer review</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Ata G. Zare</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.03105v2</id>
+    <title>Cognitio Emergens: Agency, Dimensions, and Dynamics in Human-AI Knowledge Co-Creation</title>
+    <updated>2025-10-10T14:59:30Z</updated>
+    <link href="https://arxiv.org/abs/2505.03105v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.03105v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human-AI scientific collaboration has evolved from tool-user relationships into co-evolutionary partnerships. When AlphaFold improved protein structure prediction, researchers engaged with an epistemic partner that transformed their approach to structure-function problems. Yet existing frameworks position AI as either sophisticated tool or potential risk, overlooking how scientific understanding emerges through recursive interaction. We introduce Cognitio Emergens (CE), a framework that captures the co-evolutionary nature of human-AI epistemic partnerships.
+  Drawing from autopoiesis theory, social systems theory, and organizational modularity, CE integrates three components: Agency Configurations modeling how authority distributes through Directed, Contributory, and Partnership modes, with partnerships oscillating dynamically rather than following linear progression; Epistemic Dimensions capturing six capabilities along Discovery, Integration, and Projection axes, creating distinctive "capability signatures" that guide strategic development; and Partnership Dynamics identifying evolutionary forces including epistemic alienation, where researchers lose interpretive control over knowledge they formally endorse.
+  The framework equips researchers to diagnose dimensional imbalances, institutional leaders to design governance structures supporting multiple agency configurations, and policymakers to develop evaluations beyond simple performance metrics. By reconceptualizing human-AI collaboration as fundamentally co-evolutionary, CE provides conceptual tools for cultivating partnerships that preserve epistemic integrity while enabling transformative breakthroughs neither humans nor AI could achieve independently.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-06T01:49:44Z</published>
+    <arxiv:comment>62 pages (31 appendix pages for guidance), 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Xule Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.00018v2</id>
+    <title>Position Paper: Towards Open Complex Human-AI Agents Collaboration Systems for Problem Solving and Knowledge Management</title>
+    <updated>2025-10-09T13:19:01Z</updated>
+    <link href="https://arxiv.org/abs/2505.00018v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.00018v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a technology-agnostic, collaboration-ready stance for Human-AI Agents Collaboration Systems (HAACS) that closes long-standing gaps in prior stages (automation; flexible autonomy; agentic multi-agent collectives). Reading empirical patterns through a seven-dimension collaboration spine and human-agent contrasts, we identify missing pieces: principled budgeting of initiative, instantaneous and auditable reconfiguration, a system-wide knowledge backbone with an epistemic promotion gate, capacity-aware human interfaces; and, as a prerequisite to all of the above, unified definitions of agent and formal collaborative dynamics. We respond with (i) a boundary-centric ontology of agenthood synthesized with cybernetics; (ii) a Petri net family (colored and interpreted) that models ownership, cross-boundary interaction, concurrency, guards, and rates with collaboration transitions; and (iii) a three-level orchestration (meta, agent, execution) that governs behavior families via guard flips. On the knowledge side, we ground collaborative learning in Conversation Theory and SECI with teach-back gates and an evolving backbone; on the problem-solving side, we coordinate routine MEA-style control with practice-guided open-ended discovery. The result is the Hierarchical Exploration-Exploitation Net (HE2-Net): a policy-controlled stance that splits provisional from validated assets, promotes only after tests and peer checks, and budgets concurrent probing while keeping reuse fast and safe. We show interoperability with emerging agent protocols without ad hoc glue and sketch bio-cybernetic extensions (autopoiesis, autogenesis, evolving boundaries, synergetics, etc). Altogether, the framework keeps humans central to setting aims, justifying knowledge, and steering theory-practice dynamics, while scaling agents as reliable collaborators within audited governance.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-24T05:57:03Z</published>
+    <arxiv:comment>polish the structures, flows and connections, while complement the diagrams</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Ju Wu</name>
+    </author>
+    <author>
+      <name>Calvin K. L. Or</name>
+    </author>
+  </entry>
+</feed>

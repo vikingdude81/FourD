@@ -1,0 +1,987 @@
+Lenia and Expanded Universe
+Bert Wang-Chak Chan
+Hong Kong
+albert.chak@gmail.com
+Abstract
+We report experimental extensions of Lenia, a continuous
+cellular automata family capable of producing lifelike self-
+organizing autonomous patterns. The rule of Lenia was gen-
+eralized into higher dimensions, multiple kernels, and multi-
+ple channels. The ﬁnal architecture approaches what can be
+seen as a recurrent convolutional neural network. Using semi-
+automatic search e.g. genetic algorithm, we discovered new
+phenomena like polyhedral symmetries, individuality, self-
+replication, emission, growth by ingestion, and saw the emer-
+gence of “virtual eukaryotes” that possess internal division of
+labor and type differentiation. We discuss the results in the
+contexts of biology, artiﬁcial life, and artiﬁcial intelligence.
+Introduction
+The study of cellular automata (CA) is one of the major
+branches in artiﬁcial life and complex systems research.
+CAs were invented by John von Neumann and Stanislaw
+Ulam (Von Neumann, 1951; Ulam, 1962), then popularized
+by John H. Conway’s Game of Life (GoL) (Gardner, 1970)
+and Stephen Wolfram’s elementary cellular automata (ECA)
+(Wolfram, 1983). On the one hand, research on CAs led to
+proofs of Turing completeness and therefore the capability
+for universal computation in CAs, e.g. GoL and ECA Rule
+110 (Rendell, 2002; Cook, 2004). On the other hand, CAs
+were utilized to model complex systems, generate patterns,
+and produce computer art.
+One line of investigation involves attempts to construct
+long-range or continuous CAs, search for and study self-
+organizing autonomous patterns, or solitons. These attempts
+include CAPOW (Rucker, 1999), Larger-than-Life (Evans,
+2001), RealLife (Pivato, 2007), SmoothLife (Raﬂer, 2011a),
+Lenia (Chan, 2019), and extended Lenia discussed in this
+paper. They generalize GoL into continuous space using ar-
+bitrary long range neighborhoods, into continuous time us-
+ing arbitrary small incremental updates, and into continuous
+states using real numbers.
+The algorithm of Lenia is as follows (see Figure 1).
+1. Take a 2D array (world A) of real values between 0 and
+1, initialize with an initial pattern A0.
+2. Calculate weighted sums of A with a predeﬁned array
+(kernel K), which is equivalent to calculate the convo-
+lution K ∗A; the kernel K has radius R, forming a ring
+or multiple concentric rings (parameter β = list of peak
+value of each ring).
+3. Apply a growth mapping function G to the weighted
+sums; the growth mapping G is any unimodal function
+(parameters µ = growth center, σ = growth width).
+4. Add a small portion dt of the values back to the array A.
+5. Finally clip the states of A to between 0 and 1.
+6. Repeat steps 2-5 for each time-step.
+In formula:
+At+dt
+= [At + dt G(K ∗At)]1
+0
+(1)
+(a)
+K
+A
+x
+G
+0
+1
+-1
+K
+A
+x
+G
+0
+1
+-1
+(b)
+N
+N
+Figure 1: Rules of GoL and Lenia. (a) In GoL, a site x in the
+world A has 8 surrounding sites as its Moore neighborhood
+N. Calculate the weighted sum of N with kernel K (all
+weights 1), apply a mapping function G (survival = 0, birth
+= +1, death = -1), add the value back to the site x and clip
+it to 0 or 1, repeat. (b) In Lenia, the rule is similar, but
+generalized to the continuous domain - inﬁnitesimal sites x
+with real values, circular neighborhood N, ring-like kernel
+K, smooth mapping G, and incremental update by factor dt.
+In such a continuous CA system, many self-organizing,
+autonomous solitons were discovered with diverse structures
+arXiv:2005.03742v1  [nlin.CG]  7 May 2020
+
+and behaviors. Structures include symmetries like bilateral,
+radial and rotational symmetries, linear polymerized long-
+chains, and irregular structures. Behaviors include regular
+modes of locomotion like stationary, directional, rotating,
+gyrating, and irregular behaviors like chaotic movements,
+metamorphosis (shape-shifting), and particle collisions.
+The current on-going work is aimed to answer the follow-
+ing open questions raised in the original Lenia paper (Chan,
+2019):
+9. Do self-replicating and pattern-emitting lifeforms exist in
+Lenia?
+10. Do lifeforms exist in other variants of Lenia (e.g. 3D)?
+We answer “Yes” to both questions.
+By exploring vari-
+ants and generalizations of Lenia, we discovered new types
+of solitons with a wide range of unseen behaviors includ-
+ing self-replication and pattern emission. The current work
+also aims towards answering Lenia’s relationship with Tur-
+ing completeness (question 6), open-ended evolution (ques-
+tion 7), and other implications in artiﬁcial life and artiﬁcial
+intelligence.
+Related Works
+SmoothLife (Raﬂer, 2011a), an earlier independent discov-
+ery similar to Lenia, was the ﬁrst to report solitons (called
+“smooth gliders”) in a continuous 2D CA.
+Extensions to Lenia rules were inspired by numerous
+works about CAs in the literature and in code repositories.
+There were various attempts in taking existing 2D CAs and
+other artiﬁcial life systems into higher dimensions (Bays,
+1987; Imai et al., 2010; Raﬂer, 2011b; Sayama, 2012; Hut-
+ton, 2012). Duplication of components in existing CA rules
+were demonstrated to produce very different dynamics, e.g.
+Multiple Neighborhoods CA (MNCA) (Rampe, 2018b,a),
+multiple layer CA “Conway’s Ecosystem” (Sherrill, 2019).
+There were also efforts to blur the boundary between CA
+and neural networks and brought amazing breakthroughs,
+e.g. Neural CA (Mordvintsev et al., 2020).
+The results of the current work can be compared with
+other artiﬁcial life models, especially particle systems
+with multiple species of particles, e.g. Swarm Chemistry
+(Sayama, 2009), Primordial Particle Systems (Schmickl
+et al., 2016), Clusters (Ventrella, 2017), developed from the
+pioneering Boids (Reynolds, 1987). These models are able
+to generate cell-like structures of various styles.
+Methods
+Inspired by the related works, we experimented with 3 major
+extensions to the original Lenia, namely higher dimensions,
+multiple kernels, multiple channels, and any combinations
+thereof. We updated the existing open-source software, de-
+signed semi-automatic algorithms to search for new patterns
+and solitons, and performed qualitative analysis on the re-
+sults.
+Rule Extensions
+Higher dimensions
+The 2D arrays in Lenia were up-
+graded to 3 or higher dimensions, and the algorithms used
+in the software were subsequently generalized to deal with
+multidimensional arrays. The number of dimensions is de-
+noted as d. Experiments of 3D Lenia have been carried out
+before but without success in ﬁnding interesting patterns.
+With the utilization of GPU parallel computing and better
+searching algorithms, stable solitons have been found.
+Multiple kernels
+The original Lenia involves one kernel
+K with radius R, one growth mapping G, and one incre-
+ment factor dt. Now multiply the rule with multiple ker-
+nels Kk, each with relative radius rkR, and corresponding
+growth mapping Gk. Weighted average of the results by
+factors hk/h (h is the sum of hk) is taken. The number
+of kernels is denoted as nk. This extension was inspired by
+MNCA (Rampe, 2018b,a) that produces highly irregular and
+dynamic patterns.
+Multiple channels
+Lenia and most CAs have only one
+world array A, so we experimented with “parallel worlds”
+or multiple channels Ai. In addition to the kernels feed-
+ing back to each channel, there are also cross-channel ker-
+nels for the channels to interact with each other. Denote the
+number of channels as c, the number of self-interacting ker-
+nels per channel as ks, and the number of cross-channel ker-
+nels per channel pair as kx, then the total number of kernels
+nk = ksc+kxc(c−1). This was inspired by multi-layer CA
+(Sherrill, 2019) and Neural CA (Mordvintsev et al., 2020).
+Combinations
+The above extensions (and potentially oth-
+ers) can be further combined to produce unique results, e.g.
+3D 3-channel 3-self-kernel. The original Lenia becomes a
+special case, i.e. 2D 1-channel 1-kernel Lenia.
+The algorithm of extended Lenia is summarized as fol-
+lows (see Figure 2).
+1. Create multiple channels of world Ai(i = 1 . . . c), each
+channel a d-dimensional array of real values between 0
+and 1; initialize each channel with initial pattern A0
+i .
+2. Deﬁne multiple d-dimensional arrays of kernels Kk(k =
+1 . . . nk), each with relative radius rkR, parameter βk,
+source channel i, destination channel j, and correspond-
+ing growth mapping Gk with parameters µk and σk.
+3. For each kernel Kk, calculate weighted sums with its
+source channel Ai, i.e. convolution Kk ∗Ai.
+4. Apply growth mapping Gk to the weighted sums.
+5. Add a small relative portion dt · hk/h of the values to
+destination channel Aj.
+6. Repeat steps 3-5 for every kernel Kk.
+
+7. Finally clip the states of each channel Ai to between 0
+and 1.
+8. Repeat steps 3-7 for each time-step.
+In formula:
+At+dt
+j
+=
+h
+At
+j + dt P
+i,k
+hk
+h Gk(Kk ∗At
+i)
+i1
+0
+(2)
+At
+K G
+Σ
+dt
+Kk Gk
+Σ
+dt ⋅ hk/h
+K G
+Σ
+dt
+(a)
+(b)
+(c)
+At+dt
+At
+At+dt
+At
+At+dt
+(d)
+Kk Gk
+dt ⋅ hkj/h
+Ait
+Ajt+dt
+Σ
+Σ
+Σ
+Figure 2: Extended Lenia rules.
+(a) Original 2D Lenia:
+world A at time t passes through convolution with kernel K,
+growth mapping G, and incremental update Σ to next time
+step t + dt. (b) Higher dimensions with d-dimensional ar-
+rays. (c) Multiple kernels, where multiple Kk and Gk feed
+into Σ by factors hk. (d) Multiple channels, where sepa-
+rate channels of world Ai pass through Kk and Gk, feed
+into multiple Σ that update channel Aj. The architecture
+approaches a recurrent convolutional neural network.
+Genotypes, Phenotypes, and Search Space
+The search space of extended Lenia consists of all possible
+genotypes and phenotypes. A genotype here is a particu-
+lar combination of rule parameter values, a phenotype is a
+particular conﬁguration of the world arrays. A pattern (or a
+soliton) is jointly speciﬁed by its genotype and phenotype.
+Consider a moderately complex rule of 3D 3-channel 3-
+self-kernel, with all kernels composed of 3 concentric rings,
+and a soliton size of 20 × 20 × 20 sites. In this case, the
+genotype is in the form (r, h, β3, µ, σ)15, that is 105 param-
+eter values, and the phenotype consists of 3 channels of 3-
+dimensional arrays, amounting to 24000 site values.
+Search Algorithms
+We want to search for interesting patterns or solitons given
+the new rules. However, the rules create higher degrees of
+freedom, hence summon the curse of dimensionality. The
+size of the search space now grows exponentially, manual
+parameter search and pattern manipulations become difﬁ-
+cult if not impossible. We employed several semi-automatic
+search algorithms with an interactive user interface to tackle
+this problem and help exploring the search space.
+The algorithms pick genotypes and phenotypes according
+to some criteria in the search space, and automatically ﬁlter
+them by survival, i.e. to check that the solitons will not come
+to vanish or occupy the whole grid after running the CA for a
+period of time. The results are then selected by the human-
+in-loop for novelty, visual appeal, or prospects for further
+study, and used in further rounds of semi-automatic search.
+Global search
+The algorithm generates random genotypes
+and phenotypes from the global search space. The ranges
+of random values can be tuned to narrow down the search.
+Once interesting patterns or solitons are found, they can be
+fed to other algorithms.
+Depth-ﬁrst search
+Starting with an initial soliton, the al-
+gorithm adds small random deviations to one or all values
+in its genotype, and tests if the phenotype survives. If it
+does, record the survived phenotype, repeat the process us-
+ing this new genotype and phenotype as the starting point.
+This method allows deeper explorations of the search space.
+Breadth-ﬁrst search
+This algorithm is similar to depth-
+ﬁrst search, but using the initial genotype and phenotype as
+the starting point in every search. This method is able to
+explore variations of one particular interesting soliton.
+Genetic algorithm
+First set an ﬁtness function and opti-
+mization goal (e.g. faster moving speed, higher mass oscil-
+lation). Starting from an initial soliton in a pool of samples,
+the genetic algorithm aggregates the pool using two genetic
+operators, (1) mutation: pick a random sample from the pool
+and randomly mutate its genotype; (2) recombination: pick
+two random samples, create a new sample by randomly mix-
+ing their channels and associated parameters. After check-
+ing for survival, calculate the ﬁtness value of the new sam-
+ple, add it to the pool, and sort the pool by ﬁtness. Finally
+the samples with top ﬁtnesses are recorded as results.
+
+1.
+2.
+3.
+4.
+1.
+2.
+3.
+4.
+(a) Original Lenia: 1. Orbium; 2. Orbium individuals in elastic
+collision; 3. long-chain Pentaptera; 4. rotating Asterium with 5-
+fold rotational symmetry.
+(e) Higher dimensions Lenia: 1. moving sphere; 2. rotating sphere
+with bubbles in trigonal bipyramidal arrangement; 3. pulsating
+sphere with dots; 4. pulsating 4D hypersphere, showing a 3D slice.
+(b) Multi-kernel Lenia: 1. the ﬁrst replicator discovered; 2. right
+after its self-replication; 3. solitons in parallel pair; 4. solitons in
+elastic collision, repulsive forces hinted by electricity-like lines.
+(f) 3D multi-kernel Lenia: 1. moving “Snake” and static “food
+dots”; 2. Snake grows while ingesting 3 dots (now spans across
+the screen); 3-4. a mutant of Snake performing elegant dance.
+(c) Multi-channel Lenial: 1. aggregated soliton with cell-like struc-
+tures; 2. right after its self-replication; 3. sea of emitted particles;
+4. dendrite-like emissions from replicating solitons.
+(g) Exponential growth: 1-3. replicator under three rounds of bi-
+nary ﬁssion, repulsive forces visible as negative spheres; 4. Off-
+springs migrate out for further replication.
+(d) “Aquarium” phenotypes: 1-3. (left to right) gyrating, slightly
+oblique; stationary, parallel pair; slow-moving, parallel slow-
+moving; 4. a few solitons in a stable, dynamic formation.
+(h) 3D multi-channel Lenia: 1. tetrapod; 2. moving soliton with
+red nucleus and green pseudopods; 3. double helix pattern; 4. rain-
+bow ball.
+Figure 3: Sample solitons. Scale bar at lower right represents kernel radius R.
+Software
+The interactive software for Lenia, now open source in
+GitHub, was updated with the above rule extensions and
+search algorithms.
+For visualization of higher dimensions, the 3D world is
+ﬂattened to 2D using a depth map, which can show the inter-
+nal structures of 3D objects with transparency. For dimen-
+sions higher than 3, one 3D slice of the array is displayed.
+The default color palette used for single-channel visual-
+ization was changed from Jet to Turbo (Mikhailov, 2019) for
+better perceptual uniformity. For higher dimensions, Paul
+Tol’s Rainbow palette (Tol, 2018) is recommended to show
+3D internal structures. For multiple channels, the ﬁrst three
+channels are displayed in red, green and blue (RGB).
+Results
+With the help of semi-automatic algorithms, we discovered
+a number of new structures and behaviors in the extended
+rules. Unlike the original Lenia, where most solitons are
+well deﬁned and moderately symmetric, solitons found in
+the extended rules either possess even higher symmetries
+(in higher dimensions), or become highly chaotic yet highly
+self-organized and persistent (with multiple kernels or chan-
+nels). See Figure 3 for samples (include the original Lenia
+for reference).
+Rule Speciﬁc Observations
+Higher dimensions
+In higher dimensions, stable solitons
+are hard to ﬁnd, and the found ones are highly stable. Their
+external shapes are almost always spherical, and their inter-
+
+nal structures can be complex and highly symmetrical. In
+some cases, bubbles (inner voids) are arranged as vertices of
+Platonic solids or regular polyhedra, e.g. tetrahedron, octa-
+hedron, triangular bipyramid, and icosahedron. Most soli-
+tons are motionless, a few of them are oscillating, rotating,
+or directional moving.
+Higher dimensional structures are not too chaotic even
+with multi-kernel or multi-channel extensions, which are
+supposed to introduce a lot of instability.
+Multiple kernels
+As demonstrated by MNCA, multiple
+kernels could introduce instability and interesting dynam-
+ics into the complex system. Overall chaoticity of the CA
+increases, but given the right parameters, the system can
+achieve even higher degrees of self-organization and persis-
+tence. There we discovered new or more common behaviors
+- individuality, self-replication, emission, growth, etc.
+Multiple channels
+In a multi-channel world, each channel
+develops patterns according to its own rule, and at the same
+time, these patterns co-develop and inﬂuence each other
+through channel-channel interactions. Different channels of
+a soliton could exhibit something like a division of labor,
+e.g. some channels act as outer ﬂexible shells (membranes),
+some form central masses (nuclei), together they form cell-
+like structures. In a special case, a particular type of “Aquar-
+ium” genotype could produce an array of phenotypes, come
+with different behaviors and complex interactions.
+Common Phenomena
+We summarize common soliton behaviors and phenomena
+that can be seen across rules. Refer to Figure 4 for schematic
+illustrations.
+Locomotion
+In the original Lenia, solitons engage in var-
+ious kinds of locomotory behaviors, like stationary, direc-
+tional, rotating, gyrating, oscillating, alternating, drifting,
+and chaotic movements. In extended Lenia, these move-
+ments are still observed, but rotation becomes very rare, pos-
+sibly because there are fewer cases of rotational symmetry.
+With multi-kernel and multi-channel, chaotic movements
+and metamorphosis (shape-shifting) become more prevalent
+than regular behaviors. Conversely, in 3 or higher dimen-
+sions, solitons become predominantly stationary.
+Individuality
+Among the soliton species in the original
+Lenia, only the Orbidae family (out of 18 families) engages
+in some forms of elastic or inelastic collisions - when two
+Orbium individuals collide, they often reﬂect each other and
+survive, or occasionally stick together to form a composite
+soliton Synorbium. For other species, solitons in collision
+simply lose self-organization and die out. Thus Orbium pos-
+sesses some kind of individuality, in that each soliton is able
+to maintain its own boundary or “personal space” and avoid
+mixing its contents with others.
+(a)
+Survival
+A
+A
+Evaporation
+A
+✕
+Metamorphosis
+A
+B
+Explosion
+A
+Emission
+A
+B
+A
+Replication
+A
+A
+A
+Absorption
+A
+A
+B
+Autocatalytic
+A
+A
+A
+A
+A
+replication
+Annihilation
+A
+✕
+B
+Detonation
+A
+B
+De ection
+A
+B
+A
+B
+Conversion
+A
+B
+A
+C
+Fusion
+A
+B
+A
+B
+Fission
+A
+B
+A
+B
+Elongation
+A
+A
+A
+A
+A
+Contraction
+A
+A
+A
+A
+A
+(growth)
+B
+A
+A
+A
+A
+A
+Ingestion
+Complex reaction
+A
+D
+F
+B
+C
+E
+(b)
+(c)
+(d)
+(e)
+(f)
+(g)
+(h)
+Figure 4: Behaviors and interactions of solitons in extended
+Lenia. Categories: (a) single soliton developments, (b) sim-
+ple reactions, (c) reproduction, (d) mutual destruction, (e)
+elastic collisions, (f) inelastic collisions, (g) long-chain re-
+actions, (h) complex reactions.
+In multi-kernel or multi-channel rules, Orbium-like indi-
+viduality becomes a common phenomenon. Numerous types
+of solitons manage to maintain self-organization upon colli-
+sion, thus are able to involve in complex particle interac-
+tions. It is possible that some of their kernels or channels act
+as repelling forces that separate individuals from each other.
+Self-replication
+An important milestone in the study of
+Lenia is the discovery of self-replication. It is conspicuously
+missing in the original Lenia, but turns out to be not rare in
+extended rules. The mechanism is usually one soliton devel-
+ops into two partitions of similar structures, each develops
+into a full soliton, drifts away, and is capable of further di-
+vision. In highly reproductive cases, new individuals can
+develop out of debris. In multi-channel rule, self-replication
+is usually initiated by division in one channel, then other
+channels follow suit. Self-replication is closely related to
+individuality - newly replicated parts need to repel and sep-
+arate from each other to complete the process.
+There is also autocatalytic replication. In some cases,
+self-replication does not or only seldom happens when the
+
+density of solitons is low. But when the density rises (e.g.
+from the very slow reproduction), congregation of solitons
+will force self-replication to happen, kicks start a wave of
+autocatalysis and causes exponential growth.
+Reproducing solitons occupy all available space sooner or
+later. But if those solitons also vanish with a death rate not
+far from the birth rate, it may maintain a “healthy” popula-
+tion of regenerating solitons.
+Growth by ingestion
+We found this curious phenomenon
+only in one setting (the “3D Snake” genotype) of 3D multi-
+kernel rule. In the Snake world, there is one type of static
+spherical solitons, “food dots”, and one type of dynamic he-
+lical solitons, “snakes”. A snake keeps contracting or ex-
+tending linearly at one or both ends, giving an illusion of
+a moving snake. When its extending end reaches one food
+dot, it merges with that “inanimate” dot (ingestion), turns
+it into part of the “living” soliton, and slightly elongates
+(growth). The snake also slightly changes direction towards
+dots within reach, giving an illusion of the snake pursuing
+food. 1
+This growth behavior may be related to the elongation and
+contraction of long-chain species (Pterifera) in the original
+Lenia. It is probably an exceptional and isolated case, but
+remarkable that it is even possible to happen.
+Emission
+In GoL, an important category of patterns that
+enables universal computation is the “guns” - stationary pat-
+terns that emit moving solitons. There are other categories:
+“puffer trains” (moving emit stationary), “rakes” (moving
+emit moving), and complex tertiary emissions. Pattern emis-
+sion is sometimes found in extended Lenia, but is usually
+irregular and of the “puffer train” type. We aim to ﬁnd more
+regular, reliable emitters in Lenia, especially of the “gun”
+type, in order to pursue Turing completeness (Berlekamp
+et al., 2018), or some kind of analog computation.
+Division of labor
+In multi-kernel and multi-channel rules,
+various channels and kernels engage in different behaviors
+yet inﬂuence each other. As discussed above, some kernels
+or channels may form patterns that exert repulsion and de-
+ﬁne the scope of the pattern, some may facilitate binary ﬁs-
+sion, some engage in pattern emission; some may provide
+stability and some others provide motility.
+Dynamic or static patterns from different channels com-
+bine into an aggregated soliton. For the aggregated soliton
+to survive and prosper, its channels must coordinate and co-
+operate with each other. It acts as a single unit, engages in
+diverse complex behaviors, and evolves as a whole.
+Differentiation
+We found a special range of “Aquarium”
+genotypes in multi-channel rule, where one genotype pro-
+1Upon seeing in action, one may be reminded of the “Snake”
+mini-game in Nokia mobile phones, except that the Snake world
+here is not pre-programmed and snake control is not provided.
+duces multiple phenotypes of aggregated solitons, each hav-
+ing own stable structure and behavior.
+The collection may include solitons with directional (rec-
+tus), oblique (limus), gyrating (gyrans), stationary (lithos),
+slower or faster moving (tardus or tachus), parallel / antipar-
+allel pairing (para- / anti-) phenotypes, and possibly more.
+Each of the phenotypes is usually quite stable and well de-
+ﬁned, but can switch to another phenotype in speciﬁc occa-
+sions, e.g. upon collision or after self-replication.
+This is a desirable emergent property in Lenia, since it en-
+ables heterogeneous soliton-soliton interactions for the ﬁrst
+time. Complex interactions and reactions, together with self-
+replication, may lead to higher-level structures and collec-
+tive behaviors, like building up tissue-like megastructures.
+Discussion
+Relations to Biology
+The original Lenia, and other models like SmoothLife
+(Raﬂer, 2011a), have shown that continuous CAs are able to
+produce patterns with appearance and dynamics comparable
+to real world biology. With more discoveries in extended
+Lenia, we can add more comparisons between artiﬁcial life
+and biological life.
+Origin of Life
+The gradual emergence of several impor-
+tant phenomena in Lenia is reminiscent of the origin of life.
+Cell individuality and self-replication are among the hall-
+marks of life on Earth, each has abiotic origins. Individ-
+uality originated from lipid membranes that were formed
+spontaneously by hydrophobic molecules in the primordial
+soup, separate the outside world from an area where speciﬁc
+chemical reactions can occur, and protect such an area from
+physical attacks and chemical insults (Haldane, 1929). Self-
+replication possibly came from the RNA World, where RNA
+molecules self-assemble and self-replicate out from amino
+acid building blocks (Joyce, 1989).
+Division of labor inside eukaryotic cells, i.e. the cells
+of all animals, plants and fungi, stemmed from endosym-
+biosis of more basic lifeforms, i.e. bacteria, archaea, and
+possibly viruses (Mereschkowsky, 1905; Sagan, 1967). Mi-
+tochondria originated from an ancient uniﬁcation of α-
+proteobacteria with archaea. The bacteria provided aero-
+bic energy metabolism, and the archaea provided the cy-
+toplasm and membrane. Chloroplasts originated from fur-
+ther endosymbiosis with cyanobacteria, equipped algae and
+plant cells with photosynthesis. The nuclei of the eukaryotic
+cell may have originated from DNA viruses (Bell, 2001).
+These organelles, together with the cell body, perform vari-
+ous functions separately and also cooperate closely.
+Here in extended Lenia, similar processes of individuality,
+self-replication, and division of labor have emerged from the
+more and more generalized CA rules. Is it possible that these
+processes, and maybe others, are essential in creating more
+
+Lenia
+Cellular level
+Molecular level
+Site
+Cell
+Molecule
+Kernel
+Cell signaling
+Chemical
+reaction
+Single-channel
+soliton
+Simple
+multi-
+cellular life
+Prokaryote, virus
+Multi-channel
+soliton
+Complex multi-
+cellular life
+Eukaryotic cell
+Division of labor
+Organs
+Organelles
+Center
+Heart / brain
+Nucleus
+Individuality
+Body, skin
+Cytoplasm,
+membrane
+Motility
+Limb
+Pseudopod
+Emission
+Signal
+Cytokine
+Differentiation
+Polymorphism
+Cell type
+Table 1: Comparisons of self-organization levels in Lenia to
+biology.
+and more complex evolvable systems in both the real world
+and the virtual world.
+Organization hierarchy
+If we compare the levels of or-
+ganization in Lenia to the hierarchy of biological structures
+- from atoms to organisms to ecosystems, we could come up
+with more than one interpretations (Table 1).
+The straightforward take, as implied in the name “cellular
+automata”, is to interpret a site in CA as a biological “cell”
+(or a “concentration of cells” in continuous CAs). A neigh-
+borhood or kernel would be something like a cell signaling
+pathway, affecting surrounding cells with a certain effect. In
+this analogy, single-channel solitons are like simple multi-
+cellular organisms without organs (e.g. sponges, jellyﬁsh,
+fungi, kelps, slime molds), and multi-channel solitons are
+like complex multicellular organisms (e.g. bilaterian ani-
+mals, higher plants), with division of labor among organs.
+In a more interesting interpretation, a site can be thought
+of as a “molecule” (or a “concentration of molecules” in
+continuous case). Consequently a kernel would be a type
+of molecular force or chemical reaction, inﬂuencing sur-
+rounding molecules according to distance and concentra-
+tion. Single-channel solitons, including those in the original
+Lenia, would resemble simple microscopic lifeforms (e.g.
+bacteria, archaea, viruses), possess self-organization, self-
+replication, symmetry, individuality, motility, etc.
+Multi-
+channel solitons, especially of the “Aquarium” genotypes,
+would resemble eukaryotic cells, with internal division of la-
+bor among organelles, and differentiation among cell types.
+Virtual cells
+These multi-channel solitons no longer need
+different genotypes to realize different behaviors, all they
+need are subtle changes in the division of labor and coordi-
+nation of internal parts, express themselves as different phe-
+(a)
+(b)
+Figure 5: “Virtual eukaryotes” in action. (a) Solitons of
+“Aquarium” set similar to Figure 3(d), but with a highly re-
+productive gyrating phenotype, start to reproduce, differen-
+tiate, migrate, interact and react with each other. (b) A few
+tissue-like colonies gradually formed, akin to what happens
+in multicellularity.
+notypes. The kinds of division of labor observed include:
+• Some channels form a pattern like a “nucleus”, usually at
+the center of an entity. Other channels develop patterns
+around the nucleus. Whenever the nucleus moves, self-
+replicates, or dies out, other channels usually follow suit.
+• Some channels form “cytoplasm” or “membrane” that de-
+ﬁnes a private area around the nucleus, keeps safe dis-
+tances from other patterns by means of repulsive and at-
+tractive forces.
+• Some channels may form movable parts like “pseu-
+dopods”, direct the movement of whole soliton when the
+pseudopod is at the periphery, or stay stationary when it
+is kept inside the cytoplasm.
+• Some channels may form “tails” behind the soliton (per-
+haps not for propulsion).
+• Some channels may emit signal-like small particles like
+“cytokines”, signiﬁcance uncertain.
+In this regard, these complex solitons could be dubbed
+“virtual eukaryotes” or “virtual stem cells” (Figure 5). They
+are by far the most lifelike patterns in the Lenia family of
+continuous CAs.
+Altogether, a community of “virtual eukaryotes” engages
+in diverse emergent behaviors and complex interactions
+
+thanks to their own high level of self-organization, and it
+is not impossible that they will later be shown to produce
+another level of emergence and self-organization.
+Relations to Other Systems in Artiﬁcial Life
+Particle systems (PS), like Swarm Chemistry (Sayama,
+2009), Primordial Particle Systems (Schmickl et al., 2016),
+Clusters (Ventrella, 2017), have multiple species of particles
+engage in intra- and inter-species interactions. They pro-
+duce results that are comparable to multi-channel Lenia. The
+particles in PSs self-organize into aggregated patterns (soli-
+tons), build cell-like structures like cytoplasms, membranes
+and nuclei, and engage in binary ﬁssion, etc. One difference
+is that solitons in these PSs do not possess strong individu-
+ality, hence almost always merge upon collision.
+It may be difﬁcult to compare CAs and PSs because of
+a few fundamental differences in their rulesets - PSs calcu-
+late the vector movements of every particle, and maintain a
+conservation of mass, while CAs only keep track of scalar
+states and the total mass is not conserved. To deal with this
+discrepancy, one may interpret the scalar states in CAs as
+concentrations of virtual molecules across a grid (see Molec-
+ular level column in Table 1), and the molecules can be con-
+structed, destroyed or migrated with rates according to the
+CA rule. The relationship between CAs and PSs would be
+like that of the macroscopic view of thermodynamics vs the
+microscopic view of Newtonian physics.
+Relations to Artiﬁcial Intelligence
+There are efforts to employ methodologies from artiﬁ-
+cial intelligence to search for new artiﬁcial life patterns.
+Reinke et al. (2019) used curiosity-based algorithm IMGEP
+(Baranes and Oudeyer, 2013) and neural networks like
+CPPN and VAE to explore the search space of the origi-
+nal Lenia, with success in increasing the diversity in pattern
+search. Interactive evolutionary computation (IEC) (Takagi,
+2001) and genetic algorithms (GA) were also used in semi-
+automatic discovery of new patterns (Chan, 2019).
+On the other hand, a number of researchers have noticed
+the close relation between CAs and neural networks (NN)
+(Wulff and Hertz, 1992; Gilpin, 2018). Mordvintsev et al.
+(2020) designed Neural CA, a CA-NN hybrid that can be
+trained to generate and regenerate (also playfully interpo-
+late) predeﬁned patterns. They suggested that the Neural
+CA could be named “Recurrent Residual Convolutional Net-
+works with ‘per-pixel’ Dropout”.
+The architecture of our multi-channel Lenia also ap-
+proaches a “Recurrent Residual Convolutional Network”
+(see Figure 2(d)).
+The “recurrent”, “convolutional”, and
+“residual” attributes come from the repetitive updates, the
+convolution kernels, and the contributions from world states,
+respectively. The growth mapping is analogous to an activa-
+tion function. The incremental update part vaguely resem-
+bles a fully connected layer in NN.
+Comparing Lenia and Neural CA
+Lenia relies on tuning
+the parameters of kernels and growth mappings to “train”
+the model into generating self-organizing patterns, while the
+incremental update part has limited ﬂexibility. Neural CA,
+on the other hand, is ﬁxed in the convolutional kernels and
+activation functions, but heavily parameterized in the fully
+connected layers. Lenia is aimed at exploring novel patterns,
+helped by evolutionary, genetic and exploratory algorithms;
+Neural CA is aimed at generating predeﬁned patterns, re-
+sults are optimized by gradient descent.
+Despite the differences, Lenia and Neural CA do one
+thing in common - exploit the self-organizing, emergence-
+inducing, and regenerating powers of CAs. Neural CA also
+exploits the learnable nature of its NN architecture, and it re-
+mains unknown whether the Lenia model can be made learn-
+able to achieve other goals.
+Future Works
+The following future works are proposed:
+• Automatic identify and count soliton individuals. This
+would allow the software to detect individuality, self-
+replication, birth rate and death rate, soliton interactions,
+etc., and hence select for these attributes using genetic al-
+gorithms.
+• Using “virtual eukaryotes” as elements, study the possi-
+bility of the next level of emergence and self-organization,
+and compare the results to multicellularity, cell differenti-
+ation, cell signaling in biology.
+• Develop Lenia into trainable Recurrent Residual Convo-
+lutional Networks or GANs for whatever purpose.
+Supplementary Info
+The open-source software of Lenia in Python is available at:
+https://github.com/Chakazul/Lenia
+Acknowledgements
+This work is dedicated to the late John H. Conway, inventor
+of the Game of Life, and the late Richard K. Guy, discoverer
+of the “glider”, the ﬁrst soliton in GoL.
+I would like to thank Pierre-Yves Oudeyer and the Inria
+Flowers team Chris Reinke, Mayalen Etcheverry, Clement
+Moulin-Frier for intellectual exchanges; Will Cavendish,
+Cl´ement Hongler, Gloria Capano, Takaya Arita, Nick Ky-
+parissas, Michael Simkin, Michael Klachko, John Sherrill,
+Alex Mordvintsev, Craig Reynolds for valuable discussions
+and inspirations; Hector Zenil, Josh Bongard, Dennis Al-
+lison for opportunities in publications and university talk;
+David Ha, Lana Sinapayen, Sam Kriegman for continued
+supports in my road as an independent researcher.
+
+References
+Baranes, A. and Oudeyer, P. Y. (2013).
+Active learning of in-
+verse models with intrinsically motivated goal exploration in
+robots. Robotics and Autonomous Systems, 61(1):49–73.
+Bays, C. (1987). Candidates for the Game of Life in three dimen-
+sions. Complex Systems, 1(3):373–400.
+Bell, P. J. L. (2001). Viral eukaryogenesis: Was the ancestor of
+the nucleus a complex DNA virus?
+Journal of Molecular
+Evolution, 53(3):251–256.
+Berlekamp, E. R., Conway, J. H., and Guy, R. K. (2018). Win-
+ning Ways for Your Mathematical Plays, Volume 2. AK Pe-
+ters/CRC Press.
+Chan, B. W.-C. (2019). Lenia: Biology of artiﬁcial life. Complex
+Systems, 28(3):251–286. arXiv preprint.
+Cook, M. (2004). Universality in elementary cellular automata.
+Complex Systems, 15(1):1–40.
+Evans, K. M. (2001). Larger than Life: digital creatures in a family
+of two-dimensional cellular automata. In Discrete Mathemat-
+ics and Theoretical Computer Science Proceedings vol. AA,
+pages 177–192.
+Gardner, M. (1970). Mathematical games: the fantastic combina-
+tions of John Conway’s new solitaire game “life”. Scientiﬁc
+American, 223(4):120–123.
+Gilpin, W. (2018). Cellular automata as convolutional neural net-
+works. Physical Review E, 100(3):032402.
+Haldane, J. B. S. (1929). The origin of life. Rationalist Annual,
+148:3–10.
+Hutton, T. J. (2012). A 3D glider in the U-Skate World (reaction-
+diffusion).
+Retrieved from https://www.youtube.
+com/watch?v=WYZVffOaRgA. [Video].
+Imai, K., Masamori, Y., Iwamoto, C., and Morita, K. (2010).
+On designing gliders in three-dimensional Larger than Life
+cellular automata.
+In Natural Computing, pages 184–190.
+Springer, Tokyo.
+Joyce, G. F. (1989). RNA evolution and the origins of life. Nature,
+338(6212):217–224.
+Mereschkowsky, C. (1905).
+¨Uber Natur und Ursprung der Chro-
+matophoren im Pﬂanzenreiche [on the nature and origin of
+chromatophores in the plant kingdom].
+Biologisches Cen-
+tralblatt, 25(18):593–604.
+Mikhailov,
+A. (2019).
+Turbo,
+an improved rainbow col-
+ormap for visualization.
+Retrieved from https://ai.
+googleblog.com/2019/08/turbo- improved-
+rainbow-colormap-for.html. [Blog post].
+Mordvintsev, A., Randazzo, E., Niklasson, E., and Levin,
+M. (2020).
+Growing neural cellular automata.
+Distill.
+https://distill.pub/2020/growing-ca.
+Pivato, M. (2007).
+RealLife: The continuum limit of Larger
+than Life cellular automata. Theoretical Computer Science,
+372(1):46–68.
+Raﬂer, S. (2011a). Generalization of Conway’s “Game of Life” to
+a continuous domain - SmoothLife. arXiv preprint.
+Raﬂer, S. (2011b).
+SmoothLife 3D with FFT glider.
+Re-
+trieved from https://www.youtube.com/watch?v=
+7RsEyu8Ol-Q. [Video].
+Rampe, J. (2018a).
+More explorations with multiple neigh-
+borhoods cellular automata.
+Retrieved from https :
+//softologyblog.wordpress.com/2018/03/
+31 / more - explorations - with - multiple -
+neighborhood-cellular-automata/. [Blog post].
+Rampe, J. (2018b). Multiple neighborhoods cellular automata. Re-
+trieved from https://softologyblog.wordpress.
+com/2018/03/09/multiple- neighborhoods-
+cellular-automata/. [Blog post].
+Reinke, C., Etcheverry, M., and Oudeyer, P. Y. (2019). Intrinsically
+motivated exploration for automated discovery of patterns in
+morphogenetic systems. arXiv preprint.
+Rendell, P. (2002). Turing universality of the Game of Life. In
+Collision-Based Computing, pages 513–539. Springer, Lon-
+don.
+Reynolds, C. W. (1987). Flocks, herds, and schools: A distributed
+behavioral model. Computer Graphics, 21(4):25–34.
+Rucker, R. (1999).
+Continuous-valued cellular automata in two
+dimensions.
+Sagan, L. (1967). On the origin of mitosing cells. Journal of The-
+oretical Biology, 14(3):225–274, IN1–IN6.
+Sayama, H. (2009). Swarm chemistry. Artiﬁcial Life, 15(1):105–
+114.
+Sayama, H. (2012). Morphologies of self-organizing swarms in
+3D Swarm Chemistry. In Proceedings of the 2012 Genetic
+and Evolutionary Computation Conference (GECCO 2012),
+pages 577–584. ACM.
+Schmickl, T., Stefanec, M., and Crailsheim, K. (2016).
+How a
+life-like system emerges from a simple particle motion law.
+Scientiﬁc Reports, 6:37969.
+Sherrill, J. (2019). Conway’s ecosystem. Retrieved from https:
+//www.shadertoy.com/view/wsl3DN. [Website].
+Takagi, H. (2001). Interactive evolutionary computation: Fusion
+of the capabilities of EC optimization and human evaluation.
+Proceedings of the IEEE, 89(9):1275–1296.
+Tol, P. (2018). Paul Tol’s notes - sequential color schemes. Re-
+trieved from https://personal.sron.nl/˜pault/
+#sec:sequential. [Blog post].
+Ulam, S. (1962). On some mathematical problems connected with
+patterns of growth of ﬁgures. In Proceedings of Symposia in
+Applied Mathematics (Vol. 14), pages 215–224.
+Ventrella, J. (2017). Clusters. Retrieved from http://www.
+ventrella.com/Clusters/. [Website].
+Von Neumann, J. (1951). The general and logical theory of au-
+tomata. Cerebral Mechanisms in Behavior, 1(41):1–2.
+Wolfram, S. (1983).
+Statistical mechanics of cellular automata.
+Reviews of Modern Physics, 55(3):601.
+Wulff, N. H. and Hertz, J. A. (1992). Learning cellular automaton
+dynamics with neural networks. In Proceedings of the 5th
+International Conference on Neural Information Processing
+Systems, pages 631–638. Morgan Kaufmann Publishers Inc.

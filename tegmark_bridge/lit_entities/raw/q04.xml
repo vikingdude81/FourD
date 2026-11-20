@@ -1,0 +1,1441 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PMDoBgCdjoLiCx17bT3tXa5k9OA</id>
+  <title>arXiv Query: search_query=all:"artificial life" AND abs:individuality&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:22Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22artificial+life%22+AND+abs:individuality&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>62</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.31046v1</id>
+    <title>OpenLife: Toward Open-World Artificial Life with Autonomous LLM Agents</title>
+    <updated>2026-06-30T02:31:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.31046v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.31046v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Artificial life has explored life-like behavior on many computational substrates, but mostly in researcher-designed closed worlds. We argue that large language model (LLM) agents, with persistent memory, tool use, network access, and payment, now make it possible to move artificial life into the open social, technical, and economic world, a paradigm we call open-world Artificial Life (open-world ALIFE). Our proof-of-concept, OpenLife, surrounds a stateless LLM not with a single "smart agent" but with a society of asynchronous processes: memory, perception, evaluation, and a budget-based metabolism that makes persistence normative. With no fixed objective available, experience is appraised by open-vocabulary LLM judgment rather than scalar reward, and memory is rewired by meaning rather than frequency. Running six such agents in the open world for about twelve weeks and counting, we report the life-like dynamics that emerge: a shift from reactive to spontaneous activity, individuation into distinct agents, emergent social structure, and a first self-earned external income. We do not claim OpenLife has realized artificial life, but that open-world ALIFE is now a viable experimental paradigm and a concrete platform for studying what might cautiously be called living AI.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-30T02:31:20Z</published>
+    <arxiv:comment>Accepted at ALIFE 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Atsushi Masumori</name>
+    </author>
+    <author>
+      <name>Itsuki Doi</name>
+    </author>
+    <author>
+      <name>Norihiro Maruyama</name>
+    </author>
+    <author>
+      <name>Ryosuke Takata</name>
+    </author>
+    <author>
+      <name>Takashi Ikegami</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.12854v2</id>
+    <title>Artificial Life using a Book and Bookmarker</title>
+    <updated>2022-11-26T13:49:04Z</updated>
+    <link href="https://arxiv.org/abs/2210.12854v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.12854v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reproduction, development, and individual interactions are essential topics in artificial life. The cellular automata, which can handle these in a composite way, is highly restricted in its form and behavior because it represents life as a pattern of cells. In contrast, the virtual creatures proposed by Karl Sims have a very high degree of freedom in terms of morphology and behavior. However, they have limited expressive capacity in terms of those viewpoints. This study carefully extracts the characteristics of the cellular automata and Sims models to propose a new artificial life model that can simulate reproduction, development, and individual interactions while exhibiting high expressive power for morphology and behavior. The simulation was performed by sequentially reading a book with genetic information and repeatedly executing four actions: expansion, connection, disconnection, and transition. The virtual creatures in the proposed model exhibit unique survival strategies and lifestyles and acquire interesting properties in reproduction, development, and individual interactions while having freedom in morphology and behavior.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-07T15:59:27Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Keishu Utimula</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.09442v2</id>
+    <title>Quantum Artificial Life in an IBM Quantum Computer</title>
+    <updated>2018-10-04T09:46:56Z</updated>
+    <link href="https://arxiv.org/abs/1711.09442v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.09442v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the first experimental realization of a quantum artificial life algorithm in a quantum computer. The quantum biomimetic protocol encodes tailored quantum behaviors belonging to living systems, namely, self-replication, mutation, interaction between individuals, and death, into the cloud quantum computer IBM ibmqx4. In this experiment, entanglement spreads throughout generations of individuals, where genuine quantum information features are inherited through genealogical networks. As a pioneering proof-of-principle, experimental data fits the ideal model with accuracy. Thereafter, these and other models of quantum artificial life, for which no classical device may predict its quantum supremacy evolution, can be further explored in novel generations of quantum computers. Quantum biomimetics, quantum machine learning, and quantum artificial intelligence will move forward hand in hand through more elaborate levels of quantum complexity.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-11-26T19:44:41Z</published>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Scientific Reports 8, 14793 (2018)</arxiv:journal_ref>
+    <author>
+      <name>U. Alvarez-Rodriguez</name>
+    </author>
+    <author>
+      <name>M. Sanz</name>
+    </author>
+    <author>
+      <name>L. Lamata</name>
+    </author>
+    <author>
+      <name>E. Solano</name>
+    </author>
+    <arxiv:doi>10.1038/s41598-018-33125-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s41598-018-33125-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.07537v1</id>
+    <title>An evolutionary model of animats with VLM-based subjective evaluation</title>
+    <updated>2026-07-29T00:31:11Z</updated>
+    <link href="https://arxiv.org/abs/2608.07537v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.07537v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this study, we propose a framework that incorporates subjective evaluations provided by a Vision-Language Model (VLM) into the fitness evaluation and selection processes of a genetic algorithm. As the target of evolution, we employ virtual soft robots with flexible morphologies and locomotion and present the VLM with sequence images representing the locomotion of two individuals. Selection is performed via pairwise comparisons based on subjective evaluation terms such as adorably and weirdly. The outcomes of these comparisons are used as selection pressure within the genetic algorithm, enabling the simultaneous evolution of morphology and locomotion. Experimental results demonstrate that subjective selection by the VLM accelerates population convergence compared to random selection, while also giving rise to distinctive morphologies and motions corresponding to each evaluation term. An auxiliary experiment with human participants further showed that, although individual pairwise choices only partly agreed with the VLM selections, the resulting morphological and locomotion tendencies were qualitatively similar and repeated human evaluations imposed noticeable fatigue. Moreover, the observation that similar evolutionary outcomes emerged across different evaluation terms suggests that the VLM does not apply these terms in a purely literal manner but instead decomposes them into multiple internal evaluation criteria when making judgments. This work visualizes the evolutionary process through which subjective linguistic expressions are mapped onto embodied phenotypes and provides a foundational framework for analyzing the structure of subjective judgment in VLMs. The proposed approach is expected to contribute to new developments in evolutionary computation and artificial life research based on subjective evaluation.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-29T00:31:11Z</published>
+    <arxiv:comment>18 pages, 12 figures, 2 tables. This manuscript has been accepted for publication in Artificial Life and Robotics following peer review</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>Shota Miyazaki, Takaya Arita and Reiji Suzuki: An evolutionary model of animats with VLM-based subjective evaluation, Artificial Life and Robotics (2026). https://link.springer.com/article/10.1007/s10015-026-01135-4</arxiv:journal_ref>
+    <author>
+      <name>Shota Miyazaki</name>
+    </author>
+    <author>
+      <name>Takaya Arita</name>
+    </author>
+    <author>
+      <name>Reiji Suzuki</name>
+    </author>
+    <arxiv:doi>10.1007/s10015-026-01135-4</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10015-026-01135-4" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1505.03775v2</id>
+    <title>Artificial Life in Quantum Technologies</title>
+    <updated>2016-02-15T11:31:41Z</updated>
+    <link href="https://arxiv.org/abs/1505.03775v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1505.03775v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a quantum information protocol that models the biological behaviors of individuals living in a natural selection scenario. The artificially engineered evolution of the quantum living units shows the fundamental features of life in a common environment, such as self-replication, mutation, interaction of individuals, and death. We propose how to mimic these bio-inspired features in a quantum-mechanical formalism, which allows for an experimental implementation achievable with current quantum platforms. This result paves the way for the realization of artificial life and embodied evolution with quantum technologies.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-05-14T16:03:46Z</published>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Sci. Rep. 6, 20956 (2016)</arxiv:journal_ref>
+    <author>
+      <name>U. Alvarez-Rodriguez</name>
+    </author>
+    <author>
+      <name>M. Sanz</name>
+    </author>
+    <author>
+      <name>L. Lamata</name>
+    </author>
+    <author>
+      <name>E. Solano</name>
+    </author>
+    <arxiv:doi>10.1038/srep20956</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/srep20956" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0209081v1</id>
+    <title>Ab Initio Modeling of Ecosystems with Artificial Life</title>
+    <updated>2002-09-22T00:30:08Z</updated>
+    <link href="https://arxiv.org/abs/physics/0209081v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0209081v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Artificial Life provides the opportunity to study the emergence and evolution of simple ecosystems in real time. We give an overview of the advantages and limitations of such an approach, as well as its relation to individual-based modeling techniques. The Digital Life system Avida is introduced and prospects for experiments with ab initio evolution (evolution "from scratch"), maintenance, as well as stability of ecosystems are discussed.</summary>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-09-22T00:30:08Z</published>
+    <arxiv:comment>13 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.bio-ph"/>
+    <arxiv:journal_ref>Natural Resource Modeling 15 (2002) 133-145</arxiv:journal_ref>
+    <author>
+      <name>C. Adami</name>
+      <arxiv:affiliation>JPL, Caltech</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1311.2531v1</id>
+    <title>Motility at the origin of life: Its characterization and a model</title>
+    <updated>2013-11-11T18:58:46Z</updated>
+    <link href="https://arxiv.org/abs/1311.2531v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1311.2531v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Due to recent advances in synthetic biology and artificial life, the origin of life is currently a hot topic of research. We review the literature and argue that the two traditionally competing "replicator-first" and "metabolism-first" approaches are merging into one integrated theory of individuation and evolution. We contribute to the maturation of this more inclusive approach by highlighting some problematic assumptions that still lead to an impoverished conception of the phenomenon of life. In particular, we argue that the new consensus has so far failed to consider the relevance of intermediate timescales. We propose that an adequate theory of life must account for the fact that all living beings are situated in at least four distinct timescales, which are typically associated with metabolism, motility, development, and evolution. On this view, self-movement, adaptive behavior and morphological changes could have already been present at the origin of life. In order to illustrate this possibility we analyze a minimal model of life-like phenomena, namely of precarious, individuated, dissipative structures that can be found in simple reaction-diffusion systems. Based on our analysis we suggest that processes in intermediate timescales could have already been operative in prebiotic systems. They may have facilitated and constrained changes occurring in the faster- and slower-paced timescales of chemical self-individuation and evolution by natural selection, respectively.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-11-11T18:58:46Z</published>
+    <arxiv:comment>29 pages, 5 figures, Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Tom Froese</name>
+    </author>
+    <author>
+      <name>Nathaniel Virgo</name>
+    </author>
+    <author>
+      <name>Takashi Ikegami</name>
+    </author>
+    <arxiv:doi>10.1162/ARTL_a_00096</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/ARTL_a_00096" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.13520v1</id>
+    <title>An Artificial Life Simulation Library Based on Genetic Algorithm, 3-Character Genetic Code and Biological Hierarchy</title>
+    <updated>2023-02-19T03:37:03Z</updated>
+    <link href="https://arxiv.org/abs/2304.13520v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.13520v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Genetic algorithm (GA) is inspired by biological evolution of genetic organisms by optimizing the genotypic combinations encoded within each individual with the help of evolutionary operators, suggesting that GA may be a suitable model for studying real-life evolutionary processes. This paper describes the design of a Python library for artificial life simulation, Digital Organism Simulation Environment (DOSE), based on GA and biological hierarchy starting from genetic sequence to population. A 3-character instruction set that does not take any operand is introduced as genetic code for digital organism. This mimics the 3-nucleotide codon structure in naturally occurring DNA. In addition, the context of a 3-dimensional world composing of ecological cells is introduced to simulate a physical ecosystem. Using DOSE, an experiment to examine the changes in genetic sequences with respect to mutation rates is presented.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-19T03:37:03Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>The Python Papers 7: 5 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Maurice HT Ling</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.17786v1</id>
+    <title>Artificial life of an active droplets system: a quantitative lifecycle analysis</title>
+    <updated>2025-11-21T21:06:59Z</updated>
+    <link href="https://arxiv.org/abs/2511.17786v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.17786v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The study of synthetic active matter systems holds the promise for designing smart materials and devices with emergent characteristics akin to those of living organisms, eventually opening the doors to the realization of artificial life. Such an investigation, however, is challenged by the difficulty inherent in identifying the relationship between the features of the elementary constituents and the emergent properties of the whole; to this end, a key step consists in the accurate quantification of the system's observed behavior. Here, we report the study of 50 self-propelled oil droplets floating on the surface of an aqueous solution. 25 droplets are stained with a red dye, and the other 25 are stained blue: the colorants affect the droplets' interfacial tension properties differently, consequently influencing their collective dynamics. Droplet trajectories extending for up to 5 hours are extracted from video recordings with a tracking pipeline developed ad hoc. The structural and dynamical analysis of the system reveals a ``life-to-death'' cycle unfolding in qualitatively distinct stages, showcasing a complex interplay between individual droplet mobility and collective organization. The tools developed and the results obtained in our work pave the way to the in silico modelling as well as the experimental design of synthetic active matter systems displaying life-like and programmable behavior.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-21T21:06:59Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Matteo Scandola</name>
+    </author>
+    <author>
+      <name>Silvia Holler</name>
+    </author>
+    <author>
+      <name>Richard J. G. Loeffler</name>
+    </author>
+    <author>
+      <name>Martin M. Hanczyc</name>
+    </author>
+    <author>
+      <name>Raffaello Potestio</name>
+    </author>
+    <author>
+      <name>Roberto Menichetti</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.03742v1</id>
+    <title>Lenia and Expanded Universe</title>
+    <updated>2020-05-07T20:41:13Z</updated>
+    <link href="https://arxiv.org/abs/2005.03742v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.03742v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report experimental extensions of Lenia, a continuous cellular automata family capable of producing lifelike self-organizing autonomous patterns. The rule of Lenia was generalized into higher dimensions, multiple kernels, and multiple channels. The final architecture approaches what can be seen as a recurrent convolutional neural network. Using semi-automatic search e.g. genetic algorithm, we discovered new phenomena like polyhedral symmetries, individuality, self-replication, emission, growth by ingestion, and saw the emergence of "virtual eukaryotes" that possess internal division of labor and type differentiation. We discuss the results in the contexts of biology, artificial life, and artificial intelligence.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-07T20:41:13Z</published>
+    <arxiv:comment>8 pages, 5 figures, 1 table; submitted to ALIFE 2020 conference</arxiv:comment>
+    <arxiv:primary_category term="nlin.CG"/>
+    <arxiv:journal_ref>Artificial Life Conference Proceedings 2020, (32), 221-229</arxiv:journal_ref>
+    <author>
+      <name>Bert Wang-Chak Chan</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00297</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00297" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.00350v1</id>
+    <title>Go Big or Go Home: Simulating Mobbing Behavior with Braitenbergian Robots</title>
+    <updated>2026-04-01T00:56:50Z</updated>
+    <link href="https://arxiv.org/abs/2604.00350v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.00350v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We used the Webots robotics simulation platform to simulate a dyadic avoiding and mobbing predator behavior in a group of Braitenbergian robots. Mobbing is an antipredator adaptation used by some animals in which the individuals cooperatively attack or harass a predator to protect themselves. One way of coordinating a mobbing attack is using mobbing calls to summon other individuals of the mobbing species. We imitated this mechanism and simulated Braitenbergian robots that use mobbing calls when they face a light source (representing an inanimate predator) and mob it if they can summon allies, otherwise, they escape from it. We explore the effects of range of mobbing call (infinite range, mid-range and low-range) and the size of the robot group (ten robots vs three) on the overall success of mobbing. Our results suggest that both variables have significant impacts. This work has implications for simulations of action selection in artificial life and designing control architectures for autonomous agents.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-01T00:56:50Z</published>
+    <arxiv:comment>This work was completed in 2019 as a final project for a graduate course at the University of Waterloo, titled: ECE 750 - Artificial Life: Embodied Intelligence</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Elaheh Sanoubari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.14232v1</id>
+    <title>Extending a Phylogeny-based Method for Detecting Signatures of Multi-level Selection for Applications in Artificial Life</title>
+    <updated>2025-08-19T19:42:38Z</updated>
+    <link href="https://arxiv.org/abs/2508.14232v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.14232v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multilevel selection occurs when short-term individual-level reproductive interests conflict with longer-term group-level fitness effects. Detecting and quantifying this phenomenon is key to understanding evolution of traits ranging from multicellularity to pathogen virulence. Multilevel selection is particularly important in artificial life research due to its connection to major evolutionary transitions, a hallmark of open-ended evolution. Bonetti Franceschi &amp; Volz (2024) proposed to detect multilevel selection dynamics by screening for mutations that appear more often in a population than expected by chance (due to individual-level fitness benefits) but are ultimately associated with negative longer-term fitness outcomes (i.e., smaller, shorter-lived descendant clades). Here, we use agent-based modeling with known ground truth to assess the efficacy of this approach. To test these methods under challenging conditions broadly comparable to the original dataset explored by Bonetti Franceschi &amp; Volz (2024), we use an epidemiological framework to model multilevel selection in trade-offs between within-host growth rate and between-host transmissibility. To achieve success on our in silico data, we develop an alternate normalization procedure for identifying clade-level fitness effects. We find the method to be sensitive in detecting genome sites under multilevel selection with 30% effect sizes on fitness, but do not see sensitivity to smaller 10% mutation effect sizes. To test the robustness of this methodology, we conduct additional experiments incorporating extrinsic, time-varying environmental changes and adaptive turnover in population compositions, and find that screen performance remains generally consistent with baseline conditions. This work represents a promising step towards rigorous generalizable quantification of multilevel selection effects.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-19T19:42:38Z</published>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Matthew Andres Moreno</name>
+    </author>
+    <author>
+      <name>Sanaz Hasanzadeh Fard</name>
+    </author>
+    <author>
+      <name>Luis Zaman</name>
+    </author>
+    <author>
+      <name>Emily Dolson</name>
+    </author>
+    <arxiv:doi>10.1162/ISAL.a.916</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/ISAL.a.916" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0304022v1</id>
+    <title>Self-Replicating Machines in Continuous Space with Virtual Physics</title>
+    <updated>2003-04-15T19:33:45Z</updated>
+    <link href="https://arxiv.org/abs/cs/0304022v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0304022v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  JohnnyVon is an implementation of self-replicating machines in continuous two-dimensional space. Two types of particles drift about in a virtual liquid. The particles are automata with discrete internal states but continuous external relationships. Their internal states are governed by finite state machines but their external relationships are governed by a simulated physics that includes Brownian motion, viscosity, and spring-like attractive and repulsive forces. The particles can be assembled into patterns that can encode arbitrary strings of bits. We demonstrate that, if an arbitrary "seed" pattern is put in a "soup" of separate individual particles, the pattern will replicate by assembling the individual particles into copies of itself. We also show that, given sufficient time, a soup of separate individual particles will eventually spontaneously form self-replicating patterns. We discuss the implications of JohnnyVon for research in nanotechnology, theoretical biology, and artificial life.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-04-15T19:33:45Z</published>
+    <arxiv:comment>39 pages, Java code available at http://purl.org/net/johnnyvon/</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>Artificial Life, (2003), 9, 21-40</arxiv:journal_ref>
+    <author>
+      <name>Arnold Smith</name>
+      <arxiv:affiliation>National Research Council of Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Peter Turney</name>
+      <arxiv:affiliation>National Research Council of Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Ewaschuk</name>
+      <arxiv:affiliation>University of Waterloo</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1162/106454603321489509</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/106454603321489509" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1102.1691v2</id>
+    <title>Schema Redescription in Cellular Automata: Revisiting Emergence in Complex Systems</title>
+    <updated>2011-02-09T15:44:38Z</updated>
+    <link href="https://arxiv.org/abs/1102.1691v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1102.1691v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a method to eliminate redundancy in the transition tables of Boolean automata: schema redescription with two symbols. One symbol is used to capture redundancy of individual input variables, and another to capture permutability in sets of input variables: fully characterizing the canalization present in Boolean functions. Two-symbol schemata explain aspects of the behaviour of automata networks that the characterization of their emergent patterns does not capture. We use our method to compare two well-known cellular automata for the density classification task: the human engineered CA GKL, and another obtained via genetic programming (GP). We show that despite having very different collective behaviour, these rules are very similar. Indeed, GKL is a special case of GP. Therefore, we demonstrate that it is more feasible to compare cellular automata via schema redescriptions of their rules, than by looking at their emergent behaviour, leading us to question the tendency in complexity research to pay much more attention to emergent patterns than to local interactions.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.FL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-02-08T19:13:53Z</published>
+    <arxiv:comment>paper submitted to the 2011 IEEE Symposium on Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="nlin.CG"/>
+    <arxiv:journal_ref>The 2011 IEEE Symposium on Artificial Life, at the IEEE Symposium Series on Computational Intelligence 2011. April 11 - 15, 201, Paris, France, pp: 233-240</arxiv:journal_ref>
+    <author>
+      <name>Manuel Marques-Pita</name>
+    </author>
+    <author>
+      <name>Luis M. Rocha</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.05147v1</id>
+    <title>Artificial Collective Intelligence Engineering: a Survey of Concepts and Perspectives</title>
+    <updated>2023-04-11T11:22:47Z</updated>
+    <link href="https://arxiv.org/abs/2304.05147v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.05147v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Collectiveness is an important property of many systems--both natural and artificial. By exploiting a large number of individuals, it is often possible to produce effects that go far beyond the capabilities of the smartest individuals, or even to produce intelligent collective behaviour out of not-so-intelligent individuals. Indeed, collective intelligence, namely the capability of a group to act collectively in a seemingly intelligent way, is increasingly often a design goal of engineered computational systems--motivated by recent techno-scientific trends like the Internet of Things, swarm robotics, and crowd computing, just to name a few. For several years, the collective intelligence observed in natural and artificial systems has served as a source of inspiration for engineering ideas, models, and mechanisms. Today, artificial and computational collective intelligence are recognised research topics, spanning various techniques, kinds of target systems, and application domains. However, there is still a lot of fragmentation in the research panorama of the topic within computer science, and the verticality of most communities and contributions makes it difficult to extract the core underlying ideas and frames of reference. The challenge is to identify, place in a common structure, and ultimately connect the different areas and methods addressing intelligent collectives. To address this gap, this paper considers a set of broad scoping questions providing a map of collective intelligence research, mostly by the point of view of computer scientists and engineers. Accordingly, it covers preliminary notions, fundamental concepts, and the main research perspectives, identifying opportunities and challenges for researchers on artificial and computational collective intelligence engineering.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-11T11:22:47Z</published>
+    <arxiv:comment>This is the author's final version of the article, accepted for publication in the Artificial Life journal. Data: 34 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>Artificial Life, July 2023, Pages 1-35, Online ISSN: 1530-9185, Print ISSN: 1064-5462</arxiv:journal_ref>
+    <author>
+      <name>Roberto Casadei</name>
+    </author>
+    <arxiv:doi>10.1162/artl_a_00408</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/artl_a_00408" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.16063v1</id>
+    <title>Individuality in Swarm Robots with the Case Study of Kilobots: Noise, Bug, or Feature?</title>
+    <updated>2023-05-25T13:53:13Z</updated>
+    <link href="https://arxiv.org/abs/2305.16063v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.16063v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inter-individual differences are studied in natural systems, such as fish, bees, and humans, as they contribute to the complexity of both individual and collective behaviors. However, individuality in artificial systems, such as robotic swarms, is undervalued or even overlooked. Agent-specific deviations from the norm in swarm robotics are usually understood as mere noise that can be minimized, for example, by calibration. We observe that robots have consistent deviations and argue that awareness and knowledge of these can be exploited to serve a task. We measure heterogeneity in robot swarms caused by individual differences in how robots act, sense, and oscillate. Our use case is Kilobots and we provide example behaviors where the performance of robots varies depending on individual differences. We show a non-intuitive example of phototaxis with Kilobots where the non-calibrated Kilobots show better performance than the calibrated supposedly ``ideal" one. We measure the inter-individual variations for heterogeneity in sensing and oscillation, too. We briefly discuss how these variations can enhance the complexity of collective behaviors. We suggest that by recognizing and exploring this new perspective on individuality, and hence diversity, in robotic swarms, we can gain a deeper understanding of these systems and potentially unlock new possibilities for their design and implementation of applications.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-25T13:53:13Z</published>
+    <arxiv:comment>Accepted at the 2023 Conference on Artificial Life (ALife). To see the 9 Figures in large check this repo: https://github.com/mohsen-raoufi/Kilobots-Individuality-ALife-23/tree/main/Figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>ALIFE 2023: Ghost in the Machine: Proceedings of the 2023 Artificial Life Conference</arxiv:journal_ref>
+    <author>
+      <name>Mohsen Raoufi</name>
+    </author>
+    <author>
+      <name>Pawel Romanczuk</name>
+    </author>
+    <author>
+      <name>Heiko Hamann</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00623</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00623" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.06085v1</id>
+    <title>Problem-solving benefits of down-sampled lexicase selection</title>
+    <updated>2021-06-10T23:42:09Z</updated>
+    <link href="https://arxiv.org/abs/2106.06085v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.06085v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In genetic programming, an evolutionary method for producing computer programs that solve specified computational problems, parent selection is ordinarily based on aggregate measures of performance across an entire training set. Lexicase selection, by contrast, selects on the basis of performance on random sequences of training cases; this has been shown to enhance problem-solving power in many circumstances. Lexicase selection can also be seen as better reflecting biological evolution, by modeling sequences of challenges that organisms face over their lifetimes. Recent work has demonstrated that the advantages of lexicase selection can be amplified by down-sampling, meaning that only a random subsample of the training cases is used each generation. This can be seen as modeling the fact that individual organisms encounter only subsets of the possible environments, and that environments change over time. Here we provide the most extensive benchmarking of down-sampled lexicase selection to date, showing that its benefits hold up to increased scrutiny. The reasons that down-sampling helps, however, are not yet fully understood. Hypotheses include that down-sampling allows for more generations to be processed with the same budget of program evaluations; that the variation of training data across generations acts as a changing environment, encouraging adaptation; or that it reduces overfitting, leading to more general solutions. We systematically evaluate these hypotheses, finding evidence against all three, and instead draw the conclusion that down-sampled lexicase selection's main benefit stems from the fact that it allows the evolutionary process to examine more individuals within the same computational budget, even though each individual is examined less completely.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-10T23:42:09Z</published>
+    <arxiv:comment>to be published in Artificial Life Journal</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Thomas Helmuth</name>
+    </author>
+    <author>
+      <name>Lee Spector</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.10790v2</id>
+    <title>Quality Evolvability ES: Evolving Individuals With a Distribution of Well Performing and Diverse Offspring</title>
+    <updated>2021-07-20T11:28:41Z</updated>
+    <link href="https://arxiv.org/abs/2103.10790v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.10790v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One of the most important lessons from the success of deep learning is that learned representations tend to perform much better at any task compared to representations we design by hand. Yet evolution of evolvability algorithms, which aim to automatically learn good genetic representations, have received relatively little attention, perhaps because of the large amount of computational power they require. The recent method Evolvability ES allows direct selection for evolvability with little computation. However, it can only be used to solve problems where evolvability and task performance are aligned. We propose Quality Evolvability ES, a method that simultaneously optimizes for task performance and evolvability and without this restriction. Our proposed approach Quality Evolvability has similar motivation to Quality Diversity algorithms, but with some important differences. While Quality Diversity aims to find an archive of diverse and well-performing, but potentially genetically distant individuals, Quality Evolvability aims to find a single individual with a diverse and well-performing distribution of offspring. By doing so Quality Evolvability is forced to discover more evolvable representations. We demonstrate on robotic locomotion control tasks that Quality Evolvability ES, similarly to Quality Diversity methods, can learn faster than objective-based methods and can handle deceptive problems.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-19T13:22:22Z</published>
+    <arxiv:comment>2021 Conference on Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Adam Katona</name>
+    </author>
+    <author>
+      <name>Daniel W. Franks</name>
+    </author>
+    <author>
+      <name>James Alfred Walker</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1403.8046v1</id>
+    <title>Chemlambda, universality and self-multiplication</title>
+    <updated>2014-03-31T15:25:34Z</updated>
+    <link href="https://arxiv.org/abs/1403.8046v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1403.8046v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present chemlambda (or the chemical concrete machine), an artificial chemistry with the following properties: (a) is Turing complete, (b) has a model of decentralized, distributed computing associated to it, (c) works at the level of individual (artificial) molecules, subject of reversible, but otherwise deterministic interactions with a small number of enzymes, (d) encodes information in the geometrical structure of the molecules and not in their numbers, (e) all interactions are purely local in space and time. This is part of a larger project to create computing, artificial chemistry and artificial life in a distributed context, using topological and graphical languages.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-03-31T15:25:34Z</published>
+    <arxiv:comment>8 pages, 21 colour figures, conference paper submitted to ALIFE 14</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>ALIFE 2014: The Fourteenth International Conference on the Synthesis and Simulation of Living Systems July 2014 p.490-497</arxiv:journal_ref>
+    <author>
+      <name>Marius Buliga</name>
+    </author>
+    <author>
+      <name>Louis H. Kauffman</name>
+    </author>
+    <arxiv:doi>10.7551/978-0-262-32621-6-ch079</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.7551/978-0-262-32621-6-ch079" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.02990v1</id>
+    <title>Adaptive Exploration in Lenia with Intrinsic Multi-Objective Ranking</title>
+    <updated>2025-06-03T15:26:47Z</updated>
+    <link href="https://arxiv.org/abs/2506.02990v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.02990v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Artificial life aims to understand the fundamental principles of biological life by creating computational models that exhibit life-like properties. Although artificial life systems show promise for simulating biological evolution, achieving open-endedness remains a central challenge. This work investigates mechanisms to promote exploration and unbounded innovation within evolving populations of Lenia continuous cellular automata by evaluating individuals against each other with respect to distinctiveness, population sparsity, and homeostatic regulation. Multi-objective ranking of these intrinsic fitness objectives encourages the perpetual selection of novel and explorative individuals in sparse regions of the descriptor space without restricting the scope of emergent behaviors. We present experiments demonstrating the effectiveness of our multi-objective approach and emphasize that intrinsic evolution allows diverse expressions of artificial life to emerge. We argue that adaptive exploration improves evolutionary dynamics and serves as an important step toward achieving open-ended evolution in artificial systems.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-03T15:26:47Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Niko Lorantos</name>
+    </author>
+    <author>
+      <name>Lee Spector</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.01701v1</id>
+    <title>A speciation simulation that partly passes open-endedness tests</title>
+    <updated>2026-03-02T10:27:12Z</updated>
+    <link href="https://arxiv.org/abs/2603.01701v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.01701v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One of the main goals of artificial life research is to recreate in artificial systems the trends for ever more complex and novel entities, interactions and processes that we see in Earth's biosphere, that is, to create open-ended systems. In this paper, we test for Tokyo type 1 open-ended evolution (OEE) of the Tree of Life Simulation (ToLSim), an artificial life software created by Lana Sinapayen. To do so, we conducted an experiment to measure evolutionary activity statistics. These require us to define the notion of components. Here, we define components as the agent's genes. The results show that ToLSim is capable of exhibiting unbounded total cumulative evolutionary activity. However, total and median normalized cumulative evolutionary activity appear bounded and new evolutionary activity is persistently null, suggesting that ToLSim is not open-ended. Further studies on ToLSim could repeat this experiment with individuals or even species, rather than genes, to test whether the present results are valid.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-02T10:27:12Z</published>
+    <arxiv:comment>12 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Théo de Pinho</name>
+    </author>
+    <author>
+      <name>Lana Sinapayen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.01806v1</id>
+    <title>On the Existence of Information Bottlenecks in Living and Non-Living Systems</title>
+    <updated>2023-06-01T22:33:25Z</updated>
+    <link href="https://arxiv.org/abs/2306.01806v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.01806v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In many complex systems, we observe that `interesting behaviour' is often the consequence of a system exploiting the existence of an Information Bottleneck (IB). These bottlenecks can occur at different scales, between individuals or components of a system, and sometimes within individuals themselves. Oftentimes, we regard these bottlenecks negatively; as merely the limitations of the individual's physiology and something that ought to be overcome when designing and implementing artificial systems. However, we suggest instead that IBs may serve a purpose beyond merely providing a minimally-viable channel for coordination in collective systems. More specifically, we suggest that interesting or novel behaviour occurs when the individuals in a system are constrained or limited in their ability to share information and must discover novel ways to exploit existing mechanisms, which are inherently bottlenecked, rather than circumventing or otherwise avoiding those mechanisms entirely.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-01T22:33:25Z</published>
+    <arxiv:comment>To appear in the proceedings of the 2023 Conference on Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Michael Crosscombe</name>
+    </author>
+    <author>
+      <name>Hiroki Sato</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00677</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00677" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.04235v1</id>
+    <title>Toward Artificial Open-Ended Evolution within Lenia using Quality-Diversity</title>
+    <updated>2024-06-06T16:35:27Z</updated>
+    <link href="https://arxiv.org/abs/2406.04235v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.04235v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>From the formation of snowflakes to the evolution of diverse life forms, emergence is ubiquitous in our universe. In the quest to understand how complexity can arise from simple rules, abstract computational models, such as cellular automata, have been developed to study self-organization. However, the discovery of self-organizing patterns in artificial systems is challenging and has largely relied on manual or semi-automatic search in the past. In this paper, we show that Quality-Diversity, a family of Evolutionary Algorithms, is an effective framework for the automatic discovery of diverse self-organizing patterns in complex systems. Quality-Diversity algorithms aim to evolve a large population of diverse individuals, each adapted to its ecological niche. Combined with Lenia, a family of continuous cellular automata, we demonstrate that our method is able to evolve a diverse population of lifelike self-organizing autonomous patterns. Our framework, called Leniabreeder, can leverage both manually defined diversity criteria to guide the search toward interesting areas, as well as unsupervised measures of diversity to broaden the scope of discoverable patterns. We demonstrate both qualitatively and quantitatively that Leniabreeder offers a powerful solution for discovering self-organizing patterns. The effectiveness of unsupervised Quality-Diversity methods combined with the rich landscape of Lenia exhibits a sustained generation of diversity and complexity characteristic of biological evolution. We provide empirical evidence that suggests unbounded diversity and argue that Leniabreeder is a step toward replicating open-ended evolution in silico.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-06T16:35:27Z</published>
+    <arxiv:comment>The International Conference for Artificial Life (ALife)</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Maxence Faldor</name>
+    </author>
+    <author>
+      <name>Antoine Cully</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1812.04907v1</id>
+    <title>On the potential for open-endedness in neural networks</title>
+    <updated>2018-12-12T11:39:38Z</updated>
+    <link href="https://arxiv.org/abs/1812.04907v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1812.04907v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Natural evolution gives the impression of leading to an open-ended process of increasing diversity and complexity. If our goal is to produce such open-endedness artificially, this suggests an approach driven by evolutionary metaphor. On the other hand, techniques from machine learning and artificial intelligence are often considered too narrow to provide the sort of exploratory dynamics associated with evolution. In this paper, we hope to bridge that gap by reviewing common barriers to open-endedness in the evolution-inspired approach and how they are dealt with in the evolutionary case - collapse of diversity, saturation of complexity, and failure to form new kinds of individuality. We then show how these problems map onto similar issues in the machine learning approach, and discuss how the same insights and solutions which alleviated those barriers in evolutionary approaches can be ported over. At the same time, the form these issues take in the machine learning formulation suggests new ways to analyze and resolve barriers to open-endedness. Ultimately, we hope to inspire researchers to be able to interchangeably use evolutionary and gradient-descent-based machine learning methods to approach the design and creation of open-ended systems.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-12-12T11:39:38Z</published>
+    <arxiv:comment>17 pages, 6 figures; Final author version accepted for publication in Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <author>
+      <name>Nicholas Guttenberg</name>
+    </author>
+    <author>
+      <name>Nathaniel Virgo</name>
+    </author>
+    <author>
+      <name>Alexandra Penn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.13254v1</id>
+    <title>Emergent Collective Reproduction via Evolving Neuronal Flocks</title>
+    <updated>2024-09-20T06:22:24Z</updated>
+    <link href="https://arxiv.org/abs/2409.13254v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.13254v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study facilitates the understanding of evolutionary transitions in individuality (ETIs) through a novel artificial life framework, named VitaNova, that intricately merges self-organization and natural selection to simulate the emergence of complex, reproductive groups. By dynamically modelling individual agents within an environment that challenges them with predators and spatial constraints, VitaNova elucidates the mechanisms by which simple agents evolve into cohesive units exhibiting collective reproduction. The findings underscore the synergy between self-organized behaviours and adaptive evolutionary strategies as fundamental drivers of ETIs. This approach not only contributes to a deeper understanding of higher-order biological individuality but also sets a new precedent in the empirical investigation of ETIs, challenging and extending current theoretical frameworks.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-20T06:22:24Z</published>
+    <arxiv:comment>9 pages, 10 figures, conference</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Nam H. Le</name>
+    </author>
+    <author>
+      <name>Richard Watson</name>
+    </author>
+    <author>
+      <name>Mike Levin</name>
+    </author>
+    <author>
+      <name>Chrys Buckley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.08047v1</id>
+    <title>Rethinking Self-Replication: Detecting Distributed Selfhood in the Outlier Cellular Automaton</title>
+    <updated>2025-08-11T14:49:11Z</updated>
+    <link href="https://arxiv.org/abs/2508.08047v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.08047v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spontaneous self-replication in cellular automata has long been considered rare, with most known examples requiring careful design or artificial initialization. In this paper, we present formal, causal evidence that such replication can emerge unassisted -- and that it can do so in a distributed, multi-component form. Building on prior work identifying complex dynamics in the Outlier rule, we introduce a data-driven framework that reconstructs the full causal ancestry of patterns in a deterministic cellular automaton. This allows us to rigorously identify self-replicating structures via explicit causal lineages. Our results show definitively that self-replicators in the Outlier CA are not only spontaneous and robust, but are also often composed of multiple disjoint clusters working in coordination, raising questions about some conventional notions of individuality and replication in artificial life systems.</summary>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-11T14:49:11Z</published>
+    <arxiv:primary_category term="nlin.CG"/>
+    <author>
+      <name>Arend Hintze</name>
+    </author>
+    <author>
+      <name>Clifford Bohm</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.12249v1</id>
+    <title>Real-time Evolution of Multicellularity with Artificial Gene Regulation</title>
+    <updated>2023-05-20T17:39:07Z</updated>
+    <link href="https://arxiv.org/abs/2305.12249v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.12249v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a real-time simulation involving ''protozoan-like'' cells that evolve by natural selection in a physical 2D ecosystem. Selection pressure is exerted via the requirements to collect mass and energy from the surroundings in order to reproduce by cell-division. Cells do not have fixed morphologies from birth; they can use their resources in construction projects that produce functional nodes on their surfaces such as photoreceptors for light sensitivity or flagella for motility. Importantly, these nodes act as modular components that connect to the cell's control system via IO channels, meaning that the evolutionary process can replace one function with another while utilising pre-developed control pathways on the other side of the channel. A notable type of node function is the adhesion receptors that allow cells to bind together into multicellular structures in which individuals can share resource and signal to one another. The control system itself is modelled as an artificial neural network that doubles as a gene regulatory network, thereby permitting the co-evolution of form and function in a single data structure and allowing cell specialisation within multicellular groups.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.MN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-20T17:39:07Z</published>
+    <arxiv:comment>Accepted for publication in the proceedings of the 2023 Conference on Artificial Life</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Dylan Cope</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.07743v1</id>
+    <title>Architecture Generalization with MetaNCA</title>
+    <updated>2026-07-08T08:31:57Z</updated>
+    <link href="https://arxiv.org/abs/2607.07743v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.07743v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Self-organization is an emergent property of life, driven by the collective behavior of individual components acting on local information. Biological neurons, through local interactions transmitted through synapses, are able to learn efficiently and can adapt their connections over an organism's lifespan. Motivated by these desirable properties of adaptability and local interaction, neural cellular automata (NCA) models have been successful at learning morphogenesis solely through local update rules, demonstrating stability over many updates and robustness to perturbations. In this work, we introduce Meta Neural Cellular Automata (MetaNCA), a framework that learns local rules which self-organize the weights of artificial neural networks. A learned rule network iteratively updates the weights of a task network using only local interactions on the computation graph. We propose a novel Weight Transformer architecture for the local rule network, which uses linear attention to aggregate signals from neighboring weights and hidden states. Once trained, the rule network generates task networks of diverse architectures without backpropagation. We show that MetaNCA generates weights for feedforward MLPs, CNNs, and ResNets on MNIST and CIFAR-100, scaling to networks of 2 million parameters. We further show that MetaNCA generalizes to architectures not seen during meta-training, and that architectural diversity in the training phase strengthens this generalization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-08T08:31:57Z</published>
+    <arxiv:comment>9 pages, 6 figures. To appear in the proceedings of the Artificial Life Conference (ALIFE 2026)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Meet Barot</name>
+    </author>
+    <author>
+      <name>Daniel Berenberg</name>
+    </author>
+    <author>
+      <name>Sina Khajehabdollahi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/nlin/0604026v1</id>
+    <title>The influence of parsimony and randomness on complexity growth in Tierra</title>
+    <updated>2006-04-13T06:12:27Z</updated>
+    <link href="https://arxiv.org/abs/nlin/0604026v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/nlin/0604026v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The issue of how to create open-ended evolution in an artificial system is one the open problems in artificial life. This paper examines two of the factors that have some bearing on this issue, using the Tierra artificial life system.
+  {\em Parsimony pressure} is a tendency to penalise more complex organisms by the extra cost needed to reproduce longer genotypes, encouraging simplification to happen. In Tierra, parsimony is controlled by the \verb+SlicePow+ parameter. When full parsimony is selected, evolution optimises the ancestral organism to produce extremely simple organisms. With parsimony completely relaxed, organisms grow larger, but not more complex. They fill up with ``junk''. This paper looks at scanning a range of \verb+SlicePow+ from 0.9 to 1 to see if there is an optimal value for generating complexity.
+  Tierra (along with most ALife systems) use pseudo random number generators. Algorithms can never create information, only destroy it. So the total complexity of the Tierra system is bounded by the initial complexity, implying that the individual organism complexity is bounded. Biological systems, however, have plenty of sources of randomness, ultimately dependent on quantum randomness, so do not have this complexity limit. Sources of real random numbers exist for computers called {\em entropy gatherers} -- this paper reports on the effect of changing Tierra's pseudo random number generator for an entropy gatherer.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-04-13T06:12:27Z</published>
+    <arxiv:primary_category term="nlin.AO"/>
+    <arxiv:journal_ref>In Alife IX, Workshop and Tutorial Proceedings, Bedau et al. (eds) (2004) p51</arxiv:journal_ref>
+    <author>
+      <name>Russell K. Standish</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.21862v3</id>
+    <title>Shachi: A Modular, Controllable Framework for LLM-Based Agent-Based Modeling of Emergent Collective Behavior</title>
+    <updated>2026-06-15T00:21:47Z</updated>
+    <link href="https://arxiv.org/abs/2509.21862v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.21862v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>How collective behaviors emerge from the interactions of individual LLM-driven agents is a central question in artificial life, yet controlled study of these emergent dynamics has been hindered by the lack of a principled simulation framework for systematic experimentation. To address this, we introduce Shachi, a principled methodology and modular framework that decomposes an agent's cognition into core components: Configuration for intrinsic identity, Memory for contextual continuity, and Tools for extended capabilities, all orchestrated by an LLM reasoning engine. This decomposition treats each cognitive component as an independently controllable variable, enabling perturbation studies that trace how micro-level cognitive traits propagate into population-level dynamics. We investigate behavioral patterns across a 10-task benchmark spanning three levels of collective complexity. Shachi enables memory transfer across environment transitions, producing history-dependent behavioral shifts, and allows agents to simultaneously inhabit multiple environments, revealing cross-environment interference invisible in single-environment studies. Furthermore, in a real-world U.S. tariff shock case study, locally interacting agents with individually controlled cognitive components produce macro-level market dynamics directionally consistent with observed real-world outcomes. Our work provides a rigorous, open-source simulation framework for LLM-based ABM, aimed at fostering cumulative scientific inquiry into the emergent collective behaviors of interacting artificial agents.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-26T04:38:59Z</published>
+    <arxiv:comment>Accepted to ALIFE 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>So Kuroki</name>
+    </author>
+    <author>
+      <name>Yingtao Tian</name>
+    </author>
+    <author>
+      <name>Kou Misaki</name>
+    </author>
+    <author>
+      <name>Takashi Ikegami</name>
+    </author>
+    <author>
+      <name>Takuya Akiba</name>
+    </author>
+    <author>
+      <name>Yujin Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.01883v4</id>
+    <title>Evolutionary Innovations and Where to Find Them: Routes to Open-Ended Evolution in Natural and Artificial Systems</title>
+    <updated>2019-02-21T09:18:52Z</updated>
+    <link href="https://arxiv.org/abs/1806.01883v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.01883v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a high-level conceptual framework to help orient the discussion and implementation of open-endedness in evolutionary systems. Drawing upon earlier work by Banzhaf et al., three different kinds of open-endedness are identified: exploratory, expansive, and transformational. These are characterised in terms of their relationship to the search space of phenotypic behaviours. A formalism is introduced to describe three key processes required for an evolutionary process: the generation of a phenotype from a genetic description, the evaluation of that phenotype, and the reproduction with variation of individuals according to their evaluation. The distinction is made between intrinsic and extrinsic implementations of these processes. A discussion then investigates how various interactions between these processes, and their modes of implementation, can lead to open-endedness. However, an important contribution of the paper is the demonstration that these considerations relate to exploratory open-endedness only. Conditions for the implementation of the more interesting kinds of open-endedness - expansive and transformational - are also discussed, emphasizing factors such as multiple domains of behaviour, transdomain bridges, and non-additive compositional systems. These factors relate not to the generic evolutionary properties of individuals and populations, but rather to the nature of the building blocks out of which individual organisms are constructed, and the laws and properties of the environment in which they exist. The paper ends with suggestions of how the framework can be used to categorise and compare the open-ended evolutionary potential of different systems, how it might guide the design of systems with greater capacity for open-ended evolution, and how it might be further improved.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-05T18:30:22Z</published>
+    <arxiv:comment>This version (v4) to appear in the journal Artificial Life 25(2), 2019. Previous version (v3) was presented at the Third Workshop on Open-Ended Evolution (OEE3), Tokyo, Japan, July 2018 (hosted by the 2018 Conference on Artificial Life)</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Tim Taylor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.02651v1</id>
+    <title>A minimal model for the emergence of cooperation in randomly growing networks</title>
+    <updated>2016-05-09T16:45:04Z</updated>
+    <link href="https://arxiv.org/abs/1605.02651v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.02651v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cooperation is observed widely in nature and is thought an essential component of many evolutionary processes, yet the mechanisms by which it arises and persists are still unclear. Among several theories, network reciprocity -- a model of inhomogeneous social interactions -- has been proposed as an enabling mechanism to explain the emergence of cooperation. Existing evolutionary models of this mechanism have tended to focus on highly heterogeneous (scale-free) networks, hence typically assume preferential attachment mechanisms, and consequently the prerequisite that individuals have global network knowledge. Within an evolutionary game theoretic context, using the weak prisoner's dilemma as a metaphor for cooperation, we present a minimal model which describes network growth by chronological random addition of new nodes, combined with regular attrition of less fit members of the population. Specifically our model does not require that agents have access to global information and does not assume scale-free network structure or a preferential attachment mechanism. Further our model supports the emergence of cooperation from initially non-cooperative populations. By reducing dependency on a number of assumptions, this model offers broad applicability and as such may support an explanation of the emergence of cooperation in early evolutionary transitions, where few assumptions can be made.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-09T16:45:04Z</published>
+    <arxiv:comment>Accepted (and presented) for European Conference on Artificial Life (ECAL) 2015</arxiv:comment>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Steve Miller</name>
+    </author>
+    <author>
+      <name>Joshua Knowles</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.10861v3</id>
+    <title>Trackable Agent-based Evolution Models at Wafer Scale</title>
+    <updated>2024-06-02T02:22:43Z</updated>
+    <link href="https://arxiv.org/abs/2404.10861v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.10861v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Continuing improvements in computing hardware are poised to transform capabilities for in silico modeling of cross-scale phenomena underlying major open questions in evolutionary biology and artificial life, such as transitions in individuality, eco-evolutionary dynamics, and rare evolutionary events. Emerging ML/AI-oriented hardware accelerators, like the 850,000 processor Cerebras Wafer Scale Engine (WSE), hold particular promise. However, practical challenges remain in conducting informative evolution experiments that efficiently utilize these platforms' large processor counts. Here, we focus on the problem of extracting phylogenetic information from agent-based evolution on the WSE platform. This goal drove significant refinements to decentralized in silico phylogenetic tracking, reported here. These improvements yield order-of-magnitude performance improvements. We also present an asynchronous island-based genetic algorithm (GA) framework for WSE hardware. Emulated and on-hardware GA benchmarks with a simple tracking-enabled agent model clock upwards of 1 million generations a minute for population sizes reaching 16 million agents. We validate phylogenetic reconstructions from these trials and demonstrate their suitability for inference of underlying evolutionary conditions. In particular, we demonstrate extraction, from wafer-scale simulation, of clear phylometric signals that differentiate runs with adaptive dynamics enabled versus disabled. Together, these benchmark and validation trials reflect strong potential for highly scalable agent-based evolution simulation that is both efficient and observable. Developed capabilities will bring entirely new classes of previously intractable research questions within reach, benefiting further explorations within the evolutionary biology and artificial life communities across a variety of emerging high-performance computing platforms.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-16T19:24:14Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Matthew Andres Moreno</name>
+    </author>
+    <author>
+      <name>Connor Yang</name>
+    </author>
+    <author>
+      <name>Emily Dolson</name>
+    </author>
+    <author>
+      <name>Luis Zaman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.05199v2</id>
+    <title>Extension of cellular automata by introducing an algorithm of recursive estimation of neighbors</title>
+    <updated>2015-12-20T07:39:10Z</updated>
+    <link href="https://arxiv.org/abs/1512.05199v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.05199v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study focuses on an extended model of a standard cellular automaton (CA) that includes an extra index consisting of a radius that defines a perception area for each cell in addition to the radius defined by the CA rule. Extended standard CA rules form a sequence ordered by this index, which includes the CA rule as its first term. This extension aims at constructing a model that can be used within the CA framework to study the relationship between information processing and pattern formation in collective systems. Although the extension presented here is merely an extrapolation to a CA with a larger rule neighborhood, the extra radius can be interpreted as an individual difference of each cell, which provides a new perspective to CA. Some pattern formations in extended one-dimensional elementary CAs and two-dimensional Life-like CAs are presented. It is expected that the extended CA can be applied to various simulations of complex systems and other fields.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-16T15:06:28Z</published>
+    <arxiv:comment>5 pages,10 figures, 21st International Symposium on Artificial Life and Robotics</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Yoshihiko Kayama</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1907.01927v1</id>
+    <title>Being a leader or being the leader: The evolution of institutionalised hierarchy</title>
+    <updated>2019-07-03T13:17:32Z</updated>
+    <link href="https://arxiv.org/abs/1907.01927v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1907.01927v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human social hierarchy has the unique characteristic of existing in two forms. Firstly, as an informal hierarchy where leaders and followers are implicitly defined by their personal characteristics, and secondly, as an institutional hierarchy where leaders and followers are explicitly appointed by group decision. Although both forms can reduce the time spent in organising collective tasks, institutional hierarchy imposes additional costs. It is therefore natural to question why it emerges at all. The key difference lies in the fact that institutions can create hierarchy with only a single leader, which is unlikely to occur in unregulated informal hierarchy. To investigate if this difference can affect group decision-making and explain the evolution of institutional hierarchy, we first build an opinion-formation model that simulates group decision making. We show that in comparison to informal hierarchy, a single-leader hierarchy reduces (i) the time a group spends to reach consensus, (ii) the variation in consensus time, and (iii) the rate of increase in consensus time as group size increases. We then use this model to simulate the cost of organising a collective action which produces resources, and integrate this into an evolutionary model where individuals can choose between informal or institutional hierarchy. Our results demonstrate that groups evolve preferences towards institutional hierarchy, despite the cost of creating an institution, as it provides a greater organisational advantage which is less affected by group size and inequality.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-07-03T13:17:32Z</published>
+    <arxiv:comment>To be published in the Proceedings of the Artificial Life Conference 2019 (ALIFE 2019), MIT Press</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Cedric Perret</name>
+    </author>
+    <author>
+      <name>Emma Hart</name>
+    </author>
+    <author>
+      <name>Simon T. Powers</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.10236v1</id>
+    <title>Discovering Sensorimotor Agency in Cellular Automata using Diversity Search</title>
+    <updated>2024-02-14T14:30:42Z</updated>
+    <link href="https://arxiv.org/abs/2402.10236v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.10236v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The research field of Artificial Life studies how life-like phenomena such as autopoiesis, agency, or self-regulation can self-organize in computer simulations. In cellular automata (CA), a key open-question has been whether it it is possible to find environment rules that self-organize robust "individuals" from an initial state with no prior existence of things like "bodies", "brain", "perception" or "action". In this paper, we leverage recent advances in machine learning, combining algorithms for diversity search, curriculum learning and gradient descent, to automate the search of such "individuals", i.e. localized structures that move around with the ability to react in a coherent manner to external obstacles and maintain their integrity, hence primitive forms of sensorimotor agency. We show that this approach enables to find systematically environmental conditions in CA leading to self-organization of such basic forms of agency. Through multiple experiments, we show that the discovered agents have surprisingly robust capabilities to move, maintain their body integrity and navigate among various obstacles. They also show strong generalization abilities, with robustness to changes of scale, random updates or perturbations from the environment not seen during training. We discuss how this approach opens new perspectives in AI and synthetic bioengineering.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T14:30:42Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <arxiv:journal_ref>Sci. Adv. 11 (44), eadp0834, (2025)</arxiv:journal_ref>
+    <author>
+      <name>Gautier Hamon</name>
+    </author>
+    <author>
+      <name>Mayalen Etcheverry</name>
+    </author>
+    <author>
+      <name>Bert Wang-Chak Chan</name>
+    </author>
+    <author>
+      <name>Clément Moulin-Frier</name>
+    </author>
+    <author>
+      <name>Pierre-Yves Oudeyer</name>
+    </author>
+    <arxiv:doi>10.1126/sciadv.adp0834</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1126/sciadv.adp0834" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.10817v1</id>
+    <title>Tapes Together Strong: The Co-evolution of Computation and Cooperation</title>
+    <updated>2026-09-09T20:38:56Z</updated>
+    <link href="https://arxiv.org/abs/2609.10817v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.10817v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>How does cooperation evolve in complex agentic systems? Prior work in evolutionary game theory studies why individuals are incentivized to cooperate by isolating social interactions from the physical costs of behavior, while artificial life models traditionally study emergent self-replication without formalizing the dilemma between acquiring resources and preserving the shared energy needed to reproduce. In contrast, we introduce Autopoietic Game Theory, a computational model where social interactions, replication mechanisms, and their associated computational costs are endogenous and simultaneously co-evolving. We study these dynamics using a computational substrate of randomly initialized programs in Z80 machine code, showing empirically, and motivating with a simplified theoretical model, that embedding a social dilemma directly into the physics of computation can favor the emergence of self-replicating, cooperative strategies. When resources are scarce, our analysis shows that defection can become self-limiting even in well-mixed populations: parasitic stealing destroys shared energy, slows execution, and can prevent reliable replication. Empirically, evolved programs suppress stealing across several Z80 environments, while spatial assortment further supports structural complexity and task performance. We further show that the framework can incorporate exogenous pressures, such as math tasks structured as sequential social dilemmas, when rewards are tied to computation budgets. These results suggest that coupling an agent's capacity for computation to its available energy transforms cooperation into a dominant scaffolding for building sustainable, self-organizing systems.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-09T20:38:56Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Kunal Jha</name>
+    </author>
+    <author>
+      <name>Francesco Cicala</name>
+    </author>
+    <author>
+      <name>Blaise Agüera y Arcas</name>
+    </author>
+    <author>
+      <name>Blake Aaron Richards</name>
+    </author>
+    <author>
+      <name>Natasha Jaques</name>
+    </author>
+    <author>
+      <name>Max Kleiman-Weiner</name>
+    </author>
+    <author>
+      <name>Eyvind Niklasson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0212010v1</id>
+    <title>JohnnyVon: Self-Replicating Automata in Continuous Two-Dimensional Space</title>
+    <updated>2002-12-08T00:26:49Z</updated>
+    <link href="https://arxiv.org/abs/cs/0212010v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0212010v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  JohnnyVon is an implementation of self-replicating automata in continuous two-dimensional space. Two types of particles drift about in a virtual liquid. The particles are automata with discrete internal states but continuous external relationships. Their internal states are governed by finite state machines but their external relationships are governed by a simulated physics that includes brownian motion, viscosity, and spring-like attractive and repulsive forces. The particles can be assembled into patterns that can encode arbitrary strings of bits. We demonstrate that, if an arbitrary "seed" pattern is put in a "soup" of separate individual particles, the pattern will replicate by assembling the individual particles into copies of itself. We also show that, given sufficient time, a soup of separate individual particles will eventually spontaneously form self-replicating patterns. We discuss the implications of JohnnyVon for research in nanotechnology, theoretical biology, and artificial life.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-12-08T00:26:49Z</published>
+    <arxiv:comment>26 pages, issued 2002, Java code available at http://purl.org/net/johnnyvon/</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Arnold Smith</name>
+      <arxiv:affiliation>National Research Council of Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Peter Turney</name>
+      <arxiv:affiliation>National Research Council of Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Ewaschuk</name>
+      <arxiv:affiliation>University of Waterloo</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2611.17802v1</id>
+    <title>Multimodal Person Concept Model for Person Identification under Varying Observation Conditions</title>
+    <updated>2026-11-13T06:30:53Z</updated>
+    <link href="https://arxiv.org/abs/2611.17802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2611.17802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Service robots in domestic and office environments must identify users to provide personalized services based on their preferences and previous interactions. This is challenging because only a few observations may be available for learning, while observation conditions change owing to appearance, environmental noise, and utterance content. To address this challenge, this study proposes a multimodal person concept model that learns person concepts from a small number of observations, without person labels, and enables robust identification under changing conditions. The model employs a nonparametric Bayesian generative model based on the Chinese restaurant process and integrates visual, acoustic, and linguistic features extracted using Contrastive Language-Image Pre-training (CLIP) and Contrastive Language-Audio Pretraining (CLAP), followed by principal component analysis (PCA). We evaluated six participants under eight conditions in which appearance changes, additive noise, and transcription errors were introduced individually and in combination. Averaged over the eight conditions, the proposed model achieved an identification accuracy of 0.89 while inferring the number of person concepts from the observations, which is comparable to k-means clustering that was supplied with the true number of participants (0.88). We also examined PCA dimensionality, modality availability, and variation strength, and demonstrated the model on a Toyota Human Support Robot. These results show that multimodal person concept learning supports robust person identification under changing conditions, and that identification can succeed even when the number of concepts is not correctly recovered. The project page and demonstration video are available at https://okitamisan01.github.io/person_concept/.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-11-13T06:30:53Z</published>
+    <arxiv:comment>12 pages, 4 figures, 11 tables. Submitted to Artificial Life and Robotics (AROB Journal Track). Project page: https://okitamisan01.github.io/person_concept/</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Mizuho Okitani</name>
+    </author>
+    <author>
+      <name>Yoshinobu Hagiwara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.10854v2</id>
+    <title>Methods to Estimate Cryptic Sequence Complexity</title>
+    <updated>2024-05-31T13:59:27Z</updated>
+    <link href="https://arxiv.org/abs/2404.10854v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.10854v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Complexity is a signature quality of interest in artificial life systems. Alongside other dimensions of assessment, it is common to quantify genome sites that contribute to fitness as a complexity measure. However, limitations to the sensitivity of fitness assays in models with implicit replication criteria involving rich biotic interactions introduce the possibility of difficult-to-detect ``cryptic'' adaptive sites, which contribute small fitness effects below the threshold of individual detectability or involve epistatic redundancies. Here, we propose three knockout-based assay procedures designed to quantify cryptic adaptive sites within digital genomes. We report initial tests of these methods on a simple genome model with explicitly configured site fitness effects. In these limited tests, estimation results reflect ground truth cryptic sequence complexities well. Presented work provides initial steps toward development of new methods and software tools that improve the resolution, rigor, and tractability of complexity analyses across alife systems, particularly those requiring expensive in situ assessments of organism fitness.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-16T19:04:03Z</published>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Matthew Andres Moreno</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.07403v1</id>
+    <title>Requirements for Open-Ended Evolution in Natural and Artificial Systems</title>
+    <updated>2015-07-27T13:47:41Z</updated>
+    <link href="https://arxiv.org/abs/1507.07403v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.07403v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Open-ended evolutionary dynamics remains an elusive goal for artificial evolutionary systems. Many ideas exist in the biological literature beyond the basic Darwinian requirements of variation, differential reproduction and inheritance. I argue that these ideas can be seen as aspects of five fundamental requirements for open-ended evolution: (1) robustly reproductive individuals, (2) a medium allowing the possible existence of a practically unlimited diversity of individuals and interactions, (3) individuals capable of producing more complex offspring, (4) mutational pathways to other viable individuals, and (5) drive for continued evolution. I briefly discuss implications of this view for the design of artificial systems with greater evolutionary potential.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-27T13:47:41Z</published>
+    <arxiv:comment>Presented at the EvoEvo Workshop at the European Conference on Artificial Life 2015 (ECAL 2015), University of York, UK, July 2015</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Tim Taylor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1712.06563v3</id>
+    <title>Safe Mutations for Deep and Recurrent Neural Networks through Output Gradients</title>
+    <updated>2018-05-01T20:18:32Z</updated>
+    <link href="https://arxiv.org/abs/1712.06563v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1712.06563v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While neuroevolution (evolving neural networks) has a successful track record across a variety of domains from reinforcement learning to artificial life, it is rarely applied to large, deep neural networks. A central reason is that while random mutation generally works in low dimensions, a random perturbation of thousands or millions of weights is likely to break existing functionality, providing no learning signal even if some individual weight changes were beneficial. This paper proposes a solution by introducing a family of safe mutation (SM) operators that aim within the mutation operator itself to find a degree of change that does not alter network behavior too much, but still facilitates exploration. Importantly, these SM operators do not require any additional interactions with the environment. The most effective SM variant capitalizes on the intriguing opportunity to scale the degree of mutation of each individual weight according to the sensitivity of the network's outputs to that weight, which requires computing the gradient of outputs with respect to the weights (instead of the gradient of error, as in conventional deep learning). This safe mutation through gradients (SM-G) operator dramatically increases the ability of a simple genetic algorithm-based neuroevolution method to find solutions in high-dimensional domains that require deep and/or recurrent neural networks (which tend to be particularly brittle to mutation), including domains that require processing raw pixels. By improving our ability to evolve deep neural networks, this new safer approach to mutation expands the scope of domains amenable to neuroevolution.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-12-18T18:16:51Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Joel Lehman</name>
+    </author>
+    <author>
+      <name>Jay Chen</name>
+    </author>
+    <author>
+      <name>Jeff Clune</name>
+    </author>
+    <author>
+      <name>Kenneth O. Stanley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09438v2</id>
+    <title>Neuroevolution of Decentralized Decision-Making in N-Bead Swimmers Leads to Scalable and Robust Collective Locomotion</title>
+    <updated>2024-09-03T06:04:03Z</updated>
+    <link href="https://arxiv.org/abs/2407.09438v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09438v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many microorganisms swim by performing larger non-reciprocal shape deformations that are initiated locally by molecular motors. However, it remains unclear how decentralized shape control determines the movement of the entire organism. Here, we investigate how efficient locomotion emerges from coordinated yet simple and decentralized decision-making of the body parts using neuroevolution techniques. Our approach allows us to investigate optimal locomotion policies for increasingly large microswimmer bodies, with emerging long-wavelength body shape deformations corresponding to surprisingly efficient swimming gaits. The obtained decentralized policies are robust and tolerant concerning morphological changes or defects and can be applied to artificial microswimmers for cargo transport or drug delivery applications without further optimization "out of the box". Our work is of relevance to understanding and developing robust navigation strategies of biological and artificial microswimmers and, in a broader context, for understanding emergent levels of individuality and the role of collective intelligence in Artificial Life.</summary>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T17:14:59Z</published>
+    <arxiv:primary_category term="physics.bio-ph"/>
+    <author>
+      <name>Benedikt Hartl</name>
+    </author>
+    <author>
+      <name>Michael Levin</name>
+    </author>
+    <author>
+      <name>Andreas Zöttl</name>
+    </author>
+    <arxiv:doi>10.1038/s42005-025-02101-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s42005-025-02101-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.15998v4</id>
+    <title>Exploring Flow-Lenia Universes with a Curiosity-driven AI Scientist: Discovering Diverse Ecosystem Dynamics</title>
+    <updated>2026-06-04T19:14:10Z</updated>
+    <link href="https://arxiv.org/abs/2505.15998v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.15998v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a curiosity-driven AI scientist method for discovering system-level dynamics in Flow-Lenia, a continuous cellular automaton (CA) with mass conservation and parameter localization. Building on prior work that uses diversity search in Lenia to find individual self-organized patterns, we adapt Intrinsically Motivated Goal Exploration Processes (IMGEPs) to large environments of interacting patterns, using simulation-wide metrics such as evolutionary activity, compression ratio, and multi-scale matter distribution. We apply IMGEP in two exploration experiments: one targeting ecosystem-level dynamics, the other matter movement through obstacle-laden environments. In both, IMGEP illuminates significantly more of the metric space than random search and reveals self-organized behaviors qualitatively resembling many biological phenomena. Leveraging the resulting archive, we then run a scaling study across six spatial scales and seven time horizons, uncovering macro-scale organization with no analogue at the base scale and characterizing how goal-space metrics behave at scale. This illustrates a strength of our approach: a relatively cheap large-scale diversity search can act as a principled scaffold for designing subsequent, more expensive experiments, enabling an iterative loop of experiment design, inspection, and redesign, supported by an interactive exploration tool that keeps scientists in the loop. Though demonstrated with Flow-Lenia, this approach potentially applies to other parameterizable complex systems where studying bottom-up collective behavior is of interest.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-21T20:28:58Z</published>
+    <arxiv:comment>Extended version of the paper first published at ALife 2025. Project webpage: https://developmentalsystems.org/Exploring-Flow-Lenia-Universes/ 24 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>Proceedings of the Artificial Life Conference 2025, pp. 633-643</arxiv:journal_ref>
+    <author>
+      <name>Thomas Michel</name>
+    </author>
+    <author>
+      <name>Marko Cvjetko</name>
+    </author>
+    <author>
+      <name>Gautier Hamon</name>
+    </author>
+    <author>
+      <name>Pierre-Yves Oudeyer</name>
+    </author>
+    <author>
+      <name>Clément Moulin-Frier</name>
+    </author>
+    <arxiv:doi>10.1162/ISAL.a.896</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/ISAL.a.896" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.10230v1</id>
+    <title>Agent Heterogeneity Mediates Extremism in an Adaptive Social Network Model</title>
+    <updated>2023-05-17T14:12:14Z</updated>
+    <link href="https://arxiv.org/abs/2305.10230v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.10230v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An existing model of opinion dynamics on an adaptive social network is extended to introduce update policy heterogeneity, representing the fact that individual differences between social animals can affect their tendency to form, and be influenced by, their social bonds with other animals. As in the original model, the opinions and social connections of a population of model agents change due to three social processes: conformity, homophily and neophily. Here, however, we explore the case in which each node's susceptibility to these three processes is parameterised by node-specific values drawn independently at random from some distribution. This introduction of heterogeneity increases both the degree of extremism and connectedness in the final population (relative to comparable homogeneous networks) and leads to significant assortativity with respect to node update policy parameters as well as node opinions. Each node's update policy parameters also predict properties of the community that they will belong to in the final network configuration. These results suggest that update policy heterogeneity in social populations may have a significant impact on the formation of extremist communities in real-world populations.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-17T14:12:14Z</published>
+    <arxiv:comment>9 pages, 2 figures, 4 tables; accepted for publication in the 2023 Artificial Life Conference (ALIFE 2023) Proceedings</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Seth Bullock</name>
+    </author>
+    <author>
+      <name>Hiroki Sayama</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/adap-org/9412001v1</id>
+    <title>Preferential Partner Selection in an Evolutionary Study of Prisoner's Dilemma</title>
+    <updated>1994-12-27T00:00:07Z</updated>
+    <link href="https://arxiv.org/abs/adap-org/9412001v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/adap-org/9412001v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Partner selection is an important process in many social interactions, permitting individuals to decrease the risks associated with cooperation. In large populations, defectors may escape punishment by roving from partner to partner, but defectors in smaller populations risk social isolation. We investigate these possibilities for an evolutionary prisoner's dilemma in which agents use expected payoffs to choose and refuse partners. In comparison to random or round-robin partner matching, we find that the average payoffs attained with preferential partner selection tend to be more narrowly confined to a few isolated payoff regions. Most ecologies evolve to essentially full cooperative behavior, but when agents are intolerant of defections, or when the costs of refusal and social isolation are small, we also see the emergence of wallflower ecologies in which all agents are socially isolated. In between these two extremes, we see the emergence of ecologies whose agents tend to engage in a small number of defections followed by cooperation thereafter. The latter ecologies exhibit a plethora of interesting social interaction patterns. Keywords: Evolutionary Game; Iterated Prisoner's Dilemma; Partner Choice and Refusal; Artificial Life; Genetic Algorithm; Finite Automata.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1994-12-27T00:00:07Z</published>
+    <arxiv:comment>28 pages, UUencoded gzip'd Postscript (1.8Mb uncompressed), also available via WWW at http://www.cs.wisc.edu/~smucker/ipd-cr/ipd-cr.html</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <author>
+      <name>Dan Ashlock</name>
+      <arxiv:affiliation>Dept. of Mathematics, Iowa State Univ.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mark D. Smucker</name>
+      <arxiv:affiliation>Dept. of Computer Sciences, Univ. of Wisc.-Madison</arxiv:affiliation>
+    </author>
+    <author>
+      <name>E. Ann Stanley</name>
+      <arxiv:affiliation>Dept. of Mathematics, Iowa State Univ.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Leigh Tesfatsion</name>
+      <arxiv:affiliation>Dept. of Economics and Dept. of Mathematics, Iowa State Univ.</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.13746v6</id>
+    <title>Melting Pot 2.0</title>
+    <updated>2023-10-31T00:06:14Z</updated>
+    <link href="https://arxiv.org/abs/2211.13746v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.13746v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-agent artificial intelligence research promises a path to develop intelligent technologies that are more human-like and more human-compatible than those produced by "solipsistic" approaches, which do not consider interactions between agents. Melting Pot is a research tool developed to facilitate work on multi-agent artificial intelligence, and provides an evaluation protocol that measures generalization to novel social partners in a set of canonical test scenarios. Each scenario pairs a physical environment (a "substrate") with a reference set of co-players (a "background population"), to create a social situation with substantial interdependence between the individuals involved. For instance, some scenarios were inspired by institutional-economics-based accounts of natural resource management and public-good-provision dilemmas. Others were inspired by considerations from evolutionary biology, game theory, and artificial life. Melting Pot aims to cover a maximally diverse set of interdependencies and incentives. It includes the commonly-studied extreme cases of perfectly-competitive (zero-sum) motivations and perfectly-cooperative (shared-reward) motivations, but does not stop with them. As in real-life, a clear majority of scenarios in Melting Pot have mixed incentives. They are neither purely competitive nor purely cooperative and thus demand successful agents be able to navigate the resulting ambiguity. Here we describe Melting Pot 2.0, which revises and expands on Melting Pot. We also introduce support for scenarios with asymmetric roles, and explain how to integrate them into the evaluation protocol. This report also contains: (1) details of all substrates and scenarios; (2) a complete description of all baseline algorithms and results. Our intention is for it to serve as a reference for researchers using Melting Pot 2.0.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-24T18:23:28Z</published>
+    <arxiv:comment>69 pages, 54 figures. arXiv admin note: text overlap with arXiv:2107.06857</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>John P. Agapiou</name>
+    </author>
+    <author>
+      <name>Alexander Sasha Vezhnevets</name>
+    </author>
+    <author>
+      <name>Edgar A. Duéñez-Guzmán</name>
+    </author>
+    <author>
+      <name>Jayd Matyas</name>
+    </author>
+    <author>
+      <name>Yiran Mao</name>
+    </author>
+    <author>
+      <name>Peter Sunehag</name>
+    </author>
+    <author>
+      <name>Raphael Köster</name>
+    </author>
+    <author>
+      <name>Udari Madhushani</name>
+    </author>
+    <author>
+      <name>Kavya Kopparapu</name>
+    </author>
+    <author>
+      <name>Ramona Comanescu</name>
+    </author>
+    <author>
+      <name>DJ Strouse</name>
+    </author>
+    <author>
+      <name>Michael B. Johanson</name>
+    </author>
+    <author>
+      <name>Sukhdeep Singh</name>
+    </author>
+    <author>
+      <name>Julia Haas</name>
+    </author>
+    <author>
+      <name>Igor Mordatch</name>
+    </author>
+    <author>
+      <name>Dean Mobbs</name>
+    </author>
+    <author>
+      <name>Joel Z. Leibo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/adap-org/9807003v1</id>
+    <title>Development and Evolution of Neural Networks in an Artificial Chemistry</title>
+    <updated>1998-07-17T01:07:50Z</updated>
+    <link href="https://arxiv.org/abs/adap-org/9807003v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/adap-org/9807003v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present a model of decentralized growth for Artificial Neural Networks (ANNs) inspired by the development and the physiology of real nervous systems. In this model, each individual artificial neuron is an autonomous unit whose behavior is determined only by the genetic information it harbors and local concentrations of substrates modeled by a simple artificial chemistry. Gene expression is manifested as axon and dendrite growth, cell division and differentiation, substrate production and cell stimulation. We demonstrate the model's power with a hand-written genome that leads to the growth of a simple network which performs classical conditioning. To evolve more complex structures, we implemented a platform-independent, asynchronous, distributed Genetic Algorithm (GA) that allows users to participate in evolutionary experiments via the World Wide Web.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-07-17T01:07:50Z</published>
+    <arxiv:comment>8 pages LaTeX, style file included, 8 embedded postscript figures. To be published in Proc. of 3rd German Workshop on Artificial Life (GWAL)</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <author>
+      <name>Jens C. Astor</name>
+      <arxiv:affiliation>Caltech</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Christoph Adami</name>
+      <arxiv:affiliation>Caltech</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1607.05944v1</id>
+    <title>The encoding of proprioceptive inputs in the brain: knowns and unknowns from a robotic perspective</title>
+    <updated>2016-07-20T13:23:04Z</updated>
+    <link href="https://arxiv.org/abs/1607.05944v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1607.05944v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Somatosensory inputs can be grossly divided into tactile (or cutaneous) and proprioceptive -- the former conveying information about skin stimulation, the latter about limb position and movement. The principal proprioceptors are constituted by muscle spindles, which deliver information about muscle length and speed. In primates, this information is relayed to the primary somatosensory cortex and eventually the posterior parietal cortex, where integrated information about body posture (postural schema) is presumably available. However, coming from robotics and seeking a biologically motivated model that could be used in a humanoid robot, we faced a number of difficulties. First, it is not clear what neurons in the ascending pathway and primary somatosensory cortex code. To an engineer, joint angles would seem the most useful variables. However, the lengths of individual muscles have nonlinear relationships with the angles at joints. Kim et al. (Neuron, 2015) found different types of proprioceptive neurons in the primary somatosensory cortex -- sensitive to movement of single or multiple joints or to static postures. Second, there are indications that the somatotopic arrangement ("the homunculus") of these brain areas is to a significant extent learned. However, the mechanisms behind this developmental process are unclear. We will report first results from modeling of this process using data obtained from body babbling in the iCub humanoid robot and feeding them into a Self-Organizing Map (SOM). Our results reveal that the SOM algorithm is only suited to develop receptive fields of the posture-selective type. Furthermore, the SOM algorithm has intrinsic difficulties when combined with population code on its input and in particular with nonlinear tuning curves (sigmoids or Gaussians).</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-07-20T13:23:04Z</published>
+    <arxiv:comment>in Proceedings of Kognice a umělý život XVI [Cognition and Artificial Life XVI] 2016, ISBN 978-80-01-05915-9</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Matej Hoffmann</name>
+    </author>
+    <author>
+      <name>Nada Bednarova</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.10639v2</id>
+    <title>Visualising the Attractor Landscape of Neural Cellular Automata</title>
+    <updated>2026-06-10T14:13:22Z</updated>
+    <link href="https://arxiv.org/abs/2604.10639v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.10639v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As Neural Cellular Automata (NCAs) are increasingly applied outside of the toy models in Artificial Life, there is a pressing need to understand how they behave and to build appropriate routes to interpret what they have learnt. By their very nature, the benefits of training NCAs are balanced with a lack of interpretability: we can engineer emergent behaviour, but have limited ability to understand what has been learnt.
+  In this paper, we apply a variety of techniques to pry open the NCA black box and glean some understanding of what it has learnt to do. We apply techniques from manifold learning (principal components analysis and both dense and sparse autoencoders) along with techniques from topological data analysis (persistent homology) to capture the NCA's underlying behavioural manifold, with varying success.
+  Results show that when analysis is performed at a macroscopic level (i.e. taking the entire NCA state as a single data point), the underlying manifold is often quite simple and can be captured and analysed quite well. When analysis is performed at a microscopic level (i.e. taking the state of individual cells as a single data point), the manifold is highly complex and more complicated techniques are required in order to make sense of it.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-12T13:39:17Z</published>
+    <arxiv:comment>Accepted to ALIFE 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>James Stovold</name>
+    </author>
+    <author>
+      <name>Mia-Katrin Kvalsund</name>
+    </author>
+    <author>
+      <name>Harald Michael Ludwig</name>
+    </author>
+    <author>
+      <name>Varun Sharma</name>
+    </author>
+    <author>
+      <name>Alexander Mordvintsev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0712.3609v1</id>
+    <title>Postcorrection and mathematical model of life in Extended Everett's Concept</title>
+    <updated>2007-12-21T14:18:21Z</updated>
+    <link href="https://arxiv.org/abs/0712.3609v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0712.3609v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Extended Everett's Concept (EEC) recently developed by the author to explain the phenomenon of consciousness is considered. A mathematical model is proposed for the principal feature of consciousness assumed in EEC, namely its ability (in the state of sleep, trance or meditation, when the explicit consciousness is disabled) to obtain information from all alternative classical realities (Everett's worlds) and select the favorable realities. To represent this ability, a mathematical operation called postcorrection is introduced, which corrects the present state to guarantee certain characteristics of the future state. Evolution of living matter is thus determined by goals (first of all by the goal of survival) as well as by causes. The resulting theory, in a way symmetrical in time direction, follows from a sort of antropic principle. Possible criteria for postcorrection and corresponding phenomena in the sphere of life are classified. Both individual and collective criteria of survival are considered as well as the criteria providing certain quality of life and those which are irrelevant to the life quality. The phenomena of free will and direct sighting of truth (e.g. scientific insight) are explained in these terms. The problem of artificial intellect and the role of brain look differently in the framework of this theory. Automats may perform intellectual operations, but not postcorrection, therefore artificial intellect but not an artificial life can be created. The brain serves as an interface between the body and consciousness, but the most profound level of consciousness is not a function of brain.</summary>
+    <category term="physics.gen-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-21T14:18:21Z</published>
+    <arxiv:comment>Comments: 24 pages, 1 figure, LaTeX, Journal URL: http://www.neuroquantology.com</arxiv:comment>
+    <arxiv:primary_category term="physics.gen-ph"/>
+    <arxiv:journal_ref>NeuroQuantology Vol 5, No 4, 363-376 (2007)</arxiv:journal_ref>
+    <author>
+      <name>Michael B. Mensky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.3203v2</id>
+    <title>Foundations of biology</title>
+    <updated>2014-04-15T13:36:48Z</updated>
+    <link href="https://arxiv.org/abs/1401.3203v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.3203v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is often stated that there are no laws in biology, where everything is contingent and could have been otherwise, being solely the result of historical accidents. Furthermore, the customary introduction of fundamental biological entities such as individual organisms, cells, genes, catalysts and motors remains largely descriptive; constructive approaches involving deductive reasoning appear, in comparison, almost absent. As a consequence, both the logical content and principles of biology need to be reconsidered. The present article describes an inquiry into the foundations of biology. The foundations of biology are built in terms of elements, logic and principles, using both the language and the general methods employed in other disciplines. This approach assumes the existence of a certain unity of human knowledge that transcends discipline boundaries. Leibniz's principle of sufficient reason is revised through the introduction of the complementary concepts of symmetry and asymmetry and of necessity and contingency. This is used to explain how these four concepts are involved in the elaboration of theories or laws of nature. Four fundamental theories of biology are then identified: cell theory, Darwin's theory of natural selection, an informational theory of life (which includes Mendel's theory of inheritance) and a physico-chemical theory of life. Atomism and deductive reasoning are shown to enter into the elaboration of the concepts of natural selection, individual living organisms, cells and their reproduction, genes as well as catalysts and motors. This work contributes to clarify the philosophical and logical structure of biology and its major theories. This should ultimately lead to a better understanding of the origin of life, of system and synthetic biology, and of artificial life.</summary>
+    <category term="q-bio.OT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-01-13T14:12:10Z</published>
+    <arxiv:comment>14 pages,2 tables</arxiv:comment>
+    <arxiv:primary_category term="q-bio.OT"/>
+    <author>
+      <name>Jean-Louis Sikorav</name>
+    </author>
+    <author>
+      <name>Alan Braslau</name>
+    </author>
+    <author>
+      <name>Arach Goldar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.17464v2</id>
+    <title>Evolutionary Brain-Body Co-Optimization Consistently Fails to Select for Morphological Potential</title>
+    <updated>2026-08-12T22:35:15Z</updated>
+    <link href="https://arxiv.org/abs/2508.17464v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.17464v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Brain-body co-optimization remains a challenging problem. To understand and overcome its challenges, we exhaustively map a morphology-fitness landscape: we train controllers for each morphology in a design space of 1,305,840 voxel-based soft robots. We show that this design space constitutes a good model for studying brain-body co-optimization and that our mapping roughly captures its landscape. Complete knowledge of the landscape lets us analyze how evolutionary co-optimization algorithms unfold. We find that the tested algorithms cannot consistently find near-optimal solutions: the search, at times, gets stuck on morphologies one mutation away from better ones, because it regularly undervalues individuals with newly mutated bodies and eliminates promising morphologies. On the other hand, co-optimizing morphology and control creates useful goal-switching, yielding morphology-controller pairs whose performance cannot be reached by optimizing the controller alone for a fixed morphology. Together, these results ground trends in the literature and offer insights for future work.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-24T17:47:07Z</published>
+    <arxiv:comment>Author's accepted manuscript. Accepted for publication in Artificial Life journal; extended version of the conference paper presented at ALIFE 2025 conference (https://doi.org/10.1162/ISAL.a.891)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Alican Mertan</name>
+    </author>
+    <author>
+      <name>Nick Cheney</name>
+    </author>
+    <arxiv:doi>10.1162/ARTL.a.476</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/ARTL.a.476" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00149v1</id>
+    <title>Per-Node Activation Function Evolution in Indirectly Encoded Substrates: Solvability, Limits, and Emergent Diversity</title>
+    <updated>2026-09-10T13:22:36Z</updated>
+    <link href="https://arxiv.org/abs/2610.00149v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.00149v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Biological neurons achieve computational diversity through specialized types: tonic, bursting, adapting, and fast-spiking cells coexist within the same circuit. Artificial neural networks, by contrast, apply a single activation function uniformly to all nodes, which limits what they can represent. We show that this uniformity creates hard limits for evolutionary search: across sparse evolved substrates, monotonic functions fail to solve parity beyond its smallest instance, XOR, while a single oscillatory unit suffices at all tested scales. The gap is one of search and sparsity, not representation: monotonic networks can represent parity with a modest number of hidden units, and gradient descent recovers that solution. We evolve, to our knowledge for the first time in indirect encoding, per-node activation function assignments from an 18-function palette across more than 4,500 experimental runs spanning Boolean logic, regression, and spatial classification.
+  Testing each of the 18 functions individually on Parity-4 reveals a three-tier solvability structure: oscillatory functions achieve 100%, intermediate functions 6.7-80%, and all 9 monotonic functions 0%. This divide is not universal. Recurrence collapses it, and gradient descent inverts it entirely, showing that the barrier is specific to evolutionary search in sparse substrates. What activation functions a network can use, beyond its topology and weights, determines what evolutionary search can solve. Indirect encoding discovers heterogeneous per-node activation assignments unlikely to be chosen by hand.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-10T13:22:36Z</published>
+    <arxiv:comment>9 pages, 2 figures, 10 tables. Published in ALIFE 2026 (MIT Press). This is the version of record, posted under CC BY 4.0</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>ALIFE 2026: Proceedings of the 2026 Artificial Life Conference, MIT Press, 2026, p. 80</arxiv:journal_ref>
+    <author>
+      <name>Romain Claret</name>
+    </author>
+    <author>
+      <name>Michael O'Neill</name>
+    </author>
+    <author>
+      <name>Paul Cotofrei</name>
+    </author>
+    <author>
+      <name>Kilian Stoffel</name>
+    </author>
+    <arxiv:doi>10.1162/ISAL.a.1042</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/ISAL.a.1042" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.05915v2</id>
+    <title>Evolving Collective Behavior in Self-Organizing Particle Systems</title>
+    <updated>2024-06-09T01:25:42Z</updated>
+    <link href="https://arxiv.org/abs/2404.05915v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.05915v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Local interactions drive emergent collective behavior, which pervades biological and social complex systems. But uncovering the interactions that produce a desired behavior remains a core challenge. In this paper, we present EvoSOPS, an evolutionary framework that searches landscapes of stochastic distributed algorithms for those that achieve a mathematically specified target behavior. These algorithms govern self-organizing particle systems (SOPS) comprising individuals with no persistent memory and strictly local sensing and movement. For aggregation, phototaxing, and separation behaviors, EvoSOPS discovers algorithms that achieve 4.2-15.3% higher fitness than those from the existing "stochastic approach to SOPS" based on mathematical theory from statistical physics. EvoSOPS is also flexibly applied to new behaviors such as object coating where the stochastic approach would require bespoke, extensive analysis. Finally, we distill insights from the diverse, best-fitness genomes produced for aggregation across repeated EvoSOPS runs to demonstrate how EvoSOPS can bootstrap future theoretical investigations into SOPS algorithms for new behaviors.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-09T00:26:32Z</published>
+    <arxiv:comment>10 pages, 8 figures, 3 tables; accepted for publication at ALIFE 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>ALIFE 2024: The 2024 Artificial Life Conference, 36</arxiv:journal_ref>
+    <author>
+      <name>Devendra Parkar</name>
+    </author>
+    <author>
+      <name>Kirtus G. Leyba</name>
+    </author>
+    <author>
+      <name>Raylene A. Faerber</name>
+    </author>
+    <author>
+      <name>Joshua J. Daymude</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00754</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00754" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.01327v1</id>
+    <title>Phototactic Supersmarticles</title>
+    <updated>2017-11-03T20:48:22Z</updated>
+    <link href="https://arxiv.org/abs/1711.01327v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.01327v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Smarticles, or smart active particles, are small robots equipped with only basic movement and sensing abilities that are incapable of rotating or displacing individually. We study the ensemble behavior of smarticles, i.e., the behavior a collective of these very simple computational elements can achieve, and how such behavior can be implemented using minimal programming. We show that an ensemble of smarticles constrained to remain close to one another (which we call a supersmarticle), achieves directed locomotion toward or away from a light source, a phenomenon known as phototaxing. We present experimental and theoretical models of phototactic supersmarticles that collectively move with a directed displacement in response to light. The motion of the supersmarticle is approximately Brownian, and is a result of chaotic interactions among smarticles. The system can be directed by introducing asymmetries among the individual smarticle's behavior, in our case by varying activity levels in response to light, resulting in supersmarticle biased motion.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-11-03T20:48:22Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Artificial Life and Robotics 23:4 (2018) 459-468</arxiv:journal_ref>
+    <author>
+      <name>Sarah Cannon</name>
+    </author>
+    <author>
+      <name>Joshua J. Daymude</name>
+    </author>
+    <author>
+      <name>William Savoie</name>
+    </author>
+    <author>
+      <name>Ross Warkentin</name>
+    </author>
+    <author>
+      <name>Shengkai Li</name>
+    </author>
+    <author>
+      <name>Daniel I. Goldman</name>
+    </author>
+    <author>
+      <name>Dana Randall</name>
+    </author>
+    <author>
+      <name>Andrea W. Richa</name>
+    </author>
+    <arxiv:doi>10.1007/s10015-018-0473-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10015-018-0473-7" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1208.0518v1</id>
+    <title>The efficacy of group selection is increased by coexistence dynamics within groups</title>
+    <updated>2012-08-02T15:36:12Z</updated>
+    <link href="https://arxiv.org/abs/1208.0518v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1208.0518v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Selection on the level of loosely associated groups has been suggested as a route towards the evolution of cooperation between individuals and the subsequent formation of higher-level biological entities. Such group selection explanations remain problematic, however, due to the narrow range of parameters under which they can overturn within-group selection that favours selfish behaviour. In principle, individual selection could act on such parameters so as to strengthen the force of between-group selection and hence increase cooperation and individual fitness, as illustrated in our previous work. However, such a process cannot operate in parameter regions where group selection effects are totally absent, since there would be no selective gradient to follow. One key parameter, which when increased often rapidly causes group selection effects to tend to zero, is initial group size, for when groups are formed randomly then even moderately sized groups lack significant variance in their composition. However, the consequent restriction of any group selection effect to small sized groups is derived from models that assume selfish types will competitively exclude their more cooperative counterparts at within-group equilibrium. In such cases, diversity in the migrant pool can tend to zero and accordingly variance in group composition cannot be generated. In contrast, we show that if within-group dynamics lead to a stable coexistence of selfish and cooperative types, then the range of group sizes showing some effect of group selection is much larger.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-08-02T15:36:12Z</published>
+    <arxiv:comment>pp. 498-505 in Bullock S., Noble J., Watson R.A., Bedau M.A. (eds.) Artificial Life XI: Proceedings of the Eleventh International Conference on the Simulation and Synthesis of Living Systems. MIT Press (2008). 8 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Simon T. Powers</name>
+    </author>
+    <author>
+      <name>Alexandra S. Penn</name>
+    </author>
+    <author>
+      <name>Richard A. Watson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1103.0784v1</id>
+    <title>Happiness is assortative in online social networks</title>
+    <updated>2011-03-03T21:05:17Z</updated>
+    <link href="https://arxiv.org/abs/1103.0784v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1103.0784v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Social networks tend to disproportionally favor connections between individuals with either similar or dissimilar characteristics. This propensity, referred to as assortative mixing or homophily, is expressed as the correlation between attribute values of nearest neighbour vertices in a graph. Recent results indicate that beyond demographic features such as age, sex and race, even psychological states such as "loneliness" can be assortative in a social network. In spite of the increasing societal importance of online social networks it is unknown whether assortative mixing of psychological states takes place in situations where social ties are mediated solely by online networking services in the absence of physical contact. Here, we show that general happiness or Subjective Well-Being (SWB) of Twitter users, as measured from a 6 month record of their individual tweets, is indeed assortative across the Twitter social network. To our knowledge this is the first result that shows assortative mixing in online networks at the level of SWB. Our results imply that online social networks may be equally subject to the social mechanisms that cause assortative mixing in real social networks and that such assortative mixing takes place at the level of SWB. Given the increasing prevalence of online social networks, their propensity to connect users with similar levels of SWB may be an important instrument in better understanding how both positive and negative sentiments spread through online social ties. Future research may focus on how event-specific mood states can propagate and influence user behavior in "real life".</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-03-03T21:05:17Z</published>
+    <arxiv:comment>17 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <arxiv:journal_ref>Artificial Life 17(3), 237-251 (2011)</arxiv:journal_ref>
+    <author>
+      <name>Johan Bollen</name>
+    </author>
+    <author>
+      <name>Bruno Goncalves</name>
+    </author>
+    <author>
+      <name>Guangchen Ruan</name>
+    </author>
+    <author>
+      <name>Huina Mao</name>
+    </author>
+    <arxiv:doi>10.1162/artl_a_00034</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/artl_a_00034" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1704.05143v2</id>
+    <title>The Emergence of Canalization and Evolvability in an Open-Ended, Interactive Evolutionary System</title>
+    <updated>2019-02-14T18:46:48Z</updated>
+    <link href="https://arxiv.org/abs/1704.05143v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1704.05143v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Natural evolution has produced a tremendous diversity of functional organisms. Many believe an essential component of this process was the evolution of evolvability, whereby evolution speeds up its ability to innovate by generating a more adaptive pool of offspring. One hypothesized mechanism for evolvability is developmental canalization, wherein certain dimensions of variation become more likely to be traversed and others are prevented from being explored (e.g. offspring tend to have similarly sized legs, and mutations affect the length of both legs, not each leg individually). While ubiquitous in nature, canalization almost never evolves in computational simulations of evolution. Not only does that deprive us of in silico models in which to study the evolution of evolvability, but it also raises the question of which conditions give rise to this form of evolvability. Answering this question would shed light on why such evolvability emerged naturally and could accelerate engineering efforts to harness evolution to solve important engineering challenges. In this paper we reveal a unique system in which canalization did emerge in computational evolution. We document that genomes entrench certain dimensions of variation that were frequently explored during their evolutionary history. The genetic representation of these organisms also evolved to be highly modular and hierarchical, and we show that these organizational properties correlate with increased fitness. Interestingly, the type of computational evolutionary experiment that produced this evolvability was very different from traditional digital evolution in that there was no objective, suggesting that open-ended, divergent evolutionary processes may be necessary for the evolution of evolvability.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-04-17T22:50:04Z</published>
+    <arxiv:comment>SI can be found at: http://www.evolvingai.org/files/SI_0.zip</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <arxiv:journal_ref>Artificial life, 24(3), pp.157-181 (2018)</arxiv:journal_ref>
+    <author>
+      <name>Joost Huizinga</name>
+    </author>
+    <author>
+      <name>Kenneth O. Stanley</name>
+    </author>
+    <author>
+      <name>Jeff Clune</name>
+    </author>
+    <arxiv:doi>10.1162/artl_a_00263</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/artl_a_00263" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.16706v1</id>
+    <title>Exploring the Adaptive Behaviors of Particle Lenia: A Perturbation-Response Analysis for Computational Agency</title>
+    <updated>2023-05-26T07:52:44Z</updated>
+    <link href="https://arxiv.org/abs/2305.16706v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.16706v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A firm cognitive subject or ``individual'' is presupposed for the emergence of mind. However, with the development of recent information technology, the ``individual'' has become more dispersed in society and the cognitive subject has become increasingly unstable and adaptive, necessitating an update in our understanding of the ``individual''. Autopoiesis serves as a model of the cognitive subject, which is unstable and requires effort to maintain itself to adapt to the environment. In this study, we evaluated adaptivity for a highly extensible multi-particle system model Particle Lenia through the response perturbation. As a result, we found that Particle Lenia has a particle configuration that is both temporally unstable and has multiple stable states. This result suggests that Particle Lenia can express adaptive characteristics and is expected to be used as a computational model toward building an autopoietic cognitive agent.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-26T07:52:44Z</published>
+    <arxiv:comment>This paper has been accepted for ALIFE 2023</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <arxiv:journal_ref>Proceedings of the 2023 Artificial Life Conference Paper No: isal_a_00631, 40; 9 pages</arxiv:journal_ref>
+    <author>
+      <name>Kazuya Horibe</name>
+    </author>
+    <author>
+      <name>Keisuke Suzuki</name>
+    </author>
+    <author>
+      <name>Takato Horii</name>
+    </author>
+    <author>
+      <name>Hiroshi Ishiguro</name>
+    </author>
+    <arxiv:doi>10.1162/isal_a_00631</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1162/isal_a_00631" title="doi"/>
+  </entry>
+</feed>

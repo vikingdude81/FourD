@@ -1,0 +1,497 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/lOsj2GcnfHhE6SXiXlqP8l3IW+U</id>
+  <title>arXiv Query: search_query=abs:"personal identity" AND (abs:uploading OR abs:simulation OR abs:"artificial")&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:18Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22personal+identity%22+AND+(abs:uploading+OR+(abs:simulation+OR+abs:%22artificial%22))&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>18</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1504.06320v4</id>
+    <title>The Fallacy of Favoring Gradual Replacement Mind Uploading Over Scan-and-Copy</title>
+    <updated>2018-12-17T13:59:52Z</updated>
+    <link href="https://arxiv.org/abs/1504.06320v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1504.06320v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mind uploading speculation and debate often concludes that a procedure described as gradual in-place replacement preserves personal identity while a procedure described as destructive scan-and-copy produces some other identity in the target substrate such that personal identity is lost along with the biological brain. This paper demonstrates a chain of reasoning that establishes metaphysical equivalence between these two methods in terms of preserving personal identity.</summary>
+    <category term="cs.OH" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-04-23T14:09:50Z</published>
+    <arxiv:comment>14 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.OH"/>
+    <arxiv:journal_ref>Wiley, K. B. and Koene, R. A. The Fallacy of Favoring Gradual Replacement Mind Uploading Over Scan-and-Copy. Journal of Consciousness Studies (JoCS), Vol. 23, No. 3-4, pp212-235, Mar 2016</arxiv:journal_ref>
+    <author>
+      <name>Keith B. Wiley</name>
+    </author>
+    <author>
+      <name>Randal A. Koene</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.08599v1</id>
+    <title>SPeCtrum: A Grounded Framework for Multidimensional Identity Representation in LLM-Based Agent</title>
+    <updated>2025-02-12T17:38:27Z</updated>
+    <link href="https://arxiv.org/abs/2502.08599v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.08599v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing methods for simulating individual identities often oversimplify human complexity, which may lead to incomplete or flattened representations. To address this, we introduce SPeCtrum, a grounded framework for constructing authentic LLM agent personas by incorporating an individual's multidimensional self-concept. SPeCtrum integrates three core components: Social Identity (S), Personal Identity (P), and Personal Life Context (C), each contributing distinct yet interconnected aspects of identity. To evaluate SPeCtrum's effectiveness in identity representation, we conducted automated and human evaluations. Automated evaluations using popular drama characters showed that Personal Life Context (C)-derived from short essays on preferences and daily routines-modeled characters' identities more effectively than Social Identity (S) and Personal Identity (P) alone and performed comparably to the full SPC combination. In contrast, human evaluations involving real-world individuals found that the full SPC combination provided a more comprehensive self-concept representation than C alone. Our findings suggest that while C alone may suffice for basic identity simulation, integrating S, P, and C enhances the authenticity and accuracy of real-world identity representation. Overall, SPeCtrum offers a structured approach for simulating individuals in LLM agents, enabling more personalized human-AI interactions and improving the realism of simulation-based behavioral studies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-12T17:38:27Z</published>
+    <arxiv:comment>21 pages, 8 figures, 5 tables, Accepted in NAACL2025 Main</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Keyeun Lee</name>
+    </author>
+    <author>
+      <name>Seo Hyeong Kim</name>
+    </author>
+    <author>
+      <name>Seolhee Lee</name>
+    </author>
+    <author>
+      <name>Jinsu Eun</name>
+    </author>
+    <author>
+      <name>Yena Ko</name>
+    </author>
+    <author>
+      <name>Hayeon Jeon</name>
+    </author>
+    <author>
+      <name>Esther Hehsun Kim</name>
+    </author>
+    <author>
+      <name>Seonghye Cho</name>
+    </author>
+    <author>
+      <name>Soeun Yang</name>
+    </author>
+    <author>
+      <name>Eun-mee Kim</name>
+    </author>
+    <author>
+      <name>Hajin Lim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.01997v2</id>
+    <title>DIRF: A Framework for Digital Identity Protection and Clone Governance in Agentic AI Systems</title>
+    <updated>2025-09-08T06:22:03Z</updated>
+    <link href="https://arxiv.org/abs/2508.01997v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.01997v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement and widespread adoption of generative artificial intelligence (AI) pose significant threats to the integrity of personal identity, including digital cloning, sophisticated impersonation, and the unauthorized monetization of identity-related data. Mitigating these risks necessitates the development of robust AI-generated content detection systems, enhanced legal frameworks, and ethical guidelines. This paper introduces the Digital Identity Rights Framework (DIRF), a structured security and governance model designed to protect behavioral, biometric, and personality-based digital likeness attributes to address this critical need. Structured across nine domains and 63 controls, DIRF integrates legal, technical, and hybrid enforcement mechanisms to secure digital identity consent, traceability, and monetization. We present the architectural foundations, enforcement strategies, and key use cases supporting the need for a unified framework. This work aims to inform platform builders, legal entities, and regulators about the essential controls needed to enforce identity rights in AI-driven systems.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-04T02:27:14Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Hammad Atta</name>
+    </author>
+    <author>
+      <name>Muhammad Zeeshan Baig</name>
+    </author>
+    <author>
+      <name>Yasir Mehmood</name>
+    </author>
+    <author>
+      <name>Nadeem Shahzad</name>
+    </author>
+    <author>
+      <name>Ken Huang</name>
+    </author>
+    <author>
+      <name>Muhammad Aziz Ul Haq</name>
+    </author>
+    <author>
+      <name>Muhammad Awais</name>
+    </author>
+    <author>
+      <name>Kamal Ahmed</name>
+    </author>
+    <author>
+      <name>Anthony Green</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.01161v1</id>
+    <title>A Puzzle about Further Facts</title>
+    <updated>2018-02-04T17:21:25Z</updated>
+    <link href="https://arxiv.org/abs/1802.01161v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.01161v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In metaphysics, there are a number of distinct but related questions about the existence of "further facts" -- facts that are contingent relative to the physical structure of the universe. These include further facts about qualia, personal identity, and time. In this article I provide a sequence of examples involving computer simulations, ranging from one in which the protagonist can clearly conclude such further facts exist to one that describes our own condition. This raises the question of where along the sequence (if at all) the protagonist stops being able to soundly conclude that further facts exist.</summary>
+    <category term="physics.hist-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-04T17:21:25Z</published>
+    <arxiv:comment>To appear in Erkenntnis: An International Journal of Scientific Philosophy</arxiv:comment>
+    <arxiv:primary_category term="physics.hist-ph"/>
+    <author>
+      <name>Vincent Conitzer</name>
+    </author>
+    <arxiv:doi>10.1007/s10670-018-9979-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10670-018-9979-6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.02792v3</id>
+    <title>Occluded Person Re-identification</title>
+    <updated>2018-04-20T14:22:34Z</updated>
+    <link href="https://arxiv.org/abs/1804.02792v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.02792v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Person re-identification (re-id) suffers from a serious occlusion problem when applied to crowded public places. In this paper, we propose to retrieve a full-body person image by using a person image with occlusions. This differs significantly from the conventional person re-id problem where it is assumed that person images are detected without any occlusion. We thus call this new problem the occluded person re-identitification. To address this new problem, we propose a novel Attention Framework of Person Body (AFPB) based on deep learning, consisting of 1) an Occlusion Simulator (OS) which automatically generates artificial occlusions for full-body person images, and 2) multi-task losses that force the neural network not only to discriminate a person's identity but also to determine whether a sample is from the occluded data distribution or the full-body data distribution. Experiments on a new occluded person re-id dataset and three existing benchmarks modified to include full-body person images and occluded person images show the superiority of the proposed method.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-09T01:56:53Z</published>
+    <arxiv:comment>6 pages, 7 figures, IEEE International Conference of Multimedia and Expo 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jiaxuan Zhuo</name>
+    </author>
+    <author>
+      <name>Zeyu Chen</name>
+    </author>
+    <author>
+      <name>Jianhuang Lai</name>
+    </author>
+    <author>
+      <name>Guangcong Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.02255v1</id>
+    <title>Human-Imperceptible Identification with Learnable Lensless Imaging</title>
+    <updated>2023-02-04T22:58:46Z</updated>
+    <link href="https://arxiv.org/abs/2302.02255v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.02255v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lensless imaging protects visual privacy by capturing heavily blurred images that are imperceptible for humans to recognize the subject but contain enough information for machines to infer information. Unfortunately, protecting visual privacy comes with a reduction in recognition accuracy and vice versa. We propose a learnable lensless imaging framework that protects visual privacy while maintaining recognition accuracy. To make captured images imperceptible to humans, we designed several loss functions based on total variation, invertibility, and the restricted isometry property. We studied the effect of privacy protection with blurriness on the identification of personal identity via a quantitative method based on a subjective evaluation. Moreover, we validate our simulation by implementing a hardware realization of lensless imaging with photo-lithographically printed masks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-04T22:58:46Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Thuong Nguyen Canh</name>
+    </author>
+    <author>
+      <name>Trung Thanh Ngo</name>
+    </author>
+    <author>
+      <name>Hajime Nagahara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.19032v1</id>
+    <title>Personalized Face Privacy Protection From a Single Image</title>
+    <updated>2026-05-18T18:56:56Z</updated>
+    <link href="https://arxiv.org/abs/2605.19032v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.19032v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Photos of faces uploaded online are vulnerable to malicious actors who can scrape facial images from online sources and intrude on personal privacy via unauthorized use of facial recognition models. This paper presents FaceCloak, a novel personalized face privacy protection system, which can generate defensive identity-specific universal face privacy masks from a single image of a user, causing facial recognition to fail. FaceCloak introduces a three-stage personalized face perturbation learning methodology: (1) It generates a small set of high-variety synthetic face images of a person based on a single image of the person. (2) It learns face cloaking by adding more protection to key facial-identity leakage regions through iterative perturbation generation over the small set of synthetic images, effectively shifting a user's identity embedding towards a distant anchor identity and away from a similar one. (3) It generates a personalized identity-protective mask in the form of pixel-wise cloaking, which is light-weight and can be efficiently applied to any facial image of a user while maintaining good perceptual quality. Extensive experiments on three popular face datasets across ten recognition models show the effectiveness of FaceCloak compared to 29 other existing representative methods. Code is available at https://github.com/zacharyyahn/FaceCloak</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T18:56:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zachary Yahn</name>
+    </author>
+    <author>
+      <name>Fatih Ilhan</name>
+    </author>
+    <author>
+      <name>Tiansheng Huang</name>
+    </author>
+    <author>
+      <name>Selim Tekin</name>
+    </author>
+    <author>
+      <name>Sihao Hu</name>
+    </author>
+    <author>
+      <name>Yichang Xu</name>
+    </author>
+    <author>
+      <name>Margaret Loper</name>
+    </author>
+    <author>
+      <name>Ling Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.03087v3</id>
+    <title>Unsupervised Long-Term Person Re-Identification with Clothes Change</title>
+    <updated>2024-01-23T06:07:45Z</updated>
+    <link href="https://arxiv.org/abs/2202.03087v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.03087v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate unsupervised person re-identification (Re-ID) with clothes change, a new challenging problem with more practical usability and scalability to real-world deployment. Most existing re-id methods artificially assume the clothes of every single person to be stationary across space and time. This condition is mostly valid for short-term re-id scenarios since an average person would often change the clothes even within a single day. To alleviate this assumption, several recent works have introduced the clothes change facet to re-id, with a focus on supervised learning person identity discriminative representation with invariance to clothes changes. Taking a step further towards this long-term re-id direction, we further eliminate the requirement of person identity labels, as they are significantly more expensive and more tedious to annotate in comparison to short-term person re-id datasets. Compared to conventional unsupervised short-term re-id, this new problem is drastically more challenging as different people may have similar clothes whilst the same person can wear multiple suites of clothes over different locations and times with very distinct appearance. To overcome such obstacles, we introduce a novel Curriculum Person Clustering (CPC) method that can adaptively regulate the unsupervised clustering criterion according to the clustering confidence. Experiments on three long-term person re-id datasets show that our CPC outperforms SOTA unsupervised re-id methods and even closely matches the supervised re-id models.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-07T11:55:23Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Mingkun Li</name>
+    </author>
+    <author>
+      <name>Shupeng Cheng</name>
+    </author>
+    <author>
+      <name>Peng Xu</name>
+    </author>
+    <author>
+      <name>Xiatian Zhu</name>
+    </author>
+    <author>
+      <name>Chun-Guang Li</name>
+    </author>
+    <author>
+      <name>Jun Guo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.00894v1</id>
+    <title>Decentralized Blockchain for Privacy-Preserving Large-Scale Contact Tracing</title>
+    <updated>2020-07-02T05:46:34Z</updated>
+    <link href="https://arxiv.org/abs/2007.00894v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.00894v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Activity-tracking applications and location-based services using short-range communication (SRC) techniques have been abruptly demanded in the COVID-19 pandemic, especially for automated contact tracing. The attention from both public and policy keeps raising on related practical problems, including \textit{1) how to protect data security and location privacy? 2) how to efficiently and dynamically deploy SRC Internet of Thing (IoT) witnesses to monitor large areas?} To answer these questions, in this paper, we propose a decentralized and permissionless blockchain protocol, named \textit{Bychain}. Specifically, 1) a privacy-preserving SRC protocol for activity-tracking and corresponding generalized block structure is developed, by connecting an interactive zero-knowledge proof protocol and the key escrow mechanism. As a result, connections between personal identity and the ownership of on-chain location information are decoupled. Meanwhile, the owner of the on-chain location data can still claim its ownership without revealing the private key to anyone else. 2) An artificial potential field-based incentive allocation mechanism is proposed to incentivize IoT witnesses to pursue the maximum monitoring coverage deployment. We implemented and evaluated the proposed blockchain protocol in the real-world using the Bluetooth 5.0. The storage, CPU utilization, power consumption, time delay, and security of each procedure and performance of activities are analyzed. The experiment and security analysis is shown to provide a real-world performance evaluation.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-02T05:46:34Z</published>
+    <arxiv:comment>16 pages, 22 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Wenzhe Lv</name>
+    </author>
+    <author>
+      <name>Sheng Wu</name>
+    </author>
+    <author>
+      <name>Chunxiao Jiang</name>
+    </author>
+    <author>
+      <name>Yuanhao Cui</name>
+    </author>
+    <author>
+      <name>Xuesong Qiu</name>
+    </author>
+    <author>
+      <name>Yan Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.03104v2</id>
+    <title>"I'm happy even though it's not real": GenAI Photo Editing as a Remembering Experience</title>
+    <updated>2026-02-04T04:25:33Z</updated>
+    <link href="https://arxiv.org/abs/2602.03104v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.03104v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generative Artificial Intelligence (GenAI) is increasingly integrated into photo applications on personal devices, making editing photographs easier than ever while potentially influencing the memories they represent. This study explores how and why people use GenAI to edit personal photos and how this shapes their remembering experience. We conducted a two-phase qualitative study with 12 participants: a photo editing session using a GenAI tool guided by the Remembering Experience (RX) dimensions, followed by semi-structured interviews where participants reflected on the editing process and results. Findings show that participants prioritised felt memory over factual accuracy. For different photo elements, environments were modified easily, however, editing was deemed unacceptable if it touched upon a person's identity. Editing processes brought positive and negative impacts, and itself also became a remembering experience. We further discuss potential benefits and risks of GenAI editing for remembering purposes and propose design implications for responsible GenAI.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-03T04:58:32Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Yufeng Wu</name>
+    </author>
+    <author>
+      <name>Qing Li</name>
+    </author>
+    <author>
+      <name>Elise van den Hoven</name>
+    </author>
+    <author>
+      <name>A. Baki Kocaballi</name>
+    </author>
+    <arxiv:doi>10.1145/3772318.3790927</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3772318.3790927" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.08041v1</id>
+    <title>Wispy to Voluminous: Prior-free Multi-view Capture of Strand-level Facial Hair</title>
+    <updated>2026-06-06T08:04:07Z</updated>
+    <link href="https://arxiv.org/abs/2606.08041v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.08041v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Facial hair is a defining trait of personal identity, yet remains a critical bottleneck for digital avatars. Recent volumetric methods achieve photorealism but bake hair into the underlying face geometry, preventing editability and failing to resolve sparse, strand-like structures. Meanwhile, scalp-hair reconstruction methods target dense hair volumes and do not transfer to the sparse, spatially-varying nature of facial hair. We present a pipeline that automatically reconstructs facial hair -- beard, mustache, lashes, and brows -- from multi-view images, converting an unstructured 3D Gaussian representation into an explicit curve-based strand representation. We resolve geometric ambiguities in four stages: (i) optimizing 3D Gaussians constrained by tracked head geometry to enforce early ray termination and suppress sub-surface noise; (ii) tracing continuous strands robust to frequent crossings and extreme curvature; (iii) grounding strands to the surface and resolving root-tip ambiguity via a physically-motivated prior; and (iv) refining the reconstruction through opacity-driven density control under photometric optimization. To our knowledge, this is the first method to reconstruct high-fidelity facial hair strands from a 3D Gaussian representation. The recovered strands faithfully preserve the orientation and sparsity patterns characteristic of facial hair, and yield assets immediately suitable for downstream production tasks, including facial animation and physical simulation, geometric grooming and transfer, appearance editing, and physics-based rendering.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-06T08:04:07Z</published>
+    <arxiv:comment>27 pages, 16 figures, supplementary included</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Jaeseong Lee</name>
+    </author>
+    <author>
+      <name>Giljoo Nam</name>
+    </author>
+    <author>
+      <name>Adrian Jarabo</name>
+    </author>
+    <author>
+      <name>Carlos Aliaga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09439v2</id>
+    <title>Identity-Aware Vision-Language Model for Explainable Face Forgery Detection</title>
+    <updated>2026-08-30T04:02:49Z</updated>
+    <link href="https://arxiv.org/abs/2504.09439v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09439v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in generative artificial intelligence have enabled the creation of highly realistic image forgeries, raising significant concerns about digital media authenticity. While existing detection methods demonstrate promising results on benchmark datasets, they face critical limitations in real-world applications. First, existing detectors typically fail to detect semantic inconsistencies with the person's identity, such as implausible behaviors or incompatible environmental contexts in given images. Second, these methods rely heavily on low-level visual cues, making them effective for known forgeries but less reliable against new or unseen manipulation techniques. To address these challenges, we present a novel personalized vision-language model (VLM) that integrates low-level visual artifact analysis and high-level semantic inconsistency detection. Unlike previous VLM-based methods, our approach avoids resource-intensive supervised fine-tuning that often struggles to preserve distinct identity characteristics. Instead, we employ a lightweight method that dynamically encodes identity-specific information into specialized identifier tokens. This design enables the model to learn distinct identity characteristics while maintaining robust generalization capabilities. We further enhance detection capabilities through a lightweight detection adapter that extracts fine-grained information from shallow features of the vision encoder, preserving critical low-level evidence. Comprehensive experiments demonstrate that our approach achieves 94.25% accuracy and 94.08% F1 score, outperforming both traditional forgery detectors and general VLMs while requiring only 10 extra tokens.</summary>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-13T05:32:40Z</published>
+    <arxiv:primary_category term="cs.MM"/>
+    <author>
+      <name>Junhao Xu</name>
+    </author>
+    <author>
+      <name>Jingjing Chen</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Jiacheng Zhang</name>
+    </author>
+    <author>
+      <name>Zhiyu Tan</name>
+    </author>
+    <author>
+      <name>Hao Li</name>
+    </author>
+    <author>
+      <name>Yu-Gang Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.16797v1</id>
+    <title>Multi-Prompts Learning with Cross-Modal Alignment for Attribute-based Person Re-Identification</title>
+    <updated>2023-12-28T03:00:19Z</updated>
+    <link href="https://arxiv.org/abs/2312.16797v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.16797v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The fine-grained attribute descriptions can significantly supplement the valuable semantic information for person image, which is vital to the success of person re-identification (ReID) task. However, current ReID algorithms typically failed to effectively leverage the rich contextual information available, primarily due to their reliance on simplistic and coarse utilization of image attributes. Recent advances in artificial intelligence generated content have made it possible to automatically generate plentiful fine-grained attribute descriptions and make full use of them. Thereby, this paper explores the potential of using the generated multiple person attributes as prompts in ReID tasks with off-the-shelf (large) models for more accurate retrieval results. To this end, we present a new framework called Multi-Prompts ReID (MP-ReID), based on prompt learning and language models, to fully dip fine attributes to assist ReID task. Specifically, MP-ReID first learns to hallucinate diverse, informative, and promptable sentences for describing the query images. This procedure includes (i) explicit prompts of which attributes a person has and furthermore (ii) implicit learnable prompts for adjusting/conditioning the criteria used towards this person identity matching. Explicit prompts are obtained by ensembling generation models, such as ChatGPT and VQA models. Moreover, an alignment module is designed to fuse multi-prompts (i.e., explicit and implicit ones) progressively and mitigate the cross-modal gap. Extensive experiments on the existing attribute-involved ReID datasets, namely, Market1501 and DukeMTMC-reID, demonstrate the effectiveness and rationality of the proposed MP-ReID solution.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-28T03:00:19Z</published>
+    <arxiv:comment>AAAI 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yajing Zhai</name>
+    </author>
+    <author>
+      <name>Yawen Zeng</name>
+    </author>
+    <author>
+      <name>Zhiyong Huang</name>
+    </author>
+    <author>
+      <name>Zheng Qin</name>
+    </author>
+    <author>
+      <name>Xin Jin</name>
+    </author>
+    <author>
+      <name>Da Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2611.05292v1</id>
+    <title>Personas Are Not People: Identity as State, Not Attribute</title>
+    <updated>2026-11-03T18:07:27Z</updated>
+    <link href="https://arxiv.org/abs/2611.05292v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2611.05292v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synthetic populations, large sets of simulated people, are increasingly used in place of real people to pretest surveys, simulate users and communities, and evaluate AI systems. Each simulated person is defined by a persona, a written profile of fixed traits, demographics, and attitudes that a language model is instructed to act out. Every such system assumes that a person's identity is a stable attribute that behaves the same way in every situation the simulation presents. We show that this assumption is not a harmless simplification. Three decades of personality research find the opposite. How a given person behaves varies more across contexts than people vary from one another. Drawing on identity economics, which describes how different situations activate different identities and norms within the same person, we separate behavior into three parts, which are stable traits, the identity a context calls up, and the situation itself. We then prove, under two stated assumptions, that any simulation built on fixed personas, no matter how detailed the personas or how large the underlying model, cannot reproduce the part of a population's behavior that is specific to it and its circumstances. We propose a new evaluation criterion based on this result and a person-in-context design that can meet it in principle. We test one version on a naturalistic Reddit personality corpus and on a published clinical-trial recruitment survey of a community with documented distrust of medical institutions. The design does produce context-dependent behavior when tested directly, but in neither setting does it fully match the real population, and we show where it falls short. The consequence for practice is a risk that synthetic-population evaluations misrepresent the groups whose behavior is most shaped by context, a distortion that richer personas cannot correct.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-11-03T18:07:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tamunotonye Harry</name>
+    </author>
+    <author>
+      <name>Yuanyuan Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2208.04845v1</id>
+    <title>Quantization enabled Privacy Protection in Decentralized Stochastic Optimization</title>
+    <updated>2022-08-07T15:17:23Z</updated>
+    <link href="https://arxiv.org/abs/2208.04845v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.04845v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>By enabling multiple agents to cooperatively solve a global optimization problem in the absence of a central coordinator, decentralized stochastic optimization is gaining increasing attention in areas as diverse as machine learning, control, and sensor networks. Since the associated data usually contain sensitive information, such as user locations and personal identities, privacy protection has emerged as a crucial need in the implementation of decentralized stochastic optimization. In this paper, we propose a decentralized stochastic optimization algorithm that is able to guarantee provable convergence accuracy even in the presence of aggressive quantization errors that are proportional to the amplitude of quantization inputs. The result applies to both convex and non-convex objective functions, and enables us to exploit aggressive quantization schemes to obfuscate shared information, and hence enables privacy protection without losing provable optimization accuracy. In fact, by using a {stochastic} ternary quantization scheme, which quantizes any value to three numerical levels, we achieve quantization-based rigorous differential privacy in decentralized stochastic optimization, which has not been reported before. In combination with the presented quantization scheme, the proposed algorithm ensures, for the first time, rigorous differential privacy in decentralized stochastic optimization without losing provable convergence accuracy. Simulation results for a distributed estimation problem as well as numerical experiments for decentralized learning on a benchmark machine learning dataset confirm the effectiveness of the proposed approach.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-07T15:17:23Z</published>
+    <arxiv:comment>Accepted to IEEE Transactions on Automatic Control as a full paper. arXiv admin note: text overlap with arXiv:2205.03884</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Yongqiang Wang</name>
+    </author>
+    <author>
+      <name>Tamer Basar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.09676v1</id>
+    <title>Image-based Freeform Handwriting Authentication with Energy-oriented Self-Supervised Learning</title>
+    <updated>2024-08-19T03:33:39Z</updated>
+    <link href="https://arxiv.org/abs/2408.09676v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.09676v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Freeform handwriting authentication verifies a person's identity from their writing style and habits in messy handwriting data. This technique has gained widespread attention in recent years as a valuable tool for various fields, e.g., fraud prevention and cultural heritage protection. However, it still remains a challenging task in reality due to three reasons: (i) severe damage, (ii) complex high-dimensional features, and (iii) lack of supervision. To address these issues, we propose SherlockNet, an energy-oriented two-branch contrastive self-supervised learning framework for robust and fast freeform handwriting authentication. It consists of four stages: (i) pre-processing: converting manuscripts into energy distributions using a novel plug-and-play energy-oriented operator to eliminate the influence of noise; (ii) generalized pre-training: learning general representation through two-branch momentum-based adaptive contrastive learning with the energy distributions, which handles the high-dimensional features and spatial dependencies of handwriting; (iii) personalized fine-tuning: calibrating the learned knowledge using a small amount of labeled data from downstream tasks; and (iv) practical application: identifying individual handwriting from scrambled, missing, or forged data efficiently and conveniently. Considering the practicality, we construct EN-HA, a novel dataset that simulates data forgery and severe damage in real applications. Finally, we conduct extensive experiments on six benchmark datasets including our EN-HA, and the results prove the robustness and efficiency of SherlockNet.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T03:33:39Z</published>
+    <arxiv:comment>Accepted by TMM</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jingyao Wang</name>
+    </author>
+    <author>
+      <name>Luntian Mou</name>
+    </author>
+    <author>
+      <name>Changwen Zheng</name>
+    </author>
+    <author>
+      <name>Wen Gao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1907.09511v1</id>
+    <title>Universal Person Re-Identification</title>
+    <updated>2019-07-22T18:17:56Z</updated>
+    <link href="https://arxiv.org/abs/1907.09511v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1907.09511v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most state-of-the-art person re-identification (re-id) methods depend on supervised model learning with a large set of cross-view identity labelled training data. Even worse, such trained models are limited to only the same-domain deployment with significantly degraded cross-domain generalization capability, i.e. "domain specific". To solve this limitation, there are a number of recent unsupervised domain adaptation and unsupervised learning methods that leverage unlabelled target domain training data. However, these methods need to train a separate model for each target domain as supervised learning methods. This conventional "{\em train once, run once}" pattern is unscalable to a large number of target domains typically encountered in real-world deployments. We address this problem by presenting a "train once, run everywhere" pattern industry-scale systems are desperate for. We formulate a "universal model learning' approach enabling domain-generic person re-id using only limited training data of a "{\em single}" seed domain. Specifically, we train a universal re-id deep model to discriminate between a set of transformed person identity classes. Each of such classes is formed by applying a variety of random appearance transformations to the images of that class, where the transformations simulate the camera viewing conditions of any domains for making the model training domain generic. Extensive evaluations show the superiority of our method for universal person re-id over a wide variety of state-of-the-art unsupervised domain adaptation and unsupervised learning re-id methods on five standard benchmarks: Market-1501, DukeMTMC, CUHK03, MSMT17, and VIPeR.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-07-22T18:17:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xu Lan</name>
+    </author>
+    <author>
+      <name>Xiatian Zhu</name>
+    </author>
+    <author>
+      <name>Shaogang Gong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.08526v1</id>
+    <title>FIT: A Large-Scale Dataset for Fit-Aware Virtual Try-On</title>
+    <updated>2026-04-09T17:57:50Z</updated>
+    <link href="https://arxiv.org/abs/2604.08526v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.08526v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a person and a garment image, virtual try-on (VTO) aims to synthesize a realistic image of the person wearing the garment, while preserving their original pose and identity. Although recent VTO methods excel at visualizing garment appearance, they largely overlook a crucial aspect of the try-on experience: the accuracy of garment fit -- for example, depicting how an extra-large shirt looks on an extra-small person. A key obstacle is the absence of datasets that provide precise garment and body size information, particularly for "ill-fit" cases, where garments are significantly too large or too small. Consequently, current VTO methods default to generating well-fitted results regardless of the garment or person size.
+  In this paper, we take the first steps towards solving this open problem. We introduce FIT (Fit-Inclusive Try-on), a large-scale VTO dataset comprising over 1.13M try-on image triplets accompanied by precise body and garment measurements. We overcome the challenges of data collection via a scalable synthetic strategy: (1) We programmatically generate 3D garments using GarmentCode and drape them via physics simulation to capture realistic garment fit. (2) We employ a novel re-texturing framework to transform synthetic renderings into photorealistic images while strictly preserving geometry. (3) We introduce person identity preservation into our re-texturing model to generate paired person images (same person, different garments) for supervised training. Finally, we leverage our FIT dataset to train a baseline fit-aware virtual try-on model. Our data and results set the new state-of-the-art for fit-aware virtual try-on, as well as offer a robust benchmark for future research. We will make all data and code publicly available on our project page: https://johannakarras.github.io/FIT.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-09T17:57:50Z</published>
+    <arxiv:comment>SIGGRAPH 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Johanna Karras</name>
+    </author>
+    <author>
+      <name>Yuanhao Wang</name>
+    </author>
+    <author>
+      <name>Yingwei Li</name>
+    </author>
+    <author>
+      <name>Ira Kemelmacher-Shlizerman</name>
+    </author>
+  </entry>
+</feed>

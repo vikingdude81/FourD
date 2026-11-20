@@ -1,0 +1,1276 @@
+Schema Redescription in Cellular Automata:
+Revisiting Emergence in Complex Systems
+Manuel Marques-Pita
+School of Informatics and Computing
+Indiana University (USA) and
+Instituto Gulbenkian de Ciˆencia (Portugal)
+Email: marquesm@indiana.edu
+Luis M. Rocha
+School of Informatics and Computing
+Indiana University (USA) and
+Instituto Gulbenkian de Ciˆencia (Portugal)
+Email: rocha@indiana.edu
+Abstract—We present a method to eliminate redundancy in
+the transition tables of Boolean automata: schema redescription
+with two symbols. One symbol is used to capture redundancy of
+individual input variables, and another to capture permutability
+in sets of input variables: fully characterizing the canalization
+present in Boolean functions. Two-symbol schemata explain
+aspects of the behaviour of automata networks that the char-
+acterization of their emergent patterns does not capture. We use
+our method to compare two well-known cellular automata rules
+for the density classiﬁcation task [1]: GKL [2], [3] and GP [4].
+We show that despite having very different emergent behaviour,
+these rules are very similar. Indeed, GKL is a special case of GP.
+Therefore, we demonstrate that it is more feasible to compare
+cellular automata via schema redescriptions of their rules, than
+by looking at their emergent behaviour, leading us to question
+the tendency in complexity research to pay much more attention
+to emergent patterns than to local (micro-level) interactions.
+I. INTRODUCTION
+The intersection of biology and computer science has been
+fertile for some time. Indeed, von Neumann was a member
+of the mid-twentieth century Cybernetics group [5], whose
+main focus was the understanding of natural and artiﬁcial
+systems in terms of communication and control. Most early
+computer science developments were inspired by the models
+of cognition that orbited this group [6]. Since then, the need
+to understand how biological systems are able to control
+and transmit information throughout the huge number of
+components that comprise them has only increased. The study
+of complex network dynamics has received much attention in
+the last two decades. From pioneering work on networks of
+automata [7]–[9] to recent models of genetic regulation [10]–
+[13], it is clear that to understand and control the biological
+organization, it is useful to study models based on complex
+networks of automata [14]–[16].
+There has been much progress in understanding the structure
+of natural networks—at the level of their topology [17], [18]
+or of their more ﬁne-grained motifs [19]—as well as on
+modelling biological systems as networks of automata. Yet,
+we are still to fully grasp how complex networks “compute”
+and how to harness them to perform speciﬁc tasks [20]. The
+need for a better understanding of collective computation in
+complex networks has been identiﬁed in many areas. For
+instance, the way plants adjust stomatal apertures for efﬁcient
+gas exchanges on leaf surfaces is statistically indistinguishable
+from the dynamics of automata that compute [21], and the
+high degree of connectivity in biochemical intracellular signal
+transduction networks endows them with the capability of
+emergent nontrivial classiﬁcation—via collective computation
+[22]. However, not much work in automata models of complex
+networks has focused on how interactions at the local level of
+components are linked to collective behaviour.
+We show that eliminating redundancy in the transition tables
+of local automata reveals the loci of control of collective
+dynamics, better than via the characterization of collective
+behaviour, emergent patterns, and the like. Our mechanism
+to eliminate redundancy is schema redescription [23], [24],
+which we expand here with an additional symbol as explained
+below. Schemata remove redundancy from automata transition
+tables, leaving only input states, or groups of input states that
+control state-transitions, known as their canalizing inputs [25].
+Moreover, we discuss how schema redescription can reveal
+the links between local and collective behaviour in automata
+networks (here cellular automata). We exemplify our approach
+with the classical problem of collective computation in cellular
+automata: the density classiﬁcation task [1].
+II. CELLULAR AUTOMATA
+A κ-state automaton is an integer variable x ∈{0, ..., κ−1},
+whose value (or state) is computed at time t + 1 via a state-
+determined transition function F, which takes as input the state
+of a set of n automata at time t. When x = 0 we refer to it as
+being in the quiescent state; any other state is regarded as an
+active state. To study the dynamics of systems of many simple
+elements (known as complex systems), it is common to study
+networks of interconnected automata. One way to do this is
+to arrange automata in a regular lattice of N cells, which we
+refer to as cellular automata, a formalization of a complex
+dynamical system with its origins in the work of Ulam and
+von Neumann [26]. In a homogeneous cellular automaton
+(CA), which we use here, each cell is deﬁned by the same
+κ-state automaton and is connected to n neighbour cells in the
+lattice (including itself). Therefore, there are κn possible local
+neighbourhood conﬁgurations (LNCs). The transition function
+for every cell, F = {fj}, can thus be deﬁned as a look-up table
+(LUT) where each entry, fj, j ∈{1, ..., κn}, is an assignment
+of a possible input LNC, or condition part, to an output state
+arXiv:1102.1691v2  [nlin.CG]  9 Feb 2011
+
+xi(t+1) ∈{0, ..., κ−1}. In binary CAs (κ = 2) it is possible
+to classify individual cell state transitions in three categories:
+(1) preservations, where a cell does not change its state in
+the next time step, i.e. xi(t) = xi(t + 1); (2) generations, in
+which the cell goes from the quiescent to the active state; and
+(3) annihilations, where the cell goes from the active to the
+quiescent state. The initial conﬁguration (IC) of states of a
+CA lattice is typically random. In the CAs we consider here,
+cells in the lattice update their states synchronously.
+III. SCHEMA REDESCRIPTION
+We previously proposed schema redescription with one
+symbol as a method to relate an automaton’s LUT to the col-
+lective dynamics it produces in one- and two-dimensional CA
+lattices [23], [24]. Here we introduce two-symbol schemata.
+The basic idea is simple: LUTs are compressed into par-
+simonious schemata with two extra symbols that capture
+redundant input states. One symbol captures the irrelevance
+of some inputs in some situations; the other the permutability
+of subsets of inputs. Only the input states that effectively
+determine the automaton’s state transitions remain. A related
+notion of canalizing inputs exists in the context of modelling
+biochemical networks, e.g. those that regulate the expression
+patterns of genes. Indeed, automata with canalizing inputs have
+been shown to stabilize the dynamics of Boolean models of
+genetic regulation [13], [25], [27].
+A. Wildcard Schemata
+To unpack the notion of schema, consider a Boolean au-
+tomaton x, whose state-transition function depends on the
+states of six Boolean inputs (possibly other automata). Figure
+1A depicts the subset of LUT entries (fα) for automaton x,
+that lead to state-transition x(t + 1) = 1.
+We ﬁrst compress LUT entries using schemata that are like
+LUT entries, but allow an additional wildcard (#) symbol
+(represented graphically in grey) to appear in their condition
+part. A wildcard input means that any valid state is accepted
+for it, with no effect on the state-transition. This results in a
+redescription of the set of LUT entries, F, for an automaton x
+of n inputs into a smaller set of wildcard schemata, F ′ ≡{f ′
+υ}
+(see Figure 1B). The set F ′, for a given automaton also
+contains the original entries in its LUT, F, that could not
+be redescribed by wildcard schema. Each speciﬁc wildcard
+schema f ′
+υ redescribes a subset of entries in the original LUT,
+denoted by Υυ ≡{fα : fα ↣f ′
+υ} (↣means “is redescribed
+by”). Wildcard schemata are minimal in the sense that none
+of the (non-wildcard) inputs in the condition part of a schema
+can be “raised” to the wildcard status and still ensure the
+automaton’s transition to the same state. Because wildcard
+schemata are minimal, it follows that for any two wildcard-
+schemata f ′
+υ and f ′
+φ, Υυ ⊈Υφ ∧Υφ ⊈Υυ. Because wildcard
+schemata are minimal and unique, they are equivalent to the
+set of prime implicants obtained during the ﬁrst step of the
+Quine & McCluskey Boolean minimization algorithm [29].
+In other words, a schema is unique in the sense that the
+subset of LUT entries it redescribes is not fully redescribed
+by any other schema. However, in general Υυ ∩Υφ̸ = ∅.
+This means that schemata can overlap in terms of the LUT
+entries they describe. In Figure 1, Υ1 ≡{f1, f5, f9, f13} and
+Υ9 ≡{f4, f5, f6, f7}, therefore Υ1 ∩Υ9 ≡{f5}.
+Our redescription methodology derives from the work of
+John Holland on condition/action rules to model inductive
+reasoning in cognitive systems [28]. However, the same idea
+had been developed previously for the minimization of circuits
+in electrical engineering [29]. It was also used by Valiant
+[30] when introducing Probably Approximately Correct (PAC)
+learning.
+f'1:1
+:
+f'1:2
+:
+f'1:3
+:
+f'1:4
+:
+f'1:5
+:
+f'1:6
+:
+f'1:7
+:
+f'1:8
+:
+f'1:9
+:
+f'1:10
+:
+f'1:11
+:
+f'1:12
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+f''1:1
+:
+Wildcard & Position Free 
+Schemata
+Look-Up Table
+Wildcard Schemata
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+0
+0
+1
+0
+1
+0
+0
+0
+1
+0
+0
+1
+1
+1
+1
+1
+0
+0
+1
+0
+1
+1
+0
+0
+1
+1
+0
+0
+0
+0
+1
+1
+1
+0
+0
+0
+1
+1
+0
+1
+1
+0
+1
+0
+0
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+0
+1
+1
+0
+1
+0
+1
+1
+1
+0
+1
+1
+0
+0
+1
+0
+1
+1
+1
+0
+1
+0
+1
+1
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0
+1
+1
+0
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+1
+0
+0
+1
+1
+0
+0
+0
+1
+1
+0
+0
+1
+1
+0
+0
+1
+1
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0
+0
+1
+1
+0
+0
+1
+1
+1
+1
+f1
+f2
+f3
+f4
+f5
+f6
+f7
+f8
+f9
+f10
+f11
+f12
+f13
+f14
+f ′
+1
+f ′
+2
+f ′
+3
+f ′
+4
+f ′
+5
+f ′
+6
+f ′
+7
+f ′
+8
+f ′
+9
+f ′
+10
+f ′
+11
+f ′
+12
+f ′′
+1
+A
+B
+C
+F
+Υ9
+F ′
+F ′′
+Θ1
+1
+Fig. 1.
+A set of LUT entries with transition to 1, redescribed. White (black)
+states are 0 (1). Wildcards are grey. Notice that Υ9 ≡{f4, f5, f6, f7}.
+Using the additional position-free symbol, the entire set F ′ is compressed
+into a single two-symbol schema: f′′
+1 . Any permutation of the inputs with the
+position-free symbol results in a schema in F ′. Since there is only one set of
+marked inputs, the position-free symbol does not require an index.
+A wildcard schema can always be expressed as a logical
+conjunction of literals (logical variables or their negation).
+Since such a schema is a prime implicant, it follows that
+all of its literals are essential to determine the automaton’s
+state transition. We refer to the literals (input states) in a
+wildcard schema as its essential input states or enputs for
+short. For instance, schema f ′
+9 of the example of ﬁgure 1 has
+4 enputs: the ﬁrst 4 cells in its condition part. The set F ′ can
+be expressed as a logical disjunctive normal form (DNF)—that
+is, a disjunction of conjunctions.
+B. Two-Symbol Schemata
+Here we introduce a further redescription of F ′ that results
+in a set of two-symbol schemata F ′′ ≡{f ′′
+θ } (Figure 1C).
+The position-free symbol (◦m) above inputs in a condition
+part means that any pair of inputs thus marked can “switch
+places” without affecting the automaton’s state-transition.
+The index of the position-free symbol, when necessary, is
+used to differentiate among distinct subsets of inputs whose
+
+elements can only switch places with each other. A two-
+symbol schema f ′′
+θ redescribes a set Θθ ≡{fα : fα ↣f ′′
+θ }
+of LUT entries of x. In the same way a wildcard schema
+captures a subset Υυ of LUT entries, a two-symbol schema
+redescribes a subset of wildcard schemata 1. Therefore f ′′
+θ
+captures the degree of symmetry or group invariance in the
+set of wildcard schemata contained in Θ′
+θ [31]. We refer to
+the subsets of such marked inputs in a two-symbol schema as
+group-invariant enputs, which may include wildcard symbols
+marked with the position-free symbol. Since each two-symbol
+schema compresses a number of wildcard schemata, it follows
+that for a given automaton x, |F ′′| ≤|F ′| ≤|F| = 2k.
+After redescription, all redundancy is removed in the form
+of the two symbols. In a given schema, a wildcard input alone
+is not essential by deﬁnition: it is never an enput, while an
+individual input set up to a Boolean state always is. However,
+when a wildcard input is marked with a position-free symbol,
+then it is part of a group-invariant enput deﬁned by the set of
+inputs thus marked. In this case, the enput identiﬁes a group
+invariance property, such as “as long as two of these inputs
+are false”. To summarize, the set of wildcard schemata F ′
+of an automaton x captures its enputs, while the addition of
+the position-free symbol captures group invariant relationships
+in subsets of wildcard schemata. In our working example,
+the resulting two-symbol schema (Figure 1) reveals that the
+automaton’s transition to true is determined only by a subset
+of its six inputs: as long as inputs 2 and 3 are false and true,
+respectively, and among the others at least one is true and
+another is false, the automaton will transition to true. Note
+that such minimal input constraints are not obvious by looking
+at the LUT of the example automaton.
+In previous work, we used wildcard schemata to identify
+conceptual properties of known solutions to a well-studied
+problem that requires non-trivial collective computation: the
+density classiﬁcation task in homogeneous cellular automata.
+By uncovering these properties, we were able to devise a
+genetic algorithm that operated on a search space of wildcard
+schemata, rather than the space of LUTs. We found that
+the space of schemata is much more amenable to search,
+with very good correlations among good solutions to the
+problem. This way, we found some of the best solutions to
+this problem [23], [24]. Our aims here are: (1) introduce two-
+symbol schemata; (2) demonstrate that they are more useful
+to explain and control the function and behaviour of CAs than
+existing techniques to analyse collective behaviour, and (3)
+it is more feasible to compare automata transition functions
+via their schemata redescriptions, than by looking at their
+emergent or collective behaviour.
+1Given a two-symbol schema, f′′
+θ , the wildcard schemata it redescribes
+can be denoted by the set Θ′
+θ. It is useful to look at set Θ′
+θ as a matrix
+where rows correspond to wildcard schemata, and columns to their inputs.
+The last column is the state transition of f′′
+θ , and may therefore be omitted.
+The wildcard-schemata rows of matrix Θ′
+θ have the same number of zeroes,
+ones and wildcards. For any pair of inputs (i, j) in f′′
+θ that are marked with
+the same position-free symbol, the corresponding ith and jth columns of Θ′
+θ
+can be switched, and the rows of the resulting matrix reordered to obtain Θ′
+θ
+again.
+IV. THE DENSITY CLASSIFICATION TASK (DCT)
+The density classiﬁcation task (DCT) is the most studied
+example of collective computation in CAs. The goal is to ﬁnd
+a binary CA that can classify the majority state in a random
+IC. If the majority of cells in the IC is in the quiescent (active)
+state, after a number of time steps the lattice should converge
+to a homogeneous state where every cell is in the quiescent
+(active) state. Since the outcome could be undecidable in
+lattices with even number of cells (N), lattices with an odd
+number of cells are used instead. Devising CA rules that
+perform this task is not trivial, because cells in a CA lattice
+update their states based on local neighbourhood information,
+the states of 7 input Boolean variables in this case. Therefore,
+this task requires information to be transferred across time
+and (lattice) space to achieve a correct global classiﬁcation.
+The performance of CA rule F, on C initial conﬁgurations of
+length N is denoted by PC
+N(F). The deﬁnition of the DCT
+used in our studies comes from [32].
+V. EXPLANATION IN COMPLEX SYSTEMS
+The complex systems community has produced method-
+ologies to characterize space-time dynamics in CAs to study
+emergent behaviour, often using the DCT as a test-case [20].
+The most well-known such methodology is the computational
+mechanics framework (CM) [33], [34], used to extract regular
+domains: repeating patterns in the space-time dynamics, for-
+mally deﬁned as sets of regular languages. It has been argued
+that in order to explain emergent behaviour, we should look at
+the boundaries between domains, known as particles, as this is
+where information is exchanged in the CA lattice [35]. There-
+fore, collective behaviour in CA dynamics is characterized by
+ﬁnite catalogues of particles and their interaction rules, which
+deﬁne the emergent computation implemented by a given CA
+[20], and can be seen to possess some features of linguistic
+representation, though not in fully symbolic forms [36]. Figure
+2 depicts the catalogue of particles for the FGKL rule [2], [3],
+which we describe below.
+Other methods exist to detect regularities in CA space-
+time dynamics, typically statistical and information theoretical
+ﬁlters that uncover patterns that correspond to the particles
+found via CM [37], [38]. But when it comes to understanding
+and controlling collective behaviour, a key issue is concerned
+with ﬁnding the best explanatory device to use. Do we focus
+exclusively on the emergent patterns of collective dynamics
+(the “emergentist” paradigm), as CM and related methodolo-
+gies do? Or can we gain explanatory advantages by paying
+more attention to the lower level of local transition functions?
+In the remaining of this article we pursue the second
+approach, towards a hierarchical methodology that seeks
+to link local interactions to global behaviour, ultimately
+allowing us to better understand and control the collective
+dynamics of complex systems modelled as automata networks.
+
+Regular Domains
+Λ0 = 0∗
+Λ1 = 1∗
+Λ2 = (01)∗
+Particles (Velocities)
+Particle Interactions
+decay
+react
+particle 
+annihilation
+β ∼Λ2Λ0(1)
+α ∼Λ0Λ1(0)
+γ ∼Λ0Λ2(3)
+δ ∼Λ1Λ2(−1)
+η ∼Λ2Λ1(−3)
+µ ∼Λ1Λ0(0)
+γ + β →Ø1
+δ + η →Ø2
+α + δ →γ
+β + α →η
+γ + η →α
+µ →δ + β
+Fig. 2.
+Catalogue of regular domains, particles (domain boundaries), particle
+velocities (in parentheses), and particle interactions seen in FGKL ’s space-
+time behaviour. The colouring assigned to each particle is then used in Figure
+3. The notation p ∼ΛxΛy means that p is the particle forming the boundary
+between regular domains Λx and Λy. (Adapted from [1].)
+VI. COMPARING COLLECTIVE DYNAMICS
+Most of the known one-dimensional CA rules for the DCT
+were analysed using wildcard schemata in [39]. We found
+that most of these CAs are process symmetric: they classify
+equally well ICs with majority 0s and with majority 1s. We
+also found that two of the most well-known high-performing
+CA rules for the DCT, while observing very distinct collective
+behaviour, are nonetheless similar at the local LUT level [39].
+More speciﬁcally, we refer to the human-derived CA FGKL [2],
+[3], and FGP, derived via genetic programming [4]. Figures
+3 and 4 depict the space-time dynamics of FGKL and FGP,
+respectively. The performance of these rules on the DCT is:
+P105
+149(FGKL) ≈0.815, and FGP P105
+149(FGP) ≈0.822. In the
+remainder of this article, instead of FGKL we use the fully
+equivalent FGKL′, which is the mirror rule of FGKL. That is,
+exactly the same CA rule, but where the particles traverse the
+lattice in the opposite direction, with the same velocities and
+interactions (see computationally equivalent CAs in [39]).
+The collective behaviour of FGKL′ and FGP is quite distinct;
+while FGKL′, after a short transient, leads to the appearance of
+three domains, the dynamics of the FGP leads to the appearance
+of many more (we have identiﬁed at least ten [36], see ﬁgure
+4). Because FGKL′ only has three domains, from the CM
+perspective, its collective dynamics can be characterized and
+explained with a catalogue of six particles: the permutations
+without repetition of two out of three possible domains, where
+order is relevant2. Indeed, the collective behaviour of FGKL
+has been well predicted by the CM framework, using only
+six particles [40], [41]. In contrast, FGP produces many more
+particles; even with just ten domains (it has more), there would
+be ninety possible particles and many potential interactions.
+Interestingly, even though the collective dynamics of the
+two rules is apparently (via the CM framework) completely
+different, we found that FGP can be easily derived from FGKL,
+via a small sequence of operations on the wildcard schemata
+representation of the latter.
+The wildcard schemata for FGKL′ are shown in Figure 5.
+Note that most schemata are state-preserving: all state-changes
+in this automaton are described by two wildcard schemata
+(f ′
+5 and f ′
+10). Generations (annihilations) occur only when a
+2p = d!/(d −2)!, where d is the the number of domains.
+1
+50
+100
+149
+1
+50
+100
+150
+cells
+time
+1
+50
+100
+149
+1
+50
+100
+150
+cells
+time
+α
+β
+γ
+η
+δ
+µ
+Fig. 3.
+(Top) A space-time diagram produced by FGKL . (Bottom) The
+diagram with the regular domains ﬁltered out, leaving only the locations of
+the particles (coloured using the scheme in Figure 2). Note that particle α
+(red) lasts for only one time step, after which it decays to particles δ and β.
+cell in state 0 (1) observes right (left) and right-most (left-
+most) neighbours in the opposite state—this is characterized
+by schemata f ′
+5 and f ′
+10. In all other situations the a cell xi(t+
+1) = xi(t).
+The wildcard schemata for FGP are shown in Figure 6. In
+this case, all state changes are characterized by three wildcard
+schemata: f ′
+1, f ′
+3, and f ′
+5 for annihilation, and f ′
+6, f ′
+8, and f ′
+10
+for generation. In all other situations the a cell xi(t + 1) =
+xi(t). Using the the two-symbol schemata introduced here,
+
+1
+50
+100
+149
+1
+50
+100
+150
+cells
+time
+Fig. 4.
+A space-time diagram produced by FGP .
+f ′
+1
+f ′
+2
+f ′
+3
+f ′
+4
+f ′
+5
+f ′
+6
+f ′
+7
+f ′
+8
+f ′
+9
+f ′
+10
+Fig. 5.
+Wildcard schemata of FGKL′. Schemata f′
+5 and f′
+10 describe all the
+possible state-changes for a cell; all other situations are preservations. Notice
+that schemata f′
+2, f′
+4, f′
+7 or f′
+9, when applicable to a state-change, describe
+LUT entries already described by f′
+5 or f′
+10, respectively; When prescribing
+preservations the same schemata are captured with less enputs by f′
+1, f3, f′
+6
+or f′
+8. This means that f′
+2, f′
+4, f′
+7 or f′
+9 are not essential schemata.
+we can appreciate better the similarity between the two rules.
+Figure 7 depicts the essential state-changing transitions in
+both rules, which we obtained by via two-symbol schema-
+redescription, thus removing all redundancy from local dy-
+namics. We can now, for the ﬁrst time, understand that FGP
+is doing something very similar to, and which includes the
+behaviour of, FGKL′ at local level.
+Both CA rules can be understood by a single schema for
+generation and their process-symmetric schema for annihi-
+lation. Each such schemata is characterized by two enputs.
+Moreover, one of the enputs is exactly the same for both
+CAs: for the generation schema, both CAs depend on the
+right-most neighbour being 1, and for annihilation schemata,
+both CAs depend on the left-most neighbour being 0. The
+f ′
+1
+f ′
+2
+f ′
+3
+f ′
+4
+f ′
+5
+f ′
+6
+f ′
+7
+f ′
+8
+f ′
+9
+f ′
+10
+Fig. 6.
+Wildcard schemata for FGP. f′
+1, f′
+3, f′
+5, f′
+6, f′
+8, and f′
+10 describe all
+the possible state-changes for a cell xi; all other situations are preservations.
+Notice that schemata f′
+4 and f′
+9, when applicable to a state-change, describe
+LUT entries already described by f′
+3 or f′
+5 and f′
+8 or f′
+10, respectively
+second (group-invariant) enput in FGP is also very similar
+to, and indeed contains the second enput for, FGKL′. For
+the generation schema, FGKL′ depends on the immediate-right
+neighbour being 1, and for the annihilation schema, FGKL′
+depends on the immediate-left neighbour being 0. When it
+comes to FGP, the second enput is a group-invariant enput:
+one of three possible input cells in the neighbourhood may
+be speciﬁed (set to 0 or 1). Speciﬁcally, For the generation
+schema, FGP depends not only on the right-most neighbour
+being 1, like FGKL′, but alternatively, on the immediate-left,
+immediate-right or left-most neighbours being 1. Likewise, for
+the annihilation schema, FGP depends not only on the left-most
+neighbour being 0, like FGKL′, alternatively, on the immediate-
+left, immediate-right or right-most neighbours being 0.
+Generation
+Annihilation 
+FGKL
+FGKL′
+FGP′
+Fig. 7.
+Two-symbol schemata for FGKL′ (FGKL) and FGP, characterizing
+every possible situation where there are state changes for these rules. Note
+that here we include the state of the updating cell, (even if not an enput in
+the original schemata) to describe the known state-changing transitions.
+VII. CONNECTING THE LEVELS
+The similarity between the local-level descriptions of FGKL′
+and FGP we discovered, as well as their similar performance
+leads to a natural question: do the additional regular domains
+produced by the FGP, play a signiﬁcant role in its collective
+computation of the DCT? The following three facts are known:
+(1) FGP produces the same three regular domains as FGKL′,
+plus many others; (2) the performance difference between
+the two rules, while signiﬁcant, is less than 1%; and (3) the
+number of possible particles grows very rapidly with number
+d of domains (d!/(d −2)!). Therefore, it is reasonable to con-
+clude that many—even perhaps most of the regular domains—
+produced by FGP must be redundant; i.e. the particles they
+
+produce lead to interactions that have no effect on information
+transmission across the lattice.
+Support for this conclusion comes from different sources.
+One is simple inspection of the space-time dynamics pro-
+duced by FGP. Figure 8 depicts a portion of the space-time
+dynamics for FGP shown in Figure 4. Notice, for example,
+the collision between the particle formed by domains Λ5 and
+Λ3 (highlighted in green), and the particle formed by domains
+Λ5 and Λ6 (orange). This collision, in the CM framework
+perspective, leads to two new particles: one formed by domains
+Λ6 and Λ4, and another formed by domains Λ3 and Λ4.
+However, this collision seems to be redundant, leading to
+particles that behave exactly as the colliding particles (same
+velocity, possibly same structure). This is highlighted in Figure
+8 by using the same colours for the particles observed before
+and after the collision. This suggests that the (large) set of
+possible regular domains in the dynamics of FGP contains sets
+of domains that are equivalent, such that collisions among the
+particles they produce are redundant. In the example above Λ5
+and Λ6 seem to be equivalent, just like Λ3 and Λ4.
+Λ2
+Λ1
+Λ3
+Λ4
+Λ5
+Λ6
+Fig. 8.
+In FGP there are particles that produce equal particles after collisions
+(Highlighted in green (vertical) and orange/purple (inclined)
+Our observation is supported further when looking at the
+schemata for FGP. We can use the knowledge encoded in
+schemata, to better understand the collective behaviour of the
+CA. Consider f ′
+1 in FGP, which enforces that a cell xi in
+any state whose left- and right-most neighbours are 0 will
+transition to, or stay 0 at t+1 (see Figure 7). This leaves a wide
+“gap” of ﬁve cells in-between the 0-cells, which can be in any
+state, without affecting the state-transition of xi to 0. When
+this pattern is repeated in the lattice, i.e. every 6th cell is 0,
+using the two-symbol schemata obtained instead of the original
+LUT, we can compute the resulting collective dynamics with
+incomplete information. Indeed, one key advantage of schema
+redescription is that it allows the simulation of the dynamics
+of automata networks from ICs where only the state of some
+cells is speciﬁed, while the state of the others is unknown.
+Figure 9 (A) depicts the known dynamics given partial
+lattice information, where every sixth cell is 0 (except at the
+lattice borders) and the state of grey cells is unknown. This
+allows us to know how the initial input pattern will propagate
+in the CA dynamics. In this case, our lack of knowledge
+propagates in the lattice, and our partial knowledge of the
+dynamics eventually disappears completely. In 9 (B) we show
+that different such patterns can co-exist independently, in the
+A
+B
+1
+20
+40
+67
+1
+5
+10
+14
+cells
+time
+1
+20
+40
+67
+1
+5
+10
+14
+cells
+time
+f ′
+1
+f ′
+1
+f ′
+1
+f ′
+7 f ′
+7
+f ′
+2
+f ′
+2
+Fig. 9.
+Dynamically decoupled dynamics of patterns in FGP. See text for
+description.
+previous unknown segments of the lattice. The difference from
+(A) is that every third cell in the left half of the initial lattice
+is set to 1, and the third and every third cell after that is set to
+0, in the right half of the initial lattice (these conditions match
+schemata f ′
+7 and f ′
+2 respectively).
+One very interesting observation from computing dynamics
+with incomplete information, is that many patterns (such as
+those in Figure 9) are dynamically decoupled in FGP. This
+means that the space-time patterns produced from schemata
+f ′
+1, f ′
+2 and f ′
+7 in FGP are updated independently: they function
+as building blocks that can switch places, producing different
+domains (from the CM perspective) that in reality are formed
+of some of the same sub-patterns (deﬁned by the same
+schemata). This is clear in Figure 9 (B) where the patterns
+from schemata f ′
+1, f ′
+2 and f ′
+7, coexist independently of one
+another. Since some of the schemata for FGP have large “gaps”
+wherein the states of the cells are irrelevant, if particles collide
+inside those gaps, some of the decoupled underlying patterns
+are unaffected, leading to equivalent domains and redundant
+collisions such as what we apparently observe in Figure 8.
+In contrast, rule FGKL′ does not easily lead to dynamic
+decoupled patterns and redundant collisions, since its schemata
+do not leave large enough “gaps” in the lattice for other pat-
+terns to occur. Therefore, FGKL′ presents much fewer domains
+than rule FGP. But since the domains obtained by rule FGP
+are the result of schemata with a large amount of canalization
+leading to large “gaps” that can be in any state, many of the
+obtained distinct domains are dynamically equivalent.
+This observation is also supported by the schema re-
+description of additional, better-performing rules for the
+DCT: FMM0802
+[23] and FWO
+[42], with performances
+P105
+149(FMM0802) ≈0.845 and P105
+149(FWO) ≈0.889. The two-
+symbol (state-changing) schemata for these rules are depicted
+in Figure 10. As we can see, for the DCT, increasingly better-
+performing rules become “less canalized”. This means that
+they are very sensitive to noise in ICs (as we would expect
+for the DCT): bit-ﬂips or incomplete state-speciﬁcation have a
+high chance of leading to wrong classiﬁcation (in DCT terms).
+Since noise is not used in their performance computation and
+
+ﬁtness evaluations, these rules ﬁnd advantages in becoming
+increasingly speciﬁc to the initial conditions they respond dif-
+ferently to. Therefore, they have a higher number of schemata
+with more enputs and therefor less canalization to describe
+their behaviour. The dynamics of these CAs do not produce
+the large numbers of domains as observed in FGP. 3
+FMM0802
+FWO
+Generation
+Annihilation 
+Fig. 10.
+2-symbol schemata of FMM0802 and FWO, characterizing every
+possible situation where there are state changes for this rule.
+VIII. DISCUSSION
+Two-symbol schema redescription allowed us for the ﬁrst
+time to understand that despite dramatically distinct collective
+dynamics (emergent behaviour), the FGP rule is a more general
+version of the FGKL′ rule. The statistically signiﬁcant, albeit
+small, performance improvement of FGP over FGKL′, is gained
+by converting a single enput, into a group-invariant enput.
+In other words, FGP introduced ambiguity to the dynamical
+behaviour [43] of FGKL′, by allowing the state-transition to
+optionally occur for a larger set of conﬁgurations of a cell’s
+neighbourhood. This redundancy in the form of ambiguity
+is quite effectively captured by our two-symbol schema re-
+description with the position-free symbol.
+It should be emphasized that until this point, and especially
+when looking only at the emergent behaviour of these rules,
+their deep similarity was unknown. With schema redescription
+of local-level dynamics, not only can we uncover the similar-
+ity, but we can explain it. It also makes sense that FGP was
+3 redescriptions and dynamics of all the CAs in this paper are available from
+http://cnets.indiana.edu/groups/casci/mrecinca/ca
+obtained via genetic programming [4]. This rule was probably
+evolved via minor changes to a tree encoding of FGKL; it would
+need simply to substitute a tree terminal for a sub-tree with a
+disjunction node for 3 terminal edges, plus a mirror operation
+to go from FGKL to FGKL′.
+We can also see that both rules are extremely canalized:
+every possible state-change is controlled by two enputs, dis-
+regarding the states of all other neighbouring cells. But the
+FGP is canalizing in yet another way: it depends, alternatively,
+on the state of one of the input cells in a group-invariant
+enput. These group-invariant (collective) enputs can be for-
+mally described as a disjunction of alternative input variables
+(logical literals) and captured in schemata redescription by
+the additional position-free symbol. This additional form of
+canalization in Boolean functions, and its effect on determin-
+ing collective dynamics in automata networks used to model
+genetic regulation and signalling networks is a topic we will
+explore further, elsewhere.
+Another key idea we will explore in future work is how
+to use the explanatory power of schema redescription at the
+local level of Boolean LUTs, to link local to global behaviour
+in automata networks. From what we presented here, we can
+already see that the FGP rule must necessarily lead to some
+equivalent domains and redundant particle interactions. Since
+it contains group-invariant enputs, it canalizes distinct and
+alternative neighbourhood input patterns to the same transition.
+Therefore, domains that seem to be distinct at the collective
+space-time behaviour level, can in reality be equivalent and
+not involved in transmitting novel information through the
+lattice, merely maintaining the same information in different-
+looking domains. In a forthcoming paper we will build up from
+schema redescription at the local level, and the computation
+of collective dynamics from incomplete information, to auto-
+matically identify domains (relevant and redundant), particles,
+and particle interactions at the collective dynamics level.
+As a ﬁnal topic of discussion, the present work moves us to
+consider that an exclusively emergentist approach to complex
+systems dynamics is incomplete. The induction of recurring
+patterns in dynamics is not a substitute for uncovering the
+lower-level mechanisms that actually dictate the dynamics. A
+full account of complex systems requires attention to local and
+global dynamics. In a sense, too much attention to the “spots”
+or “stripes” we observe at the emergent level of behaviour,
+can mask that underneath it all there may be a very similar
+animal.
+ACKNOWLEDGMENTS
+This work was supported by Fundac¸˜ao para a Ciˆencia e a
+Tecnologia (Portugal) grant 36312/2007. We thank the FLAD
+Computational Biology Collaboratorium at the Gulbenkian
+Institute (Portugal) for hosting and providing facilities used for
+this research. We also thank Indiana University for providing
+access to its computing facilities.
+
+REFERENCES
+[1] M. Mitchell, J. Crutchﬁeld, and R. Das, “Evolving cellular automata
+with genetic algorithms: A review of recent work,” in Proceedings of
+the First International Conference on Evolutionary Computation and its
+Applications (EvCA’96).
+Russian Academy of Sciences, 1996.
+[2] P. Gacs, L. Kurdyumov, and L. Levin, “One-dimensional uniform arrays
+that wash out ﬁnite islands,” Probl. Peredachi. Inform., vol. 14, pp. 92–
+98, 1978.
+[3] P. Gonzaga de S´a and C. Maes, “Gacs-kurdyumov-levin automaton
+revisited,” Journal of Statistical Physics, vol. 67, no. 3-4, pp. 507–522,
+1992.
+[4] D. Andre, F. B. III, and J. Koza, “Discovery by genetic programming of a
+cellular automata rule that is better than any known rule for the majority
+classiﬁcation problem,” in Proceedings of the First Annual Conference
+on Genetic Programming, J. Koza, D. Goldberg, and D. Fogel, Eds.
+MIT Press, 1996, pp. 3–11.
+[5] S. J. Heims, The Cybernetics Group.
+MIT Press, 1991.
+[6] W. McCulloch and W. Pitts, “A logical calculus of ideas immanent in
+nervous activity,” Bulletin of Mathematical Biophysics, vol. 5, pp. 115–
+133, 1943.
+[7] S. Kauffman, “Metabolic stability end epigenesis in randomly con-
+structed genetic nets.” Journal of Theoretical Biology, vol. 22, pp. 437–
+467, 1969.
+[8] B. Derrida and D. Stauffer, “Phase transitions in two-dimensional
+kauffmann cellular automata,” Europhys. Lett., vol. 2, pp. 739–745,
+1986.
+[9] S. Kauffmann, The Origins of Order: Self-Organization and Selection
+in Evolution.
+Oxford University Press, 1993.
+[10] L. Mendoza and E. R. Alvarez-Buylla, “Dynamics of the genetic
+regulatory network for arabidopsis thaliana ﬂower morphogenesis.” J
+Theor Biol, vol. 193, no. 2, pp. 307–319, Jul 1998. [Online]. Available:
+http://dx.doi.org/10.1006/jtbi.1998.0701
+[11] R. Albert and H. Othmer, “The topology of the regulatory interac-
+tions predicts the expression pattern of the segment polarity genes in
+drosophila melanogaster.” J Theor Biol, vol. 223, no. 1, pp. 1–18, Jul
+2003.
+[12] C. Espinosa-Soto, P. Padilla-Longoria, and E. R. Alvarez-Buylla,
+“A
+gene
+regulatory
+network
+model
+for
+cell-fate
+determination
+during
+arabidopsis
+thaliana
+ﬂower
+development
+that
+is
+robust
+and recovers experimental gene expression proﬁles.” Plant Cell,
+vol. 16, no. 11, pp. 2923–2939, Nov 2004. [Online]. Available:
+http://dx.doi.org/10.1105/tpc.104.021725
+[13] S. Kauffman, C. Peterson, B. Samuelsson, and C. Troein, “Random
+boolean network models and the yeast transcriptional network.” Proce,
+vol. 100, no. 25, pp. 14 796–14 799, Dec 2003. [Online]. Available:
+http://dx.doi.org/10.1073/pnas.2036429100
+[14] M. Chaves, R. Albert, and E. D. Sontag, “Robustness and fragility
+of boolean models for genetic regulatory networks.” J Theor Biol,
+vol.
+235,
+no.
+3,
+pp.
+431–449,
+Aug
+2005.
+[Online].
+Available:
+http://dx.doi.org/10.1016/j.jtbi.2005.01.023
+[15] S. Bornholdt, “Systems biology: less is more in modeling large
+genetic
+networks,”
+Science,
+Jan
+2005.
+[Online].
+Available:
+http:
+//stke.sciencemag.org/cgi/content/summary/sci;310/5747/449
+[16] ——, “Boolean network models of cellular regulation: prospects and
+limitations,” J R Soc Interface, vol. 5 Suppl 1, pp. S85–94, Aug 2008.
+[17] A.-L. Barab´asi, Linked: The New Science of Networks.
+New York,
+USA: Perseus Books, 2002.
+[18] M. Newman, A.-L. Barab´asi, and D. J. Watts, The Structure and
+Dynamics of Networks. Princeton, NJ: Princeton University Press, 2006.
+[19] U. Alon, “Network motifs: theory and experimental approaches.” Nat
+Rev Genet, vol. 8, no. 6, pp. 450–461, Jun 2007. [Online]. Available:
+http://dx.doi.org/10.1038/nrg2102
+[20] M. Mitchell, “Complex systems: Network thinking,” Artiﬁcial Intelli-
+gence, vol. 170, no. 18, pp. 1194–1212, 2006.
+[21] D. Peak, J. D. West, S. M. Messinger, and K. A. Mott, “Evidence for
+complex, collective dynamics and distributed emergent computation in
+plants,” Proceedings of the National Academy of Sciences, vol. 101,
+no. 4, pp. 918–922, 2004.
+[22] T. Helikar, J. Konvalina, J. Heidel, and J. A. Rogers, “Emergent
+decision-making in biological signal transduction networks.” Proc Natl
+Acad Sci U S A, vol. 105, no. 6, pp. 1913–1918, Feb 2008. [Online].
+Available: http://dx.doi.org/10.1073/pnas.0705088105
+[23] M. Marques-Pita, M. Mitchell, and L. M. Rocha, “The role of conceptual
+structure in designing cellular automata to perform collective compu-
+tation,” in Unconventional Computation. 7th International Conference.
+LNCS 5204, C. Calude, J. F. Costa, R. Freund, M. Oswald, and
+G. Rozenberg, Eds., vol. 5204, 2008, pp. 146–163.
+[24] M. Marques-Pita and L. M. Rocha, “Conceptual structure in cellular
+automata: The density classiﬁcation task,” in Proceedings of the Eleventh
+International Conference on Artiﬁcial Life (Alife XI), S. Bullock, J. No-
+ble, R. A. Watson, and M. A. Bedau, Eds.
+MIT Press, Cambridge,
+MA., 2008, pp. 390–397.
+[25] C. J. O. Reichhardt and K. Bassler, “Canalization and symmetry in
+boolean models for genetic regulatory networks,” Physica A, vol. 40,
+pp. 4339–4350, 2007.
+[26] J. von Neumann, Theory of Self-Reproducing Automata, ser. Edited and
+completed by A. W. Burks.
+University of Illinois Press, 1966.
+[27] J. Grefenstette, S. Kim, and S. Kauffman, “An analysis of the
+class of gene regulatory functions implied by a biochemical model,”
+BIOSYSTEMS, Jan 2006. [Online]. Available: http://linkinghub.elsevier.
+com/retrieve/pii/S0303264705001681
+[28] J. Holland, K. Holyoak, R. Nisbett, and P. Thagard, Induction: Processes
+of Inference, Learning and Discovery.
+MIT Press, 1986.
+[29] W. V. Quine, “A way to simplify truth functions,” The American
+Mathematical Monthly, vol. 62, no. 9, pp. 627–631, 1955.
+[30] L. Valiant, “A theory of the learnable,” Communications of the ACM,
+Jan 1984. [Online]. Available: http://portal.acm.org/citation.cfm?id=
+1968.1972
+[31] E. McCluskey, “Detection of group invariance or total symmetry of a
+boolean function,” Bell System Technical Journal, vol. 35, no. 6, pp.
+1445–1453, 1956.
+[32] M. Mitchell, J. Crutchﬁeld, and P. Hraber, “Revisiting the edge of chaos:
+Evolving cellular automata to perform computations,” Complex Systems,
+vol. 7, pp. 89–130, 1993.
+[33] J. Hanson, “Computational mechanics of cellular automata,” Ph.D.
+dissertation, University of California, Berkeley, 1993.
+[34] J. Crutchﬁeld, “Is anything ever new? considering emergence,” in
+Complexity: Metaphors, Models, and Reality,, ser. SFI Series in the
+Sciences of Complexity, G. Cowan and D. Pines, Eds. Addison-Wesley,
+1994, vol. XIX, pp. 479–497.
+[35] J. P. Crutchﬁeld, M. Mitchell, and R. Das, “The evolutionary de-
+sign of collective computation in cellular automata,” in Evolutionary
+Dynamics—Exploring the Interplay of Selection, Neutrality, Accident,
+and Function, J. P. Crutchﬁeld and P. K. Schuster, Eds.
+Oxford
+University Press, New York, 2003, pp. 361–411.
+[36] L. M. Rocha and W. Hordijk, “Material representations: From the
+genetic code to the evolution of cellular automata,” Artiﬁcial Life,
+vol. 11, no. 1-2, pp. 189 – 214, Winter/Spring 2005.
+[37] J. T. Lizier, M. Prokopenko, and A. Y. Zomaya, “Local information
+transfer as a spatiotemporal ﬁlter for complex systems,” Physical Review
+E, vol. 77, p. 026110, 2008.
+[38] C. Shalizi, R. Haslinger, J.-B. Rouquier, K. Klinkner, and C. Moore,
+“Automatic ﬁlters for the detection of coherent structure in spatiotem-
+poral systems,” Physical Review E, vol. 73, 2006.
+[39] M. Marques-Pita, R. Manurung, and H. Pain, “Conceptual representa-
+tions: What do they have to say about the density classiﬁcation task
+by cellular automata?” in ECCS’06, European Conference on Complex
+Systems., J. Jost, F. Reed-Tsotchas, and P. Schuster, Eds., 2006.
+[40] M. Mitchell, J. Crutchﬁeld, and P. Hraber, “Evolving cellular automata
+to perform computations:mechanisms and impediments,” Physica D,
+vol. 75, pp. 361–391, 1994.
+[41] W. Hordijk, J. P. Crutchﬁeld, and M. Mitchell, “Mechanisms of emergent
+computation in cellular automata,” in Proceedings of the Fifth Interna-
+tional Conference on Parallel Problem Solving From Nature—PPSN V,
+A. E. Eiben, Ed.
+New York: Springer, 1998.
+[42] D. Wolz and P. B. de Oliveira, “Very effective evolutionary techniques
+for searching cellular automata rule spaces,” Journal of Cellular Au-
+tomata, vol. 3, pp. 289–312, 2008.
+[43] G. Klir and M. Wierman, Uncertainty-Based Information : Elements
+of Generalized Information Theory, ser. Studies in Fuzziness and Soft
+Computing.
+Physica-Verlag, 1999.

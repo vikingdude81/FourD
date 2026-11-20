@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/K2fU8VfIorc0KFaRjseEPuXe8P4</id>
+  <title>arXiv Query: search_query=abs:"closure of constraints"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:56Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22closure+of+constraints%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>4</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1702.03337v1</id>
+    <title>Modeling mammary organogenesis from biological first principles: Cells and their physical constraints</title>
+    <updated>2017-02-09T18:34:03Z</updated>
+    <link href="https://arxiv.org/abs/1702.03337v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1702.03337v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In multicellular organisms, relations among parts and between parts and the whole are contextual and interdependent. These organisms and their cells are ontogenetically linked: an organism starts as a cell that divides producing non-identical cells, which organize in tri-dimensional patterns. These association patterns and cells types change as tissues and organs are formed. This contextuality and circularity makes it difficult to establish detailed cause and effect relationships. Here we propose an approach to overcome these intrinsic difficulties by combining the use of two models; 1) an experimental one that employs 3D culture technology to obtain the structures of the mammary gland, namely, ducts and acini, and 2) a mathematical model based on biological principles. The typical approach for mathematical modeling in biology is to apply mathematical tools and concepts developed originally in physics or computer sciences. Instead, we propose to construct a mathematical model based on proper biological principles. Specifically, we use principles identified as fundamental for the elaboration of a theory of organisms, namely i) the default state of cell proliferation with variation and motility and ii) the principle of organization by closure of constraints. This model has a biological component, the cells, and a physical component, a matrix which contains collagen fibers. Cells display agency and move and proliferate unless constrained; they exert mechanical forces that i) act on collagen fibers and ii) on other cells. As fibers organize, they constrain the cells on their ability to move and to proliferate. The model exhibits a circularity that can be interpreted in terms of closure of constraints...</summary>
+    <category term="q-bio.OT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-02-09T18:34:03Z</published>
+    <arxiv:primary_category term="q-bio.OT"/>
+    <arxiv:journal_ref>Progress in Biophysics and Molecular Biology 122(1), 2016, P. 58-69</arxiv:journal_ref>
+    <author>
+      <name>Maël Montévil</name>
+    </author>
+    <author>
+      <name>Lucia Speroni</name>
+    </author>
+    <author>
+      <name>Carlos Sonnenschein</name>
+    </author>
+    <author>
+      <name>Ana M. Soto</name>
+    </author>
+    <arxiv:doi>10.1016/j.pbiomolbio.2016.08.004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.pbiomolbio.2016.08.004" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.26198v1</id>
+    <title>Single-Shot Intensity-Correlation Diffractive X-ray Imaging of ICF Plasmas</title>
+    <updated>2026-06-24T16:11:43Z</updated>
+    <link href="https://arxiv.org/abs/2606.26198v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.26198v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>X-ray radiography of inertial confinement fusion plasmas is currently limited to several-micron resolution by geometric blur, diffraction, and photon-throughput tradeoffs. We propose single-shot intensity-correlation diffractive imaging (IDI) as a lensless route to submicron plasma turbulence measurements under low-self-emission conditions. Rather than relying on physical apertures, IDI reconstructs plasma morphology by Fourier transforming the spatial correlations of chaotic far-field speckles via the Hanbury Brown-Twiss effect. The Fourier phase is retrieved by applying bispectral closure-phase constraints derived from third-order intensity correlations. We demonstrate this submicron capability in a numerical simulation using a $50~\mathrm{keV}$ x-ray probe scattered by a spiral plasma structure.</summary>
+    <category term="physics.plasm-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-24T16:11:43Z</published>
+    <arxiv:comment>6 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.plasm-ph"/>
+    <author>
+      <name>Kenan Qu</name>
+    </author>
+    <author>
+      <name>Daniel Bhatti</name>
+    </author>
+    <author>
+      <name>Nathaniel J. Fisch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.12770v2</id>
+    <title>Distributed Visual-Inertial Cooperative Localization</title>
+    <updated>2021-08-17T20:58:27Z</updated>
+    <link href="https://arxiv.org/abs/2103.12770v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.12770v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we present a consistent and distributed state estimator for multi-robot cooperative localization (CL) which efficiently fuses environmental features and loop-closure constraints across time and robots. In particular, we leverage covariance intersection (CI) to allow each robot to only estimate its own state and autocovariance and compensate for the unknown correlations between robots. Two novel multi-robot methods for utilizing common environmental SLAM features are introduced and evaluated in terms of accuracy and efficiency. Moreover, we adapt CI to enable drift-free estimation through the use of loop-closure measurement constraints to other robots' historical poses without a significant increase in computational cost. The proposed distributed CL estimator is validated against its non-realtime centralized counterpart extensively in both simulations and real-world experiments.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-23T18:12:07Z</published>
+    <arxiv:comment>8 pages, 5 figures, 8 tables; IROS 2021 final version</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Pengxiang Zhu</name>
+    </author>
+    <author>
+      <name>Patrick Geneva</name>
+    </author>
+    <author>
+      <name>Wei Ren</name>
+    </author>
+    <author>
+      <name>Guoquan Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.10018v4</id>
+    <title>LEMON-Mapping: Loop-Enhanced Large-Scale Multi-Session Point Cloud Merging and Optimization for Globally Consistent Mapping</title>
+    <updated>2026-06-10T08:52:34Z</updated>
+    <link href="https://arxiv.org/abs/2505.10018v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.10018v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-robot collaboration is becoming increasingly critical and presents significant challenges in modern robotics, especially for building a globally consistent, accurate map. Traditional multi-robot pose graph optimization (PGO) methods ensure basic global consistency but ignore the geometric structure of the map, and only use loop closures as constraints between pose nodes, leading to divergence and blurring in overlapping regions. To address this issue, we propose LEMON-Mapping, a loop-enhanced framework for large-scale, multi-session point cloud fusion and optimization. We re-examine the role of loops for multi-robot mapping and introduce three key innovations. First, we develop a robust loop processing mechanism that rejects outliers and a loop recall strategy to recover mistakenly removed but valid loops. Second, we introduce spatial bundle adjustment for multi-robot maps, reducing divergence and eliminating blurring in overlaps. Third, we design a PGO-based approach that leverages refined bundle adjustment constraints to propagate local accuracy to the entire map. We validate LEMON-Mapping on several public datasets and a self-collected dataset. The experimental results show superior mapping accuracy and global consistency of our framework compared to traditional merging methods. Scalability experiments also demonstrate its strong capability to handle scenarios involving numerous robots.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-15T06:59:48Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Lijie Wang</name>
+    </author>
+    <author>
+      <name>Xiaoyi Zhong</name>
+    </author>
+    <author>
+      <name>Ziyi Xu</name>
+    </author>
+    <author>
+      <name>Kaixin Chai</name>
+    </author>
+    <author>
+      <name>Anke Zhao</name>
+    </author>
+    <author>
+      <name>Tianyu Zhao</name>
+    </author>
+    <author>
+      <name>Changjian Jiang</name>
+    </author>
+    <author>
+      <name>Qianhao Wang</name>
+    </author>
+    <author>
+      <name>Xieyuanli Chen</name>
+    </author>
+    <author>
+      <name>Fei Gao</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/787vV5LDHrTztSrnREjJAtjZTi0</id>
+  <title>arXiv Query: search_query=all:"emergent individuals" OR abs:"emergent individual"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:59:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22emergent+individuals%22+OR+abs:%22emergent+individual%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2511.07847v1</id>
+    <title>Matters of Life and Death in Computational Cell Biology</title>
+    <updated>2025-11-11T05:29:04Z</updated>
+    <link href="https://arxiv.org/abs/2511.07847v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.07847v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Nearly all cell models explicitly or implicitly deal with the biophysical constraints that must be respected for life to persist. Despite this, there is almost no systematicity in how these constraints are implemented, and we lack a principled understanding of how cellular dynamics interact with them and how they originate in actual biology. Computational cell biology will only overcome these concerns once it treats the life-death boundary as a central concept, creating a theory of cellular viability. We lay the foundation for such a development by demonstrating how specific geometric structures can separate regions of qualitatively similar survival outcomes in our models, offering new global organizing principles for cell fate. We also argue that idealized models of emergent individuals offer a tractable way to begin understanding life's intrinsically generated limits.</summary>
+    <category term="q-bio.CB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-11T05:29:04Z</published>
+    <arxiv:comment>10 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="q-bio.CB"/>
+    <author>
+      <name>Connor McShaffrey</name>
+    </author>
+    <author>
+      <name>Eran Agmon</name>
+    </author>
+    <author>
+      <name>Randall D. Beer</name>
+    </author>
+    <arxiv:doi>10.1038/s41540-026-00718-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s41540-026-00718-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.03068v1</id>
+    <title>From semantic memory to collective creativity: A generative cognitive foundation for social creativity models</title>
+    <updated>2026-02-03T03:52:21Z</updated>
+    <link href="https://arxiv.org/abs/2602.03068v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.03068v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Simulation-based theory development has yielded powerful insights into collective performance by linking social structure to emergent outcomes, yet it has struggled to extend to collective creativity. Creativity is hard to capture purely at the social level, as novel ideas are generated through cognitive mechanisms. To address this gap, we introduce a multi-level socio-cognitive agent-based framework in which agents share a common semantic vocabulary and substrate but differ in semantic network topology. A single generative parameter tunes semantic modularity, yielding emergent individual differences in ideational breadth. When agents exchange ideation traces, two canonical social-creativity phenomena arise without being imposed: lower pre-interaction ideation overlap predicts larger stimulation gains, and shared inspiration sources induce network-level redundancy. The framework enables mechanistic theory-building about cognition and social structure in collective creativity.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-03T03:52:21Z</published>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Mirza Nayeem Ahmed</name>
+    </author>
+    <author>
+      <name>Raiyan Abdul Baten</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.17439v1</id>
+    <title>SPICED: A Synaptic Homeostasis-Inspired Framework for Unsupervised Continual EEG Decoding</title>
+    <updated>2025-09-22T07:28:22Z</updated>
+    <link href="https://arxiv.org/abs/2509.17439v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.17439v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human brain achieves dynamic stability-plasticity balance through synaptic homeostasis. Inspired by this biological principle, we propose SPICED: a neuromorphic framework that integrates the synaptic homeostasis mechanism for unsupervised continual EEG decoding, particularly addressing practical scenarios where new individuals with inter-individual variability emerge continually. SPICED comprises a novel synaptic network that enables dynamic expansion during continual adaptation through three bio-inspired neural mechanisms: (1) critical memory reactivation; (2) synaptic consolidation and (3) synaptic renormalization. The interplay within synaptic homeostasis dynamically strengthens task-discriminative memory traces and weakens detrimental memories. By integrating these mechanisms with continual learning system, SPICED preferentially replays task-discriminative memory traces that exhibit strong associations with newly emerging individuals, thereby achieving robust adaptations. Meanwhile, SPICED effectively mitigates catastrophic forgetting by suppressing the replay prioritization of detrimental memories during long-term continual learning. Validated on three EEG datasets, SPICED show its effectiveness.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-22T07:28:22Z</published>
+    <arxiv:comment>21 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yangxuan Zhou</name>
+    </author>
+    <author>
+      <name>Sha Zhao</name>
+    </author>
+    <author>
+      <name>Jiquan Wang</name>
+    </author>
+    <author>
+      <name>Haiteng Jiang</name>
+    </author>
+    <author>
+      <name>Shijian Li</name>
+    </author>
+    <author>
+      <name>Tao Li</name>
+    </author>
+    <author>
+      <name>Gang Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.05207v2</id>
+    <title>Emergence from Emergence: Financial Market Simulation via Learning with Heterogeneous Preferences</title>
+    <updated>2025-11-11T04:40:58Z</updated>
+    <link href="https://arxiv.org/abs/2511.05207v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.05207v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Agent-based models help explain stock price dynamics as emergent phenomena driven by interacting investors. In this modeling tradition, investor behavior has typically been captured by two distinct mechanisms -- learning and heterogeneous preferences -- which have been explored as separate paradigms in prior studies. However, the impact of their joint modeling on the resulting collective dynamics remains largely unexplored. We develop a multi-agent reinforcement learning framework in which agents endowed with heterogeneous risk aversion, time discounting, and information access collectively learn trading strategies within a unified shared-policy framework. The experiment reveals that (i) learning with heterogeneous preferences drives agents to develop strategies aligned with their individual traits, fostering behavioral differentiation and niche specialization within the market, and (ii) the interactions by the differentiated agents are essential for the emergence of realistic market dynamics such as fat-tailed price fluctuations and volatility clustering. This study presents a constructive paradigm for financial market modeling in which the joint design of heterogeneous preferences and learning mechanisms enables two-stage emergence: individual behavior and the collective market dynamics.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-07T12:54:27Z</published>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Ryuji Hashimoto</name>
+    </author>
+    <author>
+      <name>Ryosuke Takata</name>
+    </author>
+    <author>
+      <name>Masahiro Suzuki</name>
+    </author>
+    <author>
+      <name>Yuki Tanaka</name>
+    </author>
+    <author>
+      <name>Kiyoshi Izumi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.00469v1</id>
+    <title>Mobility Behavior Evolution During Extended Emergencies: Returners, Explorers, and the 15-Minute City</title>
+    <updated>2025-10-01T03:41:54Z</updated>
+    <link href="https://arxiv.org/abs/2510.00469v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.00469v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding human mobility during emergencies is critical for strengthening urban resilience and guiding emergency management. This study examines transitions between returners, who repeatedly visit a limited set of locations, and explorers, who travel across broader destinations, over a 15-day emergency period in a densely populated metropolitan region using the YJMob100K dataset. High-resolution spatial data reveal intra-urban behavioral dynamics often masked at coarser scales. Beyond static comparisons, we analyze how mobility evolves over time, with varying emergency durations, across weekdays and weekends, and relative to neighborhood boundaries, linking the analysis to the 15-minute city framework.
+  Results show that at least two weeks of data are required to detect meaningful behavioral shifts. During prolonged emergencies, individuals resume visits to non-essential locations more slowly than under normal conditions. Explorers markedly reduce long distance travel, while weekends and holidays consistently exhibit returner-like, short distance patterns. Residents of low Points of Interest (POI) density neighborhoods often travel to POI rich areas, highlighting spatial disparities. Strengthening local accessibility may improve urban resilience during crises.
+  Full reproducibility is supported through the project website: https://github.com/wissamkontar</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-01T03:41:54Z</published>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Omid Armantalab</name>
+    </author>
+    <author>
+      <name>Jason Hawkins</name>
+    </author>
+    <author>
+      <name>Wissam Kontar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.00770v1</id>
+    <title>Thinking Wrong in Silence: Backdoor Attacks on Continuous Latent Reasoning</title>
+    <updated>2026-04-01T11:34:55Z</updated>
+    <link href="https://arxiv.org/abs/2604.00770v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.00770v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A new generation of language models reasons entirely in continuous hidden states, producing no tokens and leaving
+  no audit trail. We show that this silence creates a fundamentally new attack surface. ThoughtSteer perturbs a
+  single embedding vector at the input layer; the model's own multi-pass reasoning amplifies this perturbation into a
+  hijacked latent trajectory that reliably produces the attacker's chosen answer, while remaining structurally
+  invisible to every token-level defense. Across two architectures (Coconut and SimCoT), three reasoning benchmarks,
+  and model scales from 124M to 3B parameters, ThoughtSteer achieves &gt;=99% attack success rate with near-baseline
+  clean accuracy, transfers to held-out benchmarks without retraining (94-100%), evades all five evaluated active
+  defenses, and survives 25 epochs of clean fine-tuning. We trace these results to a unifying mechanism: Neural
+  Collapse in the latent space pulls triggered representations onto a tight geometric attractor, explaining both why
+  defenses fail and why any effective backdoor must leave a linearly separable signature (probe AUC&gt;=0.999). Yet a
+  striking paradox emerges: individual latent vectors still encode the correct answer even as the model outputs the
+  wrong one. The adversarial information is not in any single vector but in the collective trajectory, establishing
+  backdoor perturbations as a new lens for mechanistic interpretability of continuous reasoning. Code and checkpoints
+  are available.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-01T11:34:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Swapnil Parekh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.26688v1</id>
+    <title>Deep Learning in Infant Functional Neuroimaging: Challenges, Advances, and Future Directions</title>
+    <updated>2026-09-22T16:44:59Z</updated>
+    <link href="https://arxiv.org/abs/2609.26688v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.26688v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Infancy is a critical developmental window characterized by rapid functional brain reorganization, during which large-scale networks emerge, individualized connectome signatures continue to form, and early deviations may shape long-term cognitive and clinical outcomes. Functional MRI (fMRI) offers an opportunity to study these processes in vivo, yet extracting developmentally meaningful information from it remains challenging due to comparatively short scan duration, structured motion artifacts, variable scan states, and rapid brain maturation. Amid these challenges, deep learning has expanded the capacity of computational neuroimaging by learning robust representations from noisy, high-dimensional data, integrating complex spatial and temporal information, and capturing the nonlinear and rapidly evolving organization of the developing brain. Here, we review recent advances in deep learning for infant functional neuroimaging, synthesizing progress across input representation formatting, population and individualized brain mapping, longitudinal trajectory forecasting, robust and explainable model evaluation, and biological translation. Collectively, these methodological advances mark a paradigm shift in infant functional neuroimaging from descriptive, group-level analyses toward reliable, individualized, and developmentally grounded models. Future progress will depend on larger and more diverse longitudinal datasets, developmentally appropriate model designs, rigorous and standardized evaluation, and integration of computational predictions with biological mechanisms towards clinically meaningful outcomes. Addressing these priorities will help establish deep learning as a robust framework for understanding early functional brain development, identifying developmental variation at the individual level, and ultimately supporting earlier and precise assessment of neurodevelopmental risk.</summary>
+    <category term="q-bio.NC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-22T16:44:59Z</published>
+    <arxiv:comment>21 pages, 3 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="q-bio.NC"/>
+    <author>
+      <name>Dan Hu</name>
+    </author>
+    <author>
+      <name>Jiale Cheng</name>
+    </author>
+    <author>
+      <name>Weiran Xia</name>
+    </author>
+    <author>
+      <name>Kangfu Han</name>
+    </author>
+    <author>
+      <name>Matthew Wu</name>
+    </author>
+    <author>
+      <name>Li Wang</name>
+    </author>
+    <author>
+      <name>Weili Lin</name>
+    </author>
+    <author>
+      <name>Gang Li</name>
+    </author>
+  </entry>
+</feed>

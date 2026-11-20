@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PmA0X/ogJPdLFqzVIv1MAwZVsaU</id>
+  <title>arXiv Query: search_query=abs:"substrate independence" AND abs:identity&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22substrate+independence%22+AND+abs:identity&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2206.06298v2</id>
+    <title>Drop impact on viscous liquid films</title>
+    <updated>2022-11-16T14:35:23Z</updated>
+    <link href="https://arxiv.org/abs/2206.06298v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.06298v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>When a liquid drop falls on a solid substrate, the air layer in between them delays the occurrence of liquid--solid contact. For impacts on smooth substrates, the air film can even prevent wetting, allowing the drop to bounce off with dynamics identical to that observed for impacts on superamphiphobic materials. In this article, we investigate similar bouncing phenomena, occurring on viscous liquid films, that mimic atomically smooth substrates, with the goal to probe their effective repellency. We elucidate the mechanisms associated to the bouncing to non-bouncing (floating) transition using experiments, simulations, and a minimal model that predicts the main characteristics of drop impact, the contact time, and the coefficient of restitution. In the case of highly viscous or very thin films, the impact dynamics is not affected by the presence of the viscous film. Within this substrate--independent limit, bouncing is suppressed once the drop viscosity exceeds a critical value as on superamphiphobic substrates. For thicker or less viscous films, both the drop and film properties influence the rebound dynamics and conspire to inhibit bouncing above a critical film thickness. This substrate--dependent regime also admits a limit, for low viscosity drops, in which the film properties alone determine the limits of repellency.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-13T16:26:13Z</published>
+    <arxiv:comment>Please find the supplemental videos here: https://youtube.com/playlist?list=PLf5C5HCrvhLHJXLqwpylEwYc2rVtTsCUX</arxiv:comment>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Vatsal Sanjay</name>
+    </author>
+    <author>
+      <name>Srinath Lakshman</name>
+    </author>
+    <author>
+      <name>Pierre Chantelot</name>
+    </author>
+    <author>
+      <name>Jacco H. Snoeijer</name>
+    </author>
+    <author>
+      <name>Detlef Lohse</name>
+    </author>
+    <arxiv:doi>10.1017/jfm.2023.13</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/jfm.2023.13" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.09352v2</id>
+    <title>Causal symmetrization as an empirical signature of operational autonomy in complex systems</title>
+    <updated>2025-12-12T14:45:11Z</updated>
+    <link href="https://arxiv.org/abs/2512.09352v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.09352v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Theoretical biology has long proposed that autonomous systems sustain their identity through reciprocal constraints between structure and activity, a dynamical regime underlying concepts such as closure to efficient causation and autopoiesis. Despite their influence, these principles have resisted direct empirical assessment outside biological systems.
+  Here, we empirically assess this framework in artificial sociotechnical systems by identifying a statistical signature consistent with operational autonomy. Analyzing 50 large-scale collaborative software ecosystems spanning 11,042 system-months, we develop an order parameter ($Γ$) quantifying structural persistence under component turnover and use Granger causality to characterize directional coupling between organizational architecture and collective activity. $Γ$ exhibits a bimodal distribution (Hartigan's dip test $p = 0.0126$; $Δ$BIC = 2000), revealing a sharp phase transition between an exploratory regime of high variance and a mature regime characterized by a 1.77-fold variance collapse. At maturity, causal symmetrization emerges, with the structure--activity coupling ratio shifting from 0.71 (activity-driven) to 0.94 (bidirectional).
+  A composite viability index combining activity and structural persistence outperforms activity-based prediction alone (AUC = 0.88 vs. 0.81), identifying ``structural zombie'' systems in which sustained activity masks architectural decay.
+  Together, these results show that causal symmetrization functions as a necessary statistical signature consistent with theoretical notions of operational closure, without implying biological life or mechanistic closure. They demonstrate that core principles of autonomy can be empirically probed in artificial collaborative systems, supporting substrate-independent dynamical signatures of self-organizing autonomy across complex adaptive systems.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-09T10:32:39Z</published>
+    <arxiv:comment>18 pages, 6 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Anthony Gosme</name>
+    </author>
+  </entry>
+</feed>

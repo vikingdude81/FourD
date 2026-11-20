@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/y+eBrdTveXxuqwFAHkjo7d09BhE</id>
+  <title>arXiv Query: search_query=all:"self-aware substructures"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-11-20T04:58:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22self-aware+substructures%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/gr-qc/9704009v2</id>
+    <title>Is "the theory of everything'' merely the ultimate ensemble theory?</title>
+    <updated>1998-12-01T00:41:29Z</updated>
+    <link href="https://arxiv.org/abs/gr-qc/9704009v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/gr-qc/9704009v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We discuss some physical consequences of what might be called ``the ultimate ensemble theory'', where not only worlds corresponding to say different sets of initial data or different physical constants are considered equally real, but also worlds ruled by altogether different equations. The only postulate in this theory is that all structures that exist mathematically exist also physically, by which we mean that in those complex enough to contain self-aware substructures (SASs), these SASs will subjectively perceive themselves as existing in a physically ``real'' world. We find that it is far from clear that this simple theory, which has no free parameters whatsoever, is observationally ruled out. The predictions of the theory take the form of probability distributions for the outcome of experiments, which makes it testable. In addition, it may be possible to rule it out by comparing its a priori predictions for the observable attributes of nature (the particle masses, the dimensionality of spacetime, etc) with what is observed.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1997-04-03T21:43:57Z</published>
+    <arxiv:comment>29 pages, revised to match version published in Annals of Physics. The New Scientist article and color figures are available at http://www.sns.ias.edu/~max/toe_frames.html or from max@ias.edu</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Annals Phys.270:1-51,1998</arxiv:journal_ref>
+    <author>
+      <name>Max Tegmark</name>
+      <arxiv:affiliation>Institute for Advanced Study, Princeton</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1006/aphy.1998.5855</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1006/aphy.1998.5855" title="doi"/>
+  </entry>
+</feed>
