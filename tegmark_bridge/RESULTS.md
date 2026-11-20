@@ -602,3 +602,30 @@ Findings:
   cliff) or the engine (noise, step-size a la 2407.21086's glider); attacks on its
   instantiations are self-repairing. The immortal entity is anti-fragile at the
   member level and fragile only at the substrate/engine level.
+
+### 5.16 E3b — lethality ladder: the mortality surface of an immortal entity
+
+Permanently set each stress axis at t=1500; DEATH = basin 15 never recrowns
+(100-step sustained lead) in the remaining 2500 steps. (`e3b_lethality.py`,
+`outputs/e3b_lethality.json`.)
+
+- **Noise axis (engine chaos):** x1 alive (share 0.810), **x2 alive but diminished**
+  (crown never lost, share 0.375), **x4+ dead** (x4 lead15_post 0.655 but no
+  sustained recrown; x32 lead 0.019). Critical noise multiplier in (2, 4].
+- **Rotation axis (structure):** 30° alive (0.992), **45° dead**. Cliff matches the
+  B2 identity radius exactly — E3b independently re-measures it as a death boundary.
+- **Steering axis (engine time-rate):** alive at 1.2, 0.35, 0.15, 0.05, 0.0 — no
+  lethal value. CAVEAT: steering multiplies forces AND noise together, so it
+  rescales time rather than physics; at 0.0 the configuration is frozen (share
+  0.999→0.779 = locked state, degenerate stasis-immortality, not life). The entity
+  is immune to engine speed; this contrasts with the Lenia glider (2407.21086)
+  where dt changes the physics (asymptotic scheme), not just the clock.
+- **Combo probes (2D boundary):** (0°, x2) alive; **(30°, x2) DEAD** although each
+  factor alone is sublethal (0.44 crown-flicker, no recrown); (30°, x4) dead;
+  (15°, x8) dead. **The boundary is a region, not three thresholds:** the identity
+  radius shrinks with noise — critical multiplier ~4 at 0° but <2 at 30°.
+
+Metaphysical payload: the entity's mortality is a closed 2-manifold-ish surface in
+(structure-deformation x engine-chaos) space, computable by ladder bisection.
+Member-state attacks (E3) are off-manifold: they cannot reach it. Death requires
+moving the (structure, engine) pair across the surface.
