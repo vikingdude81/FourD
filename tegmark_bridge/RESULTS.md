@@ -567,3 +567,38 @@ identity radius (B2). Two direct confirmations and three usable imports:
 
 **Wedge**: quantitative SAS census + identity certificates, between the CA/alife camp
 (phenomenology, no identity tests) and the AI-metaphysics camp (criteria, no simulations).
+
+### 5.15 E3 — perturbation agency test: the entity is an attractor, not a crowd
+
+Imported criterion from Hamon et al. 2402.10236: an "individual" is judged by the
+robustness of its spatiotemporal unity to perturbation. Target: dodeca19 immortal
+entity (basin 15, N=128, 4000 steps, kick at t=1500, seeds 9201-9203).
+Recrowned = basin 15 leader for >=100 consecutive steps; recovered = share15 >= 95%
+of home share. (`e3_agency.py`, `outputs/e3_agency.json`.)
+
+| condition | min share during kick | recrown (steps after kick) | recover 95% | post mean share |
+|---|---|---|---|---|
+| control | 0.722 | — | — | 0.810 |
+| teleport 25% of members to random S3 | 0.638 | 0 (never lost crown) | 5 | 0.809 |
+| teleport 50% | 0.492 | 0 | 5 | 0.809 |
+| teleport 100% (whole crowd vanishes) | 0.208 | 0 | 7 | 0.809 |
+| wind (crowd displaced 80% toward far basin) | 0.143 | 5 | 8 | 0.810 |
+| noise_burst (engine noise x4 for 50 steps) | 0.065 | 49 | 54 | 0.810 |
+
+Findings:
+- **No perturbation of member-state can kill the entity.** Teleporting 100% of its
+  members to random points did not even dethrone it: the crown never changed hands
+  and home occupancy was back in 7 steps. The basin refills from the geometry —
+  identity demonstrably does not live in membership (third confirmation after B1's
+  bearer null and B2's translated crown).
+- **Displacement is transient**: wind drops share to 0.14 but the crowd streams home
+  in <10 steps. The entity behaves like a valley: pour the water elsewhere, it flows back.
+- **Only engine-level shocks suppress it**, and recovery time tracks the shock
+  duration, not any intrinsic healing: recrown at step 49 of a 50-step noise burst —
+  the entity re-crowned the moment the environment calmed, not when the "crowd healed."
+- Verdict under the agency criterion: **full robustness (self-maintaining), zero
+  behavioral agency (no sensing/acting)** — exactly what the (structure x engine)
+  ontology predicts. To kill this entity you must change the structure (B2 radius
+  cliff) or the engine (noise, step-size a la 2407.21086's glider); attacks on its
+  instantiations are self-repairing. The immortal entity is anti-fragile at the
+  member level and fragile only at the substrate/engine level.
