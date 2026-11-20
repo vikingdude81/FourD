@@ -106,6 +106,21 @@ the form's mortality surface excludes time itself stopping. If E4's dip test con
 HOSTS/BOILS/DEAD become genuine phases and "death" becomes a transition, not
 an event.
 
+B4 UPDATE (RESULTS §5.18–5.19): the exit boundary is now measured on the
+true structural axis. Gap-fill weight w kills by **weakening a pinned
+peak** (share15 0.81→0.29 by w=0.85, peak direction cos=1.000 throughout,
+diffuse only at full closure w=1) — symmetrization death is dilution, not
+relocation. Near-vertex displacement kills by **moving an intact peak**
+(cap_peak stays 1.000; leader 15→8 at 30°) — a rival form displaces ours
+while the population never loses concentration. Far-vertex displacement
+never kills (9x relation-specificity at equal angles). Hysteresis probe:
+**no route dependence at any partial gap** — d19-warmed, d20-warmed, and
+fresh runs are identical (TV 0.0000), entity crystallizes within 500 steps
+even from dead-phase conditioning. The awaited "geometry permits more than
+one outcome" bistability does not exist at these settings. Bearer-null
+now extends to deformation routes; any bearer component must live below
+the occupancy observable.
+
 ## 6. Thesis VI — No further facts (operational personal identity)
 
 Conitzer's "further facts" puzzle asks whether identity over time adds anything

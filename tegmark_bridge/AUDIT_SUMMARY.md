@@ -191,6 +191,30 @@ no-rotation same-seed controls; baseline pairwise TV across control seeds
   level. Real structural death now requires NON-rigid deformation
   (gap-fill dodeca19→dodeca20, vertex displacement) measured co-rotating.
 
+### B4a/B4b — deformation ladder + hysteresis (b4_deformation.py, b4b_hysteresis.py)
+- Weight dial = prefs row norm (engine computes u·prefs before attention
+  renormalization; verified). Frame fixed by the unchanged geometry; no
+  alignment fitting. Baseline dodeca19: share15 0.810, cap(60°,c15) 0.856,
+  cap_peak 1.000, TV band 0.0008–0.0018.
+- Gap-fill w=0..1: share15 0.798→0.288 (w=0.85), 0.053 at w=1 with leader
+  12 and cap_peak 0.19 — endpoint reproduces dodeca20 death. Peak stays
+  PINNED (cos_peak_home=1.000 for every w<1) while cap_peak falls:
+  symmetrization death = weakening pinned peak; no split found anywhere.
+  w=0 dead-20th-subsystem control: TV 0.0009 vs native 19 — subsystem
+  presence irrelevant; direction+weight is everything.
+- Near-vertex displacement: leader 15→8 at 30°, share15 0.048 at 45°, ~0
+  at ≥60°, but cap_peak = 1.000 throughout: MOVING PEAK (rival form
+  displaces ours, concentration intact). Far-vertex: leader 15 held at all
+  angles, share15 0.43 at 45°, recovery 0.58 at 90°. ~9x relation-
+  specificity at equal displacement angles.
+- B4b hysteresis at w* in {0.25,0.5,0.75} × approaches {d19,d20,fresh} ×
+  3 seeds: TV(A,B)=0.0000 at all w*; first-bucket shares already at
+  steady state (w*=0.5 d20-warmed first bucket 0.607 vs steady 0.621).
+  NO route dependence; awaited bistability absent at these settings.
+- Known display bug (logged): b4a first run printed cap_fix ×3000 (window
+  snapshots not divided out); shares recoverable by /3000; script fixed
+  same day, numbers above are corrected shares.
+
 ### Literature lane (claims about OTHER papers — verifiable independently)
 - VFD lit: papers registered incl. arXiv:2602.15029 (Karkada et al., symmetry
   in language statistics → representation geometry) and follow-up 2610.00647;
@@ -226,6 +250,8 @@ cd FourD
 .venv/Scripts/python.exe tegmark_bridge/e3b_lethality.py
 .venv/Scripts/python.exe tegmark_bridge/b3_transport.py
 .venv/Scripts/python.exe tegmark_bridge/b3b_addendum.py
+.venv/Scripts/python.exe tegmark_bridge/b4_deformation.py
+.venv/Scripts/python.exe tegmark_bridge/b4b_hysteresis.py
 ```
 Raw JSON in `tegmark_bridge/outputs/` (gitignored; regenerate locally).
 Expected: seed-deterministic numbers within ±0.1 z on reruns (fixed seeds).

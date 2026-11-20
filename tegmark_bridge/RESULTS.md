@@ -685,3 +685,55 @@ Findings:
   distribution; instantiations = grid addresses. "Death is translation"
   (thesis 5) sharpens to "translation is not death": only symmetry-breaking
   deformation or engine-phase change crosses the mortality surface.
+
+### 5.18 B4a — structural deformation ladder (frame = unchanged geometry)
+Design per external frontier audit (distinguish deformation-of vs
+loss-of-form; add cap-concentration readout). Weight = row norm of the
+prefs matrix (engine uses u·prefs directly; attention renormalizes
+activities — verified untouched). Frame fixed by the known unchanged
+geometry; no alignment fitting. Window [1000,4000), N=128, 3 seeds.
+Native dodeca19 baseline: share15 0.810, tr 0.262, cap(60°,c15) 0.856,
+cap_peak 1.000, baseline TV band 0.0008–0.0018.
+**Gap-fill ladder** (restore deleted vertex 20 with weight w):
+- w=0 dead 20th subsystem (presence, no weight): share15 0.810,
+  TV 0.0009 vs native 19-substrate → presence/number of subsystems is
+  irrelevant; direction+weight is everything.
+- w=0.05→0.85: share15 0.798→0.288 monotone; TV_vs_home 0.012→0.52;
+  cap_peak 1.0 (≤0.2) → 0.997 (0.5) → 0.812 (0.85); **cos_peak_home = 1.000
+  at every w**: peak stays PINNED and weakens ("weakening peak").
+- w=1 (= native dodeca20): leader 12, share15 0.053, cap_peak 0.19–0.22,
+  cos_peak_home −0.17: diffuse, different mode. Endpoint reproduces the
+  S2/E1 closed-substrate death. No splitting (no bimodal cap) anywhere.
+**Vertex displacement ladder** (rotate one vertex in the (v,c15) plane):
+- NEAR vertex (cos 0.978 to c15): share15 0.82 (5°) → 0.31 (30°, leader→8)
+  → 0.048 (45°) → ~0 (≥60°); cap_peak stays 1.000 throughout,
+  cos_peak_home 0.996→0.13: a **moving peak** — concentration survives,
+  basin 15 is displaced by a different form (basin 8 takes the crown).
+- FAR vertex (min cos to c15): share15 0.43 (45°), 0.41 (60°), recovers to
+  0.58 (90°); leader stays 15 at every angle. Relation-specificity:
+  at 45°, near-vertex displacement nearly kills (0.048) while far-vertex
+  displacement merely weakens (0.43) — ~9x asymmetry.
+Note: cap_fix column printed pre-fix (×nsnap=3000 factor) in the first run;
+shares recovered by /3000; script fixed.
+Signatures cleanly separate: weakening-pinned-peak (symmetrization death),
+moving-peak-with-intact-concentration (displacement by rival form),
+gradual-weaken-partial-recover (peripheral relation). No split outcome found.
+
+### 5.19 B4b — route-dependence at partial gap fill (hysteresis probe)
+Same deformed geometry P(w*) at w*∈{0.25,0.5,0.75}, identical engine
+settings; condition 1000 steps on native dodeca19 (A), native dodeca20 (B),
+or fresh-at-w* (C); hold to 5000; window [2000,5000); per-500-step buckets;
+3 seeds.
+Result: A, B, C are numerically IDENTICAL per (w*, seed):
+TV(A-mean,B-mean) = 0.0000 at all three w*; bucket series coincide from the
+FIRST bucket after the switch (e.g. w*=0.5: d20-warmed first bucket share
+0.607 vs steady 0.621). **No route dependence anywhere in the partial-gap
+regime** — including conditioning from the fully dead dodeca20 phase, from
+which the entity crystallizes within the first 500 steps. The awaited
+bistable regime (concentrated via d19 route, diffuse via d20 route) does
+NOT exist at these settings: the geometry admits exactly one outcome per w*.
+Bearer-null now holds for rigid rotation (B3), history-carrying bearer
+state (B1), and non-rigid deformation routes with dead-phase conditioning
+(B4b). If bearer effects exist in this space they must live below the
+occupancy observable (agent trajectories, within-bin structure, recovery
+rate) — not in the measurable attractor.
