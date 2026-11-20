@@ -15,9 +15,10 @@ a single missing vertex (dodeca19) creates an immortal entity that is seed-deaf,
 density-deaf, member-substitution-proof (E3: survives abduction of 100% of its members
 without losing the crown), carries no identity in its bearer (B1: null), survives
 structural deformation up to a measured identity radius ≈30–45° and then
-re-instantiates at a translated shadow (B2), and — per E3b (pending) — can only be
-killed by moving the structure or the engine out of the hosting region of
-parameter space.
+re-instantiates at a translated shadow (B2), and — per E3b — can only be killed by
+crossing an explicit mortality surface in (structure x engine) parameter space
+(critical noise multiplier in (2,4] at 0° rotation; rotation cliff 30°→45°;
+combo (30°, x2) lethal though each factor alone is not).
 
 ## 1. Thesis I — Relational ontology: entities are fixed points of hosting
 
@@ -40,8 +41,12 @@ possible instantiations**. What makes the form *this form* is measurable:
   vertex 2, −0.706 to the deleted vertex — the form is the *shadow of the absence*).
 - **Identity radius**: the largest deformation class under which it re-instantiates
   as itself (B2: ~30–45°, after which the crown translates to basin 8, then 6).
-- **Lethality boundary**: the region of engine-parameter space in which it is alive
-  (E3b ladder: noise ×N, steering/step-size, rotation — the form's *mortality surface*).
+- **Lethality boundary** (E3b): the mortality surface in (structure x engine)
+  parameter space — critical noise multiplier ~4 at 0° but <2 at 30° rotation;
+  rotation cliff at 30–45°; immune to engine time-rate (steering) wherever time
+  actually flows. The surface is a *region boundary*, not three thresholds:
+  combo (30°, x2) kills while each factor alone does not — the identity radius
+  itself shrinks as engine chaos rises.
 
 So a computable Platonic form = **(invariants, identity radius, mortality surface)**.
 Not transcendent — *modal*: the form is exactly the set of worlds in which it
@@ -83,7 +88,12 @@ Reading: for these entities, **annihilation is exiting the hosting region of
 parameter space; everything short of that is relocation.** The user's earlier
 formulation — "the structure does not die; the dynamics hosted on it die, and a
 different structure/engine pair resurrects them" — is exactly the B2 mechanism,
-and E3b (pending) maps the exit boundary. If E4's dip test confirms bimodality,
+and E3b has now mapped the exit boundary: beyond the rotation cliff the crown
+translates (basin 8, then 6) with the relational shape intact; beyond critical
+noise the occupancy never sustains again. Note also the stasis corner: at
+steering=0 the frozen configuration is "immortal" in a degenerate sense —
+preserved state without process. Persistence without dynamics is not life;
+the form's mortality surface excludes time itself stopping. If E4's dip test confirms bimodality,
 HOSTS/BOILS/DEAD become genuine phases and "death" becomes a transition, not
 an event.
 
@@ -149,7 +159,8 @@ cross-engine glider transplant; E5 composites).
 - One engine family (s3 UniversalEngine; fatigue-gradual); s2/flat4/cyclic
   variants untested for entity demographics.
 - One fully-certified form so far (dodeca19 gap-shadow). Radius measured in one
-  Givens plane family. E3b boundary pending this run.
+  Givens plane family. E3b surface sampled on a coarse ladder (5 noise levels,
+  6 angles, 4 combos); bisection would give the critical curve precisely.
 - Market instantiation (T6b k=8) is suggestive, not certified — single window,
   single basket.
 - All theses are read off effect sizes of order |z| ≫ 5 where claimed;
