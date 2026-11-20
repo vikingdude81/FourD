@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>FourD entity navigation — trace view</title>
+<style>
+body{background:#0b0e14;color:#cfd6e4;font-family:Segoe UI,monospace;margin:0;padding:14px}
+h1{font-size:16px;margin:2px 0 8px} #sceneTabs button{margin-right:6px;padding:6px 10px;background:#1a2233;color:#cfd6e4;border:1px solid #334;border-radius:6px;cursor:pointer}
+#sceneTabs button.on{background:#2b6cb0;color:#fff}
+#wrap{display:flex;gap:14px;margin-top:10px}
+canvas{background:#0d1117;border:1px solid #232c3b;border-radius:8px}
+.side{width:250px;font-size:12px} .row{margin:6px 0} .big{font-size:20px;color:#fff}
+#bars{width:250px;height:120px;background:#0d1117;border:1px solid #232c3b;border-radius:6px}
+#spark{width:250px;height:50px;background:#0d1117;border:1px solid #232c3b;border-radius:6px}
+input[type=range]{width:100%}
+#desc{font-size:12px;color:#8fa1bd;max-width:780px;margin-top:4px}
+.legend span{display:inline-block;margin-right:10px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px}
+</style></head><body>
+<h1>FourD — how agents navigate S³ (dodeca19 entity program)</h1>
+<div id="sceneTabs"></div>
+<div id="desc"></div>
+<div id="wrap">
+ <div>
+  <canvas id="cv" width="760" height="760"></canvas>
+  <div style="width:760px">
+   <input id="scrub" type="range" min="0" max="1" step="1">
+   <div class="legend">frame <span id="fr"></span> · step <span id="st"></span>
+    <button id="play">▶ play</button> speed
+    <input id="spd" type="range" min="1" max="12" value="4" style="width:80px">
+    tilt <input id="tilt" type="range" min="-80" max="80" value="28" style="width:80px">
+    spin <input id="spin" type="checkbox" checked>
+   </div>
+  </div>
+ </div>
+ <div class="side">
+  <div class="row">leader basin <span id="lead" class="big"></span></div>
+  <div class="row">basin-15 share <span id="sh15" class="big"></span></div>
+  <div class="row">occupancy (24 basins)</div><canvas id="bars"></canvas>
+  <div class="row">share15 timeline</div><canvas id="spark"></canvas>
+  <div class="row">agents = 128 unit directions in S³, colored by basin.
+   <br>white rings = preference vertices (they lie in the x₄=0 hyperplane;
+   agents above/below it appear displaced by the tilt).
+   <br>thick white halo = basin-15 entity. Points nearer the viewer are larger/brighter.</div>
+  <div class="row"><span class="dot" style="background:#fff;border:2px solid #ffd54a"></span>basin 15 halo
+   &nbsp;<span class="dot" style="background:#fff"></span>prefs</div>
+ </div>
+</div>
+<script>
+const DATA = __DATA__;
+const DESCS = {
+ "A_dodeca19_crystallize":"A: native dodeca19 — the immortal entity crystallizes: agents stream into basin 15 (haloed) and hold ~81%.",
+ "B_gap_w0.70_diluted":"B: gap filled to w=0.70 — the pinned-peak dilution. The haloed peak stays in the SAME place but thins to ~47%.",
+ "C_near45deg_moving_peak":"C: near vertex displaced 45° — the moving peak. Concentration stays tight but relocates to a rival form (basin 8); basin 15 empties.",
+ "D_dodeca20_boiling":"D: native dodeca20 (closed) — boiling: no sustained concentration, leader flickers basin to basin."
+};
+const cv=document.getElementById('cv'),G=cv.getContext('2d');
+const N=128; let cur=0, fr=0, playing=false, spd=4, spinA=0;
+const tabs=document.getElementById('sceneTabs');
+DATA.scenes.forEach((s,i)=>{const b=document.createElement('button');
+ b.textContent=s.meta.tag.split('_').slice(1).join(' '); b.onclick=()=>{cur=i;fr=0;setScrub();draw();};
+ b.id='tab'+i; tabs.appendChild(b);});
+function col(i){return `hsl(${(i*15)%360},70%,${55}%)`;}
+function proj(p,tilt){ // p=[x,y,z,w]; tilt rotates (z,w), spin rotates (x,y)
+ const t=tilt*Math.PI/180, ct=Math.cos(t), st=Math.sin(t);
+ const z2=p[2]*ct-p[3]*st;
+ const s=spinA, cs=Math.cos(s), ss=Math.sin(s);
+ const x2=p[0]*cs-p[1]*ss, y2=p[0]*ss+p[1]*cs;
+ return [x2,y2,z2];}
+function setScrub(){const s=DATA.scenes[cur].meta;const e=document.getElementById('scrub');
+ e.max=s.nframes-1;e.value=fr;}
+document.getElementById('scrub').oninput=e=>{fr=+e.value;draw();};
+document.getElementById('play').onclick=()=>{playing=!playing;document.getElementById('play').textContent=playing?'⏸ pause':'▶ play';};
+document.getElementById('spd').oninput=e=>spd=+e.value;
+document.getElementById('tilt').oninput=draw;
+document.getElementById('spin').onchange=draw;
+function draw(){
+ const sc=DATA.scenes[cur],M=sc.meta;
+ document.querySelectorAll('#sceneTabs button').forEach((b,i)=>b.classList.toggle('on',i===cur));
+ document.getElementById('desc').textContent=DESCS[M.tag]||'';
+ const tilt=+document.getElementById('tilt').value;
+ if(document.getElementById('spin').checked)spinA+=0;
+ const W=cv.width,cx=W/2,R=W*0.42;
+ G.clearRect(0,0,W,W);
+ G.strokeStyle='#1e2a3a';G.beginPath();G.arc(cx,cx,R,0,7);G.stroke(); // unit-circle rim
+ // hyperplane ellipse (x4=0 circle seen under tilt)
+ G.strokeStyle='#2c3a4e';G.beginPath();
+ for(let a=0;a<=64;a++){const th=a/64*2*Math.PI;const q=proj([Math.cos(th),Math.sin(th),0,0],tilt+spinA*0);
+  G.lineTo(cx+q[0]*R,cx-q[1]*R);}G.stroke();
+ // basin centers
+ M.centers.forEach((c,i)=>{const q=proj(c,tilt);const x=cx+q[0]*R,y=cx-q[1]*R;
+  G.fillStyle='rgba(140,160,190,0.30)';G.beginPath();G.arc(x,y,2.2,0,7);G.fill();
+  if(i===15){G.strokeStyle='rgba(255,213,74,0.8)';G.beginPath();G.arc(x,y,6,0,7);G.stroke();}});
+ // prefs
+ M.prefs.forEach(p=>{const q=proj(p,tilt);const x=cx+q[0]*R,y=cx-q[1]*R;
+  G.strokeStyle='rgba(255,255,255,0.75)';G.lineWidth=1.2;G.beginPath();G.arc(x,y,4.5,0,7);G.stroke();});
+ // agents (stored 4 coords per agent)
+ const F=sc.frames[fr].u,L=sc.frames[fr].lab,stride=4;
+ const tR=tilt*Math.PI/180;
+ const dep=i=>F[i*stride+2]*Math.cos(tR)-F[i*stride+3]*Math.sin(tR);
+ const ord=[...Array(N).keys()].sort((a,b)=>dep(a)-dep(b));
+ for(const i of ord){
+  const Q=48;
+  const q=proj([F[i*stride]/Q,F[i*stride+1]/Q,F[i*stride+2]/Q,F[i*stride+3]/Q],tilt);
+  const x=cx+q[0]*R,y=cx-q[1]*R,dz=q[2]; // -1..1
+  const r=2.2+1.8*(dz+1)/2, al=0.35+0.65*(dz+1)/2;
+  G.globalAlpha=al;G.fillStyle=col(L[i]);
+  G.beginPath();G.arc(x,y,r,0,7);G.fill();
+  if(L[i]===15){G.globalAlpha=Math.min(1,al+0.25);G.strokeStyle='#ffd54a';G.lineWidth=1.1;G.stroke();}
+ }
+ G.globalAlpha=1;
+ document.getElementById('fr').textContent=fr;
+ document.getElementById('st').textContent=fr*M.stride;
+ document.getElementById('lead').textContent=M.leaders[fr];
+ document.getElementById('sh15').textContent=M.share15[fr];
+ // bars
+ const bc=document.getElementById('bars'),B=bc.getContext('2d');B.clearRect(0,0,250,120);
+ const cnt=Array(24).fill(0);for(let i=0;i<N;i++)cnt[L[i]]++;
+ for(let i=0;i<24;i++){const h=cnt[i]/N*116;B.fillStyle=col(i);B.fillRect(i*10+2,118-h,8,h);
+  if(i===15){B.strokeStyle='#ffd54a';B.strokeRect(i*10+1,117-(cnt[i]/N*116)-1,10,cnt[i]/N*116+2);}}
+ // spark
+ const sp=document.getElementById('spark'),S2=sp.getContext('2d');S2.clearRect(0,0,250,50);
+ S2.strokeStyle='#4aa3ff';S2.beginPath();
+ M.share15.forEach((v,i)=>S2.lineTo(i/M.share15.length*248+1,48-v*46));S2.stroke();
+ S2.strokeStyle='#fff';S2.beginPath();S2.moveTo(fr/M.share15.length*248+1,0);S2.lineTo(fr/M.share15.length*248+1,50);S2.stroke();
+}
+function tick(){if(playing){const n=DATA.scenes[cur].meta.nframes;fr=(fr+1)%n;document.getElementById('scrub').value=fr;draw();}
+ setTimeout(()=>requestAnimationFrame(tick),1000/(4*spd));}
+requestAnimationFrame(tick);
+setScrub();draw();
+</script></body></html>
